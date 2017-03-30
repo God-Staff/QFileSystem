@@ -1,0 +1,243 @@
+
+// QFileSystemDlg.cpp : 实现文件
+//
+
+#include "stdafx.h"
+#include "QFileSystem.h"
+#include "QFileSystemDlg.h"
+#include "afxdialogex.h"
+
+#ifdef _DEBUG
+#define new DEBUG_NEW
+#endif
+
+
+// 用于应用程序“关于”菜单项的 CAboutDlg 对话框
+
+class CAboutDlg : public CDialogEx
+{
+public:
+	CAboutDlg();
+
+// 对话框数据
+#ifdef AFX_DESIGN_TIME
+	enum { IDD = IDD_ABOUTBOX };
+#endif
+
+	protected:
+	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 支持
+
+// 实现
+protected:
+	DECLARE_MESSAGE_MAP()
+};
+
+CAboutDlg::CAboutDlg() : CDialogEx(IDD_ABOUTBOX)
+{
+}
+
+void CAboutDlg::DoDataExchange(CDataExchange* pDX)
+{
+	CDialogEx::DoDataExchange(pDX);
+}
+
+BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
+END_MESSAGE_MAP()
+
+
+// CQFileSystemDlg 对话框
+
+BEGIN_DHTML_EVENT_MAP(CQFileSystemDlg)
+	DHTML_EVENT_ONCLICK(_T("ButtonOK"), OnButtonOK)
+	DHTML_EVENT_ONCLICK(_T("ButtonCancel"), OnButtonCancel)
+END_DHTML_EVENT_MAP()
+
+
+CQFileSystemDlg::CQFileSystemDlg(CWnd* pParent /*=NULL*/)
+	: CDHtmlDialog(IDD_QFILESYSTEM_DIALOG, IDR_HTML_QFILESYSTEM_DIALOG, pParent)
+{
+	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
+}
+
+void CQFileSystemDlg::DoDataExchange(CDataExchange* pDX)
+{
+	CDHtmlDialog::DoDataExchange(pDX);
+}
+
+BEGIN_MESSAGE_MAP(CQFileSystemDlg, CDHtmlDialog)
+	ON_WM_SYSCOMMAND()
+END_MESSAGE_MAP()
+
+
+// CQFileSystemDlg 消息处理程序
+
+BOOL CQFileSystemDlg::OnInitDialog()
+{
+	CDHtmlDialog::OnInitDialog();
+
+	// 将“关于...”菜单项添加到系统菜单中。
+
+	// IDM_ABOUTBOX 必须在系统命令范围内。
+	ASSERT((IDM_ABOUTBOX & 0xFFF0) == IDM_ABOUTBOX);
+	ASSERT(IDM_ABOUTBOX < 0xF000);
+
+	CMenu* pSysMenu = GetSystemMenu(FALSE);
+	if (pSysMenu != NULL)
+	{
+		BOOL bNameValid;
+		CString strAboutMenu;
+		bNameValid = strAboutMenu.LoadString(IDS_ABOUTBOX);
+		ASSERT(bNameValid);
+		if (!strAboutMenu.IsEmpty())
+		{
+			pSysMenu->AppendMenu(MF_SEPARATOR);
+			pSysMenu->AppendMenu(MF_STRING, IDM_ABOUTBOX, strAboutMenu);
+		}
+	}
+
+	// 设置此对话框的图标。  当应用程序主窗口不是对话框时，框架将自动
+	//  执行此操作
+	SetIcon(m_hIcon, TRUE);			// 设置大图标
+	SetIcon(m_hIcon, FALSE);		// 设置小图标
+
+	
+	///////////////////////////////////
+	//文件列表
+	m_ListContro2 = (CListCtrl*)GetDlgItem (IDC_LIST1);
+	DWORD dwStyle2 = GetWindowLong (m_ListContro2->m_hWnd, GWL_STYLE);
+	SetWindowLong (m_ListContro2->m_hWnd, GWL_STYLE, dwStyle2 | LVS_REPORT);
+
+	//设置listctrl可以整行选择和网格条纹
+	DWORD styles2 = m_ListContro2->GetExtendedStyle ();
+	m_ListContro2->SetExtendedStyle (styles2 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+
+	//给listctrl设置5个标题栏
+	TCHAR rgtsz2[5][10] = { _T ("文件名"),_T ("SHA512") ,_T ("ClientID") ,_T ("创建时间") ,_T ("权限") };
+
+	//修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
+
+	LV_COLUMN lvcolumn2;
+	CRect rect2;
+	m_ListContro2->GetWindowRect (&rect2);
+	for (int i = 0; i < 5; i++)
+	{
+		lvcolumn2.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
+			| LVCF_WIDTH | LVCF_ORDER;
+		lvcolumn2.fmt = LVCFMT_LEFT;
+		lvcolumn2.pszText = rgtsz2[i];
+		lvcolumn2.iSubItem = i;
+		lvcolumn2.iOrder = i;
+		lvcolumn2.cx = rect2.Width () / 5;
+		m_ListContro2->InsertColumn (i, &lvcolumn2);
+	}
+	// TODO: 在此添加额外的初始化代码
+	//主机列表
+	m_ListControl = (CListCtrl*)GetDlgItem (IDC_LIST2);
+	DWORD dwStyle = GetWindowLong (m_ListControl->m_hWnd, GWL_STYLE);
+	SetWindowLong (m_ListControl->m_hWnd, GWL_STYLE, dwStyle | LVS_REPORT);
+
+	//设置listctrl可以整行选择和网格条纹
+	DWORD styles = m_ListControl->GetExtendedStyle ();
+	m_ListControl->SetExtendedStyle (styles | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+
+	//给listctrl设置5个标题栏
+	TCHAR rgtsz[2][10] = { _T ("主句编号"),_T ("IP") };
+
+	//修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
+	LV_COLUMN lvcolumn;
+	CRect rect;
+	m_ListControl->GetWindowRect (&rect);
+	for (int i = 0; i < 2; i++)
+	{
+		lvcolumn.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
+			| LVCF_WIDTH | LVCF_ORDER;
+		lvcolumn.fmt = LVCFMT_LEFT;
+		lvcolumn.pszText = rgtsz[i];
+		lvcolumn.iSubItem = i;
+		lvcolumn.iOrder = i;
+		lvcolumn.cx = rect.Width () / 2;
+		m_ListControl->InsertColumn (i, &lvcolumn);
+	}
+
+
+	//解析数据好友和分享链接数据
+	updateList ();
+
+	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+}
+
+void CQFileSystemDlg::OnSysCommand(UINT nID, LPARAM lParam)
+{
+	if ((nID & 0xFFF0) == IDM_ABOUTBOX)
+	{
+		CAboutDlg dlgAbout;
+		dlgAbout.DoModal();
+	}
+	else
+	{
+		CDHtmlDialog::OnSysCommand(nID, lParam);
+	}
+}
+
+// 如果向对话框添加最小化按钮，则需要下面的代码
+//  来绘制该图标。  对于使用文档/视图模型的 MFC 应用程序，
+//  这将由框架自动完成。
+
+void CQFileSystemDlg::OnPaint()
+{
+	if (IsIconic())
+	{
+		CPaintDC dc(this); // 用于绘制的设备上下文
+
+		SendMessage(WM_ICONERASEBKGND, reinterpret_cast<WPARAM>(dc.GetSafeHdc()), 0);
+
+		// 使图标在工作区矩形中居中
+		int cxIcon = GetSystemMetrics(SM_CXICON);
+		int cyIcon = GetSystemMetrics(SM_CYICON);
+		CRect rect;
+		GetClientRect(&rect);
+		int x = (rect.Width() - cxIcon + 1) / 2;
+		int y = (rect.Height() - cyIcon + 1) / 2;
+
+		// 绘制图标
+		dc.DrawIcon(x, y, m_hIcon);
+	}
+	else
+	{
+		CDHtmlDialog::OnPaint();
+	}
+}
+
+//当用户拖动最小化窗口时系统调用此函数取得光标
+//显示。
+HCURSOR CQFileSystemDlg::OnQueryDragIcon()
+{
+	return static_cast<HCURSOR>(m_hIcon);
+}
+
+HRESULT CQFileSystemDlg::OnButtonOK(IHTMLElement* /*pElement*/)
+{
+	OnOK();
+	return S_OK;
+}
+
+HRESULT CQFileSystemDlg::OnButtonCancel(IHTMLElement* /*pElement*/)
+{
+	OnCancel();
+	return S_OK;
+}
+
+
+void CQFileSystemDlg::updateList ()
+{
+
+}
+
+void CQFileSystemDlg::MakeFilesLog (qiuwanli::File2Cilent * file, std::string filename,
+	std::string sha512, std::string client, std::string createtime)
+{
+	file->set_filename (filename);
+	file->set_sha512 (sha512);
+	file->set_cilentid (client);
+	file->set_createdate (createtime);
+}
