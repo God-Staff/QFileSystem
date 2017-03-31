@@ -39,6 +39,12 @@ extern File2CilentDefaultTypeInternal _File2Cilent_default_instance_;
 class File2ClientServers;
 class File2ClientServersDefaultTypeInternal;
 extern File2ClientServersDefaultTypeInternal _File2ClientServers_default_instance_;
+class FileShared;
+class FileSharedDefaultTypeInternal;
+extern FileSharedDefaultTypeInternal _FileShared_default_instance_;
+class FilesSharedLog;
+class FilesSharedLogDefaultTypeInternal;
+extern FilesSharedLogDefaultTypeInternal _FilesSharedLog_default_instance_;
 class ID2IP;
 class ID2IPDefaultTypeInternal;
 extern ID2IPDefaultTypeInternal _ID2IP_default_instance_;
@@ -146,6 +152,20 @@ class Logs : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::std::string* release_user_id();
   void set_allocated_user_id(::std::string* user_id);
 
+  // string log_date = 2;
+  void clear_log_date();
+  static const int kLogDateFieldNumber = 2;
+  const ::std::string& log_date() const;
+  void set_log_date(const ::std::string& value);
+  #if LANG_CXX11
+  void set_log_date(::std::string&& value);
+  #endif
+  void set_log_date(const char* value);
+  void set_log_date(const char* value, size_t size);
+  ::std::string* mutable_log_date();
+  ::std::string* release_log_date();
+  void set_allocated_log_date(::std::string* log_date);
+
   // string log_info = 3;
   void clear_log_info();
   static const int kLogInfoFieldNumber = 3;
@@ -188,21 +208,15 @@ class Logs : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
   ::std::string* release_user_client_uuid();
   void set_allocated_user_client_uuid(::std::string* user_client_uuid);
 
-  // uint64 log_date = 2;
-  void clear_log_date();
-  static const int kLogDateFieldNumber = 2;
-  ::google::protobuf::uint64 log_date() const;
-  void set_log_date(::google::protobuf::uint64 value);
-
   // @@protoc_insertion_point(class_scope:qiuwanli.Logs)
  private:
 
   ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
   ::google::protobuf::internal::ArenaStringPtr user_id_;
+  ::google::protobuf::internal::ArenaStringPtr log_date_;
   ::google::protobuf::internal::ArenaStringPtr log_info_;
   ::google::protobuf::internal::ArenaStringPtr log_type_;
   ::google::protobuf::internal::ArenaStringPtr user_client_uuid_;
-  ::google::protobuf::uint64 log_date_;
   mutable int _cached_size_;
   friend struct  protobuf_date_2eproto::TableStruct;
 };
@@ -775,6 +789,216 @@ class ID2IPTable : public ::google::protobuf::Message /* @@protoc_insertion_poin
   mutable int _cached_size_;
   friend struct  protobuf_date_2eproto::TableStruct;
 };
+// -------------------------------------------------------------------
+
+class FilesSharedLog : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:qiuwanli.FilesSharedLog) */ {
+ public:
+  FilesSharedLog();
+  virtual ~FilesSharedLog();
+
+  FilesSharedLog(const FilesSharedLog& from);
+
+  inline FilesSharedLog& operator=(const FilesSharedLog& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const FilesSharedLog& default_instance();
+
+  static inline const FilesSharedLog* internal_default_instance() {
+    return reinterpret_cast<const FilesSharedLog*>(
+               &_FilesSharedLog_default_instance_);
+  }
+
+  void Swap(FilesSharedLog* other);
+
+  // implements Message ----------------------------------------------
+
+  inline FilesSharedLog* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  FilesSharedLog* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const FilesSharedLog& from);
+  void MergeFrom(const FilesSharedLog& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(FilesSharedLog* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // string Sha512 = 1;
+  void clear_sha512();
+  static const int kSha512FieldNumber = 1;
+  const ::std::string& sha512() const;
+  void set_sha512(const ::std::string& value);
+  #if LANG_CXX11
+  void set_sha512(::std::string&& value);
+  #endif
+  void set_sha512(const char* value);
+  void set_sha512(const char* value, size_t size);
+  ::std::string* mutable_sha512();
+  ::std::string* release_sha512();
+  void set_allocated_sha512(::std::string* sha512);
+
+  // string Key = 2;
+  void clear_key();
+  static const int kKeyFieldNumber = 2;
+  const ::std::string& key() const;
+  void set_key(const ::std::string& value);
+  #if LANG_CXX11
+  void set_key(::std::string&& value);
+  #endif
+  void set_key(const char* value);
+  void set_key(const char* value, size_t size);
+  ::std::string* mutable_key();
+  ::std::string* release_key();
+  void set_allocated_key(::std::string* key);
+
+  // string SharedTime = 3;
+  void clear_sharedtime();
+  static const int kSharedTimeFieldNumber = 3;
+  const ::std::string& sharedtime() const;
+  void set_sharedtime(const ::std::string& value);
+  #if LANG_CXX11
+  void set_sharedtime(::std::string&& value);
+  #endif
+  void set_sharedtime(const char* value);
+  void set_sharedtime(const char* value, size_t size);
+  ::std::string* mutable_sharedtime();
+  ::std::string* release_sharedtime();
+  void set_allocated_sharedtime(::std::string* sharedtime);
+
+  // @@protoc_insertion_point(class_scope:qiuwanli.FilesSharedLog)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::internal::ArenaStringPtr sha512_;
+  ::google::protobuf::internal::ArenaStringPtr key_;
+  ::google::protobuf::internal::ArenaStringPtr sharedtime_;
+  mutable int _cached_size_;
+  friend struct  protobuf_date_2eproto::TableStruct;
+};
+// -------------------------------------------------------------------
+
+class FileShared : public ::google::protobuf::Message /* @@protoc_insertion_point(class_definition:qiuwanli.FileShared) */ {
+ public:
+  FileShared();
+  virtual ~FileShared();
+
+  FileShared(const FileShared& from);
+
+  inline FileShared& operator=(const FileShared& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const FileShared& default_instance();
+
+  static inline const FileShared* internal_default_instance() {
+    return reinterpret_cast<const FileShared*>(
+               &_FileShared_default_instance_);
+  }
+
+  void Swap(FileShared* other);
+
+  // implements Message ----------------------------------------------
+
+  inline FileShared* New() const PROTOBUF_FINAL { return New(NULL); }
+
+  FileShared* New(::google::protobuf::Arena* arena) const PROTOBUF_FINAL;
+  void CopyFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void MergeFrom(const ::google::protobuf::Message& from) PROTOBUF_FINAL;
+  void CopyFrom(const FileShared& from);
+  void MergeFrom(const FileShared& from);
+  void Clear() PROTOBUF_FINAL;
+  bool IsInitialized() const PROTOBUF_FINAL;
+
+  size_t ByteSizeLong() const PROTOBUF_FINAL;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input) PROTOBUF_FINAL;
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* InternalSerializeWithCachedSizesToArray(
+      bool deterministic, ::google::protobuf::uint8* target) const PROTOBUF_FINAL;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output)
+      const PROTOBUF_FINAL {
+    return InternalSerializeWithCachedSizesToArray(
+        ::google::protobuf::io::CodedOutputStream::IsDefaultSerializationDeterministic(), output);
+  }
+  int GetCachedSize() const PROTOBUF_FINAL { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const PROTOBUF_FINAL;
+  void InternalSwap(FileShared* other);
+  private:
+  inline ::google::protobuf::Arena* GetArenaNoVirtual() const {
+    return NULL;
+  }
+  inline void* MaybeArenaPtr() const {
+    return NULL;
+  }
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const PROTOBUF_FINAL;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // repeated .qiuwanli.FilesSharedLog sharedlog = 1;
+  int sharedlog_size() const;
+  void clear_sharedlog();
+  static const int kSharedlogFieldNumber = 1;
+  const ::qiuwanli::FilesSharedLog& sharedlog(int index) const;
+  ::qiuwanli::FilesSharedLog* mutable_sharedlog(int index);
+  ::qiuwanli::FilesSharedLog* add_sharedlog();
+  ::google::protobuf::RepeatedPtrField< ::qiuwanli::FilesSharedLog >*
+      mutable_sharedlog();
+  const ::google::protobuf::RepeatedPtrField< ::qiuwanli::FilesSharedLog >&
+      sharedlog() const;
+
+  // @@protoc_insertion_point(class_scope:qiuwanli.FileShared)
+ private:
+
+  ::google::protobuf::internal::InternalMetadataWithArena _internal_metadata_;
+  ::google::protobuf::RepeatedPtrField< ::qiuwanli::FilesSharedLog > sharedlog_;
+  mutable int _cached_size_;
+  friend struct  protobuf_date_2eproto::TableStruct;
+};
 // ===================================================================
 
 
@@ -835,18 +1059,56 @@ inline void Logs::set_allocated_user_id(::std::string* user_id) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.Logs.user_id)
 }
 
-// uint64 log_date = 2;
+// string log_date = 2;
 inline void Logs::clear_log_date() {
-  log_date_ = GOOGLE_ULONGLONG(0);
+  log_date_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-inline ::google::protobuf::uint64 Logs::log_date() const {
+inline const ::std::string& Logs::log_date() const {
   // @@protoc_insertion_point(field_get:qiuwanli.Logs.log_date)
-  return log_date_;
+  return log_date_.GetNoArena();
 }
-inline void Logs::set_log_date(::google::protobuf::uint64 value) {
+inline void Logs::set_log_date(const ::std::string& value) {
   
-  log_date_ = value;
+  log_date_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
   // @@protoc_insertion_point(field_set:qiuwanli.Logs.log_date)
+}
+#if LANG_CXX11
+inline void Logs::set_log_date(::std::string&& value) {
+  
+  log_date_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.log_date)
+}
+#endif
+inline void Logs::set_log_date(const char* value) {
+  
+  log_date_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.Logs.log_date)
+}
+inline void Logs::set_log_date(const char* value, size_t size) {
+  
+  log_date_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.Logs.log_date)
+}
+inline ::std::string* Logs::mutable_log_date() {
+  
+  // @@protoc_insertion_point(field_mutable:qiuwanli.Logs.log_date)
+  return log_date_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* Logs::release_log_date() {
+  // @@protoc_insertion_point(field_release:qiuwanli.Logs.log_date)
+  
+  return log_date_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void Logs::set_allocated_log_date(::std::string* log_date) {
+  if (log_date != NULL) {
+    
+  } else {
+    
+  }
+  log_date_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), log_date);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.Logs.log_date)
 }
 
 // string log_info = 3;
@@ -1635,7 +1897,205 @@ ID2IPTable::ip() const {
   return ip_;
 }
 
+// -------------------------------------------------------------------
+
+// FilesSharedLog
+
+// string Sha512 = 1;
+inline void FilesSharedLog::clear_sha512() {
+  sha512_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& FilesSharedLog::sha512() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.FilesSharedLog.Sha512)
+  return sha512_.GetNoArena();
+}
+inline void FilesSharedLog::set_sha512(const ::std::string& value) {
+  
+  sha512_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:qiuwanli.FilesSharedLog.Sha512)
+}
+#if LANG_CXX11
+inline void FilesSharedLog::set_sha512(::std::string&& value) {
+  
+  sha512_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FilesSharedLog.Sha512)
+}
+#endif
+inline void FilesSharedLog::set_sha512(const char* value) {
+  
+  sha512_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.FilesSharedLog.Sha512)
+}
+inline void FilesSharedLog::set_sha512(const char* value, size_t size) {
+  
+  sha512_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FilesSharedLog.Sha512)
+}
+inline ::std::string* FilesSharedLog::mutable_sha512() {
+  
+  // @@protoc_insertion_point(field_mutable:qiuwanli.FilesSharedLog.Sha512)
+  return sha512_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* FilesSharedLog::release_sha512() {
+  // @@protoc_insertion_point(field_release:qiuwanli.FilesSharedLog.Sha512)
+  
+  return sha512_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void FilesSharedLog::set_allocated_sha512(::std::string* sha512) {
+  if (sha512 != NULL) {
+    
+  } else {
+    
+  }
+  sha512_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sha512);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FilesSharedLog.Sha512)
+}
+
+// string Key = 2;
+inline void FilesSharedLog::clear_key() {
+  key_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& FilesSharedLog::key() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.FilesSharedLog.Key)
+  return key_.GetNoArena();
+}
+inline void FilesSharedLog::set_key(const ::std::string& value) {
+  
+  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:qiuwanli.FilesSharedLog.Key)
+}
+#if LANG_CXX11
+inline void FilesSharedLog::set_key(::std::string&& value) {
+  
+  key_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FilesSharedLog.Key)
+}
+#endif
+inline void FilesSharedLog::set_key(const char* value) {
+  
+  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.FilesSharedLog.Key)
+}
+inline void FilesSharedLog::set_key(const char* value, size_t size) {
+  
+  key_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FilesSharedLog.Key)
+}
+inline ::std::string* FilesSharedLog::mutable_key() {
+  
+  // @@protoc_insertion_point(field_mutable:qiuwanli.FilesSharedLog.Key)
+  return key_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* FilesSharedLog::release_key() {
+  // @@protoc_insertion_point(field_release:qiuwanli.FilesSharedLog.Key)
+  
+  return key_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void FilesSharedLog::set_allocated_key(::std::string* key) {
+  if (key != NULL) {
+    
+  } else {
+    
+  }
+  key_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), key);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FilesSharedLog.Key)
+}
+
+// string SharedTime = 3;
+inline void FilesSharedLog::clear_sharedtime() {
+  sharedtime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& FilesSharedLog::sharedtime() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.FilesSharedLog.SharedTime)
+  return sharedtime_.GetNoArena();
+}
+inline void FilesSharedLog::set_sharedtime(const ::std::string& value) {
+  
+  sharedtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:qiuwanli.FilesSharedLog.SharedTime)
+}
+#if LANG_CXX11
+inline void FilesSharedLog::set_sharedtime(::std::string&& value) {
+  
+  sharedtime_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FilesSharedLog.SharedTime)
+}
+#endif
+inline void FilesSharedLog::set_sharedtime(const char* value) {
+  
+  sharedtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.FilesSharedLog.SharedTime)
+}
+inline void FilesSharedLog::set_sharedtime(const char* value, size_t size) {
+  
+  sharedtime_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FilesSharedLog.SharedTime)
+}
+inline ::std::string* FilesSharedLog::mutable_sharedtime() {
+  
+  // @@protoc_insertion_point(field_mutable:qiuwanli.FilesSharedLog.SharedTime)
+  return sharedtime_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* FilesSharedLog::release_sharedtime() {
+  // @@protoc_insertion_point(field_release:qiuwanli.FilesSharedLog.SharedTime)
+  
+  return sharedtime_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void FilesSharedLog::set_allocated_sharedtime(::std::string* sharedtime) {
+  if (sharedtime != NULL) {
+    
+  } else {
+    
+  }
+  sharedtime_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), sharedtime);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FilesSharedLog.SharedTime)
+}
+
+// -------------------------------------------------------------------
+
+// FileShared
+
+// repeated .qiuwanli.FilesSharedLog sharedlog = 1;
+inline int FileShared::sharedlog_size() const {
+  return sharedlog_.size();
+}
+inline void FileShared::clear_sharedlog() {
+  sharedlog_.Clear();
+}
+inline const ::qiuwanli::FilesSharedLog& FileShared::sharedlog(int index) const {
+  // @@protoc_insertion_point(field_get:qiuwanli.FileShared.sharedlog)
+  return sharedlog_.Get(index);
+}
+inline ::qiuwanli::FilesSharedLog* FileShared::mutable_sharedlog(int index) {
+  // @@protoc_insertion_point(field_mutable:qiuwanli.FileShared.sharedlog)
+  return sharedlog_.Mutable(index);
+}
+inline ::qiuwanli::FilesSharedLog* FileShared::add_sharedlog() {
+  // @@protoc_insertion_point(field_add:qiuwanli.FileShared.sharedlog)
+  return sharedlog_.Add();
+}
+inline ::google::protobuf::RepeatedPtrField< ::qiuwanli::FilesSharedLog >*
+FileShared::mutable_sharedlog() {
+  // @@protoc_insertion_point(field_mutable_list:qiuwanli.FileShared.sharedlog)
+  return &sharedlog_;
+}
+inline const ::google::protobuf::RepeatedPtrField< ::qiuwanli::FilesSharedLog >&
+FileShared::sharedlog() const {
+  // @@protoc_insertion_point(field_list:qiuwanli.FileShared.sharedlog)
+  return sharedlog_;
+}
+
 #endif  // !PROTOBUF_INLINE_NOT_IN_HEADERS
+// -------------------------------------------------------------------
+
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

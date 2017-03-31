@@ -186,6 +186,7 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="constdate.hpp" />
     <ClInclude Include="date.pb.h" />
     <ClInclude Include="QFileSystem.h" />
     <ClInclude Include="QFileSystemDlg.h" />

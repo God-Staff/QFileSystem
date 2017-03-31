@@ -3,7 +3,7 @@
 //
 
 #pragma once
-#include "date.pb.h"
+#include "constdate.hpp"
 
 // CQFileSystemDlg 对话框
 class CQFileSystemDlg : public CDHtmlDialog
@@ -38,6 +38,33 @@ protected:
 	CListCtrl*  m_ListControl = nullptr;
 	CListCtrl*  m_ListContro2 = nullptr;
 	void updateList ();
-	void MakeFilesLog (qiuwanli::File2Cilent * downingLog, std::string filename,
-		std::string sha512, std::string client, std::string createtime)
+	void MakeFilesLog (qiuwanli::File2Cilent * file, std::string filename,
+		std::string sha512, std::string client, std::string createtime);
+	void MakeLogs (qiuwanli::Logs * Log, std::string user_id,
+		std::string logdate, std::string loginfo, std::string logtype);
+	void MakeLogs (qiuwanli::ID2IP * id2ip, std::string clientid,
+		std::string id, std::string Prikey, std::string KeyMd5, std::string Others);
+	void sender (boost::asio::io_service &io, const char*	ip_address, unsigned	port, const char* filename, const char* msg_type);
+
+	//核对是否存在
+	bool CQFileSystemDlg::checkItem (std::string item);
+
+	std::wstring StringToWstring (const std::string& str)
+	{
+		int size_needed = MultiByteToWideChar (CP_UTF8, 0, &str[0], (int)str.size (), NULL, 0);
+		std::wstring wstrTo (size_needed, 0);
+		MultiByteToWideChar (CP_UTF8, 0, &str[0], (int)str.size (), &wstrTo[0], size_needed);
+		return wstrTo;
+	}
+
+	std::string & WStringToUTF8String (const std::wstring &wstr)
+	{
+		std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
+		std::string u8str = "";
+		u8str = conv.to_bytes (wstr);
+		return std::move (u8str);
+	}
+public:
+	afx_msg void OnNMRClickList1 (NMHDR *pNMHDR, LRESULT *pResult);
 };
+

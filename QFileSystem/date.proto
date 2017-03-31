@@ -2,12 +2,10 @@ syntax = "proto3";
 
 package qiuwanli;
 
-
 //用于记录用户操作的，可进行操作回退，系统日志
-message Logs 
-{
+message Logs {
 	string user_id=1;
-	uint64 log_date=2;
+	string log_date=2;
 	string log_info=3;
 	bytes  log_type=4;
 	string user_client_UUID=5;	
@@ -20,8 +18,7 @@ message AllLog
 }
 
 //服务端
-message File2Cilent
-{
+message File2Cilent {
 	string FileName=1;	//文件名
 	string SHA512=2;	//唯一标识SHA512
 	string CilentID=3;	//客户端ID
@@ -32,9 +29,7 @@ message File2ClientServers
 	repeated File2Cilent client=1;
 }
 
-
-message ID2IP
-{
+message ID2IP {
 	string CilentID=1;	//
 	string IP=2;		//客户端对应IP
 	string PriKey=3;	//认证信息
@@ -44,4 +39,13 @@ message ID2IP
 message ID2IPTable
 {
 	repeated ID2IP ip=1;
+}
+
+message FilesSharedLog {
+	string Sha512=1;
+	string Key=2;
+	string SharedTime=3;
+}
+message FileShared {
+    repeated FilesSharedLog sharedlog = 1;
 }
