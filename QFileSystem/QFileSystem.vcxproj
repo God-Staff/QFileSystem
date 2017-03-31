@@ -188,14 +188,18 @@
   <ItemGroup>
     <ClInclude Include="constdate.hpp" />
     <ClInclude Include="date.pb.h" />
+    <ClInclude Include="handler_allocator.hpp" />
     <ClInclude Include="QFileSystem.h" />
     <ClInclude Include="QFileSystemDlg.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="Servers.hpp" />
+    <ClInclude Include="Session.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="date.pb.cc" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="QFileSystem.cpp" />
     <ClCompile Include="QFileSystemDlg.cpp" />
     <ClCompile Include="stdafx.cpp">

@@ -39,6 +39,15 @@
     <ClInclude Include="constdate.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="handler_allocator.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Session.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Servers.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QFileSystem.cpp">
@@ -52,6 +61,9 @@
     </ClCompile>
     <ClCompile Include="date.pb.cc">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>头文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
