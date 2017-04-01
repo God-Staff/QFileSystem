@@ -46,6 +46,8 @@ protected:
 		std::string id, std::string Prikey, std::string KeyMd5, std::string Others);
 	void sender (boost::asio::io_service &io, const char*	ip_address, unsigned	port, const char* filename, const char* msg_type);
 
+	//发送发文件
+	void sender (boost::asio::io_service &io, const char*	ip_address, unsigned	port, const char* filename, const char* msg_type);
 	//核对是否存在
 	bool CQFileSystemDlg::checkItem (std::string item);
 

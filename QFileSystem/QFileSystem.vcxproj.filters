@@ -48,6 +48,9 @@
     <ClInclude Include="Servers.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="optlog.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QFileSystem.cpp">
