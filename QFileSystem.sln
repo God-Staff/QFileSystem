@@ -13,6 +13,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileKeepClient", "FileKeepC
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThridClient", "ThridClient\ThridClient.vcxproj", "{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project1", "Project1\Project1.vcxproj", "{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -61,6 +63,14 @@ Global
 		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Release|x64.Build.0 = Release|x64
 		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Release|x86.ActiveCfg = Release|Win32
 		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Release|x86.Build.0 = Release|Win32
+		{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}.Debug|x64.ActiveCfg = Debug|x64
+		{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}.Debug|x64.Build.0 = Debug|x64
+		{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}.Debug|x86.ActiveCfg = Debug|Win32
+		{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}.Debug|x86.Build.0 = Debug|Win32
+		{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}.Release|x64.ActiveCfg = Release|x64
+		{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}.Release|x64.Build.0 = Release|x64
+		{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}.Release|x86.ActiveCfg = Release|Win32
+		{9D21A3DA-C951-4BA5-8075-4124DE2F5DE9}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

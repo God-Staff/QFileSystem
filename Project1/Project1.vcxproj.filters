@@ -15,37 +15,11 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="源.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="FileDataStruct.pb.cc">
+    <ClCompile Include="源1.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="FileManage.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="FileManage.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="handler_allocator.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Servers.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Session.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FileDataStruct.pb.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="public.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
