@@ -16,21 +16,27 @@
 #include <boost/algorithm/string/classification.hpp>
 #include <cstdio>
 #include <mutex>
-#include <fstream>
+#include <boost/filesystem.hpp>
 
 class OptLog
 {
 private:
 	std::mutex m_mutex;
-	std::fstream fout;
+	boost::filesystem::fstream fout;
 public:
 	void log (std::string ss)
 	{
 		std::lock_guard<std::mutex> locker_m (m_mutex);
 		fout << ss << std::endl;
 	}
-	OptLog () { fout.open ("log.txt"); }
-	~OptLog () {}
+	OptLog () { fout.open ("log.txt",std::ios::app); }
+	~OptLog () 
+	{
+		if (fout.is_open())
+		{
+			fout.close ();
+		}
+	}
 };
 
 struct File_info 

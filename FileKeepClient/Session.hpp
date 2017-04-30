@@ -1,38 +1,44 @@
 #ifndef SESSION_HPP
 #define SESSION_HPP
 
-#include <boost/asio.hpp>
 #include <algorithm>
 #include <boost/bind.hpp>
 #include <iostream>
-#include <fstream>
+#include <list>
+#include <mutex>
+#include <cstdio>
+
+#include <boost/asio.hpp>
 #include <boost/shared_ptr.hpp>
 #include <boost/enable_shared_from_this.hpp>
-#include <list>
 #include <boost/thread.hpp>
-#include "handler_allocator.hpp"
 #include <boost/regex.hpp>
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
-#include <cstdio>
-#include <mutex>
-#include <fstream>
+#include <boost/filesystem.hpp>
+
+#include "handler_allocator.hpp"
 
 class OptLog
 {
 private:
 	std::mutex m_mutex;
-	std::fstream fout;
+	boost::filesystem::fstream fout;
 public:
 	void log (std::string ss)
 	{
 		std::lock_guard<std::mutex> locker_m (m_mutex);
 		fout << ss << std::endl;
 	}
-	OptLog () { fout.open ("log.txt"); }
-	~OptLog () {}
+	OptLog () { fout.open ("log.txt", std::ios::app); }
+	~OptLog ()
+	{
+		if (fout.is_open ())
+		{
+			fout.close ();
+		}
+	}
 };
-
 struct File_info 
 {
 	typedef unsigned long long Size_type;

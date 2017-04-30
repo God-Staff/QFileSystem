@@ -20,8 +20,8 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{51B82C1E-E1F2-46A9-B220-5837EEC1F41C}</ProjectGuid>
-    <RootNamespace>FileKeepClient</RootNamespace>
+    <ProjectGuid>{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}</ProjectGuid>
+    <RootNamespace>ThridClient</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.14393.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -111,18 +111,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="FileDataStruct.pb.h" />
-    <ClInclude Include="FileManage.hpp" />
-    <ClInclude Include="handler_allocator.hpp" />
-    <ClInclude Include="Servers.hpp" />
-    <ClInclude Include="Session.hpp" />
+    <ClCompile Include="DataStruct.pb.cc" />
+    <ClCompile Include="files.pb.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileDataStruct.pb.cc" />
-    <ClCompile Include="main.cpp" />
+    <ClInclude Include="DataStruct.pb.h" />
+    <ClInclude Include="files.pb.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <None Include="DataStruct.proto" />
+    <None Include="files.proto" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

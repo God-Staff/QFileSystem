@@ -51,6 +51,9 @@
     <ClInclude Include="optlog.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="DataStruct.pb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QFileSystem.cpp">
@@ -68,6 +71,9 @@
     <ClCompile Include="main.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
+    <ClCompile Include="DataStruct.pb.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="QFileSystem.htm" />
@@ -77,6 +83,7 @@
     <None Include="date.proto">
       <Filter>资源文件</Filter>
     </None>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="QFileSystem.rc">

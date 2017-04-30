@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.10
+VisualStudioVersion = 15.0.26403.7
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "QFileSystem", "QFileSystem\QFileSystem.vcxproj", "{EE85005E-FB3F-4CD8-9455-088AB83AD694}"
 EndProject
@@ -10,6 +10,8 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "SendFiles", "SendFiles\SendFiles.vcxproj", "{B30E5399-B4E7-4366-84EB-E96948F26D41}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "FileKeepClient", "FileKeepClient\FileKeepClient.vcxproj", "{51B82C1E-E1F2-46A9-B220-5837EEC1F41C}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThridClient", "ThridClient\ThridClient.vcxproj", "{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +53,14 @@ Global
 		{51B82C1E-E1F2-46A9-B220-5837EEC1F41C}.Release|x64.Build.0 = Release|x64
 		{51B82C1E-E1F2-46A9-B220-5837EEC1F41C}.Release|x86.ActiveCfg = Release|Win32
 		{51B82C1E-E1F2-46A9-B220-5837EEC1F41C}.Release|x86.Build.0 = Release|Win32
+		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Debug|x64.ActiveCfg = Debug|x64
+		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Debug|x64.Build.0 = Debug|x64
+		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Debug|x86.ActiveCfg = Debug|Win32
+		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Debug|x86.Build.0 = Debug|Win32
+		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Release|x64.ActiveCfg = Release|x64
+		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Release|x64.Build.0 = Release|x64
+		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Release|x86.ActiveCfg = Release|Win32
+		{69687294-A7F4-45AC-8CF8-3DB29F7F5AA7}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -15,31 +15,23 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="DataStruct.pb.cc">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="FileDataStruct.pb.cc">
+    <ClCompile Include="files.pb.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="FileManage.hpp">
+    <ClInclude Include="DataStruct.pb.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="handler_allocator.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Servers.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Session.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FileDataStruct.pb.h">
+    <ClInclude Include="files.pb.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="ClassDiagram.cd" />
+    <None Include="DataStruct.proto" />
+    <None Include="files.proto" />
   </ItemGroup>
 </Project>

@@ -3,25 +3,44 @@
 
 #include <fstream>
 #include <string>
-
+#include <boost/filesystem.hpp>
 class FileManage
 {
 public:
-	FileManage () { f_inout = nullptr; }
+	FileManage ():m_FileName("") {}
+	FileManage (std::string FileName)
+	{
+		m_FileName = FileName;
+		if (!m_FileInOut.is_open ())
+		{
+			m_FileInOut.open (m_FileName);
+		}
+	}
 	~FileManage () 
 	{
-		if (!f_inout == nullptr)
-			f_inout.close ();
+		if (m_FileInOut.is_open())
+			m_FileInOut.close ();
 	}
-	bool open (std::string filename) 
+	bool open (std::string FileName ="")
 	{
-		if(!f_inout.open (filename))
+		if (0 == FileName.compare(""))
+		{
+			m_FileName = FileName;
+		}
+
+		if (!m_FileInOut.is_open ())
+		{
+			m_FileInOut.open (m_FileName);
+			if (m_FileInOut)
+			{
+				return true;
+			}
 			return false;
-		return true;
+		}
 	}
 private:
-	std::fstream f_inout;
-
+	boost::filesystem::fstream m_FileInOut;
+	boost::filesystem::path m_FileName;
 };
 
 

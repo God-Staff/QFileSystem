@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package qiuwanli;
+
+////////////////////////////////////////////////////////
+//文件存储端
+//配置信息
+message ConfigFile
+{
+	uint64 ID=1;
+	uint64 IP=2;
+	string PriKey=3;
+	string PriKeyMD5=4;
+	uint64 TotalSize=5;
+	uint64 RemainSize=6;
+}
+
+//块列表
+message BlockInfo
+{
+	string FileSHA512=1;		//文件名包含后缀
+	string BlockMD5=2;			//
+	string SaveFileName=3; 		//保存在哪个文件中
+	uint64 BlockNumer=4;		//
+	uint64 CurSize=5;			//实际大小这表示为整块64K
+	uint64 FileBlockOffset=6;	//文件存储位置的相对偏移量
+}
+message BlockInfoTable
+{
+	repeated BlockInfo Block=1;
+}
+
+//用于记录用户操作的，可进行操作回退，系统日志
+message Logs 
+{
+	string user_id=1;
+	uint64 log_date=2;
+	string log_info=3;
+	bytes  log_type=4;
+	string user_client_UUID=5;	
+}
+//用于记录个人日志，每月保存为一个文件
+message LogTable
+{
+	string logdate=1;
+	repeated Logs log=2;
+}
+
+//保存文件所对应的文件块的下载列表
+message BlockListForDown
+{
+	string FileSHA512=1;
+	string BlockNumer=2;
+	string SaveServersIP=3;
+}
+message BlockListForDownTable
+{
+	repeated BlockListForDown BlockListForDown=1;
+}

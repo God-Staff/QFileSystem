@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="qiuwanli::LogsDefaultTypeInternal" Collapsed="true">
+    <Position X="0.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="qiuwanli::AllLogDefaultTypeInternal" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="qiuwanli::File2CilentDefaultTypeInternal" Collapsed="true">
+    <Position X="4" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="qiuwanli::File2ClientServersDefaultTypeInternal" Collapsed="true">
+    <Position X="7.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="qiuwanli::ID2IPDefaultTypeInternal" Collapsed="true">
+    <Position X="2.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="qiuwanli::ID2IPTableDefaultTypeInternal" Collapsed="true">
+    <Position X="5.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="qiuwanli::FilesSharedLogDefaultTypeInternal" Collapsed="true">
+    <Position X="5.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="qiuwanli::FileSharedDefaultTypeInternal" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="qiuwanli::Logs" Collapsed="true">
+    <Position X="7.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAABABAAAAAAAQAAAABAAIAAAAgAAAAAAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CAboutDlg" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAABAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>QFileSystemDlg.cpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AllLog" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QAAAAAAAAAAABABAAAAAAAAAAAABAAIAAAAgAAABAAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="File2Cilent" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABABAAAAAAAAAAAABAAKAAAAgAAAAQAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="File2ClientServers" Collapsed="true">
+    <Position X="5.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABABAAAAAAAAAAAABAAoAIAAgAAAAAAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ID2IP" Collapsed="true">
+    <Position X="0.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAABABAAAAAAAAAAAABAAIAAAAgAAAAAAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ID2IPTable" Collapsed="true">
+    <Position X="4" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAABABAAAAAAAAAAAABAAIAAQAgAAAAAAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FilesSharedLog" Collapsed="true">
+    <Position X="4" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABABAAAAAAAAAAAABACIAAAAgAAAABAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileShared" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAABABAAACAAAAAAAARAAIAAAAgAAAAAAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="handler_allocator" Collapsed="true">
+    <Position X="7.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAEAAEABAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>handler_allocator.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="custom_alloc_handler&lt;Handler&gt;" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAEAAAIAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>handler_allocator.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OptLog" Collapsed="true">
+    <Position X="2.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAAAAAAAABAAAACEAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>optlog.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CQFileSystemApp" Collapsed="true">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAIAAAAAAA=</HashCode>
+      <FileName>QFileSystem.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CQFileSystemDlg" Collapsed="true">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAiBQAGAKCAAAQAAABAQAAAAAAAAAAYAAQEAAAAQAAg=</HashCode>
+      <FileName>QFileSystemDlg.h</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="server" Collapsed="true">
+    <Position X="4" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACABAAAAAAAQAAAAAAAQAAAAAAAAAAACAAAAAAAAAI=</HashCode>
+      <FileName>Servers.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Session" Collapsed="true">
+    <Position X="5.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgABAAAAEAAAQAgAAAAAgUgBgAAAAAAABFCAgAAUAA=</HashCode>
+      <FileName>Session.hpp</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="qiuwanli::protobuf_date_2eproto::StaticDescriptorInitializer" Collapsed="true">
+    <Position X="2.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.cc</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="qiuwanli::protobuf_date_2eproto::TableStruct" Collapsed="true">
+    <Position X="4" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAQABAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>date.pb.h</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="File_info" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAACAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAgAAAA=</HashCode>
+      <FileName>constdate.hpp</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Typedef Name="Size_type" Collapsed="true">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>constdate.hpp</FileName>
+    </TypeIdentifier>
+  </Typedef>
+  <Font Name="Microsoft YaHei UI" Size="9" />
+</ClassDiagram>

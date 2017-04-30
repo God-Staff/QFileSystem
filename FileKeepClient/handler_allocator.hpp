@@ -36,10 +36,7 @@ public:
 	}
 
 private:
-	// Storage space used for handler-based custom memory allocation.
 	boost::aligned_storage<1024> storage_;
-
-	// Whether the handler-based custom allocation storage has been used.
 	bool in_use_;
 };
 
