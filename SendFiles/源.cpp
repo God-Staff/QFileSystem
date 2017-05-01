@@ -11,7 +11,8 @@ struct File_info {
 	File_info () : filesize (0), filename_size (0) {}
 };
 
-void sender (boost::asio::io_service &io, const char*	ip_address, unsigned	port, const char* filename, const char* msg_type)
+void sender (boost::asio::io_service &io, const char*	ip_address
+             , unsigned	port, const char* filename, const char* msg_type)
 {
 	FILE *fp=nullptr;
 	fopen_s (&fp, filename, "rb");
@@ -51,8 +52,8 @@ void sender (boost::asio::io_service &io, const char*	ip_address, unsigned	port,
 	file_info.filesize = ftell (fp);
 	rewind (fp);
 
-	memcpy (buffer, &file_info, file_info_size);								//文件信息
-	memcpy (buffer + file_info_size, filename, filename_size);					//文件名/消息类型
+    memcpy(buffer, &file_info, file_info_size);							//文件信息
+    memcpy(buffer + file_info_size, filename, filename_size);			//文件名/消息类型
 
 	boost::asio::ip::tcp::socket socket (io);
 	socket.connect (boost::asio::ip::tcp::endpoint (boost::asio::ip::address_v4::from_string (ip_address), port));
@@ -60,10 +61,13 @@ void sender (boost::asio::io_service &io, const char*	ip_address, unsigned	port,
 	std::cout << "Sending file : " << filename << " MsgType:" << msg_type << std::endl;
 	size_t len = total_size;
 	unsigned long long total_bytes_read = 0;
-	while (true) {
+	while (true) 
+    {
 		//先发送文件头，之后发送data
 		socket.send (boost::asio::buffer (buffer, len), 0);
-		if (feof (fp)) break;
+
+		if (feof (fp)) 
+            break;
 		len = fread (buffer, 1, k_buffer_size, fp);
 		total_bytes_read += len;
 	}
@@ -71,10 +75,10 @@ void sender (boost::asio::io_service &io, const char*	ip_address, unsigned	port,
 	//计算时间、大小和速度//
 	cost_time = clock () - cost_time;
 	if (cost_time == 0) cost_time = 1;
-	double speed = total_bytes_read * (CLOCKS_PER_SEC / 1024.0 / 1024.0) / cost_time;
-	std::cout << "cost time: " << cost_time / (double)CLOCKS_PER_SEC << " s "
-		<< "  transferred_bytes: " << total_bytes_read << " bytes\n"
-		<< "speed: " << speed << " MB/s\n\n";
+	double speed = total_bytes_read * (CLOCKS_PER_SEC/1024.0/1024.0)/cost_time;
+    std::cout << "cost time: " << cost_time/(double)CLOCKS_PER_SEC << " s "
+        << "  transferred_bytes: " << total_bytes_read << " bytes\n"
+        << "speed: " << speed << " MB/s\n\n";
 }
 
 int main ()

@@ -7,9 +7,10 @@
 class server
 {
 public:
-	server (boost::asio::io_service& ios, const boost::asio::ip::tcp::endpoint& endpoint)
-		: io_service_ (ios),
-		acceptor_ (ios)
+	server (boost::asio::io_service& ios
+            , const boost::asio::ip::tcp::endpoint& endpoint)
+		: io_service_ (ios)
+        , acceptor_ (ios)
 	{
 		acceptor_.open (endpoint.protocol ());
 		acceptor_.set_option (boost::asio::ip::tcp::acceptor::reuse_address (1));
@@ -18,19 +19,28 @@ public:
 
 		start_accept ();
 	}
-	static void print_asio_error (const boost::system::error_code& error) { std::cerr << error.message () << "\n"; }
+	static void print_asio_error (const boost::system::error_code& error) 
+    { 
+        std::cerr << error.message () << "\n"; 
+    }
 
 private:
 	void start_accept ()
 	{
 		boost::shared_ptr<Session> session = Session::create (io_service_);
 		acceptor_.async_accept (session->socket (),
-			boost::bind (&server::handle_accept, this, session, boost::asio::placeholders::error));
+			        boost::bind (&server::handle_accept
+                                , this
+                                , session
+                                , boost::asio::placeholders::error));
 	}
 
-	void handle_accept (boost::shared_ptr<Session> session, const boost::system::error_code& error)
+	void handle_accept (boost::shared_ptr<Session> session
+                        , const boost::system::error_code& error)
 	{
-		if (error) return print_asio_error (error);
+		if (error) 
+            return print_asio_error (error);
+
 		session->start ();
 		start_accept ();
 	}
