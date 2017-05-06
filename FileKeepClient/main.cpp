@@ -27,7 +27,7 @@ int main (int argc, char* argv[])
 		while (--thread_count > 0)
 		{
 			boost::thread* new_thread = new boost::thread (
-				boost::bind (&boost::asio::io_service::run, &ios));
+				boost::bind (&boost::asio::io_service::run,&ios));
 			threads.push_back (new_thread);
 		}
 

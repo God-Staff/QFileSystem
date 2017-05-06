@@ -115,6 +115,7 @@
     <ClInclude Include="FileManage.hpp" />
     <ClInclude Include="handler_allocator.hpp" />
     <ClInclude Include="public.h" />
+    <ClInclude Include="SerializationToStream.hpp" />
     <ClInclude Include="Servers.hpp" />
     <ClInclude Include="Session.hpp" />
   </ItemGroup>
@@ -122,6 +123,7 @@
     <ClCompile Include="FileDataStruct.pb.cc" />
     <ClCompile Include="FileManage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SerializationToStream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

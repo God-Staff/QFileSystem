@@ -129,7 +129,7 @@ void protobuf_AssignDescriptors() {
 
 void protobuf_AssignDescriptorsOnce() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &protobuf_AssignDescriptors);
+  ::google::protobuf::GoogleOnceInit(&once,&protobuf_AssignDescriptors);
 }
 
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
@@ -172,7 +172,7 @@ void TableStruct::InitDefaultsImpl() {
 
 void InitDefaults() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &TableStruct::InitDefaultsImpl);
+  ::google::protobuf::GoogleOnceInit(&once,&TableStruct::InitDefaultsImpl);
 }
 void AddDescriptorsImpl() {
   InitDefaults();
@@ -198,13 +198,13 @@ void AddDescriptorsImpl() {
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
       descriptor, 667);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
-    "FileDataStruct.proto", &protobuf_RegisterTypes);
+    "FileDataStruct.proto",&protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
 }
 
 void AddDescriptors() {
   static GOOGLE_PROTOBUF_DECLARE_ONCE(once);
-  ::google::protobuf::GoogleOnceInit(&once, &AddDescriptorsImpl);
+  ::google::protobuf::GoogleOnceInit(&once,&AddDescriptorsImpl);
 }
 // Force AddDescriptors() to be called at static initialization time.
 struct StaticDescriptorInitializer {
@@ -248,7 +248,7 @@ ConfigFile::ConfigFile(const ConfigFile& from)
   if (from.prikeymd5().size() > 0) {
     prikeymd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.prikeymd5_);
   }
-  ::memcpy(&id_, &from.id_,
+  ::memcpy(&id_,&from.id_,
     reinterpret_cast<char*>(&remainsize_) -
     reinterpret_cast<char*>(&id_) + sizeof(remainsize_));
   // @@protoc_insertion_point(copy_constructor:qiuwanli.ConfigFile)
@@ -319,7 +319,7 @@ bool ConfigFile::MergePartialFromCodedStream(
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &id_)));
+                 input,&id_)));
         } else {
           goto handle_unusual;
         }
@@ -332,7 +332,7 @@ bool ConfigFile::MergePartialFromCodedStream(
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &ip_)));
+                 input,&ip_)));
         } else {
           goto handle_unusual;
         }
@@ -375,7 +375,7 @@ bool ConfigFile::MergePartialFromCodedStream(
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &totalsize_)));
+                 input,&totalsize_)));
         } else {
           goto handle_unusual;
         }
@@ -388,7 +388,7 @@ bool ConfigFile::MergePartialFromCodedStream(
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &remainsize_)));
+                 input,&remainsize_)));
         } else {
           goto handle_unusual;
         }
@@ -570,7 +570,7 @@ void ConfigFile::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_DCHECK_NE(&from, this);
   const ConfigFile* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const ConfigFile>(
-          &from);
+         &from);
   if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.ConfigFile)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -691,7 +691,7 @@ void ConfigFile::set_prikey(const ::std::string& value) {
 void ConfigFile::set_prikey(::std::string&& value) {
   
   prikey_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.ConfigFile.PriKey)
 }
 #endif
@@ -743,7 +743,7 @@ void ConfigFile::set_prikeymd5(const ::std::string& value) {
 void ConfigFile::set_prikeymd5(::std::string&& value) {
   
   prikeymd5_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.ConfigFile.PriKeyMD5)
 }
 #endif
@@ -844,7 +844,7 @@ BlockInfo::BlockInfo(const BlockInfo& from)
   if (from.savefilename().size() > 0) {
     savefilename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.savefilename_);
   }
-  ::memcpy(&blocknumer_, &from.blocknumer_,
+  ::memcpy(&blocknumer_,&from.blocknumer_,
     reinterpret_cast<char*>(&fileblockoffset_) -
     reinterpret_cast<char*>(&blocknumer_) + sizeof(fileblockoffset_));
   // @@protoc_insertion_point(copy_constructor:qiuwanli.BlockInfo)
@@ -963,7 +963,7 @@ bool BlockInfo::MergePartialFromCodedStream(
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &blocknumer_)));
+                 input,&blocknumer_)));
         } else {
           goto handle_unusual;
         }
@@ -976,7 +976,7 @@ bool BlockInfo::MergePartialFromCodedStream(
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &cursize_)));
+                 input,&cursize_)));
         } else {
           goto handle_unusual;
         }
@@ -989,7 +989,7 @@ bool BlockInfo::MergePartialFromCodedStream(
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &fileblockoffset_)));
+                 input,&fileblockoffset_)));
         } else {
           goto handle_unusual;
         }
@@ -1182,7 +1182,7 @@ void BlockInfo::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_DCHECK_NE(&from, this);
   const BlockInfo* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const BlockInfo>(
-          &from);
+         &from);
   if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.BlockInfo)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1276,7 +1276,7 @@ void BlockInfo::set_filesha512(const ::std::string& value) {
 void BlockInfo::set_filesha512(::std::string&& value) {
   
   filesha512_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockInfo.FileSHA512)
 }
 #endif
@@ -1328,7 +1328,7 @@ void BlockInfo::set_blockmd5(const ::std::string& value) {
 void BlockInfo::set_blockmd5(::std::string&& value) {
   
   blockmd5_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockInfo.BlockMD5)
 }
 #endif
@@ -1380,7 +1380,7 @@ void BlockInfo::set_savefilename(const ::std::string& value) {
 void BlockInfo::set_savefilename(::std::string&& value) {
   
   savefilename_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockInfo.SaveFileName)
 }
 #endif
@@ -1620,7 +1620,7 @@ void BlockInfoTable::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_DCHECK_NE(&from, this);
   const BlockInfoTable* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const BlockInfoTable>(
-          &from);
+         &from);
   if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.BlockInfoTable)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -1694,7 +1694,7 @@ const ::qiuwanli::BlockInfo& BlockInfoTable::block(int index) const {
 ::google::protobuf::RepeatedPtrField< ::qiuwanli::BlockInfo >*
 BlockInfoTable::mutable_block() {
   // @@protoc_insertion_point(field_mutable_list:qiuwanli.BlockInfoTable.Block)
-  return &block_;
+  return&block_;
 }
 const ::google::protobuf::RepeatedPtrField< ::qiuwanli::BlockInfo >&
 BlockInfoTable::block() const {
@@ -1831,7 +1831,7 @@ bool Logs::MergePartialFromCodedStream(
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &log_date_)));
+                 input,&log_date_)));
         } else {
           goto handle_unusual;
         }
@@ -2051,7 +2051,7 @@ void Logs::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_DCHECK_NE(&from, this);
   const Logs* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const Logs>(
-          &from);
+         &from);
   if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.Logs)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2142,7 +2142,7 @@ void Logs::set_user_id(const ::std::string& value) {
 void Logs::set_user_id(::std::string&& value) {
   
   user_id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.user_id)
 }
 #endif
@@ -2208,7 +2208,7 @@ void Logs::set_log_info(const ::std::string& value) {
 void Logs::set_log_info(::std::string&& value) {
   
   log_info_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.log_info)
 }
 #endif
@@ -2260,7 +2260,7 @@ void Logs::set_log_type(const ::std::string& value) {
 void Logs::set_log_type(::std::string&& value) {
   
   log_type_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.log_type)
 }
 #endif
@@ -2312,7 +2312,7 @@ void Logs::set_user_client_uuid(const ::std::string& value) {
 void Logs::set_user_client_uuid(::std::string&& value) {
   
   user_client_uuid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.user_client_UUID)
 }
 #endif
@@ -2561,7 +2561,7 @@ void LogTable::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_DCHECK_NE(&from, this);
   const LogTable* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const LogTable>(
-          &from);
+         &from);
   if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.LogTable)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -2635,7 +2635,7 @@ void LogTable::set_logdate(const ::std::string& value) {
 void LogTable::set_logdate(::std::string&& value) {
   
   logdate_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.LogTable.logdate)
 }
 #endif
@@ -2692,7 +2692,7 @@ const ::qiuwanli::Logs& LogTable::log(int index) const {
 ::google::protobuf::RepeatedPtrField< ::qiuwanli::Logs >*
 LogTable::mutable_log() {
   // @@protoc_insertion_point(field_mutable_list:qiuwanli.LogTable.log)
-  return &log_;
+  return&log_;
 }
 const ::google::protobuf::RepeatedPtrField< ::qiuwanli::Logs >&
 LogTable::log() const {
@@ -2976,7 +2976,7 @@ void BlockListForDown::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_DCHECK_NE(&from, this);
   const BlockListForDown* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const BlockListForDown>(
-          &from);
+         &from);
   if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.BlockListForDown)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -3058,7 +3058,7 @@ void BlockListForDown::set_filesha512(const ::std::string& value) {
 void BlockListForDown::set_filesha512(::std::string&& value) {
   
   filesha512_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockListForDown.FileSHA512)
 }
 #endif
@@ -3110,7 +3110,7 @@ void BlockListForDown::set_blocknumer(const ::std::string& value) {
 void BlockListForDown::set_blocknumer(::std::string&& value) {
   
   blocknumer_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockListForDown.BlockNumer)
 }
 #endif
@@ -3162,7 +3162,7 @@ void BlockListForDown::set_saveserversip(const ::std::string& value) {
 void BlockListForDown::set_saveserversip(::std::string&& value) {
   
   saveserversip_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockListForDown.SaveServersIP)
 }
 #endif
@@ -3360,7 +3360,7 @@ void BlockListForDownTable::MergeFrom(const ::google::protobuf::Message& from) {
   GOOGLE_DCHECK_NE(&from, this);
   const BlockListForDownTable* source =
       ::google::protobuf::internal::DynamicCastToGenerated<const BlockListForDownTable>(
-          &from);
+         &from);
   if (source == NULL) {
   // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.BlockListForDownTable)
     ::google::protobuf::internal::ReflectionOps::Merge(from, this);
@@ -3434,7 +3434,7 @@ const ::qiuwanli::BlockListForDown& BlockListForDownTable::blocklistfordown(int 
 ::google::protobuf::RepeatedPtrField< ::qiuwanli::BlockListForDown >*
 BlockListForDownTable::mutable_blocklistfordown() {
   // @@protoc_insertion_point(field_mutable_list:qiuwanli.BlockListForDownTable.BlockListForDown)
-  return &blocklistfordown_;
+  return&blocklistfordown_;
 }
 const ::google::protobuf::RepeatedPtrField< ::qiuwanli::BlockListForDown >&
 BlockListForDownTable::blocklistfordown() const {

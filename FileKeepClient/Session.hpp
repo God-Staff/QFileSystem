@@ -116,8 +116,8 @@ private:
 		if (error)
 			return print_asio_error (error);
 		const char *base_name_msg = buffer_ + file_info_.filename_size - 1;
-        while (base_name_msg >= buffer_ && 
-             (*base_name_msg != '\\' && *base_name_msg != '/'))
+        while (base_name_msg >= buffer_&& 
+             (*base_name_msg != '\\'&& *base_name_msg != '/'))
         {
             --base_name_msg;
         }

@@ -11,7 +11,7 @@ public:
     FileManage( );
     ~FileManage( );
 
-    bool CreateFile(std::string & File);
+    bool CreateFile(std::string& File);
 
     bool open(const std::string& FileName = "");
     char * ReadFileBlock(char * fileBlock, const size_t OffSet, const size_t CurSize);

@@ -11,6 +11,7 @@
 #define IDR_MENU1                       130
 #define IDC_LIST1                       1001
 #define IDC_LIST2                       1002
+#define IDC_LIST3                       1003
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_DELETE_32773                 32773

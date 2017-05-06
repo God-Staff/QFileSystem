@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include "constdate.hpp"
 
 int main1 (int argc, char* argv[])
@@ -24,7 +25,8 @@ int main1 (int argc, char* argv[])
 		while (--thread_count > 0)
 		{
 			boost::thread* new_thread = new boost::thread (
-				boost::bind (&boost::asio::io_service::run, &ios));
+				    boost::bind (&boost::asio::io_service::run, &ios));
+
 			threads.push_back (new_thread);
 		}
 
@@ -33,6 +35,7 @@ int main1 (int argc, char* argv[])
 		while (!threads.empty ())
 		{
 			threads.front ()->join ();
+
 			delete threads.front ();
 			threads.pop_front ();
 		}

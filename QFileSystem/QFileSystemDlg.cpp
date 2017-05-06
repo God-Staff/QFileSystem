@@ -66,7 +66,9 @@ void CQFileSystemDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CQFileSystemDlg, CDHtmlDialog)
 	ON_WM_SYSCOMMAND()
-	ON_NOTIFY (NM_RCLICK, IDC_LIST1, &CQFileSystemDlg::OnNMRClickList1)
+	ON_NOTIFY(NM_RCLICK, IDC_LIST1, &CQFileSystemDlg::OnNMRClickFileList)
+    ON_NOTIFY(NM_RCLICK, IDC_LIST2, &CQFileSystemDlg::OnNMRClickClientList)
+    ON_NOTIFY(NM_RCLICK, IDC_LIST3, &CQFileSystemDlg::OnNMRClickSharedList)
 END_MESSAGE_MAP()
 
 
@@ -113,7 +115,8 @@ BOOL CQFileSystemDlg::OnInitDialog()
 	m_ListControl->SetExtendedStyle (styles2 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
 	//给listctrl设置5个标题栏
-	TCHAR rgtsz2[5][10] = { _T ("文件名"),_T ("SHA512") ,_T ("ClientID") ,_T ("创建时间") ,_T ("权限") };
+    TCHAR rgtsz2[5][10] = {_T("文件名"), _T("SHA512") 
+        , _T("ClientID") ,_T("创建时间") ,_T("权限")};
 
 	//修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
 
@@ -152,7 +155,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
 	for (int i = 0; i < 2; i++)
 	{
 		lvcolumn.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
-			| LVCF_WIDTH | LVCF_ORDER;
+			        | LVCF_WIDTH | LVCF_ORDER;
 		lvcolumn.fmt = LVCFMT_LEFT;
 		lvcolumn.pszText = rgtsz[i];
 		lvcolumn.iSubItem = i;
@@ -288,8 +291,11 @@ void CQFileSystemDlg::updateList ()
 	clientInfo.close ();
 }
 
-void CQFileSystemDlg::MakeFilesLog (qiuwanli::File2Cilent * file, std::string filename,
-	std::string sha512, std::string client, std::string createtime)
+void CQFileSystemDlg::MakeFilesLog (qiuwanli::File2Cilent * file
+                                    , std::string filename
+                                    , std::string sha512
+                                    , std::string client
+                                    , std::string createtime)
 {
 	file->set_filename (filename);
 	file->set_sha512 (sha512);
@@ -297,16 +303,23 @@ void CQFileSystemDlg::MakeFilesLog (qiuwanli::File2Cilent * file, std::string fi
 	file->set_createdate (createtime);
 }
 
-void CQFileSystemDlg::MakeLogs (qiuwanli::Logs * Log, std::string user_id,
-	std::string logdate, std::string loginfo, std::string logtype) 
+void CQFileSystemDlg::MakeLogs (qiuwanli::Logs * Log
+                                , std::string user_id
+                                , std::string logdate
+                                , std::string loginfo
+                                , std::string logtype) 
 {
 	Log->set_user_id (user_id);
 	Log->set_log_date (logdate);
 	Log->set_log_info (loginfo);
 	Log->set_log_type (logtype);
 }
-void CQFileSystemDlg::MakeLogs (qiuwanli::ID2IP * id2ip, std::string clientid,
-	std::string ip, std::string Prikey, std::string KeyMd5, std::string Others)
+void CQFileSystemDlg::MakeLogs (qiuwanli::ID2IP * id2ip
+                                , std::string clientid
+                                , std::string ip
+                                , std::string Prikey
+                                , std::string KeyMd5
+                                , std::string Others)
 {
 	id2ip->set_cilentid (clientid);
 	id2ip->set_ip (ip);
@@ -319,7 +332,8 @@ void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_addres
 {
 	FILE *fp;
 	fopen_s (&fp, filename, "rb");
-	if (fp == NULL) {
+	if (fp == NULL) 
+    {
 		std::cerr << "cannot open file\n";
 		return;
 	}
@@ -345,7 +359,8 @@ void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_addres
 	int filename_size = strlen (filename) + 1;
 	size_t file_info_size = sizeof (file_info);
 	size_t total_size = file_info_size + filename_size;
-	if (total_size > k_buffer_size) {
+	if (total_size > k_buffer_size) 
+    {
 		std::cerr << "File name is too long";
 		return;
 	}
@@ -362,11 +377,17 @@ void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_addres
 
 	std::cout << "Sending file : " << filename << " MsgType:" << msg_type << std::endl;
 	size_t len = total_size;
+
 	unsigned long long total_bytes_read = 0;
-	while (true) {
+	while (true) 
+    {
 		//先发送文件头，之后发送data
 		socket.send (boost::asio::buffer (buffer, len), 0);
-		if (feof (fp)) break;
+		if (feof (fp))
+        {
+            break;
+        }
+
 		len = fread (buffer, 1, k_buffer_size, fp);
 		total_bytes_read += len;
 	}
@@ -382,7 +403,7 @@ void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_addres
 
 //每次只允许选择一项
 //右键响应事件
-void CQFileSystemDlg::OnNMRClickList1 (NMHDR *pNMHDR, LRESULT *pResult)
+void CQFileSystemDlg::OnNMRClickFileList(NMHDR *pNMHDR, LRESULT *pResult)
 {
 	LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
 	// TODO: 在此添加控件通知处理程序代码
@@ -420,11 +441,16 @@ bool CQFileSystemDlg::checkItem (std::string item)
 }
 
 
-void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_address, unsigned	port, const char* filename, const char* msg_type)
+void CQFileSystemDlg::sender (boost::asio::io_service &io
+                              , const char*	ip_address
+                              , unsigned	port
+                              , const char* filename
+                              , const char* msg_type)
 {
 	FILE *fp = nullptr;
 	fopen_s (&fp, filename, "rb");
-	if (fp == NULL) {
+	if (fp == NULL) 
+    {
 		std::cerr << "cannot open file\n";
 		return;
 	}
@@ -451,7 +477,9 @@ void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_addres
 	int filename_size = strlen (filename) + 1;
 	size_t file_info_size = sizeof (file_info);
 	size_t total_size = file_info_size + filename_size;
-	if (total_size > k_buffer_size) {
+
+	if (total_size > k_buffer_size) 
+    {
 		std::cerr << "File name is too long";
 		return;
 	}
@@ -464,24 +492,51 @@ void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_addres
 	memcpy (buffer + file_info_size, filename, filename_size);					//文件名/消息类型
 
 	boost::asio::ip::tcp::socket socket (io);
-	socket.connect (boost::asio::ip::tcp::endpoint (boost::asio::ip::address_v4::from_string (ip_address), port));
+	socket.connect (boost::asio::ip::tcp::endpoint (
+            boost::asio::ip::address_v4::from_string (ip_address)
+             , port));
 
 	std::cout << "Sending file : " << filename << " MsgType:" << msg_type << std::endl;
 	size_t len = total_size;
+
 	unsigned long long total_bytes_read = 0;
-	while (true) {
+	while (true) 
+    {
 		//先发送文件头，之后发送data
 		socket.send (boost::asio::buffer (buffer, len), 0);
-		if (feof (fp)) break;
+        if (feof(fp))
+        {
+            break;
+        }
 		len = fread (buffer, 1, k_buffer_size, fp);
 		total_bytes_read += len;
 	}
 
 	//计算时间、大小和速度//
 	cost_time = clock () - cost_time;
-	if (cost_time == 0) cost_time = 1;
+	if (cost_time == 0) 
+    {
+        cost_time = 1;
+    }
+
 	double speed = total_bytes_read * (CLOCKS_PER_SEC / 1024.0 / 1024.0) / cost_time;
 	std::cout << "cost time: " << cost_time / (double)CLOCKS_PER_SEC << " s "
 		<< "  transferred_bytes: " << total_bytes_read << " bytes\n"
 		<< "speed: " << speed << " MB/s\n\n";
+}
+
+
+void CQFileSystemDlg::OnNMRClickClientList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+    LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+    // TODO: 在此添加控件通知处理程序代码
+    *pResult = 0;
+}
+
+
+void CQFileSystemDlg::OnNMRClickSharedList(NMHDR *pNMHDR, LRESULT *pResult)
+{
+    LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
+    // TODO: 在此添加控件通知处理程序代码
+    *pResult = 0;
 }

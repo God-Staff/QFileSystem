@@ -24,12 +24,18 @@ private:
 	std::mutex m_mutex;
 	boost::filesystem::fstream fout;
 public:
+
 	void log (std::string ss)
 	{
 		std::lock_guard<std::mutex> locker_m (m_mutex);
 		fout << ss << std::endl;
 	}
-	OptLog () { fout.open ("log.txt",std::ios::app); }
+
+	OptLog () 
+    { 
+        fout.open ("log.txt",std::ios::app); 
+    }
+
 	~OptLog () 
 	{
 		if (fout.is_open())
@@ -44,7 +50,7 @@ struct File_info
 	typedef unsigned long long Size_type;
 	Size_type filesize;
 	size_t filename_size;
-	File_info () : filesize (0), filename_size (0) {}
+	File_info () : filesize (0), filename_size (0) { }
 };
 
 class Session : public boost::enable_shared_from_this<Session>
@@ -90,9 +96,11 @@ public:
 	{
 		clock_ = clock ();
 		std::cout << "client: " << socket_.remote_endpoint ().address () << "\n";
-		socket_.async_receive (
-			boost::asio::buffer (reinterpret_cast<char*>(&file_info_), sizeof (file_info_)),
-			boost::bind (&Session::handle_header, shared_from_this (), boost::asio::placeholders::error));
+        socket_.async_receive(
+                    boost::asio::buffer(reinterpret_cast<char*>(&file_info_)
+                                , sizeof(file_info_))
+                    , boost::bind(&Session::handle_header, shared_from_this( )
+                                , boost::asio::placeholders::error));
 	}
 
 private:
@@ -102,25 +110,43 @@ private:
 
 	void handle_header (const boost::system::error_code& error)
 	{
-		if (error) return print_asio_error (error);
-		size_t filename_size = file_info_.filename_size;
-		if ((filename_size) > k_buffer_size) {
+        if (error)
+        {
+            return print_asio_error (error);
+        }
+
+        size_t filename_size = file_info_.filename_size;
+		if ((filename_size) > k_buffer_size) 
+        {
 			std::cerr << "Path name is too long!\n";
 			return;
 		}
-		//得用async_read, 不能用async_read_some，防止路径名超长时，一次接收不完
-		boost::asio::async_read (socket_, boost::asio::buffer (buffer_, file_info_.filename_size),
-			boost::bind (&Session::handle_file, shared_from_this (), boost::asio::placeholders::error));
+		
+        //得用async_read, 不能用async_read_some，防止路径名超长时，一次接收不完
+		boost::asio::async_read (socket_
+                                 , boost::asio::buffer (buffer_
+                                                        , file_info_.filename_size)
+                                 , boost::bind (&Session::handle_file
+                                                , shared_from_this ()
+                                                , boost::asio::placeholders::error)
+                                );
 	}
 
 	//将接受到的数据块，解析为文件名+文件数据
 	void handle_file (const boost::system::error_code& error)
 	{
-		if (error)
+        if (error)
+        {
 			return print_asio_error (error);
+        }
+
 		const char *base_name_msg = buffer_ + file_info_.filename_size - 1;
-		while (base_name_msg >= buffer_ && (*base_name_msg != '\\' && *base_name_msg != '/'))
+        while (base_name_msg >= buffer_
+               && (*base_name_msg != '\\'
+               && *base_name_msg != '/'))
+        {
 			--base_name_msg;
+        }
 		++base_name_msg;
 
 		const char *basename = "";
@@ -139,9 +165,12 @@ private:
 
 		//std::cout << "Open file: " << basename << " (" << buffer_ << ")\n";
 		//std::cout << "FileType:" << std::stoi (vstr[1]) << std::endl;
-		optlog.log ("base_name_msg:" +str+ "basename:"+vstr[0]+ "msg_type:" +vstr[1]+"File Size:"+ buffer_);
+        optlog.log("base_name_msg:" + str + "basename:" + vstr[0] + "msg_type:"
+                   + vstr[1] + "File Size:" + buffer_);
+
 		fp_ = fopen (basename, "wb");
-		if (fp_ == NULL) {
+		if (fp_ == NULL) 
+        {
 			std::cerr << "Failed to open file to write\n";
 			return;
 		}
@@ -151,22 +180,34 @@ private:
 
 	void receive_file_content ()
 	{
-		socket_.async_receive (boost::asio::buffer (buffer_, k_buffer_size),
-			boost::bind (&Session::handle_write, shared_from_this (), boost::asio::placeholders::error,
-				boost::asio::placeholders::bytes_transferred));
+        socket_.async_receive(boost::asio::buffer(buffer_, k_buffer_size)
+                              , boost::bind(&Session::handle_write, shared_from_this( )
+                                            , boost::asio::placeholders::error
+                                            , boost::asio::placeholders::bytes_transferred)
+                            );
 	}
 
 	void handle_write (const boost::system::error_code& error, size_t bytes_transferred)
 	{
-		if (error) {
-			if (error != boost::asio::error::eof) return print_asio_error (error);
+		if (error) 
+        {
+            if (error != boost::asio::error::eof)
+            {
+                return print_asio_error(error);
+            }
+
 			File_info::Size_type filesize = file_info_.filesize;
-			if (total_bytes_writen_ != filesize)
-				optlog.log ("Filesize not matched! " + std::to_string (total_bytes_writen_) + "/" + std::to_string (filesize) + "\n");
+            if (total_bytes_writen_ != filesize)
+            {
+				optlog.log ("Filesize not matched! " + std::to_string (total_bytes_writen_) 
+                            + "/" + std::to_string (filesize) + "\n");
+            }
 				//std::cerr << "Filesize not matched! " << total_bytes_writen_<< "/" << filesize << "\n";
 			return;
 		}
+
 		total_bytes_writen_ += fwrite (buffer_, 1, bytes_transferred, fp_);
+
 		receive_file_content ();
 	}
 
@@ -176,6 +217,7 @@ private:
 
 	}
 
+private:
 	clock_t clock_;
 	boost::asio::ip::tcp::socket socket_;
 	FILE *fp_;

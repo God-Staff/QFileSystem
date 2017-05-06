@@ -14,7 +14,7 @@ public:
 
 	void* allocate (std::size_t size)
 	{
-		if (!in_use_ && size < storage_.size)
+		if (!in_use_&& size < storage_.size)
 		{
 			in_use_ = true;
 			return storage_.address ();

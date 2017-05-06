@@ -24,6 +24,9 @@
     <ClCompile Include="FileManage.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SerializationToStream.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileManage.hpp">
@@ -42,6 +45,9 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="public.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SerializationToStream.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

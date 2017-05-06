@@ -7,8 +7,8 @@ package qiuwanli;
 //配置信息
 message ConfigFile
 {
-	uint64 ID=1;
-	uint64 IP=2;
+	string ID=1;
+	string IP=2;
 	string PriKey=3;
 	string PriKeyMD5=4;
 	uint64 TotalSize=5;
@@ -39,6 +39,7 @@ message Logs
 	bytes  log_type=4;
 	string user_client_UUID=5;	
 }
+
 //用于记录个人日志，每月保存为一个文件
 message LogTable
 {

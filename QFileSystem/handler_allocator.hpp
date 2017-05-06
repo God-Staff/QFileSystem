@@ -93,8 +93,8 @@ private:
 
 // Helper function to wrap a handler object to add custom allocation.
 template <typename Handler>
-inline custom_alloc_handler<Handler> make_custom_alloc_handler (
-	handler_allocator& a, Handler h)
+inline custom_alloc_handler<Handler> 
+make_custom_alloc_handler (handler_allocator& a, Handler h)
 {
 	return custom_alloc_handler<Handler> (a, h);
 }

@@ -85,7 +85,7 @@ class ConfigFile : public ::google::protobuf::Message /* @@protoc_insertion_poin
 
   static inline const ConfigFile* internal_default_instance() {
     return reinterpret_cast<const ConfigFile*>(
-               &_ConfigFile_default_instance_);
+              &_ConfigFile_default_instance_);
   }
 
   void Swap(ConfigFile* other);
@@ -219,7 +219,7 @@ class BlockInfo : public ::google::protobuf::Message /* @@protoc_insertion_point
 
   static inline const BlockInfo* internal_default_instance() {
     return reinterpret_cast<const BlockInfo*>(
-               &_BlockInfo_default_instance_);
+              &_BlockInfo_default_instance_);
   }
 
   void Swap(BlockInfo* other);
@@ -361,7 +361,7 @@ class BlockInfoTable : public ::google::protobuf::Message /* @@protoc_insertion_
 
   static inline const BlockInfoTable* internal_default_instance() {
     return reinterpret_cast<const BlockInfoTable*>(
-               &_BlockInfoTable_default_instance_);
+              &_BlockInfoTable_default_instance_);
   }
 
   void Swap(BlockInfoTable* other);
@@ -450,7 +450,7 @@ class Logs : public ::google::protobuf::Message /* @@protoc_insertion_point(clas
 
   static inline const Logs* internal_default_instance() {
     return reinterpret_cast<const Logs*>(
-               &_Logs_default_instance_);
+              &_Logs_default_instance_);
   }
 
   void Swap(Logs* other);
@@ -593,7 +593,7 @@ class LogTable : public ::google::protobuf::Message /* @@protoc_insertion_point(
 
   static inline const LogTable* internal_default_instance() {
     return reinterpret_cast<const LogTable*>(
-               &_LogTable_default_instance_);
+              &_LogTable_default_instance_);
   }
 
   void Swap(LogTable* other);
@@ -697,7 +697,7 @@ class BlockListForDown : public ::google::protobuf::Message /* @@protoc_insertio
 
   static inline const BlockListForDown* internal_default_instance() {
     return reinterpret_cast<const BlockListForDown*>(
-               &_BlockListForDown_default_instance_);
+              &_BlockListForDown_default_instance_);
   }
 
   void Swap(BlockListForDown* other);
@@ -818,7 +818,7 @@ class BlockListForDownTable : public ::google::protobuf::Message /* @@protoc_ins
 
   static inline const BlockListForDownTable* internal_default_instance() {
     return reinterpret_cast<const BlockListForDownTable*>(
-               &_BlockListForDownTable_default_instance_);
+              &_BlockListForDownTable_default_instance_);
   }
 
   void Swap(BlockListForDownTable* other);
@@ -941,7 +941,7 @@ inline void ConfigFile::set_prikey(const ::std::string& value) {
 inline void ConfigFile::set_prikey(::std::string&& value) {
   
   prikey_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.ConfigFile.PriKey)
 }
 #endif
@@ -993,7 +993,7 @@ inline void ConfigFile::set_prikeymd5(const ::std::string& value) {
 inline void ConfigFile::set_prikeymd5(::std::string&& value) {
   
   prikeymd5_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.ConfigFile.PriKeyMD5)
 }
 #endif
@@ -1077,7 +1077,7 @@ inline void BlockInfo::set_filesha512(const ::std::string& value) {
 inline void BlockInfo::set_filesha512(::std::string&& value) {
   
   filesha512_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockInfo.FileSHA512)
 }
 #endif
@@ -1129,7 +1129,7 @@ inline void BlockInfo::set_blockmd5(const ::std::string& value) {
 inline void BlockInfo::set_blockmd5(::std::string&& value) {
   
   blockmd5_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockInfo.BlockMD5)
 }
 #endif
@@ -1181,7 +1181,7 @@ inline void BlockInfo::set_savefilename(const ::std::string& value) {
 inline void BlockInfo::set_savefilename(::std::string&& value) {
   
   savefilename_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockInfo.SaveFileName)
 }
 #endif
@@ -1284,7 +1284,7 @@ inline ::qiuwanli::BlockInfo* BlockInfoTable::add_block() {
 inline ::google::protobuf::RepeatedPtrField< ::qiuwanli::BlockInfo >*
 BlockInfoTable::mutable_block() {
   // @@protoc_insertion_point(field_mutable_list:qiuwanli.BlockInfoTable.Block)
-  return &block_;
+  return&block_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::qiuwanli::BlockInfo >&
 BlockInfoTable::block() const {
@@ -1313,7 +1313,7 @@ inline void Logs::set_user_id(const ::std::string& value) {
 inline void Logs::set_user_id(::std::string&& value) {
   
   user_id_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.user_id)
 }
 #endif
@@ -1379,7 +1379,7 @@ inline void Logs::set_log_info(const ::std::string& value) {
 inline void Logs::set_log_info(::std::string&& value) {
   
   log_info_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.log_info)
 }
 #endif
@@ -1431,7 +1431,7 @@ inline void Logs::set_log_type(const ::std::string& value) {
 inline void Logs::set_log_type(::std::string&& value) {
   
   log_type_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.log_type)
 }
 #endif
@@ -1483,7 +1483,7 @@ inline void Logs::set_user_client_uuid(const ::std::string& value) {
 inline void Logs::set_user_client_uuid(::std::string&& value) {
   
   user_client_uuid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Logs.user_client_UUID)
 }
 #endif
@@ -1539,7 +1539,7 @@ inline void LogTable::set_logdate(const ::std::string& value) {
 inline void LogTable::set_logdate(::std::string&& value) {
   
   logdate_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.LogTable.logdate)
 }
 #endif
@@ -1596,7 +1596,7 @@ inline ::qiuwanli::Logs* LogTable::add_log() {
 inline ::google::protobuf::RepeatedPtrField< ::qiuwanli::Logs >*
 LogTable::mutable_log() {
   // @@protoc_insertion_point(field_mutable_list:qiuwanli.LogTable.log)
-  return &log_;
+  return&log_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::qiuwanli::Logs >&
 LogTable::log() const {
@@ -1625,7 +1625,7 @@ inline void BlockListForDown::set_filesha512(const ::std::string& value) {
 inline void BlockListForDown::set_filesha512(::std::string&& value) {
   
   filesha512_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockListForDown.FileSHA512)
 }
 #endif
@@ -1677,7 +1677,7 @@ inline void BlockListForDown::set_blocknumer(const ::std::string& value) {
 inline void BlockListForDown::set_blocknumer(::std::string&& value) {
   
   blocknumer_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockListForDown.BlockNumer)
 }
 #endif
@@ -1729,7 +1729,7 @@ inline void BlockListForDown::set_saveserversip(const ::std::string& value) {
 inline void BlockListForDown::set_saveserversip(::std::string&& value) {
   
   saveserversip_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+   &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
   // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockListForDown.SaveServersIP)
 }
 #endif
@@ -1790,7 +1790,7 @@ inline ::qiuwanli::BlockListForDown* BlockListForDownTable::add_blocklistfordown
 inline ::google::protobuf::RepeatedPtrField< ::qiuwanli::BlockListForDown >*
 BlockListForDownTable::mutable_blocklistfordown() {
   // @@protoc_insertion_point(field_mutable_list:qiuwanli.BlockListForDownTable.BlockListForDown)
-  return &blocklistfordown_;
+  return&blocklistfordown_;
 }
 inline const ::google::protobuf::RepeatedPtrField< ::qiuwanli::BlockListForDown >&
 BlockListForDownTable::blocklistfordown() const {

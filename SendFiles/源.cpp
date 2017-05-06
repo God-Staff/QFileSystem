@@ -4,19 +4,25 @@
 #include <boost/shared_ptr.hpp>
 #include <boost/filesystem.hpp>
 
-struct File_info {
+struct File_info 
+{
 	typedef unsigned long long Size_type;
 	Size_type filesize;
 	size_t filename_size;
 	File_info () : filesize (0), filename_size (0) {}
 };
 
-void sender (boost::asio::io_service &io, const char*	ip_address
-             , unsigned	port, const char* filename, const char* msg_type)
+void sender (boost::asio::io_service &io
+             , const char*	ip_address
+             , unsigned	port
+             , const char* filename
+             , const char* msg_type)
 {
 	FILE *fp=nullptr;
+
 	fopen_s (&fp, filename, "rb");
-	if (fp == NULL) {
+	if (fp == NULL) 
+    {
 		std::cerr << "cannot open file\n";
 		return;
 	}
@@ -43,7 +49,9 @@ void sender (boost::asio::io_service &io, const char*	ip_address
 	int filename_size = strlen (filename) + 1;
 	size_t file_info_size = sizeof (file_info);
 	size_t total_size = file_info_size + filename_size;
-	if (total_size > k_buffer_size) {
+
+	if (total_size > k_buffer_size) 
+    {
 		std::cerr << "File name is too long";
 		return;
 	}
@@ -60,32 +68,36 @@ void sender (boost::asio::io_service &io, const char*	ip_address
 
 	std::cout << "Sending file : " << filename << " MsgType:" << msg_type << std::endl;
 	size_t len = total_size;
+
 	unsigned long long total_bytes_read = 0;
 	while (true) 
     {
 		//先发送文件头，之后发送data
 		socket.send (boost::asio::buffer (buffer, len), 0);
 
-		if (feof (fp)) 
+        if (feof(fp))
+        {
             break;
-		len = fread (buffer, 1, k_buffer_size, fp);
+        }
+
+        len = fread (buffer, 1, k_buffer_size, fp);
 		total_bytes_read += len;
 	}
 
 	//计算时间、大小和速度//
 	cost_time = clock () - cost_time;
 	if (cost_time == 0) cost_time = 1;
-	double speed = total_bytes_read * (CLOCKS_PER_SEC/1024.0/1024.0)/cost_time;
-    std::cout << "cost time: " << cost_time/(double)CLOCKS_PER_SEC << " s "
-        << "  transferred_bytes: " << total_bytes_read << " bytes\n"
-        << "speed: " << speed << " MB/s\n\n";
+    double speed = total_bytes_read * (CLOCKS_PER_SEC / 1024.0 / 1024.0) / cost_time;
+    std::cout << "cost time: " << cost_time / (double) CLOCKS_PER_SEC
+        << " s " << "  transferred_bytes: " << total_bytes_read
+        << " bytes\n" << "speed: " << speed << " MB/s\n\n";
 }
 
 int main ()
 {
 	boost::asio::io_service io_ser;
 	try {
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (2)", "1001");
+        sender(io_ser, "127.0.0.1", 9999, "login - 副本 (2)", "1001");
 		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (3)", "1001");
 		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (4)", "1001");
 		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (5)", "1001");
@@ -120,7 +132,8 @@ int main ()
 		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (34)", "1001");
 		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (35)", "1001");
 	}
-	catch (std::exception& err) {
+	catch (std::exception& err) 
+    {
 		std::cerr << err.what () << "\n";
 	}
 

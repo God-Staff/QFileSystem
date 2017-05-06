@@ -38,15 +38,26 @@ public:
 		return boost::shared_ptr<Session> (new Session (io));
 	}
 
-	boost::asio::ip::tcp::socket& socket () { return socket_; }
+	boost::asio::ip::tcp::socket& socket () 
+    { 
+        return socket_; 
+    }
 
 	~Session ()
 	{
 		std::cout << "\n Thread ID: " << boost::this_thread::get_id () << std::endl;
-		if (fp_) fclose (fp_);
-		clock_ = clock () - clock_;
+        if (fp_)
+        {
+            fclose(fp_);
+        }
+
+        clock_ = clock () - clock_;
 		File_info::Size_type bytes_writen = total_bytes_writen_;
-		if (clock_ == 0) clock_ = 1;
+        if (clock_ == 0)
+        {
+            clock_ = 1;
+        }
+
 		double speed = bytes_writen * (CLOCKS_PER_SEC / 1024.0 / 1024.0) / clock_;
 		std::cout << "cost time: " << clock_ / (double)CLOCKS_PER_SEC << " s  "
 			<< "bytes_writen: " << bytes_writen << " bytes\n"
@@ -65,9 +76,12 @@ public:
 	{
 		clock_ = clock ();
 		std::cout << "client: " << socket_.remote_endpoint ().address () << "\n";
-		socket_.async_receive (
-			boost::asio::buffer (reinterpret_cast<char*>(&file_info_), sizeof (file_info_)),
-			boost::bind (&Session::handle_header, shared_from_this (), boost::asio::placeholders::error));
+        socket_.async_receive(
+            boost::asio::buffer(reinterpret_cast<char*>(&file_info_)
+                                , sizeof(file_info_))
+            , boost::bind(&Session::handle_header
+                        , shared_from_this( )
+                        , boost::asio::placeholders::error));
 	}
 
 private:
@@ -77,7 +91,11 @@ private:
 
 	void handle_header (const boost::system::error_code& error)
 	{
-		if (error) return print_asio_error (error);
+        if (error)
+        {
+            return print_asio_error(error);
+        }
+
 		size_t filename_size = file_info_.filename_size;
 		if ((filename_size) > k_buffer_size) {
 			std::cerr << "Path name is too long!\n";
@@ -91,11 +109,19 @@ private:
 	//将接受到的数据块，解析为文件名+文件数据
 	void handle_file (const boost::system::error_code& error)
 	{
-		if (error)
-			return print_asio_error (error);
+        if (error)
+        {
+            return print_asio_error(error);
+        }
+
 		const char *base_name_msg = buffer_ + file_info_.filename_size - 1;
-		while (base_name_msg >= buffer_ && (*base_name_msg != '\\' && *base_name_msg != '/'))
-			--base_name_msg;
+        while (base_name_msg >= buffer_
+               && (*base_name_msg != '\\'
+               && *base_name_msg != '/'))
+        {
+            --base_name_msg;
+        }
+
 		++base_name_msg;
 
 		const char *basename = "";
@@ -115,7 +141,8 @@ private:
 		std::cout << "Open file: " << basename << " (" << buffer_ << ")\n";
 
 		fp_ = fopen (basename, "wb");
-		if (fp_ == NULL) {
+		if (fp_ == NULL) 
+        {
 			std::cerr << "Failed to open file to write\n";
 			return;
 		}
@@ -126,15 +153,23 @@ private:
 
 	void receive_file_content ()
 	{
-		socket_.async_receive (boost::asio::buffer (buffer_, k_buffer_size),
-			boost::bind (&Session::handle_write, shared_from_this (), boost::asio::placeholders::error,
-				boost::asio::placeholders::bytes_transferred));
+        socket_.async_receive(boost::asio::buffer(buffer_
+                                                , k_buffer_size)
+                              , boost::bind(&Session::handle_write
+                                            , shared_from_this( )
+                                            , boost::asio::placeholders::error
+                                            , boost::asio::placeholders::bytes_transferred));
 	}
 
 	void handle_write (const boost::system::error_code& error, size_t bytes_transferred)
 	{
-		if (error) {
-			if (error != boost::asio::error::eof) return print_asio_error (error);
+		if (error) 
+        {
+            if (error != boost::asio::error::eof)
+            {
+                return print_asio_error(error);
+            }
+
 			File_info::Size_type filesize = file_info_.filesize;
 			if (total_bytes_writen_ != filesize)
 				std::cerr << "Filesize not matched! " << total_bytes_writen_
@@ -142,6 +177,7 @@ private:
 			return;
 		}
 		total_bytes_writen_ += fwrite (buffer_, 1, bytes_transferred, fp_);
+
 		receive_file_content ();
 	}
 
