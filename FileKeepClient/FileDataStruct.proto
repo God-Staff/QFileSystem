@@ -47,14 +47,52 @@ message LogTable
 	repeated Logs log=2;
 }
 
+
 //保存文件所对应的文件块的下载列表
+message Block
+{
+	uint32 BlockItem=1;
+}
 message BlockListForDown
 {
 	string FileSHA512=1;
-	string BlockNumer=2;
-	string SaveServersIP=3;
+	string SaveServersIP=2;
+	string FileMD5=3;
+	repeated Block Blocks=4;
 }
 message BlockListForDownTable
 {
 	repeated BlockListForDown BlockListForDown=1;
 }
+
+message BlockCheck
+{
+	uint32 BlockItem=1;
+	string BlockMD5=2;
+}
+message BlockListForDownCheck
+{
+	string FileSHA512=1;
+	string SaveServersIP=2;
+	string FileMD5=3;
+	repeated BlockCheck Blocks=4;
+}
+message BlockListForDownCheckTable
+{
+	repeated BlockListForDown BlockListForDown=1;
+}
+
+
+//Send Block to 目录服务器
+message BlockInfo2Server
+{
+	string FileSHA512=1;
+	repeated Block BlockNumer=2;
+}
+
+message BlockInfo2ServerTable
+{
+	string ClientIP=1;
+	repeated BlockInfo2Server BlockInfo=2;
+}
+

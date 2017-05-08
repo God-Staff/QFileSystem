@@ -1,145 +1,117 @@
 #include "SerializationToStream.hpp"
+#include <google/protobuf/repeated_field.h>
+namespace qiuwanli
+{
 
-void SerialToStream::MakeSerailToStream(qiuwanli::ConfigFile& Config
+void SerialToStream::MakeSerailToStream(qiuwanli::ConfigFile* Config
                                         , const std::string& SaveClientID
                                         , const std::string& SaveClientIP
                                         , const std::string& Prikey
                                         , const std::string& PriKeyMD5
                                         , const unsigned long TotalSize
                                         , const unsigned long RemainSize)
+{
+    Config->set_id(SaveClientID);
+    Config->set_ip(SaveClientIP);
+    Config->set_prikey(Prikey);
+    Config->set_prikeymd5(PriKeyMD5);
+    Config->set_totalsize(TotalSize);
+    Config->set_remainsize(RemainSize);
+}
+
+void SerialToStream::MakeLogTable(qiuwanli::Logs* Log
+                                  , const std::string& UserID
+                                  , const std::string& LogInfo)
+{
+
+}
+
+void SerialToStream::MakeBlockInfo(qiuwanli::BlockInfo* Blocks
+                                   , const std::string& FileSHA512
+                                   , const std::string& BlockMd5
+                                   , const std::string& SaveFileName
+                                   , const unsigned long BlockNum
+                                   , const unsigned long CurSize
+                                   , const unsigned long FileBlockOffSet)
+{
+    Blocks->set_filesha512(FileSHA512);
+    Blocks->set_blockmd5(BlockMd5);
+    Blocks->set_savefilename(SaveFileName);
+    Blocks->set_blocknumer(BlockNum);
+    Blocks->set_cursize(CurSize);
+    Blocks->set_fileblockoffset(FileBlockOffSet);
+}
+
+void SerialToStream::MakeBlock(qiuwanli::Block* Block, const unsigned long BlockItem)
 { 
-
+    Block->set_blockitem(BlockItem);
 }
 
-void SerialToStream::MakeBlockInfoTable(qiuwanli::BlockInfoTable& BlockTable
-                                        , const std::string& FileSHA512
-                                        , const std::string& BlockMD5
-                                        , const std::string& SaveFileName
-                                        , const unsigned long BlockNum
-                                        , const unsigned long CurSize
-                                        , const unsigned longFileBlockOffSet)
+template<typename T>
+void SerialToStream::MakeBlockListForDown(qiuwanli::BlockListForDown* DownList
+                                          , const std::string& FileSHA512
+                                          , const std::string& SaveServersIP
+                                          , const std::string& FileMd5
+                                          , const std::vector<T>& BlockList)
+{
+    DownList->set_filesha512(FileSHA512);
+    DownList->set_saveserversip(SaveServersIP);
+    DownList->set_filemd5(FileMd5);
+    for (auto x : BlockList)
+    {
+        qiuwanli::Block* Item = DownList->add_blocks( );
+        MakeBlock(Item, x);
+    }
+}
+
+void SerialToStream::MakeBlockCheck(qiuwanli::BlockCheck* BlockCheck
+                                    , const unsigned long BlockItem
+                                    , const std::string& BlockMd5)
 { 
+    BlockCheck->set_blockitem(BlockItem);
+    BlockCheck->set_blockmd5(BlockMd5);
+}
+
+void SerialToStream::MakeBlockListCheckForDown(qiuwanli::BlockListForDownCheck* DownList
+                                                , const std::string& FileSHA512
+                                                , const std::string& SaveServersIP
+                                                , const std::string& FileMd5
+                    , const std::vector<std::pair<unsigned long,std::string> >& BlockList)
+{ 
+    DownList->set_filesha512(FileSHA512);
+    DownList->set_saveserversip(SaveServersIP);
+    DownList->set_filemd5(FileMd5);
+
+    //使用遍历，对数据进行填充
+    for (auto x : BlockList)
+    {
+        qiuwanli::BlockCheck* Item = DownList->add_blocks( );
+        MakeBlockCheck(Item, x.first,x.second);
+    }
 
 }
 
-
-#include "ProtoInterface.hpp"
-namespace qiuwanli
-{
-
-BufInterface::BufInterface( )
-{ }
-
-BufInterface::~BufInterface( )
-{ }
-
-void BufInterface::MakeConfigFile(qiuwanli::Config* conf, qiuwanli::Type type, std::string value)
-{
-    conf->set_type(type);
-    conf->set_valuestring(value);
+template<typename T>
+void SerialToStream::MakeBlock2Server(qiuwanli::BlockInfo2Server * BlockInfo
+                                      , const std::string & FileSHA512
+                                      , const std::vector<T>& Blocks)
+{ 
+    BlockInfo->set_filesha512(FileSHA512);
+    for (auto x : Blocks)
+    {
+        qiuwanli::BlockCheck* Item = BlockInfo->add_blocks( );
+        MakeBlock(Item, x);
+    }
 }
 
-void BufInterface::MakeFileDowingLog(qiuwanli::FileDowningLog* downingLog, std::string filename,
-                                     std::string filesize, std::string downtime, std::string downingStatus, std::string fileSha512)
-{
-    downingLog->set_filename(filename);
-    downingLog->set_filesize(filesize);
-    downingLog->set_downtime(downtime);
-    downingLog->set_downingstatus(downingStatus);
-    downingLog->set_filesha512(fileSha512);
+
+void SerialToStream::MakeLogTable(qiuwanli::LogTable* Log
+                                  , const std::string& UserID
+                                  , const std::string& LogInfo)
+{ 
 }
 
-void BufInterface::MakeDownlog(qiuwanli::FileDownLog *log, std::string filename, std::string path,
-                               std::string size, std::string downtime, std::string status)
-{
-    log->set_filename(filename);
-    log->set_filepath(path);
-    log->set_filesize(size);
-    log->set_downtime(downtime);
-    log->set_status(status);
-}
 
-void BufInterface::MakeUser(qiuwanli::Users* user, std::string id, std::string name, std::string ps,
-                            std::string uuid, std::string code, std::string type)
-{
-    user->set_user_id(id);
-    user->set_user_name(name);
-    user->set_user_password_md5(ps);
-    user->set_user_client_uuid(uuid);
-    user->set_login_code(code);
-    user->set_user_type(type);
-}
 
-void BufInterface::MakeRealUsers(qiuwanli::RealUsers* realuser, std::string id, std::string realname
-                                 , std::string idcard, std::string liveadress, std::string phone, std::string qq
-                                 , std::string mirchat, std::string email, std::string bri, std::string adress)
-{
-    realuser->set_user_id(id);
-    realuser->set_user_name_real(realname);
-    realuser->set_user_idcard(idcard);
-    realuser->set_user_live_address(liveadress);
-    realuser->set_user_phone(phone);
-    realuser->set_user_mirchat(mirchat);
-    realuser->set_user_email(email);
-    realuser->set_user_bri(bri);
-    realuser->set_user_address(adress);
-}
+}//! End NameSpace qiuwanli
 
-void BufInterface::MakeUserLogin(qiuwanli::userreg* reg, std::string name, std::string ps, std::string phone, std::string code)
-{
-    reg->set_user_name(name);
-    reg->set_user_password_md5(ps);
-    reg->set_user_phone(phone);
-    reg->set_reg_code(code);
-}
-
-void BufInterface::MakeFileSharedLog(qiuwanli::FilesSharedLog*  Shared, std::string url, std::string ps/*=""*/,
-                                     unsigned long long time, unsigned long timelength, std::string type)
-{
-    Shared->set_shared_url(url);
-    Shared->set_shared_ps(ps);
-    Shared->set_shared_time(time);
-    Shared->set_shared_timelenth(timelength);
-    Shared->set_shared_types(type);
-}
-
-void BufInterface::MakeFriendList(qiuwanli::MyFriend* friends, std::string friendid, std::string name, std::string status)
-{
-    friends->set_friendid(friendid);
-    friends->set_name(name);
-    friends->set_status(status);
-}
-
-void BufInterface::MakePath4FileOrDir(qiuwanli::Path4FilesOrDir* filepath, std::string pathname,
-                                      std::string pathdeep, unsigned long fileid)
-{
-    filepath->set_pathorname(pathname);
-    filepath->set_pathtypes(pathdeep);
-    filepath->set_fileid(fileid);
-}
-
-void BufInterface::MakeFileInfo(qiuwanli::FileInfo* Info, std::string filename, unsigned long size, std::string md51,
-                                std::string md52, unsigned long long  creatime, unsigned long filepathid)
-{
-    Info->set_fileid(filename);
-    Info->set_filesize(size);
-    Info->set_filemd5_1(md51);
-    Info->set_filemd5_2(md52);
-    Info->set_filecreatedate(creatime);
-    Info->set_filepathid(filepathid);
-}
-
-void BufInterface::MakeFileTemp(qiuwanli::filetemp* tmpfile, std::string filename, std::string crc,
-                                std::string BitMap, std::string Status, unsigned long blocknum)
-{
-    qiuwanli::FileBlockInfo ttt;
-    ttt.set_file_id(filename);
-    ttt.set_fileblock_num(blocknum);
-    ttt.set_file_crc(crc);
-    tmpfile->set_bitmap(BitMap);
-    tmpfile->set_nowstatus(Status);
-    tmpfile->set_allocated_fileinfo(&ttt);
-
-}
-
-} //End namespace qiuwanli

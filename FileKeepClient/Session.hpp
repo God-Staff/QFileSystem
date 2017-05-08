@@ -30,7 +30,12 @@ public:
 		std::lock_guard<std::mutex> locker_m (m_mutex);
 		fout << ss << std::endl;
 	}
-	OptLog () { fout.open ("log.txt", std::ios::app); }
+
+	OptLog () 
+    { 
+        fout.open ("log.txt", std::ios::app); 
+    }
+
 	~OptLog ()
 	{
 		if (fout.is_open ())
@@ -61,7 +66,10 @@ public:
 		return boost::shared_ptr<Session> (new Session (io));
 	}
 
-	boost::asio::ip::tcp::socket& socket () { return socket_; }
+	boost::asio::ip::tcp::socket& socket () 
+    { 
+        return socket_; 
+    }
 
 	~Session ()
 	{
@@ -69,8 +77,11 @@ public:
         if (fp_) fclose(fp_);
         clock_ = clock( ) - clock_;
         File_info::Size_type bytes_writen = total_bytes_writen_;
-        if (clock_ == 0) 
+        if (clock_ == 0)
+        {
             clock_ = 1;
+        }
+
         double speed = bytes_writen * (CLOCKS_PER_SEC / 1024.0 / 1024.0) / clock_;
 		optlog.log ("cost time: " +std::to_string(clock_ / (double)CLOCKS_PER_SEC)
                     + " s  "+ "bytes_writen: " + std::to_string (bytes_writen) 
@@ -83,23 +94,34 @@ public:
 		clock_ = clock ();
 		std::cout << "client: " << socket_.remote_endpoint ().address () << "\n";
 		socket_.async_receive (
-			boost::asio::buffer (reinterpret_cast<char*>(&file_info_), sizeof (file_info_)),
-			boost::bind (&Session::handle_header, shared_from_this (), boost::asio::placeholders::error));
+			boost::asio::buffer (reinterpret_cast<char*>(&file_info_)
+                                , sizeof (file_info_)),
+			boost::bind (&Session::handle_header
+                        , shared_from_this ()
+                        , boost::asio::placeholders::error));
 	}
 
 private:
-	Session (boost::asio::io_service& io) :
-		socket_ (io), fp_ (NULL), total_bytes_writen_ (0)
-	{ }
+	Session (boost::asio::io_service& io) 
+        : socket_ (io)
+        , fp_ (NULL)
+        , total_bytes_writen_ (0)
+	{ 
+    
+    }
 
 	void handle_header (const boost::system::error_code& error)
 	{
         if (error)
+        {
             return print_asio_error(error);
+        }
+
 		size_t filename_size = file_info_.filename_size;
 		if ((filename_size) > k_buffer_size) 
         {
 			std::cerr << "Path name is too long!\n";
+
 			return;
 		}
 		//用async_read, 不能用async_read_some，防止路径名超长时，一次接收不完
@@ -113,11 +135,15 @@ private:
 	//将接受到的数据块，解析为文件名+文件数据
 	void handle_file (const boost::system::error_code& error)
 	{
-		if (error)
-			return print_asio_error (error);
+        if (error)
+        {
+            return print_asio_error(error);
+        }
+
 		const char *base_name_msg = buffer_ + file_info_.filename_size - 1;
         while (base_name_msg >= buffer_&& 
-             (*base_name_msg != '\\'&& *base_name_msg != '/'))
+             (*base_name_msg != '\\'
+               && *base_name_msg != '/'))
         {
             --base_name_msg;
         }
@@ -132,8 +158,8 @@ private:
         boost::split(vstr, str, boost::is_any_of("+"), boost::token_compress_on);
 		basename = vstr[0].c_str ();
 
-        optlog.log("base_name_msg:" + str + "basename:" + vstr[0] + "msg_type:"
-                   + vstr[1] + "File Size:" + buffer_);
+        optlog.log("base_name_msg:" + str + "basename:" + vstr[0]
+                   + "msg_type:" + vstr[1] + "File Size:" + buffer_);
         fp_ = fopen(basename, "wb");
 		if (fp_ == NULL) 
         {
@@ -157,16 +183,23 @@ private:
 	{
 		if (error) 
         {
-			if (error != boost::asio::error::eof) 
+            if (error != boost::asio::error::eof)
+            {
                 return print_asio_error(error);
+            }
 
 			File_info::Size_type filesize = file_info_.filesize;
-			if (total_bytes_writen_ != filesize)
-				optlog.log ("Filesize not matched! " + std::to_string (total_bytes_writen_) 
-                            + "/" + std::to_string (filesize) + "\n");
-			return;
+            if (total_bytes_writen_ != filesize)
+            {
+                optlog.log("Filesize not matched! " 
+                           + std::to_string(total_bytes_writen_)
+                           + "/" + std::to_string(filesize) + "\n");
+            }
+			
+            return;
 		}
 		total_bytes_writen_ += fwrite (buffer_, 1, bytes_transferred, fp_);
+
 		receive_file_content ();
 	}
 

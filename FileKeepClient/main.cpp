@@ -36,9 +36,12 @@ int main (int argc, char* argv[])
 		while (!threads.empty ())
 		{
 			threads.front ()->join ();
+
 			delete threads.front ();
+
 			threads.pop_front ();
 		}
+
 	}
 	catch (std::exception& e)
 	{

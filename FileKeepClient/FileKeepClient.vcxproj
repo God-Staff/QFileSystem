@@ -114,6 +114,7 @@
     <ClInclude Include="FileDataStruct.pb.h" />
     <ClInclude Include="FileManage.hpp" />
     <ClInclude Include="handler_allocator.hpp" />
+    <ClInclude Include="OptLog.hpp" />
     <ClInclude Include="public.h" />
     <ClInclude Include="SerializationToStream.hpp" />
     <ClInclude Include="Servers.hpp" />
