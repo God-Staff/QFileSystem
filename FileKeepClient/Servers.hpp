@@ -45,6 +45,7 @@ private:
         }
 
 		session->start ();
+
 		start_accept ();
 	}
 

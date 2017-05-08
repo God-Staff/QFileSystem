@@ -7,13 +7,16 @@ package qiuwanli;
 //配置信息
 message ConfigFile
 {
-	string ID=1;
-	string IP=2;
-	string PriKey=3;
-	string PriKeyMD5=4;
-	uint64 TotalSize=5;
-	uint64 RemainSize=6;
+	string ID=1;				//存储端ID
+	string IP=2;				//存储端IP
+	string PriKey=3;			//存储端私钥
+	string PriKeyMD5=4;			//存储端私钥的MD5
+	uint64 TotalSize=5;			//总空间大小
+	uint64 RemainSize=6;		//剩余空间大小
+	string ServersIP=7;			//目录服务器ID
+	string ServersPort=8;		//目录服务器端口号
 }
+
 
 //块列表
 message BlockInfo
@@ -57,12 +60,12 @@ message BlockListForDown
 {
 	string FileSHA512=1;
 	string SaveServersIP=2;
-	string FileMD5=3;
 	repeated Block Blocks=4;
 }
 message BlockListForDownTable
 {
-	repeated BlockListForDown BlockListForDown=1;
+	string PrikeyMd5=1;
+	repeated BlockListForDown BlockListForDown=2;
 }
 
 message BlockCheck

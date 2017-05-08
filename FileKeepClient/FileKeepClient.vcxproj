@@ -111,11 +111,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="asnyListion.hpp" />
+    <ClInclude Include="ComData.hpp" />
     <ClInclude Include="FileDataStruct.pb.h" />
     <ClInclude Include="FileManage.hpp" />
     <ClInclude Include="handler_allocator.hpp" />
     <ClInclude Include="OptLog.hpp" />
     <ClInclude Include="public.h" />
+    <ClInclude Include="SendFile.hpp" />
     <ClInclude Include="SerializationToStream.hpp" />
     <ClInclude Include="Servers.hpp" />
     <ClInclude Include="Session.hpp" />
@@ -124,6 +127,7 @@
     <ClCompile Include="FileDataStruct.pb.cc" />
     <ClCompile Include="FileManage.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="SendFile.cpp" />
     <ClCompile Include="SerializationToStream.cpp" />
   </ItemGroup>
   <ItemGroup>

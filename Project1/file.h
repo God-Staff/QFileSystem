@@ -19,7 +19,7 @@ public:
     bool open(std::string& FileName);
     char * ReadFileBlock(char * fileBlock, const size_t OffSet, const size_t CurSize);
     bool WriteFileBlock(char * WriteBlock, const size_t CurSize, const size_t OffSet = FILE_MAX);
-    size_t GetFileSize(const boost::filesystem::path& FileName);
+    size_t Getfilesize(const boost::filesystem::path& FileName);
 private:
     //char*       m_FileBlockBuf;
     size_t      m_FileBlockConut;

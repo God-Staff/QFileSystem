@@ -199,10 +199,10 @@ private:
 			File_info::Size_type filesize = file_info_.filesize;
             if (total_bytes_writen_ != filesize)
             {
-				optlog.log ("Filesize not matched! " + std::to_string (total_bytes_writen_) 
+				optlog.log ("filesize not matched! " + std::to_string (total_bytes_writen_) 
                             + "/" + std::to_string (filesize) + "\n");
             }
-				//std::cerr << "Filesize not matched! " << total_bytes_writen_<< "/" << filesize << "\n";
+				//std::cerr << "filesize not matched! " << total_bytes_writen_<< "/" << filesize << "\n";
 			return;
 		}
 

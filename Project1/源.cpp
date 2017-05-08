@@ -1,9 +1,8 @@
 #include <string>
 #include <iostream>
 #include <boost/filesystem.hpp>
-
-const size_t BLOCK_SIZE = 1024;
-const size_t FILE_MAX = ~0;
+#include <windows.h>
+#include <thread>
 
 //char* ReadFileBlock(char* fileBlock, const size_t OffSet, const size_t CurSize)
 //{
@@ -37,34 +36,65 @@ const size_t FILE_MAX = ~0;
 //    return false;
 //}
 //
-//size_t GetFileSize(const boost::filesystem::path& FileName)
+//size_t Getfilesize(const boost::filesystem::path& FileName)
 //{
 //    return FileName.size( );
 //}
 
+
+void doItNextTime( )
+{
+    //先更新本地服务端数据
+
+    //再将数据同步到目录服务器
+
+    Sleep(3000);
+
+    std::cout << "Time:" << std::endl;
+    doItNextTime( );
+}
+
+
+void doItNextTime1( )
+{
+    //先更新本地服务端数据
+
+    //再将数据同步到目录服务器
+
+    Sleep(300);
+
+    std::cout << "3333333:" << std::endl;
+    doItNextTime1( );
+}
+
+
+
+
 int main( )
 {
-    std::string FileName="ttt.txt";
-    boost::filesystem::path FilePath(FileName);
-    
-    boost::filesystem::fstream m_FileInOut(FileName, std::ios::out | std::ios::in | std::ios::binary);
-    if (!m_FileInOut.is_open( ))
-    {
-        std::cout << "文件打开失败" << std::endl;
-        return 0;
-    }
 
-    std::cout << "File Name: " << FileName << "\nFileSize:" << FileName.size( )
-        << std::endl;
-    //char* BlocksFile = new char[BLOCK_SIZE];
-    std::string BlocksFile = "ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCDABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD              ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD";
+    std::thread t1(doItNextTime);
 
-    m_FileInOut.seekp(0);
-    m_FileInOut.write(BlocksFile.c_str(), BlocksFile.size());
-    m_FileInOut.close( );
+    t1.detach( );
+    doItNextTime1( );
+    //std::string FileName="ttt.txt";
+    //boost::filesystem::path FilePath(FileName);
+    //
+    //boost::filesystem::fstream m_FileInOut(FileName, std::ios::out | std::ios::in | std::ios::binary);
+    //if (!m_FileInOut.is_open( ))
+    //{
+    //    std::cout << "文件打开失败" << std::endl;
+    //    return 0;
+    //}
 
-    [&]( ){
+    //std::cout << "File Name: " << FileName << "\nfilesize:" << FileName.size( )
+    //    << std::endl;
+    ////char* BlocksFile = new char[BLOCK_SIZE];
+    //std::string BlocksFile = "ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCDABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD              ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD ABCDABCDABCDABCD";
 
-    };
+    //m_FileInOut.seekp(0);
+    //m_FileInOut.write(BlocksFile.c_str(), BlocksFile.size());
+    //m_FileInOut.close( );
+
     return 0;
 }

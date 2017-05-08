@@ -88,7 +88,7 @@ bool FileManage::WriteFileBlock(char* WriteBlock, const size_t CurSize,const siz
     return false;
 }
 
-size_t FileManage::GetFileSize(const boost::filesystem::path& FileName)
+size_t FileManage::Getfilesize(const boost::filesystem::path& FileName)
 {
     return FileName.size( );
 }

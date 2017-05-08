@@ -27,6 +27,9 @@
     <ClCompile Include="SerializationToStream.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SendFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FileManage.hpp">
@@ -51,6 +54,15 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="OptLog.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="asnyListion.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="ComData.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="SendFile.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>

@@ -29,15 +29,7 @@ private:
                             , const std::string& PriKeyMD5
                             , const unsigned long TotalSize
                             , const unsigned long RemainSize);
-    /**
-     * 日志输出表
-     * @param Log     日志序列化对象
-     * @param UserID  用户ID
-     * @param LogInfo 操作信息
-     */
-    void MakeLogTable(  qiuwanli::Logs* Log
-                        , const std::string& UserID
-                        , const std::string& LogInfo);
+
     /**
      * 本地文件块存储信息
      * @param Blocks          文件块对象
@@ -54,7 +46,15 @@ private:
                        , const std::string& SaveFileName
                        , const unsigned long BlockNum
                        , const unsigned long CurSize
-                       , const unsigned long FileBlockOffSet);
+                       , const unsigned long FileBlockOffSet = 0);
+
+    //将客户短信息解析，写入，并进行序列化
+    void MakeBlockInfoSend(qiuwanli::BlockInfo * Blocks
+                           , const std::string & FileSHA512
+                           , const std::string & BlockMd5
+                           , const std::string & SaveFileName
+                           , const unsigned long BlockNum
+                           , const unsigned long CurSize);
     /**
      * [MakeBlock description]
      * @param Block     [description]
@@ -92,26 +92,24 @@ private:
      * @param FileMd5       [description]
      * @param BlockCheck    [description]
      */
-
-    void MakeBlockListCheckForDown(qiuwanli::BlockListForDownCheck * DownList
-                                   , const std::string & FileSHA512
-                                   , const std::string & SaveServersIP
-                                   , const std::string & FileMd5
+    void MakeBlockListCheckForDown(qiuwanli::BlockListForDownCheck* DownList
+                                   , const std::string& FileSHA512
+                                   , const std::string& SaveServersIP
+                                   , const std::string& FileMd5
                                    , const std::vector<std::pair<unsigned long, std::string> >& BlockList);
 
-    /**
-     * [MakeLogTable description]
-     * @param Log     [description]
-     * @param UserID  [description]
-     * @param LogInfo [description]
-     */
-    void MakeLogTable(qiuwanli::LogTable* Log
-                      , const std::string& UserID
-                      , const std::string& LogInfo);
+
     template<typename T>
+    /**
+     * 当文件传输完成，将块信息发送到目录服务器
+     * @param BlockInfo  快对象
+     * @param FileSHA512 文件的SHA512
+     * @param Blocks     块信息向量
+     */
     void MakeBlock2Server(qiuwanli::BlockInfo2Server* BlockInfo
                           , const std::string& FileSHA512
                           , const std::vector<T>& Blocks);
+
 };
 
 

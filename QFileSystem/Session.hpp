@@ -172,7 +172,7 @@ private:
 
 			File_info::Size_type filesize = file_info_.filesize;
 			if (total_bytes_writen_ != filesize)
-				std::cerr << "Filesize not matched! " << total_bytes_writen_
+				std::cerr << "filesize not matched! " << total_bytes_writen_
 				<< "/" << filesize << "\n";
 			return;
 		}

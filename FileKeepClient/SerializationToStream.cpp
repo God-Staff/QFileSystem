@@ -19,12 +19,6 @@ void SerialToStream::MakeSerailToStream(qiuwanli::ConfigFile* Config
     Config->set_remainsize(RemainSize);
 }
 
-void SerialToStream::MakeLogTable(qiuwanli::Logs* Log
-                                  , const std::string& UserID
-                                  , const std::string& LogInfo)
-{
-
-}
 
 void SerialToStream::MakeBlockInfo(qiuwanli::BlockInfo* Blocks
                                    , const std::string& FileSHA512
@@ -40,6 +34,20 @@ void SerialToStream::MakeBlockInfo(qiuwanli::BlockInfo* Blocks
     Blocks->set_blocknumer(BlockNum);
     Blocks->set_cursize(CurSize);
     Blocks->set_fileblockoffset(FileBlockOffSet);
+}
+
+void SerialToStream::MakeBlockInfoSend(qiuwanli::BlockInfo* Blocks
+                                   , const std::string& FileSHA512
+                                   , const std::string& BlockMd5
+                                   , const std::string& SaveFileName
+                                   , const unsigned long BlockNum
+                                   , const unsigned long CurSize)
+{
+    Blocks->set_filesha512(FileSHA512);
+    Blocks->set_blockmd5(BlockMd5);
+    Blocks->set_savefilename(SaveFileName);
+    Blocks->set_blocknumer(BlockNum);
+    Blocks->set_cursize(CurSize);
 }
 
 void SerialToStream::MakeBlock(qiuwanli::Block* Block, const unsigned long BlockItem)
@@ -103,14 +111,6 @@ void SerialToStream::MakeBlock2Server(qiuwanli::BlockInfo2Server * BlockInfo
         MakeBlock(Item, x);
     }
 }
-
-
-void SerialToStream::MakeLogTable(qiuwanli::LogTable* Log
-                                  , const std::string& UserID
-                                  , const std::string& LogInfo)
-{ 
-}
-
 
 
 }//! End NameSpace qiuwanli

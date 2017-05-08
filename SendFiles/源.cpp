@@ -6,10 +6,10 @@
 
 struct File_info 
 {
-	typedef unsigned long long Size_type;
-	Size_type filesize;
-	size_t filename_size;
-	File_info () : filesize (0), filename_size (0) {}
+    unsigned char   m_RequireType;
+	size_t          m_FileSize;
+	size_t          m_FileNameLength;
+	File_info () : m_FileSize(0), m_FileNameLength(0) {}
 };
 
 void sender (boost::asio::io_service &io
@@ -46,7 +46,7 @@ void sender (boost::asio::io_service &io
 	//MessageBox ();
 	//const char* filename_msg = filename + msg_type;
 
-	int filename_size = strlen (filename) + 1;
+	size_t filename_size = strlen (filename) + 1;
 	size_t file_info_size = sizeof (file_info);
 	size_t total_size = file_info_size + filename_size;
 
@@ -55,9 +55,9 @@ void sender (boost::asio::io_service &io
 		std::cerr << "File name is too long";
 		return;
 	}
-	file_info.filename_size = filename_size;
+	file_info.m_FileNameLength = filename_size;
 	fseek (fp, 0, SEEK_END);
-	file_info.filesize = ftell (fp);
+	file_info.m_FileSize = ftell (fp);
 	rewind (fp);
 
     memcpy(buffer, &file_info, file_info_size);							//文件信息
@@ -98,7 +98,7 @@ int main ()
 	boost::asio::io_service io_ser;
 	try {
         sender(io_ser, "127.0.0.1", 9999, "login - 副本 (2)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (3)", "1001");
+        sender(io_ser, "127.0.0.1", 9999, "login - 副本 (3)", "1001");
 		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (4)", "1001");
 		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (5)", "1001");
 		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (6)", "1001");

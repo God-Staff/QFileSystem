@@ -21,12 +21,19 @@ public:
             return;
         }
     }
-    ~OptLog( ) { }
+
+    ~OptLog( ) 
+    {
+        if (m_fout.is_open( ))
+        {
+            m_fout.close( );
+        }
+    }
 
     void log(const std::string logs)
     {
         boost::lock_guard<boost::mutex> locker_m(m_mutex);
-        m_fout << GetTime( ) << logs << std::endl;
+        m_fout << GetTime( ) << "\t" << logs << std::endl;
     }
 
     std::string GetTime( )
@@ -45,7 +52,7 @@ public:
 
 private:
     boost::mutex m_mutex;
-    boost::filesystem::ofstream m_fout;
+    boost::filesystem::fstream m_fout;
 };
 
 
