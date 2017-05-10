@@ -112,7 +112,7 @@ void sendBlockInfoToServers( )
 }
 
 //定时将blockinfo写入到文件
-void WriteToFile( )
+void CloseWriteToFile( )
 {
     if (g_ComData.OpFile.is_open( ))
     {
@@ -161,6 +161,7 @@ void DelayWirte( )
         g_ComData.opplog.log("qiuwanli::ConfigFile 序列化失败！");
         return;
     }
+
     Sleep(DelayWriteToFile);
     DelayWirte( );
 }
@@ -173,11 +174,13 @@ int main (int argc, char* argv[])
         initData( );
 
         //初始化服务端连接信息
-
-
         //再执行循环心跳程序
         boost::thread HeartThread(doItNextTime);
         HeartThread.detach( );
+
+        //发送数据
+        boost::thread BlockInfoThread(sendBlockInfoToServers);
+        BlockInfoThread.join( );
 
         //创建进程去，管理序列化文件的更新
         //WriteToFile FileManage;
@@ -188,6 +191,7 @@ int main (int argc, char* argv[])
             Sleep(DelayWriteToFile);
             DelayWirte( );
         });
+        FileManage.join( );
 
 
 		if (argc != 5)
@@ -233,5 +237,7 @@ int main (int argc, char* argv[])
 		std::cerr << "Exception: " << e.what () << "\n";
 	}
 
+
+    CloseWriteToFile( );
 	return 0;
 }

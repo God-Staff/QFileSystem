@@ -1,5 +1,7 @@
 #include "SerializationToStream.hpp"
+
 #include <google/protobuf/repeated_field.h>
+
 namespace qiuwanli
 {
 

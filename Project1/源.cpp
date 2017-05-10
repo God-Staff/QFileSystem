@@ -66,17 +66,34 @@ void doItNextTime1( )
     std::cout << "3333333:" << std::endl;
     doItNextTime1( );
 }
+#include "qq.h"
+#include "qqq.h"
 
-
+void ff( )
+{
+    std::cout << fff << "  " << &fff << std::endl;
+    fff = 23450;
+    std::cout << fff << "  " << &fff << std::endl;
+    int fff = 34560;
+    std::cout << fff << "  " << &fff << std::endl;
+}
 
 
 int main( )
 {
 
+    f( );
+
+    ff( );
+
+    f( );
+
+
+/*
     std::thread t1(doItNextTime);
 
     t1.detach( );
-    doItNextTime1( );
+    doItNextTime1( );*/
     //std::string FileName="ttt.txt";
     //boost::filesystem::path FilePath(FileName);
     //
