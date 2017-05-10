@@ -75,7 +75,7 @@ char* FileManage::ReadFileBlock(char* fileBlock, const size_t OffSet, const size
 //Ð´ÈëÊý¾Ý
 bool FileManage::WriteFileBlock(char* WriteBlock, const size_t CurSize,const size_t OffSet )
 {
-    if (OffSet == FILE_MAX)
+    if (OffSet >= FILE_MAX)
     {
         return false;
     }
@@ -86,6 +86,22 @@ bool FileManage::WriteFileBlock(char* WriteBlock, const size_t CurSize,const siz
     delete []WriteBlock;
 
     return false;
+}
+
+size_t FileManage::WriteFileBlockEnd(char * WriteBlock, const size_t CurSize)
+{
+    m_FileInOut.seekp(0, std::ios_base::end);
+
+    auto index=m_FileInOut.tellp( );
+    if ((index % k_buffer_size)!=0)
+    {
+        index = index / k_buffer_size + 1;
+        m_FileInOut.seekp(index*k_buffer_size);
+    }
+
+    m_FileInOut.write(WriteBlock, CurSize);
+
+    return index;
 }
 
 size_t FileManage::Getfilesize(const boost::filesystem::path& FileName)

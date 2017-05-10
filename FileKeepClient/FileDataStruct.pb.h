@@ -934,6 +934,20 @@ class BlockListForDown : public ::google::protobuf::Message /* @@protoc_insertio
   ::std::string* release_saveserversip();
   void set_allocated_saveserversip(::std::string* saveserversip);
 
+  // string FileMD5 = 3;
+  void clear_filemd5();
+  static const int kFileMD5FieldNumber = 3;
+  const ::std::string& filemd5() const;
+  void set_filemd5(const ::std::string& value);
+  #if LANG_CXX11
+  void set_filemd5(::std::string&& value);
+  #endif
+  void set_filemd5(const char* value);
+  void set_filemd5(const char* value, size_t size);
+  ::std::string* mutable_filemd5();
+  ::std::string* release_filemd5();
+  void set_allocated_filemd5(::std::string* filemd5);
+
   // @@protoc_insertion_point(class_scope:qiuwanli.BlockListForDown)
  private:
 
@@ -941,6 +955,7 @@ class BlockListForDown : public ::google::protobuf::Message /* @@protoc_insertio
   ::google::protobuf::RepeatedPtrField< ::qiuwanli::Block > blocks_;
   ::google::protobuf::internal::ArenaStringPtr filesha512_;
   ::google::protobuf::internal::ArenaStringPtr saveserversip_;
+  ::google::protobuf::internal::ArenaStringPtr filemd5_;
   mutable int _cached_size_;
   friend struct  protobuf_FileDataStruct_2eproto::TableStruct;
 };
@@ -2597,6 +2612,58 @@ inline void BlockListForDown::set_allocated_saveserversip(::std::string* saveser
   }
   saveserversip_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), saveserversip);
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.BlockListForDown.SaveServersIP)
+}
+
+// string FileMD5 = 3;
+inline void BlockListForDown::clear_filemd5() {
+  filemd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline const ::std::string& BlockListForDown::filemd5() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.BlockListForDown.FileMD5)
+  return filemd5_.GetNoArena();
+}
+inline void BlockListForDown::set_filemd5(const ::std::string& value) {
+  
+  filemd5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:qiuwanli.BlockListForDown.FileMD5)
+}
+#if LANG_CXX11
+inline void BlockListForDown::set_filemd5(::std::string&& value) {
+  
+  filemd5_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockListForDown.FileMD5)
+}
+#endif
+inline void BlockListForDown::set_filemd5(const char* value) {
+  
+  filemd5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.BlockListForDown.FileMD5)
+}
+inline void BlockListForDown::set_filemd5(const char* value, size_t size) {
+  
+  filemd5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.BlockListForDown.FileMD5)
+}
+inline ::std::string* BlockListForDown::mutable_filemd5() {
+  
+  // @@protoc_insertion_point(field_mutable:qiuwanli.BlockListForDown.FileMD5)
+  return filemd5_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline ::std::string* BlockListForDown::release_filemd5() {
+  // @@protoc_insertion_point(field_release:qiuwanli.BlockListForDown.FileMD5)
+  
+  return filemd5_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+inline void BlockListForDown::set_allocated_filemd5(::std::string* filemd5) {
+  if (filemd5 != NULL) {
+    
+  } else {
+    
+  }
+  filemd5_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filemd5);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.BlockListForDown.FileMD5)
 }
 
 // repeated .qiuwanli.Block Blocks = 4;

@@ -40,7 +40,10 @@ public:
     {
         std::string CurTime;
         time_t calendar_time = time(NULL);
-        struct tm * tm_local = localtime(&calendar_time);
+        struct tm * tm_local;
+        
+        localtime_s(tm_local,&calendar_time);
+
         char str_f_t[100];
         strftime(str_f_t, sizeof(str_f_t), "%G-%m-%d %H:%M:%S", tm_local);
 

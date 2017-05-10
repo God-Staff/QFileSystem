@@ -60,6 +60,7 @@ message BlockListForDown
 {
 	string FileSHA512=1;
 	string SaveServersIP=2;
+	string FileMD5=3;
 	repeated Block Blocks=4;
 }
 message BlockListForDownTable

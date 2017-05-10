@@ -55,12 +55,11 @@ void SerialToStream::MakeBlock(qiuwanli::Block* Block, const unsigned long Block
     Block->set_blockitem(BlockItem);
 }
 
-template<typename T>
 void SerialToStream::MakeBlockListForDown(qiuwanli::BlockListForDown* DownList
                                           , const std::string& FileSHA512
                                           , const std::string& SaveServersIP
                                           , const std::string& FileMd5
-                                          , const std::vector<T>& BlockList)
+                                          , const std::vector<unsigned long>& BlockList)
 {
     DownList->set_filesha512(FileSHA512);
     DownList->set_saveserversip(SaveServersIP);

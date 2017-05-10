@@ -11,7 +11,7 @@ class SerialToStream
 public:
     SerialToStream( ) { }
     ~SerialToStream( ) { }
-private:
+
     /**
      * 读取本地配置文件
      * @param Config       配置文件的序列化对象
@@ -69,12 +69,11 @@ private:
      * @param FileMd5       [description]
      * @param Block         [description]
      */
-    template<typename T>
     void MakeBlockListForDown(qiuwanli::BlockListForDown* DownList
                               , const std::string& FileSHA512
                               , const std::string& SaveServersIP
                               , const std::string& FileMd5
-                              , const std::vector<T>& BlockList);
+                              , const std::vector<unsigned long>& BlockList);
     /**
      * [MakeBlockCheck description]
      * @param BlockCheck [description]

@@ -3,14 +3,12 @@
 #include "Servers.hpp"
 #include "FileDataStruct.pb.h"
 #include "SendFile.hpp"
+#include "ComData.hpp"
 
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <windows.h>
 
-qiuwanli::ConfigFile Conf;
-qiuwanli::BlockInfoTable BlockTable;
-OptLog opplog;
 
 //对数据进行初始化
 void initData( )
@@ -66,11 +64,14 @@ void doItNextTime( )
     {
         boost::asio::io_service io;
         SendFile senddata;
-        senddata.sender(io, Conf.serversip, Conf.serversport, "config", 'a');
+        std::string ip = Conf.serversip( );
+        senddata.sender(io, Conf.serversip( ).c_str()
+                        , std::atoi( Conf.serversport( ).c_str())
+                        , "config", 'a');
     }
-    catch (std::exception& e)
+    catch (std::exception e)
     {
-        opplog.log("Heart Fail!\t" + e.what);
+        opplog.log("Heart Fail!\t");
     }
 
     //延时60秒在发送心跳连接
@@ -79,6 +80,34 @@ void doItNextTime( )
     doItNextTime( );
 }
 
+void sendBlockInfoToServers( )
+{
+    //将最近15秒内接收到的块信息，发送给服务端
+    if (BlockTableDiff.block_size( ))
+    {
+        try
+        {
+            boost::asio::io_service io;
+            SendFile senddata;
+            senddata.sender(io, Conf.serversip( ).c_str( )
+                            , std::atoi(Conf.serversport( ).c_str( ))
+                            , "BlockTableDiff", 'a');
+        } catch (std::exception e)
+        {
+            opplog.log("Heart Fail!\t");
+        }
+    }
+
+    //将其合并
+    BlockTablePreDiff.MergeFrom(BlockTableDiff);
+    
+    //清空数据，便于下次合并
+    BlockTableDiff.Clear( );
+
+    Sleep(DelayTime_SendInfo);
+    
+    sendBlockInfoToServers( );
+}
 
 //定时将blockinfo写入到文件
 class WriteToFile
@@ -102,6 +131,12 @@ public:
         }
     }
 
+    void operator()()
+    {
+        Sleep(DelayWriteToFile);
+        DelayWirte( );
+    }
+
     void Init()
     {
         //打开文件
@@ -120,8 +155,7 @@ public:
             return;
         }
 
-        Sleep(DelayWriteToFile);
-        DelayWirte( );
+        
     }
 
     void DelayWirte( )
@@ -132,6 +166,9 @@ public:
             opplog.log("qiuwanli::ConfigFile 序列化失败！");
             return;
         }
+
+
+        BlockTable.MergeFrom(BlockTableDiff);
 
         if (!BlockTable.SerializePartialToOstream(&OpFileBlockInfo))
         {	//打开失败
@@ -151,19 +188,28 @@ private:
 
 int main (int argc, char* argv[])
 {
-	try
-	{
+    try
+    {
         //先初始化数据
         initData( );
+
+        //初始化服务端连接信息
+
 
         //再执行循环心跳程序
         boost::thread HeartThread(doItNextTime);
         HeartThread.detach( );
 
         //创建进程去，管理序列化文件的更新
-        WriteToFile FileManage;
-        boost::thread ManageFileUpdate(FileManage);
-        ManageFileUpdate.detach( );
+        //WriteToFile FileManage;
+        //boost::thread ManageFileUpdate{WriteToFile( )};
+        //ManageFileUpdate.detach( );
+        //boost::thread FileManage( [&](){
+        //    boost::filesystem::ofstream OpFile;
+        //    boost::filesystem::ofstream OpFileBlockInfo;
+
+
+        //});
 
 
 		if (argc != 5)

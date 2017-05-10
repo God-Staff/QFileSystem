@@ -20,7 +20,9 @@
 #include "handler_allocator.hpp"
 #include "public.h"
 #include "OptLog.hpp"
-
+#include "FileManage.hpp"
+#include "SerializationToStream.hpp"
+#include "ComData.hpp"
 
 class Session : public boost::enable_shared_from_this<Session>
 {
@@ -43,8 +45,15 @@ public:
 
 	~Session ()
 	{
+        if (fp_)
+        {
+            fclose(fp_);
+        }
+
+        WriteBlock_ToFile( );
+
 		std::cout << "\n Thread ID: " << boost::this_thread::get_id () << std::endl;
-        if (fp_) fclose(fp_);
+
         clock_ = clock( ) - clock_;
         DataBlockTypeInfo::Size_type bytes_writen = total_bytes_writen_;
         if (clock_ == 0)
@@ -171,7 +180,8 @@ private:
         }
         else
         {	//解析配置文件
-            if (DownListTable.prikeymd5( ).compare("") == 0)
+            std::string md5=Conf.prikeymd5( );
+            if (DownListTable.prikeymd5().compare(md5) == 0)
             {
                 PairVec ListForUp;
                 for (size_t index = 0; index < DownListTable.blocklistfordown_size( ); ++index)
@@ -182,7 +192,7 @@ private:
                     std::vector<unsigned long> vec;
                     for (size_t index = 0; index < DownList.blocks_size( ); ++index)
                     {
-                        const qiuwanli::Block& Block = DownList.blocks(i);
+                        const qiuwanli::Block& Block = DownList.blocks(index);
                         vec.emplace_back(Block.blockitem( ));
                     }
 
@@ -200,7 +210,6 @@ private:
                     //尝试重传
                     SendFileToClient(ListForUp);
                 }
-
 
             }
         }
@@ -223,6 +232,7 @@ private:
         return DownList;
     }
 
+
 	//将接受到的数据块，解析为文件名+文件数据
 	void handle_file (const boost::system::error_code& error)
 	{
@@ -240,12 +250,12 @@ private:
         }
 		++base_name_msg;
 
-		const char *basename = "";
+		const char *basename = base_name_msg;
 		//const char *msg_type = "";
 
 		//将const char* 分割
         std::string str(base_name_msg);
-        std::vector<std::string>  vstr;
+        //std::vector<std::string>  vstr;
         boost::split(vstr, str, boost::is_any_of("+"), boost::token_compress_on);
 		basename = vstr[0].c_str ();
 
@@ -296,6 +306,43 @@ private:
 		receive_file_content ();
 	}
 
+
+    void WriteBlock_ToFile( )
+    {
+        //在文件传输完成时，若果传输类型为文件块则，调用文件块写入函数
+        if (file_info_.m_ReqiureType == 'a')
+        {
+            fp_ = fopen(vstr[0].c_str( ), "rb");
+            if (fp_ == NULL)
+            {
+                std::cerr << "Failed to open file to write\n";
+                return;
+            }
+            else
+            {
+                std::string filesha512;
+                size_t offset = m_FileManage.WriteFileBlockEnd(buffer_,k_buffer_size);
+
+                qiuwanli::BlockInfo* addItem = BlockTableDiff.add_block( );
+                
+                //addItem->filesha512 = vstr[0];
+                //addItem->blockmd5 = vstr[1];
+                //addItem->savefilename = m_FileManage.getFileName( );
+                //addItem->blockmd5 = vstr[2];
+                //addItem->cursize = total_bytes_writen_;
+                //addItem->fileblockoffset = offset;
+
+                m_serial.MakeBlockInfo(addItem, vstr[0], vstr[1]
+                                       , m_FileManage.getFileName( )
+                                       , std::atoi(vstr[2].c_str( ))
+                                       , total_bytes_writen_, offset);
+                
+            }
+
+        }
+    }
+
+   
 	//发送文件
     void send_file_content_sender(  const char*	ip_address
                                   , unsigned	port
@@ -335,9 +382,9 @@ private:
         memcpy(buffer_ + file_info_size, filename, filename_size);			//文件名/消息类型
 
         //boost::asio::ip::tcp::socket socket(io);
-        socket_.connect(boost::asio::ip::tcp::endpoint(
+        /* socket_.connect(boost::asio::ip::tcp::endpoint(
             boost::asio::ip::address_v4::from_string(ip_address)
-            , port));
+            , port));*/
 
         std::cout << "Sending file : " << filename << " MsgType:" << msg_type << std::endl;
         size_t len = total_size;
@@ -378,6 +425,10 @@ private:
     DataBlockTypeInfo::Size_type total_bytes_writen_;
 	char buffer_[k_buffer_size];
 	OptLog optlog;
+    std::vector<std::string>  vstr;
+
+    FileManage m_FileManage;
+    qiuwanli::SerialToStream m_serial;
 };
 
 
