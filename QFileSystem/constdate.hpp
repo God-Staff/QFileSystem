@@ -28,10 +28,10 @@ constexpr size_t k_times = 32;
 typedef unsigned long long Size_type;
 
 
-struct File_info 
-{
-	Size_type filesize;
-	size_t filename_size;
-	File_info () : filesize (0), filename_size (0) {}
-};
+//struct File_info 
+//{
+//	Size_type filesize;
+//	size_t filename_size;
+//	File_info () : filesize (0), filename_size (0) {}
+//};
 #endif // !CONST_DADTA_HPP

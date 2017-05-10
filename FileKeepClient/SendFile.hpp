@@ -1,9 +1,8 @@
 #ifndef SEND_FILE_HPP
 #define SEND_FILE_HPP
 
-#include "public.h"
-#include "OptLog.hpp"
-#include "FileDataStruct.pb.h"
+//#include "public.h"
+#include "FileManage.hpp"
 
 #include <boost/asio.hpp>
 
@@ -22,11 +21,10 @@ public:
                 , const char msg_type); 
 
 private:
-    FILE *fp = nullptr;
+    FILE *fp;
     OptLog Logs;
-    //char buf[k_buffer_size];
     char buffer[k_buffer_size];
-    DataBlockTypeInfo file_info;
+    DataBlockTypeInfo file_infos;
 };
 
 #endif // !SEND_FILE_HPP

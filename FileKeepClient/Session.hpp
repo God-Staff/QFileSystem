@@ -18,11 +18,8 @@
 #include <boost/filesystem.hpp>
 
 #include "handler_allocator.hpp"
-#include "public.h"
-#include "OptLog.hpp"
 #include "FileManage.hpp"
 #include "SerializationToStream.hpp"
-#include "ComData.hpp"
 
 class Session : public boost::enable_shared_from_this<Session>
 {
@@ -180,7 +177,7 @@ private:
         }
         else
         {	//½âÎöÅäÖÃÎÄ¼þ
-            std::string md5=Conf.prikeymd5( );
+            std::string md5= g_ComData.Conf.prikeymd5( );
             if (DownListTable.prikeymd5().compare(md5) == 0)
             {
                 PairVec ListForUp;
@@ -322,8 +319,8 @@ private:
             {
                 std::string filesha512;
                 size_t offset = m_FileManage.WriteFileBlockEnd(buffer_,k_buffer_size);
-
-                qiuwanli::BlockInfo* addItem = BlockTableDiff.add_block( );
+                extern ComData g_ComData;
+                qiuwanli::BlockInfo* addItem = g_ComData.BlockTableDiff.add_block( );
                 
                 //addItem->filesha512 = vstr[0];
                 //addItem->blockmd5 = vstr[1];

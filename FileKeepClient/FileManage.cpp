@@ -1,5 +1,4 @@
 #include "FileManage.hpp"
-#include "public.h"
 
 FileManage::FileManage( ) 
     : m_FileName("")

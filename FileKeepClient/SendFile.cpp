@@ -1,7 +1,7 @@
 #include "SendFile.hpp"
 
 
-SendFile::SendFile( ):fp(nullptr)
+SendFile::SendFile( ) : fp(nullptr)
 { 
 
 }
@@ -21,8 +21,6 @@ void SendFile::Init(const char* filename)
         return;
     }
 
-    //使用智能指针，防止程序出现异常时，fclose未被调用。
-    boost::shared_ptr<FILE> file_ptr(fp, fclose);
 }
 
 void SendFile::sender(boost::asio::io_service& io
@@ -33,8 +31,11 @@ void SendFile::sender(boost::asio::io_service& io
 {
     Init(filename);
 
+    //使用智能指针，防止程序出现异常时，fclose未被调用。
+    boost::shared_ptr<FILE> file_ptr(fp, fclose);
+
     size_t filename_size = strlen(filename) + 1;
-    size_t file_info_size = sizeof(file_info);
+    size_t file_info_size = sizeof(file_infos);
     size_t total_size = file_info_size + filename_size;
 
     if (total_size > k_buffer_size)
@@ -43,13 +44,13 @@ void SendFile::sender(boost::asio::io_service& io
         return;
     }
 
-    file_info.m_FileNameLength = filename_size;
-    file_info.m_ReqiureType = msg_type;
+    file_infos.m_FileNameLength = filename_size;
+    file_infos.m_ReqiureType = msg_type;
     fseek(fp, 0, SEEK_END);
-    file_info.m_FileSize = ftell(fp);
+    file_infos.m_FileSize = ftell(fp);
     rewind(fp);
 
-    memcpy(buffer, &file_info, file_info_size);							//文件信息
+    memcpy(buffer, &file_infos, file_info_size);							//文件信息
     memcpy(buffer + file_info_size, filename, filename_size);			//文件名/消息类型
 
     boost::asio::ip::tcp::socket socket(io);

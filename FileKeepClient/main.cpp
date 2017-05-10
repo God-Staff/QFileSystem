@@ -1,14 +1,13 @@
 #define _CRT_SECURE_NO_WARNINGS
 
 #include "Servers.hpp"
-#include "FileDataStruct.pb.h"
 #include "SendFile.hpp"
-#include "ComData.hpp"
 
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <windows.h>
 
+ComData g_ComData;
 
 //对数据进行初始化
 void initData( )
@@ -17,14 +16,14 @@ void initData( )
     boost::filesystem::fstream OpFile("config", std::ios::in | std::ios::binary);
     if (!OpFile)
     {
-        opplog.log("Conf 打开失败！");
+        g_ComData.opplog.log("Conf 打开失败！");
         return;
     }
 
-    if (!Conf.ParseFromIstream(&OpFile))
+    if (!g_ComData.Conf.ParseFromIstream(&OpFile))
     {	//打开失败
         OpFile.close( );
-        opplog.log("qiuwanli::ConfigFile 解析失败！");
+        g_ComData.opplog.log("qiuwanli::ConfigFile 解析失败！");
         return;
     }
 
@@ -34,14 +33,14 @@ void initData( )
     boost::filesystem::fstream OpFileBlockInfo("BlockTable.db", std::ios::in | std::ios::binary);
     if (!OpFileBlockInfo)
     {
-        opplog.log("BlockTable.db 打开失败！");
+        g_ComData.opplog.log("BlockTable.db 打开失败！");
         return;
     }
 
-    if (!BlockTable.ParseFromIstream(&OpFileBlockInfo))
+    if (!g_ComData.BlockTable.ParseFromIstream(&OpFileBlockInfo))
     {	//打开失败
         OpFileBlockInfo.close( );
-        opplog.log("qiuwanli::ConfigFile 解析失败！");
+        g_ComData.opplog.log("qiuwanli::ConfigFile 解析失败！");
         return;
     }
 
@@ -56,22 +55,24 @@ void doItNextTime( )
     boost::filesystem::space_info Space = boost::filesystem::space(CurPath);
     
     //先更新本地服务端数据
-    Conf.set_totalsize((Space.capacity + Space.available) / Size_Mb);
-    Conf.set_remainsize(Space.capacity / Size_Mb);
+    g_ComData.Conf.set_totalsize((Space.capacity + Space.available) / Size_Mb);
+    g_ComData.Conf.set_remainsize(Space.capacity / Size_Mb);
     
     //再将数据同步到目录服务器，心跳连接
     try
     {
         boost::asio::io_service io;
         SendFile senddata;
-        std::string ip = Conf.serversip( );
-        senddata.sender(io, Conf.serversip( ).c_str()
-                        , std::atoi( Conf.serversport( ).c_str())
-                        , "config", 'a');
+        std::string ip = g_ComData.Conf.serversip( );
+        senddata.sender(io
+                        , g_ComData.Conf.serversip( ).c_str()
+                        , std::atoi(g_ComData.Conf.serversport( ).c_str())
+                        , "config"
+                        , 'a');
     }
     catch (std::exception e)
     {
-        opplog.log("Heart Fail!\t");
+        g_ComData.opplog.log("Heart Fail!\t");
     }
 
     //延时60秒在发送心跳连接
@@ -83,26 +84,27 @@ void doItNextTime( )
 void sendBlockInfoToServers( )
 {
     //将最近15秒内接收到的块信息，发送给服务端
-    if (BlockTableDiff.block_size( ))
+    if (g_ComData.BlockTableDiff.block_size( ))
     {
         try
         {
             boost::asio::io_service io;
             SendFile senddata;
-            senddata.sender(io, Conf.serversip( ).c_str( )
-                            , std::atoi(Conf.serversport( ).c_str( ))
-                            , "BlockTableDiff", 'a');
+            senddata.sender(io, g_ComData.Conf.serversip( ).c_str( )
+                            , std::atoi(g_ComData.Conf.serversport( ).c_str( ))
+                            , "BlockTableDiff"
+                            , 'a');
         } catch (std::exception e)
         {
-            opplog.log("Heart Fail!\t");
+            g_ComData.opplog.log("Heart Fail!\t");
         }
     }
 
     //将其合并
-    BlockTablePreDiff.MergeFrom(BlockTableDiff);
+    g_ComData.BlockTablePreDiff.MergeFrom(g_ComData.BlockTableDiff);
     
     //清空数据，便于下次合并
-    BlockTableDiff.Clear( );
+    g_ComData.BlockTableDiff.Clear( );
 
     Sleep(DelayTime_SendInfo);
     
@@ -110,81 +112,58 @@ void sendBlockInfoToServers( )
 }
 
 //定时将blockinfo写入到文件
-class WriteToFile
+void WriteToFile( )
 {
-public:
-    WriteToFile( )
+    if (g_ComData.OpFile.is_open( ))
     {
-        Init( );
+        g_ComData.OpFile.close( );
     }
 
-    ~WriteToFile( )
+    if (g_ComData.OpFileBlockInfo.is_open( ))
     {
-        if (OpFile.is_open( ))
-        {
-            OpFile.close( );
-        }
+        g_ComData.OpFileBlockInfo.close( );
+    }
+}
 
-        if (OpFileBlockInfo.is_open( ))
-        {
-            OpFileBlockInfo.close( );
-        }
+void Init( )
+{
+    //打开文件
+    g_ComData.OpFile.open("config", std::ios::out | std::ios::binary);
+    if (!g_ComData.OpFile)
+    {
+        g_ComData.opplog.log("Conf 打开失败！");
+        return;
     }
 
-    void operator()()
+    //加载文件块信息表
+    g_ComData.OpFileBlockInfo.open("BlockTable.db", std::ios::out | std::ios::binary);
+    if (!g_ComData.OpFileBlockInfo)
     {
-        Sleep(DelayWriteToFile);
-        DelayWirte( );
+        g_ComData.opplog.log("BlockTable.db 打开失败！");
+        return;
+    }
+}
+
+void DelayWirte( )
+{
+    if (!g_ComData.Conf.SerializePartialToOstream(&g_ComData.OpFile))
+    {	//打开失败
+        g_ComData.OpFile.close( );
+        g_ComData.opplog.log("qiuwanli::ConfigFile 序列化失败！");
+        return;
     }
 
-    void Init()
-    {
-        //打开文件
-        OpFile.open("config", std::ios::out | std::ios::binary);
-        if (!OpFile)
-        {
-            opplog.log("Conf 打开失败！");
-            return;
-        }
+    g_ComData.BlockTable.MergeFrom(g_ComData.BlockTableDiff);
 
-        //加载文件块信息表
-        boost::filesystem::ofstream OpFileBlockInfo("BlockTable.db", std::ios::out | std::ios::binary);
-        if (!OpFileBlockInfo)
-        {
-            opplog.log("BlockTable.db 打开失败！");
-            return;
-        }
-
-        
+    if (!g_ComData.BlockTable.SerializePartialToOstream(&g_ComData.OpFileBlockInfo))
+    {	//打开失败
+        g_ComData.OpFileBlockInfo.close( );
+        g_ComData.opplog.log("qiuwanli::ConfigFile 序列化失败！");
+        return;
     }
-
-    void DelayWirte( )
-    {
-        if (!Conf.SerializePartialToOstream(&OpFile))
-        {	//打开失败
-            OpFile.close( );
-            opplog.log("qiuwanli::ConfigFile 序列化失败！");
-            return;
-        }
-
-
-        BlockTable.MergeFrom(BlockTableDiff);
-
-        if (!BlockTable.SerializePartialToOstream(&OpFileBlockInfo))
-        {	//打开失败
-            OpFileBlockInfo.close( );
-            opplog.log("qiuwanli::ConfigFile 序列化失败！");
-            return;
-        }
-
-        Sleep(DelayWriteToFile);
-        DelayWirte( );
-    }
-
-private:
-    boost::filesystem::ofstream OpFile;
-    boost::filesystem::ofstream OpFileBlockInfo;
-};
+    Sleep(DelayWriteToFile);
+    DelayWirte( );
+}
 
 int main (int argc, char* argv[])
 {
@@ -203,13 +182,12 @@ int main (int argc, char* argv[])
         //创建进程去，管理序列化文件的更新
         //WriteToFile FileManage;
         //boost::thread ManageFileUpdate{WriteToFile( )};
-        //ManageFileUpdate.detach( );
-        //boost::thread FileManage( [&](){
-        //    boost::filesystem::ofstream OpFile;
-        //    boost::filesystem::ofstream OpFileBlockInfo;
-
-
-        //});
+        //ManageFileUpdate.join( );
+        boost::thread FileManage([&]( ){
+            Init( );
+            Sleep(DelayWriteToFile);
+            DelayWirte( );
+        });
 
 
 		if (argc != 5)
