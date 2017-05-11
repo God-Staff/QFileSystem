@@ -15,14 +15,9 @@
 #include <boost/algorithm/string/split.hpp>
 #include <boost/algorithm/string/classification.hpp>
 #include <cstdio>
-#include "constdate.hpp"
 
-struct File_info
-{
-	Size_type filesize;
-	size_t filename_size;
-	File_info () : filesize (0), filename_size (0) {}
-};
+#include "constdate.hpp"
+#include "public.h"
 
 class Session : public boost::enable_shared_from_this<Session>
 {
@@ -52,7 +47,7 @@ public:
         }
 
         clock_ = clock () - clock_;
-		File_info::Size_type bytes_writen = total_bytes_writen_;
+        DataBlockTypeInfo::Size_type bytes_writen = total_bytes_writen_;
         if (clock_ == 0)
         {
             clock_ = 1;
@@ -96,13 +91,13 @@ private:
             return print_asio_error(error);
         }
 
-		size_t filename_size = file_info_.filename_size;
+		size_t filename_size = file_info_.m_FileNameLength;
 		if ((filename_size) > k_buffer_size) {
 			std::cerr << "Path name is too long!\n";
 			return;
 		}
 		//得用async_read, 不能用async_read_some，防止路径名超长时，一次接收不完
-		boost::asio::async_read (socket_, boost::asio::buffer (buffer_, file_info_.filename_size),
+		boost::asio::async_read (socket_, boost::asio::buffer (buffer_, file_info_.m_FileNameLength),
 			boost::bind (&Session::handle_file, shared_from_this (), boost::asio::placeholders::error));
 	}
 
@@ -114,7 +109,7 @@ private:
             return print_asio_error(error);
         }
 
-		const char *base_name_msg = buffer_ + file_info_.filename_size - 1;
+		const char *base_name_msg = buffer_ + file_info_.m_FileNameLength - 1;
         while (base_name_msg >= buffer_
                && (*base_name_msg != '\\'
                && *base_name_msg != '/'))
@@ -140,7 +135,7 @@ private:
 
 		std::cout << "Open file: " << basename << " (" << buffer_ << ")\n";
 
-		fp_ = fopen (basename, "wb");
+		fopen_s (&fp_,basename, "wb");
 		if (fp_ == NULL) 
         {
 			std::cerr << "Failed to open file to write\n";
@@ -170,7 +165,7 @@ private:
                 return print_asio_error(error);
             }
 
-			File_info::Size_type filesize = file_info_.filesize;
+            DataBlockTypeInfo::Size_type filesize = file_info_.m_FileSize;
 			if (total_bytes_writen_ != filesize)
 				std::cerr << "filesize not matched! " << total_bytes_writen_
 				<< "/" << filesize << "\n";
@@ -190,8 +185,8 @@ private:
 	clock_t clock_;
 	boost::asio::ip::tcp::socket socket_;
 	FILE *fp_;
-	File_info file_info_;
-	File_info::Size_type total_bytes_writen_;
+    DataBlockTypeInfo file_info_;
+    DataBlockTypeInfo::Size_type total_bytes_writen_;
 	static const unsigned k_buffer_size = 1024 * 32;
 	char buffer_[k_buffer_size];
 };

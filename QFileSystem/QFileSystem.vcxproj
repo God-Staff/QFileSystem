@@ -191,6 +191,7 @@
     <ClInclude Include="date.pb.h" />
     <ClInclude Include="handler_allocator.hpp" />
     <ClInclude Include="optlog.hpp" />
+    <ClInclude Include="public.h" />
     <ClInclude Include="QFileSystem.h" />
     <ClInclude Include="QFileSystemDlg.h" />
     <ClInclude Include="Resource.h" />

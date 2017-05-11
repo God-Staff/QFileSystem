@@ -18,16 +18,27 @@ message File2ClientTable
 //文件存储端的信息
 message ClientConfigFile
 {
-	string CilentID=1;	//
-	string SaveIP=2;	//客户端对应IP
-	string PriKey=3;	//认证信息
-	string KeyMD5=4;	//用于验证
+	string CilentID=1;		//
+	string SaveIP=2;		//客户端对应IP
+	string PriKey=3;		//认证信息
+	string KeyMD5=4;		//用于验证
 	uint64 TotleSize=5;
 	uint64 RemainSize=6;
 }
 message ClientConfigFileTable
 {
 	repeated ClientConfigFile ClientInfo=1;
+}
+
+//用于心跳连接
+message Heart
+{
+	string ID=1;
+	string RemainSize=2;
+}
+message HeartTable
+{
+	repeated Heart CilentHeart=1;
 }
 
 //服务端文件信息保存列表
@@ -59,11 +70,25 @@ message BlockList4DownTable
 	repeated BlockList4Down BlockListForDown=1;
 }
 
+//用于解析目录服务器收到的目录信息
+message BlockInfo2Server
+{
+	string FileSHA512=1;
+	repeated uint32 BlockNumer=2;
+}
+message BlockInfo2ServerTable
+{
+	string ClientIP=1;
+	repeated BlockInfo2Server BlockInfo=2;
+}
+
+
 //用于保存用户信息
 message UserInfo
 {
 	string UserID=1;
 	string UserPS=2;
+	repeated string FileSHA512=3;
 }
 message UserInfoTable
 {

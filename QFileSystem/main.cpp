@@ -18,7 +18,7 @@ int main1 (int argc, char* argv[])
 
 		boost::asio::io_service ios;
 
-		server s (ios, boost::asio::ip::tcp::endpoint (address, port), block_size);
+		//server ss(ios, boost::asio::ip::tcp::endpoint (address, port), block_size);
 
 		// Threads not currently supported in this test.
 		std::list<boost::thread*> threads;

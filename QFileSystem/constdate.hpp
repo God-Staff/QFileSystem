@@ -24,8 +24,8 @@
 //常量数据
 
 //k*1024
-constexpr size_t k_times = 32;	
-typedef unsigned long long Size_type;
+//constexpr size_t k_times = 32;	
+//typedef unsigned long long Size_type;
 
 
 //struct File_info 

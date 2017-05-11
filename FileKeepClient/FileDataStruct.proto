@@ -17,6 +17,13 @@ message ConfigFile
 	string ServersPort=8;		//目录服务器端口号
 }
 
+//用于心跳连接
+message Heart
+{
+	string ID=1;
+	string RemainSize=2;
+}
+
 
 //块列表
 message BlockInfo

@@ -115,8 +115,8 @@ BOOL CQFileSystemDlg::OnInitDialog()
     m_ListFile->SetExtendedStyle (styles1 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
 	//给listctrl设置5个标题栏
-    TCHAR rgtsz2[5][10] = {_T("文件名"), _T("SHA512") 
-        , _T("ClientID") ,_T("创建时间") ,_T("权限")};
+    TCHAR rgtsz1[5][10] = {_T("文件名"), _T("SHA512"), _T("文件大小")
+                            ,_T("创建时间"),_T("是否分享")};
 
 	//修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
 
@@ -128,7 +128,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
         lvcolumn1.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
 			| LVCF_WIDTH | LVCF_ORDER;
         lvcolumn1.fmt = LVCFMT_LEFT;
-        lvcolumn1.pszText = rgtsz2[i];
+        lvcolumn1.pszText = rgtsz1[i];
         lvcolumn1.iSubItem = i;
         lvcolumn1.iOrder = i;
         lvcolumn1.cx = rect1.Width () / 5;
@@ -146,13 +146,13 @@ BOOL CQFileSystemDlg::OnInitDialog()
     m_ListSaveServer->SetExtendedStyle(styles2 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     //给listctrl设置5个标题栏
-    TCHAR rgtsz2[2][10] = {_T("主句编号"),_T("IP")};
+    TCHAR rgtsz2[3][10] = {_T("存储端编号"),_T("IP"),_T("剩余空间")};
 
     //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
     LV_COLUMN lvcolumn2;
     CRect rect2;
     m_ListSaveServer->GetWindowRect(&rect2);
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 3; i++)
     {
         lvcolumn2.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
             | LVCF_WIDTH | LVCF_ORDER;
@@ -160,12 +160,12 @@ BOOL CQFileSystemDlg::OnInitDialog()
         lvcolumn2.pszText = rgtsz2[i];
         lvcolumn2.iSubItem = i;
         lvcolumn2.iOrder = i;
-        lvcolumn2.cx = rect2.Width( ) / 2;
+        lvcolumn2.cx = rect2.Width( ) / 3;
         m_ListSaveServer->InsertColumn(i, &lvcolumn2);
     }
 
 
-    //主机列表
+    //分享列表
     m_ListShared = (CListCtrl*)GetDlgItem(IDC_LIST_Shared);
     DWORD dwStyle3 = GetWindowLong(m_ListShared->m_hWnd, GWL_STYLE);
     SetWindowLong(m_ListShared->m_hWnd, GWL_STYLE, dwStyle3 | LVS_REPORT);
@@ -175,13 +175,13 @@ BOOL CQFileSystemDlg::OnInitDialog()
     m_ListShared->SetExtendedStyle(styles3 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     //给listctrl设置5个标题栏
-    TCHAR rgtsz3[2][10] = {_T("主句编号"),_T("IP")};
+    TCHAR rgtsz3[4][10] = {_T("URL"),_T("文件标识"),_T("验证信息"),_T("用户ID")};
 
     //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
     LV_COLUMN lvcolumn3;
     CRect rect3;
     m_ListShared->GetWindowRect(&rect3);
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 4; i++)
     {
         lvcolumn3.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
             | LVCF_WIDTH | LVCF_ORDER;
@@ -189,13 +189,13 @@ BOOL CQFileSystemDlg::OnInitDialog()
         lvcolumn3.pszText = rgtsz3[i];
         lvcolumn3.iSubItem = i;
         lvcolumn3.iOrder = i;
-        lvcolumn3.cx = rect3.Width( ) / 2;
+        lvcolumn3.cx = rect3.Width( ) / 4;
         m_ListShared->InsertColumn(i, &lvcolumn3);
     }
 
 
 
-    //主机列表
+    //下载端在线列表
     m_ListClient = (CListCtrl*) GetDlgItem(IDC_LIST_Client);
     DWORD dwStyle4 = GetWindowLong(m_ListClient->m_hWnd, GWL_STYLE);
     SetWindowLong(m_ListClient->m_hWnd, GWL_STYLE, dwStyle4 | LVS_REPORT);
@@ -205,7 +205,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
     m_ListClient->SetExtendedStyle(styles4 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     //给listctrl设置5个标题栏
-    TCHAR rgtsz4[2][10] = {_T("主句编号"),_T("IP")};
+    TCHAR rgtsz4[2][10] = {_T("用户ID"),_T("IP")};
 
     //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
     LV_COLUMN lvcolumn4;
@@ -225,7 +225,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
 
 
 
-    //主机列表
+    //日志列表
     m_ListLogs = (CListCtrl*) GetDlgItem(IDC_LIST_Logs);
     DWORD dwStyle5 = GetWindowLong(m_ListLogs->m_hWnd, GWL_STYLE);
     SetWindowLong(m_ListLogs->m_hWnd, GWL_STYLE, dwStyle5 | LVS_REPORT);
@@ -235,13 +235,13 @@ BOOL CQFileSystemDlg::OnInitDialog()
     m_ListLogs->SetExtendedStyle(styles5 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     //给listctrl设置5个标题栏
-    TCHAR rgtsz5[2][10] = {_T("主句编号"),_T("IP")};
+    TCHAR rgtsz5[4][10] = {_T("时间"),_T("事件"),_T("用户ID"),_T("详情")};
 
     //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
     LV_COLUMN lvcolumn5;
     CRect rect5;
     m_ListLogs->GetWindowRect(&rect5);
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 4; i++)
     {
         lvcolumn5.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
                         | LVCF_WIDTH | LVCF_ORDER;
@@ -249,17 +249,11 @@ BOOL CQFileSystemDlg::OnInitDialog()
         lvcolumn5.pszText = rgtsz5[i];
         lvcolumn5.iSubItem = i;
         lvcolumn5.iOrder = i;
-        lvcolumn5.cx = rect5.Width( ) / 2;
+        lvcolumn5.cx = rect5.Width( ) / 4;
         m_ListLogs->InsertColumn(i, &lvcolumn5);
     }
 
-
-    m_ListFile->InsertItem (0, L"dafs");
-    m_ListFile->SetItemText (0, 1, L"dafs");
-    m_ListFile->SetItemText (0, 2, L"dafs");
-    m_ListFile->SetItemText (0, 3, L"dafs");
-    m_ListSaveServer->InsertItem (0, L"dafs");
-    m_ListSaveServer->SetItemText (0, 1, L"dafs");
+    InitData( );
 
 	//解析数据好友和分享链接数据
 	updateList ();
@@ -418,8 +412,11 @@ void CQFileSystemDlg::MakeLogs (qiuwanli::ID2IP * id2ip
 	id2ip->set_keymd5 (KeyMd5);
 }
 
-void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_address, 
-					unsigned	port, const char* filename, const char* msg_type)
+void CQFileSystemDlg::sender (boost::asio::io_service &io
+                              , const char*	ip_address
+                              , unsigned	port
+                              , const char* filename
+                              , const char* msg_type)
 {
 	FILE *fp;
 	fopen_s (&fp, filename, "rb");
@@ -436,7 +433,7 @@ void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_addres
 
 	const size_t k_buffer_size = k_times * 1024;
 	char buffer[k_buffer_size];
-	File_info file_info;
+    DataBlockTypeInfo file_info;
 
 	char buf[k_times * 1024];
 	strcat_s (buf, filename);
@@ -455,9 +452,9 @@ void CQFileSystemDlg::sender (boost::asio::io_service &io, const char*	ip_addres
 		std::cerr << "File name is too long";
 		return;
 	}
-	file_info.filename_size = filename_size;
+	file_info.m_FileNameLength = filename_size;
 	fseek (fp, 0, SEEK_END);
-	file_info.filesize = ftell (fp);
+	file_info.m_FileSize = ftell (fp);
 	rewind (fp);
 
 	memcpy (buffer, &file_info, file_info_size);								//文件信息
@@ -532,91 +529,6 @@ bool CQFileSystemDlg::checkItem (std::string item)
 }
 
 
-void CQFileSystemDlg::sender (boost::asio::io_service &io
-                              , const char*	ip_address
-                              , unsigned	port
-                              , const char* filename
-                              , const char* msg_type)
-{
-	FILE *fp = nullptr;
-	fopen_s (&fp, filename, "rb");
-	if (fp == NULL) 
-    {
-		std::cerr << "cannot open file\n";
-		return;
-	}
-
-	//使用智能指针，防止程序出现异常时，fclose未被调用。
-	boost::shared_ptr<FILE> file_ptr (fp, fclose);
-
-	clock_t cost_time = clock ();
-
-	const size_t k_buffer_size = 32 * 1024;
-	char buffer[k_buffer_size]{};
-	File_info file_info;
-
-	char buf[32 * 1024]{};
-
-	strcat_s (buf, filename);
-	strcat_s (buf, "+");
-	strcat_s (buf, msg_type);
-	filename = (const char*)buf;
-
-	//MessageBox ();
-	//const char* filename_msg = filename + msg_type;
-
-	int filename_size = strlen (filename) + 1;
-	size_t file_info_size = sizeof (file_info);
-	size_t total_size = file_info_size + filename_size;
-
-	if (total_size > k_buffer_size) 
-    {
-		std::cerr << "File name is too long";
-		return;
-	}
-	file_info.filename_size = filename_size;
-	fseek (fp, 0, SEEK_END);
-	file_info.filesize = ftell (fp);
-	rewind (fp);
-
-	memcpy (buffer, &file_info, file_info_size);								//文件信息
-	memcpy (buffer + file_info_size, filename, filename_size);					//文件名/消息类型
-
-	boost::asio::ip::tcp::socket socket (io);
-	socket.connect (boost::asio::ip::tcp::endpoint (
-            boost::asio::ip::address_v4::from_string (ip_address)
-             , port));
-
-	std::cout << "Sending file : " << filename << " MsgType:" << msg_type << std::endl;
-	size_t len = total_size;
-
-	unsigned long long total_bytes_read = 0;
-	while (true) 
-    {
-		//先发送文件头，之后发送data
-		socket.send (boost::asio::buffer (buffer, len), 0);
-        if (feof(fp))
-        {
-            break;
-        }
-		len = fread (buffer, 1, k_buffer_size, fp);
-		total_bytes_read += len;
-	}
-
-	//计算时间、大小和速度//
-	cost_time = clock () - cost_time;
-	if (cost_time == 0) 
-    {
-        cost_time = 1;
-    }
-
-	double speed = total_bytes_read * (CLOCKS_PER_SEC / 1024.0 / 1024.0) / cost_time;
-	std::cout << "cost time: " << cost_time / (double)CLOCKS_PER_SEC << " s "
-		<< "  transferred_bytes: " << total_bytes_read << " bytes\n"
-		<< "speed: " << speed << " MB/s\n\n";
-}
-
-
 void CQFileSystemDlg::OnNMRClickClientList(NMHDR *pNMHDR, LRESULT *pResult)
 {
     LPNMITEMACTIVATE pNMItemActivate = reinterpret_cast<LPNMITEMACTIVATE>(pNMHDR);
@@ -634,4 +546,74 @@ void CQFileSystemDlg::OnNMRClickSharedList(NMHDR *pNMHDR, LRESULT *pResult)
 
 
     *pResult = 0;
+}
+
+
+void CQFileSystemDlg::InitData( )
+{
+    m_ListFile->InsertItem(0, L"dafs");
+    m_ListFile->SetItemText(0, 1, L"dafs");
+    m_ListFile->SetItemText(0, 2, L"dafs");
+    m_ListFile->SetItemText(0, 3, L"dafs");
+    m_ListFile->InsertItem(1, L"dafs");
+    m_ListFile->SetItemText(1, 1, L"dafs");
+    m_ListFile->SetItemText(1, 2, L"dafs");
+    m_ListFile->SetItemText(1, 3, L"dafs");
+    m_ListFile->InsertItem(2, L"dafs");
+    m_ListFile->SetItemText(2, 1, L"dafs");
+    m_ListFile->SetItemText(2, 2, L"dafs");
+    m_ListFile->SetItemText(3, 3, L"dafs");
+
+    m_ListSaveServer->InsertItem(0, L"dafs");
+    m_ListSaveServer->SetItemText(0, 1, L"dafs");
+    m_ListSaveServer->SetItemText(0, 2, L"dafs");
+    m_ListSaveServer->SetItemText(0, 3, L"dafs");
+    m_ListSaveServer->InsertItem(1, L"dafs");
+    m_ListSaveServer->SetItemText(1, 1, L"dafs");
+    m_ListSaveServer->SetItemText(1, 2, L"dafs");
+    m_ListSaveServer->SetItemText(1, 3, L"dafs");
+    m_ListSaveServer->InsertItem(2, L"dafs");
+    m_ListSaveServer->SetItemText(2, 1, L"dafs");
+    m_ListSaveServer->SetItemText(2, 2, L"dafs");
+    m_ListSaveServer->SetItemText(3, 3, L"dafs");
+
+    m_ListShared->InsertItem(0, L"dafs");
+    m_ListShared->SetItemText(0, 1, L"dafs");
+    m_ListShared->SetItemText(0, 2, L"dafs");
+    m_ListShared->SetItemText(0, 3, L"dafs");
+    m_ListShared->InsertItem(1, L"dafs");
+    m_ListShared->SetItemText(1, 1, L"dafs");
+    m_ListShared->SetItemText(1, 2, L"dafs");
+    m_ListShared->SetItemText(1, 3, L"dafs");
+    m_ListShared->InsertItem(2, L"dafs");
+    m_ListShared->SetItemText(2, 1, L"dafs");
+    m_ListShared->SetItemText(2, 2, L"dafs");
+    m_ListShared->SetItemText(3, 3, L"dafs");
+
+    m_ListClient->InsertItem(0, L"dafs");
+    m_ListClient->SetItemText(0, 1, L"dafs");
+    m_ListClient->SetItemText(0, 2, L"dafs");
+    m_ListClient->SetItemText(0, 3, L"dafs");
+    m_ListClient->InsertItem(1, L"dafs");
+    m_ListClient->SetItemText(1, 1, L"dafs");
+    m_ListClient->SetItemText(1, 2, L"dafs");
+    m_ListClient->SetItemText(1, 3, L"dafs");
+    m_ListClient->InsertItem(2, L"dafs");
+    m_ListClient->SetItemText(2, 1, L"dafs");
+    m_ListClient->SetItemText(2, 2, L"dafs");
+    m_ListClient->SetItemText(3, 3, L"dafs");
+
+    m_ListLogs->InsertItem(0, L"dafs");
+    m_ListLogs->SetItemText(0, 1, L"dafs");
+    m_ListLogs->SetItemText(0, 2, L"dafs");
+    m_ListLogs->SetItemText(0, 3, L"dafs");
+    m_ListLogs->InsertItem(1, L"dafs");
+    m_ListLogs->SetItemText(1, 1, L"dafs");
+    m_ListLogs->SetItemText(1, 2, L"dafs");
+    m_ListLogs->SetItemText(1, 3, L"dafs");
+    m_ListLogs->InsertItem(2, L"dafs");
+    m_ListLogs->SetItemText(2, 1, L"dafs");
+    m_ListLogs->SetItemText(2, 2, L"dafs");
+    m_ListLogs->SetItemText(3, 3, L"dafs");
+
 }
