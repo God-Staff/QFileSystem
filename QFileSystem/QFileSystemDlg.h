@@ -35,8 +35,12 @@ protected:
 	DECLARE_MESSAGE_MAP()
 	DECLARE_DHTML_EVENT_MAP()
 
-	CListCtrl*  m_ListControl = nullptr;
-	CListCtrl*  m_ListContro2 = nullptr;
+    CListCtrl*  m_ListFile;
+    CListCtrl*  m_ListSaveServer;
+    CListCtrl*  m_ListShared;
+    CListCtrl*  m_ListClient;
+    CListCtrl*  m_ListLogs;
+
 	void updateList ();
 	void MakeFilesLog (qiuwanli::File2Cilent * file
                        , std::string filename
