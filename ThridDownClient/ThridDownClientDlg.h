@@ -43,4 +43,14 @@ public:
     CListCtrl* m_FileList;
     CListCtrl* m_DownList;
     CListCtrl* m_SharedList;
+    afx_msg void DeleteFile( );
+    afx_msg void On32774( );
+    afx_msg void DownloadFile( );
+    afx_msg void MakeShared( );
+    afx_msg void StartDownload( );
+    afx_msg void PauseDownload( );
+    afx_msg void ReStart( );
+    afx_msg void DeleteSharedUrl( );
+    afx_msg void CopyUrl( );
+    afx_msg void OnBnClickedDownloadurl( );
 };

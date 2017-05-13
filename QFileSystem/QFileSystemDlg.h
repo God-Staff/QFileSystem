@@ -3,10 +3,12 @@
 //
 
 #pragma once
-#include "constdate.hpp"
+//#include "constdate.hpp"
+#include "public.h"
+#include "DataStruct.pb.h"
 
 // CQFileSystemDlg 对话框
-class CQFileSystemDlg : public CDHtmlDialog
+class CQFileSystemDlg : public CDialogEx
 {
 // 构造
 public:
@@ -14,14 +16,12 @@ public:
 
 // 对话框数据
 #ifdef AFX_DESIGN_TIME
-	enum { IDD = IDD_QFILESYSTEM_DIALOG, IDH = IDR_HTML_QFILESYSTEM_DIALOG };
+	enum { IDD = IDD_QFILESYSTEM_DIALOG };
 #endif
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
 
-	HRESULT OnButtonOK(IHTMLElement *pElement);
-	HRESULT OnButtonCancel(IHTMLElement *pElement);
 
 // 实现
 protected:
@@ -33,7 +33,7 @@ protected:
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
-	DECLARE_DHTML_EVENT_MAP()
+	//DECLARE_DHTML_EVENT_MAP()
 
     CListCtrl*  m_ListFile;
     CListCtrl*  m_ListSaveServer;
@@ -42,22 +42,22 @@ protected:
     CListCtrl*  m_ListLogs;
 
 	void updateList ();
-	void MakeFilesLog (qiuwanli::File2Cilent * file
-                       , std::string filename
-                       , std::string sha512
-                       , std::string client
-                       , std::string createtime);
-	void MakeLogs (qiuwanli::Logs * Log
-                   , std::string user_id
-                   , std::string logdate
-                   , std::string loginfo
-                   , std::string logtype);
-	void MakeLogs (qiuwanli::ID2IP * id2ip
-                   , std::string clientid
-                   , std::string id
-                   , std::string Prikey
-                   , std::string KeyMd5
-                   , std::string Others);
+	//void MakeFilesLog (qiuwanli::File2Cilent * file
+ //                      , std::string filename
+ //                      , std::string sha512
+ //                      , std::string client
+ //                      , std::string createtime);
+	//void MakeLogs (qiuwanli::Logs * Log
+ //                  , std::string user_id
+ //                  , std::string logdate
+ //                  , std::string loginfo
+ //                  , std::string logtype);
+	//void MakeLogs (qiuwanli::ID2IP * id2ip
+ //                  , std::string clientid
+ //                  , std::string id
+ //                  , std::string Prikey
+ //                  , std::string KeyMd5
+ //                  , std::string Others);
 
 	//发送发文件
     void sender(boost::asio::io_service &io
@@ -78,18 +78,38 @@ protected:
 		return wstrTo;
 	}
 
-	std::string& WStringToUTF8String (const std::wstring &wstr)
+	/*std::string& WStringToUTF8String (const std::wstring &wstr)
 	{
 		std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
 		std::string u8str = "";
 		u8str = conv.to_bytes (wstr);
 		return std::move (u8str);
-	}
+	}*/
 
 public:
 	afx_msg void OnNMRClickFileList(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnNMRClickClientList(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnNMRClickSharedList(NMHDR *pNMHDR, LRESULT *pResult);
+    afx_msg void OnBnClickedend( );
+    afx_msg void OnBnClickedStart( );
+        
+
+    
+    //数据的初始化
     void InitData( );
+    void LoadFileList( );
+    void LoadSaveServerList( );
+    void LoadSharedList( );
+    void LoadClientList( );
+    void LoadLogsList( );
+
+public:
+    qiuwanli::FileInfoList      m_CFileList;
+    qiuwanli::File2ClientTable  m_CFileToClient;
+    qiuwanli::SharedTable       m_CSharedTable;
+    qiuwanli::UserInfoTable     m_CUserInfo;
+
+    qiuwanli::HeartTable        m_CHeart;
+    qiuwanli::BlockListDownTable     m_CBlockDownList;
 };
 

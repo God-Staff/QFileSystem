@@ -33,9 +33,6 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="date.pb.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="constdate.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -66,9 +63,6 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="date.pb.cc">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">

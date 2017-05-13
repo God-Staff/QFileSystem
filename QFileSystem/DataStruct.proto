@@ -125,25 +125,15 @@ message LogTable
 }
 
 
-//保存文件传输完成的验证信息
-message FileList4Down
+//保存文件所对应的文件块的下载列表
+message BlockDown
+{
+	string BlockNumer=1;
+	string SaveServersIP=2;
+}
+message BlockListDownTable
 {
 	string FileSHA512=1;
 	string FileMD5=2;
-}
-message FileList4DownTable
-{
-	repeated FileList4Down FileListForDown=1;
-}
-
-//保存文件所对应的文件块的下载列表
-message BlockListForDown
-{
-	string FileSHA512=1;
-	string BlockNumer=2;
-	string SaveServersIP=3;
-}
-message BlockListForDownTable
-{
-	repeated BlockListForDown BlockListForDown=1;
+	repeated BlockDown BlockListForDown=3;
 }

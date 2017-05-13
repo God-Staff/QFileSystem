@@ -37,6 +37,16 @@ BEGIN_MESSAGE_MAP(CThridDownClientDlg, CDialogEx)
     ON_NOTIFY(NM_RCLICK, IDC_LIST_SHARED, &CThridDownClientDlg::OnNMRClickListSharedMenu)
     ON_BN_CLICKED(IDOK, &CThridDownClientDlg::OnBnClickedOk)
     ON_BN_CLICKED(IDCANCEL, &CThridDownClientDlg::OnBnClickedCancel)
+    ON_COMMAND(ID_32773, &CThridDownClientDlg::DeleteFile)
+    ON_COMMAND(ID_32774, &CThridDownClientDlg::On32774)
+    ON_COMMAND(ID_32775, &CThridDownClientDlg::DownloadFile)
+    ON_COMMAND(ID_32776, &CThridDownClientDlg::MakeShared)
+    ON_COMMAND(ID_32779, &CThridDownClientDlg::StartDownload)
+    ON_COMMAND(ID_32778, &CThridDownClientDlg::PauseDownload)
+    ON_COMMAND(ID_32780, &CThridDownClientDlg::ReStart)
+    ON_COMMAND(ID_32771, &CThridDownClientDlg::DeleteSharedUrl)
+    ON_COMMAND(ID_32772, &CThridDownClientDlg::CopyUrl)
+    ON_BN_CLICKED(IDC_DownLoadURL, &CThridDownClientDlg::OnBnClickedDownloadurl)
 END_MESSAGE_MAP()
 
 
@@ -226,7 +236,7 @@ void CThridDownClientDlg::OnNMRClickListFordownMenu(NMHDR *pNMHDR, LRESULT *pRes
     std::vector<CString> kSelectedItem; //多个选中项。
     CMenu menu, *pSubMenu; //定义下面要用到的cmenu对象
     menu.LoadMenu(IDR_MENU1); //装载自定义的右键菜单
-    pSubMenu = menu.GetSubMenu(2); //获取第一个弹出菜单，所以第一个菜单必须有子菜单
+    pSubMenu = menu.GetSubMenu(1); //获取第一个弹出菜单，所以第一个菜单必须有子菜单
     CPoint oPoint; //定义一个用于确定光标位置的位置
     GetCursorPos(&oPoint); //获取当前光标的位置，以便使得菜单可以跟随光标
 
@@ -267,7 +277,7 @@ void CThridDownClientDlg::OnNMRClickListSharedMenu(NMHDR *pNMHDR, LRESULT *pResu
     std::vector<CString> kSelectedItem; //多个选中项。
     CMenu menu, *pSubMenu; //定义下面要用到的cmenu对象
     menu.LoadMenu(IDR_MENU1); //装载自定义的右键菜单
-    pSubMenu = menu.GetSubMenu(1); //获取第一个弹出菜单，所以第一个菜单必须有子菜单
+    pSubMenu = menu.GetSubMenu(2); //获取第一个弹出菜单，所以第一个菜单必须有子菜单
     CPoint oPoint; //定义一个用于确定光标位置的位置
     GetCursorPos(&oPoint); //获取当前光标的位置，以便使得菜单可以跟随光标
 
@@ -359,19 +369,19 @@ void CThridDownClientDlg::FillData( )
     m_DownList->SetItemText(3, 3, _T("暂停"));
 
     ////////////////////////////////////////
-    m_SharedList->InsertItem(0, _T("234da434zz39n0v343un4374n2c9342bn364b82402n8340823402n3423-4023n94c29403498028234 v3234bg254j234h3g"));
+    m_SharedList->InsertItem(0, _T("234da434zz39n0v343un4374n2c9342bn364b82402n8340823402n34234023n94c29403498028234u8v3234bg254j234h3g"));
     m_SharedList->SetItemText(0, 1, _T("234"));
     m_SharedList->SetItemText(0, 2, _T("345"));
     m_SharedList->SetItemText(0, 3, _T("56"));
     m_SharedList->SetItemText(0, 4, _T("20160707234507"));
 
-    m_SharedList->InsertItem(1, _T("234da434ttt9n0v343un4374n2c9342bn364b82402n8340823402n3423-4023n94c29403498028234 v3234bg254j234h3g"));
+    m_SharedList->InsertItem(1, _T("234da434ttt9n0v343un4374n2c9342bn364b82402n8340823402n34234023n94c29403498028234v3234bg254j234h3grt"));
     m_SharedList->SetItemText(1, 1, _T("234"));
     m_SharedList->SetItemText(1, 2, _T("345"));
     m_SharedList->SetItemText(1, 3, _T("56"));
     m_SharedList->SetItemText(1, 4, _T("20160517234507"));
 
-    m_SharedList->InsertItem(2, _T("234da434ggg9n0v343un4374n2c9342bn364b82402n8340823402n3423-4023n94c29403498028234 v3234bg254j234h3g"));
+    m_SharedList->InsertItem(2, _T("234da434ggg9n0v343un4374n2c9342bn364b82402n8340823402n34234023n94c294034980282347hv3234bg254j234h3g"));
     m_SharedList->SetItemText(2, 1, _T("234"));
     m_SharedList->SetItemText(2, 2, _T("345"));
     m_SharedList->SetItemText(2, 3, _T("56"));
@@ -382,4 +392,64 @@ void CThridDownClientDlg::FillData( )
     m_SharedList->SetItemText(3, 2, _T("345"));
     m_SharedList->SetItemText(3, 3, _T("56"));
     m_SharedList->SetItemText(3, 4, _T("20170427034507"));
+}
+
+
+void CThridDownClientDlg::DeleteFile( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::On32774( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::DownloadFile( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::MakeShared( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::StartDownload( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::PauseDownload( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::ReStart( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::DeleteSharedUrl( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::CopyUrl( )
+{
+    // TODO: 在此添加命令处理程序代码
+}
+
+
+void CThridDownClientDlg::OnBnClickedDownloadurl( )
+{
+    // TODO: 在此添加控件通知处理程序代码
 }

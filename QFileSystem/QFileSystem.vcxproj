@@ -188,7 +188,6 @@
   <ItemGroup>
     <ClInclude Include="constdate.hpp" />
     <ClInclude Include="DataStruct.pb.h" />
-    <ClInclude Include="date.pb.h" />
     <ClInclude Include="handler_allocator.hpp" />
     <ClInclude Include="optlog.hpp" />
     <ClInclude Include="public.h" />
@@ -202,7 +201,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="DataStruct.pb.cc" />
-    <ClCompile Include="date.pb.cc" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QFileSystem.cpp" />
     <ClCompile Include="QFileSystemDlg.cpp" />

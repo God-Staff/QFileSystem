@@ -47,28 +47,30 @@ END_MESSAGE_MAP()
 
 // CQFileSystemDlg 对话框
 
-BEGIN_DHTML_EVENT_MAP(CQFileSystemDlg)
-	DHTML_EVENT_ONCLICK(_T("ButtonOK"), OnButtonOK)
-	DHTML_EVENT_ONCLICK(_T("ButtonCancel"), OnButtonCancel)
-END_DHTML_EVENT_MAP()
+//BEGIN_DHTML_EVENT_MAP(CQFileSystemDlg)
+//	//DHTML_EVENT_ONCLICK(_T("ButtonOK"), OnButtonOK)
+//	//DHTML_EVENT_ONCLICK(_T("ButtonCancel"), OnButtonCancel)
+//END_DHTML_EVENT_MAP()
 
 
 CQFileSystemDlg::CQFileSystemDlg(CWnd* pParent /*=NULL*/)
-	: CDHtmlDialog(IDD_QFILESYSTEM_DIALOG, IDR_HTML_QFILESYSTEM_DIALOG, pParent)
+	: CDialogEx(IDD_QFILESYSTEM_DIALOG, pParent)
 {
 	m_hIcon = AfxGetApp()->LoadIcon(IDR_MAINFRAME);
 }
 
 void CQFileSystemDlg::DoDataExchange(CDataExchange* pDX)
 {
-	CDHtmlDialog::DoDataExchange(pDX);
+    CDialogEx::DoDataExchange(pDX);
 }
 
-BEGIN_MESSAGE_MAP(CQFileSystemDlg, CDHtmlDialog)
+BEGIN_MESSAGE_MAP(CQFileSystemDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_NOTIFY(NM_RCLICK, IDC_LIST_FILE, &CQFileSystemDlg::OnNMRClickFileList)
     ON_NOTIFY(NM_RCLICK, IDC_LIST_Save_Servers, &CQFileSystemDlg::OnNMRClickClientList)
     ON_NOTIFY(NM_RCLICK, IDC_LIST_Shared, &CQFileSystemDlg::OnNMRClickSharedList)
+    ON_BN_CLICKED(IDC_BUTTON1, &CQFileSystemDlg::OnBnClickedStart)
+    ON_BN_CLICKED(IDC_BUTTON2, &CQFileSystemDlg::OnBnClickedend)
 END_MESSAGE_MAP()
 
 
@@ -76,7 +78,7 @@ END_MESSAGE_MAP()
 
 BOOL CQFileSystemDlg::OnInitDialog()
 {
-	CDHtmlDialog::OnInitDialog();
+    CDialogEx::OnInitDialog();
 
 	// 将“关于...”菜单项添加到系统菜单中。
 
@@ -146,13 +148,13 @@ BOOL CQFileSystemDlg::OnInitDialog()
     m_ListSaveServer->SetExtendedStyle(styles2 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     //给listctrl设置5个标题栏
-    TCHAR rgtsz2[3][10] = {_T("存储端编号"),_T("IP"),_T("剩余空间")};
+    TCHAR rgtsz2[4][10] = {_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")};
 
     //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
     LV_COLUMN lvcolumn2;
     CRect rect2;
     m_ListSaveServer->GetWindowRect(&rect2);
-    for (int i = 0; i < 3; i++)
+    for (int i = 0; i < 4; i++)
     {
         lvcolumn2.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
             | LVCF_WIDTH | LVCF_ORDER;
@@ -160,7 +162,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
         lvcolumn2.pszText = rgtsz2[i];
         lvcolumn2.iSubItem = i;
         lvcolumn2.iOrder = i;
-        lvcolumn2.cx = rect2.Width( ) / 3;
+        lvcolumn2.cx = rect2.Width( ) / 4;
         m_ListSaveServer->InsertColumn(i, &lvcolumn2);
     }
 
@@ -270,7 +272,7 @@ void CQFileSystemDlg::OnSysCommand(UINT nID, LPARAM lParam)
 	}
 	else
 	{
-		CDHtmlDialog::OnSysCommand(nID, lParam);
+        CDialogEx::OnSysCommand(nID, lParam);
 	}
 }
 
@@ -299,7 +301,7 @@ void CQFileSystemDlg::OnPaint()
 	}
 	else
 	{
-		CDHtmlDialog::OnPaint();
+        CDialogEx::OnPaint();
 	}
 }
 
@@ -310,107 +312,95 @@ HCURSOR CQFileSystemDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
-HRESULT CQFileSystemDlg::OnButtonOK(IHTMLElement* /*pElement*/)
-{
-	OnOK();
-	return S_OK;
-}
-
-HRESULT CQFileSystemDlg::OnButtonCancel(IHTMLElement* /*pElement*/)
-{
-	OnCancel();
-	return S_OK;
-}
-
 
 void CQFileSystemDlg::updateList ()
 {
-	qiuwanli::ID2IPTable ips;
-	qiuwanli::File2ClientServers client;
+	//qiuwanli::ID2IPTable ips;
+	//qiuwanli::File2ClientServers client;
 
-	std::fstream ipInfo ("ID2IP", std::ios::in | std::ios::binary);
-	std::fstream clientInfo ("FileSharedLog", std::ios::in | std::ios::binary);
+	//std::fstream ipInfo ("ID2IP", std::ios::in | std::ios::binary);
+	//std::fstream clientInfo ("FileSharedLog", std::ios::in | std::ios::binary);
 
-	if (!ipInfo)
-		MessageBox (L"配置文件打开失败！");
+	//if (!ipInfo)
+	//	MessageBox (L"配置文件打开失败！");
 
-	if (!ips.ParseFromIstream (&ipInfo))
-	{	//打开失败
-		MessageBox (L"配置文件加载失败！");
-		ipInfo.close ();
-	}
-	else
-	{	//解析配置文件
-		for (int i = 0; i < ips.ip_size(); ++i)
-		{
-			const qiuwanli::ID2IP& myfriend = ips.ip(i);
+	//if (!ips.ParseFromIstream (&ipInfo))
+	//{	//打开失败
+	//	MessageBox (L"配置文件加载失败！");
+	//	ipInfo.close ();
+	//}
+	//else
+	//{	//解析配置文件
+	//	for (int i = 0; i < ips.ip_size(); ++i)
+	//	{
+	//		const qiuwanli::ID2IP& myfriend = ips.ip(i);
 
-			m_ListSaveServer->InsertItem (i, StringToWstring (myfriend.cilentid()).c_str ());
-            m_ListSaveServer->SetItemText (i, 1, StringToWstring (myfriend.ip ()).c_str ());
-            m_ListSaveServer->SetItemText (i, 2, StringToWstring (myfriend.keymd5 ()).c_str ());
-		}
-	}
-	ipInfo.close ();
+	//		m_ListSaveServer->InsertItem (i, StringToWstring (myfriend.cilentid()).c_str ());
+ //           m_ListSaveServer->SetItemText (i, 1, StringToWstring (myfriend.ip ()).c_str ());
+ //           m_ListSaveServer->SetItemText (i, 2, StringToWstring (myfriend.keymd5 ()).c_str ());
+	//	}
+	//}
+	//ipInfo.close ();
 
-	if (!clientInfo)
-		MessageBox (L"sharedlist 配置文件打开失败！");
+	//if (!clientInfo)
+	//	MessageBox (L"sharedlist 配置文件打开失败！");
 
-	if (!client.ParseFromIstream (&clientInfo))
-	{	//打开失败
-		MessageBox (L" sharedlist 配置文件加载失败！");
-		clientInfo.close ();
-	}
-	else
-	{	//解析配置文件
-		for (int i = 0; i < client.client_size(); ++i)
-		{
-			const qiuwanli::File2Cilent& shared = client.client (i);
+	//if (!client.ParseFromIstream (&clientInfo))
+	//{	//打开失败
+	//	MessageBox (L" sharedlist 配置文件加载失败！");
+	//	clientInfo.close ();
+	//}
+	//else
+	//{	//解析配置文件
+	//	for (int i = 0; i < client.client_size(); ++i)
+	//	{
+	//		const qiuwanli::File2Cilent& shared = client.client (i);
 
-			m_ListFile->InsertItem (i, StringToWstring (shared.filename ()).c_str ());
-            m_ListFile->SetItemText (i, 1, StringToWstring (shared.sha512 ()).c_str ());
-            m_ListFile->SetItemText (i, 2, StringToWstring (shared.cilentid ()).c_str ());
-            m_ListFile->SetItemText (i, 3, StringToWstring (shared.createdate ()).c_str ());
-		}
-	}
+	//		m_ListFile->InsertItem (i, StringToWstring (shared.filename ()).c_str ());
+ //           m_ListFile->SetItemText (i, 1, StringToWstring (shared.sha512 ()).c_str ());
+ //           m_ListFile->SetItemText (i, 2, StringToWstring (shared.cilentid ()).c_str ());
+ //           m_ListFile->SetItemText (i, 3, StringToWstring (shared.createdate ()).c_str ());
+	//	}
+	//}
 
-	clientInfo.close ();
+	//clientInfo.close ();
 }
 
-void CQFileSystemDlg::MakeFilesLog (qiuwanli::File2Cilent * file
-                                    , std::string filename
-                                    , std::string sha512
-                                    , std::string client
-                                    , std::string createtime)
-{
-	file->set_filename (filename);
-	file->set_sha512 (sha512);
-	file->set_cilentid (client);
-	file->set_createdate (createtime);
-}
-
-void CQFileSystemDlg::MakeLogs (qiuwanli::Logs * Log
-                                , std::string user_id
-                                , std::string logdate
-                                , std::string loginfo
-                                , std::string logtype) 
-{
-	Log->set_user_id (user_id);
-	Log->set_log_date (logdate);
-	Log->set_log_info (loginfo);
-	Log->set_log_type (logtype);
-}
-void CQFileSystemDlg::MakeLogs (qiuwanli::ID2IP * id2ip
-                                , std::string clientid
-                                , std::string ip
-                                , std::string Prikey
-                                , std::string KeyMd5
-                                , std::string Others)
-{
-	id2ip->set_cilentid (clientid);
-	id2ip->set_ip (ip);
-	id2ip->set_prikey (Prikey);
-	id2ip->set_keymd5 (KeyMd5);
-}
+//void CQFileSystemDlg::MakeFilesLog (qiuwanli::File2Cilent * file
+//                                    , std::string filename
+//                                    , std::string sha512
+//                                    , std::string client
+//                                    , std::string createtime)
+//{
+//	file->set_filename (filename);
+//	file->set_sha512 (sha512);
+//	file->set_cilentid (client);
+//	file->set_createdate (createtime);
+//}
+//
+//void CQFileSystemDlg::MakeLogs (qiuwanli::Logs * Log
+//                                , std::string user_id
+//                                , std::string logdate
+//                                , std::string loginfo
+//                                , std::string logtype) 
+//{
+//	Log->set_user_id (user_id);
+//	Log->set_log_date (logdate);
+//	Log->set_log_info (loginfo);
+//	Log->set_log_type (logtype);
+//}
+//void CQFileSystemDlg::MakeLogs (qiuwanli::ID2IP * id2ip
+//                                , std::string clientid
+//                                , std::string ip
+//                                , std::string Prikey
+//                                , std::string KeyMd5
+//                                , std::string Others)
+//{
+//	id2ip->set_cilentid (clientid);
+//	id2ip->set_ip (ip);
+//	id2ip->set_prikey (Prikey);
+//	id2ip->set_keymd5 (KeyMd5);
+//}
 
 void CQFileSystemDlg::sender (boost::asio::io_service &io
                               , const char*	ip_address
@@ -551,69 +541,112 @@ void CQFileSystemDlg::OnNMRClickSharedList(NMHDR *pNMHDR, LRESULT *pResult)
 
 void CQFileSystemDlg::InitData( )
 {
-    m_ListFile->InsertItem(0, L"dafs");
-    m_ListFile->SetItemText(0, 1, L"dafs");
-    m_ListFile->SetItemText(0, 2, L"dafs");
-    m_ListFile->SetItemText(0, 3, L"dafs");
-    m_ListFile->InsertItem(1, L"dafs");
-    m_ListFile->SetItemText(1, 1, L"dafs");
-    m_ListFile->SetItemText(1, 2, L"dafs");
-    m_ListFile->SetItemText(1, 3, L"dafs");
-    m_ListFile->InsertItem(2, L"dafs");
-    m_ListFile->SetItemText(2, 1, L"dafs");
-    m_ListFile->SetItemText(2, 2, L"dafs");
-    m_ListFile->SetItemText(3, 3, L"dafs");
+    m_ListFile->InsertItem(0, L"vc++开发大全");
+    m_ListFile->SetItemText(0, 1, L"df89cia9da7dasd80ad87as0da0sd");
+    m_ListFile->SetItemText(0, 2, L"8764253");
+    m_ListFile->SetItemText(0, 3, L"20160304133307");
+    m_ListFile->InsertItem(1, L"Boost开发大全");
+    m_ListFile->SetItemText(1, 1, L"df89cia9da7dasd80ad87as0da0sd");
+    m_ListFile->SetItemText(1, 2, L"432534");
+    m_ListFile->SetItemText(1, 3, L"20160304134409");
+    m_ListFile->InsertItem(2, L"CPlusPlus");
+    m_ListFile->SetItemText(2, 1, L"df89cia9da7dasd80ad87as0da0sd");
+    m_ListFile->SetItemText(2, 2, L"743563");
+    m_ListFile->SetItemText(3, 3, L"20160304132055");
 
-    m_ListSaveServer->InsertItem(0, L"dafs");
-    m_ListSaveServer->SetItemText(0, 1, L"dafs");
-    m_ListSaveServer->SetItemText(0, 2, L"dafs");
-    m_ListSaveServer->SetItemText(0, 3, L"dafs");
-    m_ListSaveServer->InsertItem(1, L"dafs");
-    m_ListSaveServer->SetItemText(1, 1, L"dafs");
-    m_ListSaveServer->SetItemText(1, 2, L"dafs");
-    m_ListSaveServer->SetItemText(1, 3, L"dafs");
-    m_ListSaveServer->InsertItem(2, L"dafs");
-    m_ListSaveServer->SetItemText(2, 1, L"dafs");
-    m_ListSaveServer->SetItemText(2, 2, L"dafs");
-    m_ListSaveServer->SetItemText(3, 3, L"dafs");
+    m_ListSaveServer->InsertItem(0, L"10004");
+    m_ListSaveServer->SetItemText(0, 1, L"124.54.77.33");
+    m_ListSaveServer->SetItemText(0, 2, L"23452623");
+    m_ListSaveServer->SetItemText(0, 3, L"923452623");
+    m_ListSaveServer->InsertItem(1, L"10070");
+    m_ListSaveServer->SetItemText(1, 1, L"124.54.74.33");
+    m_ListSaveServer->SetItemText(1, 2, L"86452623");
+    m_ListSaveServer->SetItemText(1, 3, L"234452623");
+    m_ListSaveServer->InsertItem(2, L"10008");
+    m_ListSaveServer->SetItemText(2, 1, L"124.54.77.123");
+    m_ListSaveServer->SetItemText(2, 2, L"23452623");
+    m_ListSaveServer->SetItemText(3, 3, L"777452623");
 
-    m_ListShared->InsertItem(0, L"dafs");
-    m_ListShared->SetItemText(0, 1, L"dafs");
-    m_ListShared->SetItemText(0, 2, L"dafs");
-    m_ListShared->SetItemText(0, 3, L"dafs");
-    m_ListShared->InsertItem(1, L"dafs");
-    m_ListShared->SetItemText(1, 1, L"dafs");
-    m_ListShared->SetItemText(1, 2, L"dafs");
-    m_ListShared->SetItemText(1, 3, L"dafs");
-    m_ListShared->InsertItem(2, L"dafs");
-    m_ListShared->SetItemText(2, 1, L"dafs");
-    m_ListShared->SetItemText(2, 2, L"dafs");
-    m_ListShared->SetItemText(3, 3, L"dafs");
+    m_ListShared->InsertItem(0, L"etynnh89adasdaa0nendjfaij09434f343");
+    m_ListShared->SetItemText(0, 1, L"89adasdaa0nendjfaij09434f343");
+    m_ListShared->SetItemText(0, 2, L"5efwg4");
+    m_ListShared->SetItemText(0, 3, L"2054534");
+    m_ListShared->InsertItem(1, L"bsgrts89adasdaa0nendjfaij09434f343");
+    m_ListShared->SetItemText(1, 1, L"89adasdaa0nendjfaij09434f343");
+    m_ListShared->SetItemText(1, 2, L"234534");
+    m_ListShared->SetItemText(1, 3, L"2364565");
+    m_ListShared->InsertItem(2, L"fgfawe89adasdaa0nendjfaij09434f343");
+    m_ListShared->SetItemText(2, 1, L"89adasdaa0nendjfaij09434f343");
+    m_ListShared->SetItemText(2, 2, L"5hf2fd");
+    m_ListShared->SetItemText(2, 3, L"5634543");
 
-    m_ListClient->InsertItem(0, L"dafs");
-    m_ListClient->SetItemText(0, 1, L"dafs");
-    m_ListClient->SetItemText(0, 2, L"dafs");
-    m_ListClient->SetItemText(0, 3, L"dafs");
-    m_ListClient->InsertItem(1, L"dafs");
-    m_ListClient->SetItemText(1, 1, L"dafs");
-    m_ListClient->SetItemText(1, 2, L"dafs");
-    m_ListClient->SetItemText(1, 3, L"dafs");
-    m_ListClient->InsertItem(2, L"dafs");
-    m_ListClient->SetItemText(2, 1, L"dafs");
-    m_ListClient->SetItemText(2, 2, L"dafs");
-    m_ListClient->SetItemText(3, 3, L"dafs");
+    m_ListClient->InsertItem(0, L"5634543");
+    m_ListClient->SetItemText(0, 1, L"174.74.77.33");
+    m_ListClient->InsertItem(1, L"2364565");
+    m_ListClient->SetItemText(1, 1, L"129.54.74.33");
+    m_ListClient->InsertItem(2, L"2054534");
+    m_ListClient->SetItemText(2, 1, L"177.58.97.33");
 
-    m_ListLogs->InsertItem(0, L"dafs");
-    m_ListLogs->SetItemText(0, 1, L"dafs");
-    m_ListLogs->SetItemText(0, 2, L"dafs");
+    m_ListLogs->InsertItem(0, L"2017-05-14 05:30:22");
+    m_ListLogs->SetItemText(0, 1, L"上传");
+    m_ListLogs->SetItemText(0, 2, L"2364565");
     m_ListLogs->SetItemText(0, 3, L"dafs");
-    m_ListLogs->InsertItem(1, L"dafs");
-    m_ListLogs->SetItemText(1, 1, L"dafs");
-    m_ListLogs->SetItemText(1, 2, L"dafs");
+    m_ListLogs->InsertItem(1, L"2017-05-14 05:50:33");
+    m_ListLogs->SetItemText(1, 1, L"分享");
+    m_ListLogs->SetItemText(1, 2, L"2364565");
     m_ListLogs->SetItemText(1, 3, L"dafs");
-    m_ListLogs->InsertItem(2, L"dafs");
-    m_ListLogs->SetItemText(2, 1, L"dafs");
-    m_ListLogs->SetItemText(2, 2, L"dafs");
+    m_ListLogs->InsertItem(2, L"2017-05-15 09:07:42");
+    m_ListLogs->SetItemText(2, 1, L"下载");
+    m_ListLogs->SetItemText(2, 2, L"5634543");
+    m_ListLogs->SetItemText(3, 3, L"dafs");
+    m_ListLogs->InsertItem(2, L"2017-05-15 09:07:42");
+    m_ListLogs->SetItemText(2, 1, L"删除");
+    m_ListLogs->SetItemText(2, 2, L"2364565");
     m_ListLogs->SetItemText(3, 3, L"dafs");
 
+    //
+    LoadFileList( );
+    LoadSaveServerList( );
+    LoadSharedList( );
+    LoadClientList( );
+    LoadLogsList( );
+
+}
+
+void CQFileSystemDlg::LoadFileList( )
+{
+
+}
+
+void CQFileSystemDlg::LoadSharedList( )
+{
+
+}
+
+void CQFileSystemDlg::LoadSaveServerList( )
+{
+
+}
+
+void CQFileSystemDlg::LoadClientList( )
+{
+
+}
+
+void CQFileSystemDlg::LoadLogsList( )
+{
+
+}
+
+
+
+void CQFileSystemDlg::OnBnClickedStart( )
+{
+    // TODO: 在此添加控件通知处理程序代码
+}
+
+
+void CQFileSystemDlg::OnBnClickedend( )
+{
+    // TODO: 在此添加控件通知处理程序代码
 }
