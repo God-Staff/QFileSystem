@@ -3,12 +3,16 @@
 #include "Servers.hpp"
 #include "SendFile.hpp"
 
+#include "PublicStruct.pb.h"
+
 #include <boost/asio.hpp>
 #include <boost/thread.hpp>
 #include <windows.h>
 
 ComData g_ComData;
+#include "Interface.h"
 
+CInterface PublicData;
 //对数据进行初始化
 void initData( )
 {
@@ -47,7 +51,6 @@ void initData( )
     OpFileBlockInfo.close( );
 }
 
-
 //数据的更新，以及定时器
 void doItNextTime( )
 {
@@ -58,6 +61,14 @@ void doItNextTime( )
     g_ComData.Conf.set_totalsize((Space.capacity + Space.available) / Size_Mb);
     g_ComData.Conf.set_remainsize(Space.capacity / Size_Mb);
     
+    qiuwanli::Heart heart;
+    heart.set_id("");
+    heart.set_remainsize(Space.capacity / Size_Mb);
+    heart.set_totlesize((Space.capacity + Space.available) / Size_Mb);
+    heart.set_prikeymd5(g_ComData.Conf.prikeymd5( ));
+
+    std::string name = "heart" + heart.id( ) + ".tmp";
+    PublicData.SaveToFile(&heart, name.c_str( ));
     //再将数据同步到目录服务器，心跳连接
     try
     {
@@ -67,8 +78,8 @@ void doItNextTime( )
         senddata.sender(io
                         , g_ComData.Conf.serversip( ).c_str()
                         , std::atoi(g_ComData.Conf.serversport( ).c_str())
-                        , "config"
-                        , 'a');
+                        , name.c_str( )
+                        , 'h');
     }
     catch (std::exception e)
     {
@@ -86,14 +97,17 @@ void sendBlockInfoToServers( )
     //将最近15秒内接收到的块信息，发送给服务端
     if (g_ComData.BlockTableDiff.block_size( ))
     {
+        //qiuwanli::BlockInfo Info;
+        std::string name = "BlockTableDiff" + g_ComData.Conf.id( );
+        PublicData.SaveToFile(&g_ComData.BlockTableDiff, name.c_str( ));
         try
         {
             boost::asio::io_service io;
             SendFile senddata;
             senddata.sender(io, g_ComData.Conf.serversip( ).c_str( )
                             , std::atoi(g_ComData.Conf.serversport( ).c_str( ))
-                            , "BlockTableDiff"
-                            , 'a');
+                            , name.c_str( )
+                            , 'u');
         } catch (std::exception e)
         {
             g_ComData.opplog.log("Heart Fail!\t");
@@ -153,7 +167,7 @@ void DelayWirte( )
         return;
     }
 
-    g_ComData.BlockTable.MergeFrom(g_ComData.BlockTableDiff);
+    g_ComData.BlockTable.MergeFrom(g_ComData.BlockTablePreDiff);
 
     if (!g_ComData.BlockTable.SerializePartialToOstream(&g_ComData.OpFileBlockInfo))
     {	//打开失败
@@ -172,15 +186,17 @@ int main (int argc, char* argv[])
     {
         //先初始化数据
         initData( );
-
+        std::cout << "1";
         //初始化服务端连接信息
         //再执行循环心跳程序
         boost::thread HeartThread(doItNextTime);
         HeartThread.detach( );
+        std::cout << "1";
 
         //发送数据
         boost::thread BlockInfoThread(sendBlockInfoToServers);
         BlockInfoThread.join( );
+        std::cout << "1";
 
         //创建进程去，管理序列化文件的更新
         //WriteToFile FileManage;
@@ -192,6 +208,7 @@ int main (int argc, char* argv[])
             DelayWirte( );
         });
         FileManage.join( );
+        std::cout << "1";
 
 
 		if (argc != 5)
@@ -230,7 +247,6 @@ int main (int argc, char* argv[])
 
 			threads.pop_front ();
 		}
-
 	}
 	catch (std::exception& e)
 	{

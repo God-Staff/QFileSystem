@@ -1,0 +1,216 @@
+syntax = "proto3";
+package qiuwanli;
+////////////////////////////////////////////////////
+//文件存储端
+//配置信息
+message ConfigFile
+{
+	string ID=1;				//存储端ID
+	string IP=2;				//存储端IP
+	string PriKey=3;			//存储端私钥
+	string PriKeyMD5=4;			//存储端私钥的MD5
+	uint64 TotalSize=5;			//总空间大小
+	uint64 RemainSize=6;		//剩余空间大小
+	string ServersIP=7;			//目录服务器ID
+	string ServersPort=8;		//目录服务器端口号
+}
+//块列表
+message BlockInfo
+{
+	string FileSHA512=1;		//文件名包含后缀
+	string BlockMD5=2;			//
+	string SaveFileName=3; 		//保存在哪个文件中
+	uint64 BlockNumer=4;		//
+	uint64 CurSize=5;			//实际大小这表示为整块64K
+	uint64 FileBlockOffset=6;	//文件存储位置的相对偏移量
+}
+message BlockInfoTable
+{
+	repeated BlockInfo Block=1;
+}
+
+////////////////////////////////////////////////////
+//目录服务器
+//服务端
+message File2Cilent
+{
+	string FileName=1;		//文件名
+	string FileSHA512=2;	//唯一标识SHA512
+	string CilentID=3;		//客户端ID
+	string CilentPort=4;	//端口号
+}
+message File2ClientTable
+{
+	repeated File2Cilent FileToClient=1;
+}
+//文件存储端的信息
+message ClientConfigFile
+{
+	string CilentID=1;		//
+	string SaveIP=2;		//客户端对应IP
+	string PriKey=3;		//认证信息
+	string KeyMD5=4;		//用于验证
+	uint64 TotalSize=5;		//
+	uint64 RemainSize=6;	//
+}
+message ClientConfigFileTable
+{
+	repeated ClientConfigFile ClientInfo=1;
+}
+//服务端文件信息保存列表
+message FileInfoList
+{
+	string FileSHA512=1;
+	string FileMD5=2;
+	string FileName=3;
+	string FileCreateDate=4;
+	string FileChangeDate=5;
+	uint64 FileAllBlock=6;
+	uint64 FileTotalSize=7;
+	string Tag=8;
+}
+message FileInfoListTable
+{
+	repeated FileInfoList FileList=1;
+}
+//用于保存用户信息
+message UserInfo
+{
+	string UserID=1;
+	string UserPS=2;
+	repeated string FileSHA512=3;
+}
+message UserInfoTable
+{
+	repeated UserInfo User=1;
+}
+////////////////////////////////////////////////////
+//客户端：文件分享列表，下载信息，断点续传信息块，本地文件列表
+//Self文件
+message FileList
+{
+	string FileName=1;
+	uint64 FileSize=2;
+	string FileSHA512=3;
+}
+message FileListTable
+{
+	repeated FileList File=1;
+}
+//正在下载的文件
+message FileDownLog
+{
+	string FileName=1;
+	uint64 FileSize=2;
+	string FileDownTime=3;
+	string Downingstatus=4;
+	string FileSHA512=5;
+	string FileMD5=6;
+}
+message FileDownLogTable
+{
+	repeated FileDownLog DownLog=1;
+}
+//保存文件所对应的文件块的下载列表
+
+//正在下载的文件信息
+message FileDowning
+{
+	string FileSHA512 = 1;
+	string FileMD5 =2;
+	string FilePauseTime=3;
+	uint64 FileDownloadBlockCount=4;
+	uint64 FileTotalBlockCount=5;
+	uint64 FileSize=6;
+	string BitMap=7;
+}
+message FileDowningTable
+{
+	repeated FileDowning FileContinueTransmit=1;
+}
+////////////////////////////////////////////////////
+//传输2--3：文件下载、上传、分享、删除
+//传输1--3：上传、下载、删除
+////传输1--2
+////用于心跳连接
+message Heart
+{
+	string ID=1;			//ID编号
+	uint64 RemainSize=2;	//剩余空间大小
+	uint64 TotleSize=3;		//第一次是发送总大小，之后默认为空
+	string PrikeyMd5=4;		//客户端私钥的MD5用于验证
+}
+//用于删除文件,或分享文件
+message DoSomething
+{
+	string Key=1;
+	string FileSHA512=2;
+}
+message DoSomethingTable
+{
+	repeated DoSomething DoSome=1;
+}
+////////////////////////////////////////////////////
+//保存文件所对应的文件块的下载列表
+message BlockCheck
+{
+	uint32 BlockItem=1;
+	string BlockMD5=2;
+}
+message BlockListForDownCheck
+{
+	string FileSHA512=1;
+	string SaveServersIP=2;
+	string FileMD5=3;
+	repeated BlockCheck Blocks=4;
+}
+message BlockListForDownCheckTable
+{
+	repeated BlockListForDownCheck BlockListForDown=1;
+}
+////////////////////////////////////////////////////
+//分享列表
+message SharedUrl
+{
+	string Sha512=1;
+	string VerificationCode=2;
+	string SharedTime=3;
+	uint64 FileSize=4;
+	string UserStutas=5;
+	string UserID=6;
+}
+message SharedUrlTable
+{
+	repeated SharedUrl SharedInfo=1;
+}
+//对应存储列表
+message BlockList4Down
+{
+	string FileSHA512=1;
+	uint64 BlockNumer=2;
+	string BlockMD5=3;
+	string SaveServersIP=4;
+}
+message BlockList4DownTable
+{
+	repeated BlockList4Down BlockListForDown=1;
+}
+////////////////////////////////////////////////////
+//用于记录用户操作的，可进行操作回退，系统日志
+message Logs 
+{
+	string user_id=1;
+	uint64 log_date=2;
+	string log_info=3;
+	bytes  log_type=4;
+	string user_client_UUID=5;	
+}
+//用于记录个人日志，每月保存为一个文件
+message LogsTable
+{
+	string logdate=1;
+	repeated Logs log=2;
+}
+
+//protoc -I=./ --cpp_out=./ ./PublicStruct.proto
+//,

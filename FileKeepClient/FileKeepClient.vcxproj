@@ -77,11 +77,15 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -113,25 +117,28 @@
   <ItemGroup>
     <ClInclude Include="asnyListion.hpp" />
     <ClInclude Include="ComData.hpp" />
-    <ClInclude Include="FileDataStruct.pb.h" />
     <ClInclude Include="FileManage.hpp" />
     <ClInclude Include="handler_allocator.hpp" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="OptLog.hpp" />
     <ClInclude Include="public.h" />
+    <ClInclude Include="PublicStruct.pb.h" />
     <ClInclude Include="SendFile.hpp" />
     <ClInclude Include="SerializationToStream.hpp" />
     <ClInclude Include="Servers.hpp" />
     <ClInclude Include="Session.hpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="FileDataStruct.pb.cc" />
     <ClCompile Include="FileManage.cpp" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PublicStruct.pb.cc" />
     <ClCompile Include="SendFile.cpp" />
     <ClCompile Include="SerializationToStream.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="PublicStruct.proto" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

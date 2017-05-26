@@ -1,7 +1,9 @@
 #ifndef SERIALIZATION_TO_STREAM_HPP
 #define SERIALIZATION_TO_STREAM_HPP
 
-#include "FileDataStruct.pb.h"
+//#include "FileDataStruct.pb.h"
+
+#include "PublicStruct.pb.h"
 
 namespace qiuwanli
 {
@@ -60,7 +62,7 @@ public:
      * @param Block     [description]
      * @param BlockItem [description]
      */
-    void MakeBlock(qiuwanli::Block* Block, const unsigned long BlockItem);
+    //void MakeBlock(qiuwanli::Block* Block, const unsigned long BlockItem);
     /**
      * [MakeBlockListForDown description]
      * @param DownList      [description]
@@ -69,11 +71,11 @@ public:
      * @param FileMd5       [description]
      * @param Block         [description]
      */
-    void MakeBlockListForDown(qiuwanli::BlockListForDown* DownList
-                              , const std::string& FileSHA512
-                              , const std::string& SaveServersIP
-                              , const std::string& FileMd5
-                              , const std::vector<unsigned long>& BlockList);
+    //void MakeBlockListForDown(qiuwanli::BlockListForDown* DownList
+    //                          , const std::string& FileSHA512
+    //                          , const std::string& SaveServersIP
+    //                          , const std::string& FileMd5
+    //                          , const std::vector<unsigned long>& BlockList);
     /**
      * [MakeBlockCheck description]
      * @param BlockCheck [description]

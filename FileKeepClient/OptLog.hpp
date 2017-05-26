@@ -7,7 +7,7 @@
 #include <boost/filesystem.hpp>
 #include <string>
 
-#include "FileDataStruct.pb.h"
+//#include "FileDataStruct.pb.h"
 
 class OptLog
 {

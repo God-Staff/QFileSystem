@@ -6,7 +6,8 @@
 #include <boost/asio.hpp>
 #include <boost/filesystem.hpp>
 
-#include "FileDataStruct.pb.h"
+//#include "FileDataStruct.pb.h"
+#include "PublicStruct.pb.h"
 #include "OptLog.hpp"
 
 

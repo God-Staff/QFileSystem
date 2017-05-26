@@ -51,27 +51,27 @@ void SerialToStream::MakeBlockInfoSend(qiuwanli::BlockInfo* Blocks
     Blocks->set_blocknumer(BlockNum);
     Blocks->set_cursize(CurSize);
 }
-
-void SerialToStream::MakeBlock(qiuwanli::Block* Block, const unsigned long BlockItem)
-{ 
-    Block->set_blockitem(BlockItem);
-}
-
-void SerialToStream::MakeBlockListForDown(qiuwanli::BlockListForDown* DownList
-                                          , const std::string& FileSHA512
-                                          , const std::string& SaveServersIP
-                                          , const std::string& FileMd5
-                                          , const std::vector<unsigned long>& BlockList)
-{
-    DownList->set_filesha512(FileSHA512);
-    DownList->set_saveserversip(SaveServersIP);
-    DownList->set_filemd5(FileMd5);
-    for (auto x : BlockList)
-    {
-        qiuwanli::Block* Item = DownList->add_blocks( );
-        MakeBlock(Item, x);
-    }
-}
+//
+//void SerialToStream::MakeBlock(qiuwanli::Block* Block, const unsigned long BlockItem)
+//{ 
+//    Block->set_blockitem(BlockItem);
+//}
+//
+//void SerialToStream::MakeBlockListForDown(qiuwanli::BlockListForDown* DownList
+//                                          , const std::string& FileSHA512
+//                                          , const std::string& SaveServersIP
+//                                          , const std::string& FileMd5
+//                                          , const std::vector<unsigned long>& BlockList)
+//{
+//    DownList->set_filesha512(FileSHA512);
+//    DownList->set_saveserversip(SaveServersIP);
+//    DownList->set_filemd5(FileMd5);
+//    for (auto x : BlockList)
+//    {
+//        qiuwanli::Block* Item = DownList->add_blocks( );
+//        MakeBlock(Item, x);
+//    }
+//}
 
 void SerialToStream::MakeBlockCheck(qiuwanli::BlockCheck* BlockCheck
                                     , const unsigned long BlockItem

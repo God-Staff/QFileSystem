@@ -17,6 +17,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Project1", "Project1\Projec
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ThridDownClient", "ThridDownClient\ThridDownClient.vcxproj", "{368E3490-A555-4DF9-9742-188DC841F64C}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WriteToFile", "WriteToFile\WriteToFile.vcxproj", "{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -81,6 +83,14 @@ Global
 		{368E3490-A555-4DF9-9742-188DC841F64C}.Release|x64.Build.0 = Release|x64
 		{368E3490-A555-4DF9-9742-188DC841F64C}.Release|x86.ActiveCfg = Release|Win32
 		{368E3490-A555-4DF9-9742-188DC841F64C}.Release|x86.Build.0 = Release|Win32
+		{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}.Debug|x64.ActiveCfg = Debug|x64
+		{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}.Debug|x64.Build.0 = Debug|x64
+		{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}.Debug|x86.ActiveCfg = Debug|Win32
+		{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}.Debug|x86.Build.0 = Debug|Win32
+		{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}.Release|x64.ActiveCfg = Release|x64
+		{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}.Release|x64.Build.0 = Release|x64
+		{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}.Release|x86.ActiveCfg = Release|Win32
+		{D3AAD1D7-BFCC-4D4B-BF8A-BF14D3DEB329}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

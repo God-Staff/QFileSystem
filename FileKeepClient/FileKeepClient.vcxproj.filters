@@ -18,9 +18,6 @@
     <ClCompile Include="main.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="FileDataStruct.pb.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="FileManage.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
@@ -28,6 +25,12 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="SendFile.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="PublicStruct.pb.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -42,9 +45,6 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Session.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="FileDataStruct.pb.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="public.h">
@@ -65,8 +65,15 @@
     <ClInclude Include="SendFile.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="PublicStruct.pb.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
+    <None Include="PublicStruct.proto" />
   </ItemGroup>
 </Project>
