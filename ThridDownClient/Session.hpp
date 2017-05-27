@@ -18,8 +18,7 @@
 #include <boost/filesystem.hpp>
 
 #include "handler_allocator.hpp"
-#include "FileManage.hpp"
-#include "SerializationToStream.hpp"
+#include "public.h"
 
 class Session : public boost::enable_shared_from_this<Session>
 {
@@ -40,11 +39,55 @@ public:
         return socket_; 
     }
 
+    void DoSendFile( )
+    {
+        boost::filesystem::fstream InFile(CurKeepFileName, std::ios::in | std::ios::binary);
+        boost::filesystem::fstream InFile2(CurKeepFileName, std::ios::in | std::ios::binary);
+
+
+        qiuwanli::ClientConfigFileTable ServerTable;
+
+        if (ServerTable.ParseFromIstream(&InFile))
+            ;
+
+        int Count_thread = ServerTable.clientinfo_size();
+        int SendBlocks = 0;
+        std::list<boost::thread*> threads;
+
+        for (int index = 0; index < ServerTable.clientinfo_size( ); ++index)
+        {
+
+            SendFile sender;
+            boost::asio::io_service io_ser;
+            //std::string FileName= ServerTable;
+            // boost::thread* new_thread = new boost::thread(sender.sender, io_ser, ServerTable.clientinfo(index).saveip(), 8289, FileName.c_str( ), 'd');
+            //threads.push_back(new_thread);
+        }
+
+           
+
+
+
+        while (ServerTable.clientinfo_size( )>SendBlocks)
+        {
+        }
+
+
+
+
+    }
+
 	~Session ()
 	{
         if (fp_)
         {
             fclose(fp_);
+        }
+
+        //传输文件
+        if (DoType == 6)
+        {
+            DoSendFile();
         }
 
         WriteBlock_ToFile( );
@@ -59,9 +102,6 @@ public:
         }
 
         double speed = bytes_writen * (CLOCKS_PER_SEC / 1024.0 / 1024.0) / clock_;
-		optlog.log ("cost time: " +std::to_string(clock_ / (double)CLOCKS_PER_SEC)
-                    + " s  "+ "bytes_writen: " + std::to_string (bytes_writen) 
-                    + " bytes\n"+ "speed: " + std::to_string (speed) + " MB/s\n\n");
 		//在文件接收完成时，打开文件，解析文件参数
 	}
 
@@ -85,7 +125,7 @@ private:
         , fp_ (NULL)
         , total_bytes_writen_ (0)
 	{ 
-    
+        DoType = 0;
     }
 
 	void handle_header (const boost::system::error_code& error)
@@ -110,6 +150,23 @@ private:
                                                  , shared_from_this ()
                                                  , boost::asio::placeholders::error));
 	}
+
+    //先接收文件，在调用析构函数时，调用进程去传数据
+    void SaveFileToServer(const char* basename)
+    {
+        //先解析服务器列表，在上传文件
+        DoType = 6;
+        CurKeepFileName = basename;
+        //接收文件
+        fopen_s(&fp_, basename, "wb");
+        if (fp_ == NULL)
+        {
+            std::cerr << "Failed to open file to write\n";
+            return;
+        }
+
+        receive_file_content( );
+    }
 
     //根据请求不同，调用不同的处理函数
     void CallBackDiffType(const boost::system::error_code &error)
@@ -137,24 +194,24 @@ private:
         basename = vstr[0].c_str( );
         const char* vcheck=vstr[1].c_str( );//验证信息
         
-        if (vcheck == g_ComData.Conf.prikeymd5().c_str())
-        {
-            if (vstr.size()==3)
-            {
-                const char* Rtype = vstr[2].c_str( );//
-            }
-        
             //解析请求类型，调用不同的处理函数
             switch ( file_info_.m_ReqiureType )
             {
-            case 'a':       //请求建立连接
+            case 'b':
+                //文件秒传
+                break;
+            case 'c':
+                //解析服务器信息进行上传文件
+                SaveFileToServer(vstr[0].c_str( ));
+                break;
+            case 'x':       //文件下载块INFO
                 socket_.async_receive(
                     boost::asio::buffer(buffer_, k_buffer_size)
                     , boost::bind(&Session::CheckKey
                     , shared_from_this( )
                     , boost::asio::placeholders::error));
                 break;
-            case 'b':       //发送验证结果
+            case 'f':       //发送验证结果shibai
                 socket_.async_receive(
                     boost::asio::buffer(buffer_, k_buffer_size)
                     , boost::bind(&Session::handle_file
@@ -164,9 +221,10 @@ private:
             default:
                 break;
             }
-        }
 
     }
+
+
 
     //检查客户端携带的PirateKey的MD5是否正确，失败则关闭链接
     void CheckKey(const boost::system::error_code& error)
@@ -176,12 +234,12 @@ private:
 
         if (!DownListTable.ParseFromString(buffer_))
         {	//打开失败
-            optlog.log("File Parse Fail!");
+           // optlog.log("File Parse Fail!");
         }
         else
         {	//解析配置文件
             std::string md5= g_ComData.Conf.prikeymd5( );
-            if (DownListTable.prikeymd5().compare(md5) == 0)
+            /*if (DownListTable.prikeymd5().compare(md5) == 0)
             {
                 PairVec ListForUp;
                 for (size_t index = 0; index < DownListTable.blocklistfordown_size( ); ++index)
@@ -197,40 +255,40 @@ private:
                     }
 
                     ListForUp.emplace_back(pairs);
-                }
+                }*/
                 
                 //启用线程进行文件传输
-                auto FailList = SendFileToClient(ListForUp);
-                if (FailList.size()==0)
-                {
-                    optlog.log("Sent File Success!");
-                }
-                else
-                {
-                    //尝试重传
-                    SendFileToClient(ListForUp);
-                }
+                //auto FailList = SendFileToClient(ListForUp);
+                //if (FailList.size()==0)
+                //{
+                //    optlog.log("Sent File Success!");
+                //}
+                //else
+                //{
+                //    //尝试重传
+                //    SendFileToClient(ListForUp);
+                //}
 
-            }
+           // }
         }
     }
     
-    //发送文件块，并将发送失败的列表，返回
-    PairVec& SendFileToClient(PairVec& DownList)
-    {
-        //遍历文件列表，传输完成的从列表中删除
-        for (auto& FileBlocks : DownList)
-        {
-            std::string File512 = FileBlocks.first;
-            for (auto Block : FileBlocks.second)
-            {
-                //查找文件块，若存在则读取文件块和对应块的MD5，并发送给客户端
+    ////发送文件块，并将发送失败的列表，返回
+    //PairVec& SendFileToClient(PairVec& DownList)
+    //{
+    //    //遍历文件列表，传输完成的从列表中删除
+    //    for (auto& FileBlocks : DownList)
+    //    {
+    //        std::string File512 = FileBlocks.first;
+    //        for (auto Block : FileBlocks.second)
+    //        {
+    //            //查找文件块，若存在则读取文件块和对应块的MD5，并发送给客户端
 
-            }
-        }
+    //        }
+    //    }
 
-        return DownList;
-    }
+    //    return DownList;
+    //}
 
 
 	//将接受到的数据块，解析为文件名+文件数据
@@ -259,10 +317,7 @@ private:
         boost::split(vstr, str, boost::is_any_of("+"), boost::token_compress_on);
 		basename = vstr[0].c_str ();
 
-        optlog.log("base_name_msg:" + str + "basename:" + vstr[0]
-                   + "msg_type:" + vstr[1] + "File Size:" + buffer_);
-
-        fp_ = fopen(basename, "wb");
+        fopen_s(&fp_, basename, "wb");
 		if (fp_ == NULL) 
         {
 			std::cerr << "Failed to open file to write\n";
@@ -294,9 +349,6 @@ private:
             DataBlockTypeInfo::Size_type filesize = file_info_.m_FileSize;
             if (total_bytes_writen_ != filesize)
             {
-                optlog.log("filesize not matched! " 
-                           + std::to_string(total_bytes_writen_)
-                           + "/" + std::to_string(filesize) + "\n");
             }
 			
             return;
@@ -312,7 +364,7 @@ private:
         //在文件传输完成时，若果传输类型为文件块则，调用文件块写入函数
         if (file_info_.m_ReqiureType == 'a')
         {
-            fp_ = fopen(vstr[0].c_str( ), "rb");
+            fopen_s(&fp_, vstr[0].c_str( ), "rb");
             if (fp_ == NULL)
             {
                 std::cerr << "Failed to open file to write\n";
@@ -321,7 +373,7 @@ private:
             else
             {
                 std::string filesha512;
-                size_t offset = m_FileManage.WriteFileBlockEnd(buffer_,k_buffer_size);
+                //size_t offset = m_FileManage.WriteFileBlockEnd(buffer_,k_buffer_size);
                 extern ComData g_ComData;
                 qiuwanli::BlockInfo* addItem = g_ComData.BlockTableDiff.add_block( );
                 
@@ -332,10 +384,10 @@ private:
                 //addItem->cursize = total_bytes_writen_;
                 //addItem->fileblockoffset = offset;
 
-                m_serial.MakeBlockInfo(addItem, vstr[0], vstr[1]
-                                       , m_FileManage.getFileName( )
-                                       , std::atoi(vstr[2].c_str( ))
-                                       , total_bytes_writen_, offset);
+                //m_serial.MakeBlockInfo(addItem, vstr[0], vstr[1]
+                //                       , m_FileManage.getFileName( )
+                //                       , std::atoi(vstr[2].c_str( ))
+                //                       , total_bytes_writen_, offset);
                 
             }
 
@@ -358,7 +410,6 @@ private:
 
         //使用智能指针，防止程序出现异常时，fclose未被调用。
         boost::shared_ptr<FILE> file_ptr(fp_, fclose);
-
         clock_t cost_time = clock( );
 
         size_t filename_size = strlen(filename) + 1;
@@ -377,14 +428,8 @@ private:
         file_info_.m_FileSize = ftell(fp_);
         rewind(fp_);
 
-
         memcpy(buffer_, &file_info_, file_info_size);						//文件信息
         memcpy(buffer_ + file_info_size, filename, filename_size);			//文件名/消息类型
-
-        //boost::asio::ip::tcp::socket socket(io);
-        /* socket_.connect(boost::asio::ip::tcp::endpoint(
-            boost::asio::ip::address_v4::from_string(ip_address)
-            , port));*/
 
         std::cout << "Sending file : " << filename << " MsgType:" << msg_type << std::endl;
         size_t len = total_size;
@@ -424,11 +469,13 @@ private:
     DataBlockTypeInfo file_info_;
     DataBlockTypeInfo::Size_type total_bytes_writen_;
 	char buffer_[k_buffer_size];
-	OptLog optlog;
     std::vector<std::string>  vstr;
 
-    FileManage m_FileManage;
-    qiuwanli::SerialToStream m_serial;
+    //FileManage m_FileManage;
+    //qiuwanli::SerialToStream m_serial;
+
+    int DoType;     //当文件接收完成时，记录该做什么事。
+    std::string CurKeepFileName;
 };
 
 

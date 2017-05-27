@@ -198,6 +198,7 @@
     <ClInclude Include="QFileSystem.h" />
     <ClInclude Include="QFileSystemDlg.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SendFile.hpp" />
     <ClInclude Include="Servers.hpp" />
     <ClInclude Include="Session.hpp" />
     <ClInclude Include="stdafx.h" />
@@ -208,6 +209,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="QFileSystem.cpp" />
     <ClCompile Include="QFileSystemDlg.cpp" />
+    <ClCompile Include="SendFile.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>

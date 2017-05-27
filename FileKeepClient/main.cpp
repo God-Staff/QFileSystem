@@ -70,6 +70,8 @@ void doItNextTime( )
     std::string name = "heart" + heart.id( ) + ".tmp";
     PublicData.SaveToFile(&heart, name.c_str( ));
     //再将数据同步到目录服务器，心跳连接
+    //std::string ttt;
+    //heart.SerializeToString(&ttt);
     try
     {
         boost::asio::io_service io;
@@ -80,6 +82,11 @@ void doItNextTime( )
                         , std::atoi(g_ComData.Conf.serversport( ).c_str())
                         , name.c_str( )
                         , 'h');
+        //senddata.senderLitter(io
+        //                      , g_ComData.Conf.serversip( ).c_str( )
+        //                      , std::atoi(g_ComData.Conf.serversport( ).c_str( ))
+        //                      , ttt.c_str( )
+        //                      , '1');
     }
     catch (std::exception e)
     {

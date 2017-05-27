@@ -11,6 +11,8 @@
 #define new DEBUG_NEW
 #endif
 
+#include "SendFile.hpp"
+#include "Servers.hpp"
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
@@ -260,7 +262,46 @@ BOOL CQFileSystemDlg::OnInitDialog()
 	//解析数据好友和分享链接数据
 	updateList ();
 
+    runServer( );
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+}
+
+void CQFileSystemDlg::runServer( )
+{
+    try
+    {
+        std::cerr << "Usage: server <address> <port> <threads> <blocksize>\n";
+
+        boost::asio::ip::address address = boost::asio::ip::address::from_string("127.0.0.1");
+        short port = 8089;
+        int thread_count = 6;
+        size_t block_size = 4096;
+
+        boost::asio::io_service ios;
+        server ssss(ios, boost::asio::ip::tcp::endpoint(address, port));
+        std::list<boost::thread*> threads;
+
+        while (--thread_count > 0)
+        {
+            boost::thread* new_thread = new boost::thread(
+                boost::bind(&boost::asio::io_service::run, &ios));
+            threads.push_back(new_thread);
+        }
+
+        ios.run( );
+
+        while (!threads.empty( ))
+        {
+            threads.front( )->join( );
+
+            delete threads.front( );
+
+            threads.pop_front( );
+        }
+    } catch (std::exception& e)
+    {
+        std::cerr << "Exception: " << e.what( ) << "\n";
+    }
 }
 
 void CQFileSystemDlg::OnSysCommand(UINT nID, LPARAM lParam)

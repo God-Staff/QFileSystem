@@ -7,6 +7,7 @@
 #include "public.h"
 #include "DataStruct.pb.h"
 
+ComData g_ComData;
 // CQFileSystemDlg 对话框
 class CQFileSystemDlg : public CDialogEx
 {
@@ -28,7 +29,8 @@ protected:
 
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
-	afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
+    void runServer( );
+    afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()

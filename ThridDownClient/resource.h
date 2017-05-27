@@ -2,11 +2,11 @@
 // Microsoft Visual C++ 生成的包含文件。
 // 供 ThridDownClient.rc 使用
 //
-#define IDCANCEL2                       4
 #define IDC_DownLoadURL                 4
 #define IDD_THRIDDOWNCLIENT_DIALOG      102
 #define IDR_MAINFRAME                   128
 #define IDR_MENU1                       130
+#define IDR_MENU2                       131
 #define IDC_LIST_FILE                   1000
 #define IDC_LIST_ForDown                1001
 #define IDC_LIST_SHARED                 1002

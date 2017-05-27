@@ -37,8 +37,9 @@ struct DataBlockTypeInfo
     char m_ReqiureType;
     Size_type m_FileSize;
     unsigned int m_FileNameLength;
+    char m_UserID[11];
 
-    DataBlockTypeInfo( ) : m_FileSize(0), m_FileNameLength(0) ,m_ReqiureType(0){ }
+    DataBlockTypeInfo( ) : m_FileSize(0), m_FileNameLength(0), m_ReqiureType(0) { }
 };
 
 

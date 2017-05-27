@@ -1,5 +1,6 @@
 #pragma once
-
+#include <openssl/evp.h>  
+#include <boost/filesystem.hpp>
 enum ReposeType
 {
     eTypeHeart = 0,
@@ -27,7 +28,6 @@ enum ReposeType
     eTypeFileDownLogTable,
     eTypeFileDowning,
     eTypeFileDowningTable,
-    eTypeHeart,
     eTypeDoSomething,
     eTypeDoSomethingTable,
     eTypeBlockCheck,
@@ -37,21 +37,6 @@ enum ReposeType
     eTypeSharedTable,
     eTypeBlockList4Down,
     eTypeBlockList4DownTable
-    //eTypeConfigFile,
-    //eTypeConfigFileTable,
-    //eTypeBlockInfoTable,
-    //eTypeFile2ClientTable,
-    //eTypeClientConfigFileTable,
-    //eTypeFileInfoListTable,
-    //eTypeUserInfoTable,
-    //eTypeFileListTable,
-    //eTypeFileDownLogTable,
-    //eTypeFileDowningTable,
-    //eTypeHeart,
-    //eTypeSomethingTable,
-    //eTypeBlockListForDownCheckTable,
-    //eTypeSharedTable,
-    //eTypeBlockList4DownTable
 };
 class CInterface
 {
@@ -122,7 +107,7 @@ public:
                             , const std::string& FilePauseTime
                             , unsigned long long FileDownloadBlockCount
                             , unsigned long long FileTotalBlockCount
-                            , const std::string& FileSize
+                            , unsigned long long FileSize
                             , const std::string& BitMap);
 
     bool DoHeart(qiuwanli::Heart* heart
@@ -158,6 +143,60 @@ public:
                                , unsigned long long BlockNumer
                                , const std::string& BlockMD5
                                , const std::string& SaveServersIP);
+
+
+
+    void GetFileSHA512(std::string& fileName, std::string& FileSHA512)
+    {
+            EVP_MD_CTX mdctx;
+            const EVP_MD *md = NULL;
+            char buffer[256];
+            char FFFF[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+
+            unsigned char mdValue[EVP_MAX_MD_SIZE] = {0};
+            unsigned int mdLen = 0;
+
+            OpenSSL_add_all_digests( );
+            md = EVP_get_digestbyname("sha512");
+
+            EVP_MD_CTX_init(&mdctx);
+            EVP_DigestInit_ex(&mdctx, md, NULL);
+
+            boost::filesystem::ifstream inFile(fileName, std::ios::in | std::ios::binary);
+
+            unsigned long endPos = inFile.tellg( );
+            inFile.seekg(0, std::ios::beg);
+            unsigned long inPos = 0;
+
+            while ((endPos - inPos) > 256)
+            {
+                inPos = inFile.tellg( );
+                inFile.read(buffer, 256);
+                EVP_DigestUpdate(&mdctx, buffer, 256);
+            }
+
+            inFile.read(buffer, endPos - inPos);
+            EVP_DigestUpdate(&mdctx, buffer, endPos - inPos);
+
+            EVP_DigestFinal_ex(&mdctx, mdValue, &mdLen);
+            EVP_MD_CTX_cleanup(&mdctx);
+
+            int j = 0;
+            for (j = 0; j < mdLen; j++)
+            {
+                printf("%s", mdValue[j]);
+            }
+
+            for (int ii = 0; ii < 64; ++ii)
+            {
+                int x = mdValue[ii];
+                int xx = x & 15;
+                int xxx = x & 240;
+                xxx = xxx >> 4;
+                FileSHA512+FFFF[xxx] + FFFF[xx];
+            }
+            //FileSHA512
+    }
 };
 
 //void MakeLogs (qiuwanli::Logs * Log

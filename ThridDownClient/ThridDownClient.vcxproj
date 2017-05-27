@@ -190,9 +190,16 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="asnyListion.hpp" />
+    <ClInclude Include="ComData.hpp" />
+    <ClInclude Include="handler_allocator.hpp" />
     <ClInclude Include="Interface.h" />
+    <ClInclude Include="public.h" />
     <ClInclude Include="PublicStruct.pb.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="SendFile.hpp" />
+    <ClInclude Include="Servers.hpp" />
+    <ClInclude Include="Session.hpp" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ThridDownClient.h" />
@@ -201,6 +208,7 @@
   <ItemGroup>
     <ClCompile Include="Interface.cpp" />
     <ClCompile Include="PublicStruct.pb.cc" />
+    <ClCompile Include="SendFile.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

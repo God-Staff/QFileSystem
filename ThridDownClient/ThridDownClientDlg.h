@@ -3,8 +3,11 @@
 //
 
 #pragma once
+
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <vector>
+#include "PublicStruct.pb.h"
 
 // CThridDownClientDlg 对话框
 class CThridDownClientDlg : public CDialogEx
@@ -28,7 +31,8 @@ protected:
 
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
-	afx_msg void OnPaint();
+    void runRecive( );
+    afx_msg void OnPaint( );
 	afx_msg HCURSOR OnQueryDragIcon();
 	DECLARE_MESSAGE_MAP()
 public:
@@ -44,7 +48,7 @@ public:
     CListCtrl* m_DownList;
     CListCtrl* m_SharedList;
     afx_msg void DeleteFile( );
-    afx_msg void On32774( );
+    afx_msg void OnUploadFile( );
     afx_msg void DownloadFile( );
     afx_msg void MakeShared( );
     afx_msg void StartDownload( );
@@ -53,4 +57,9 @@ public:
     afx_msg void DeleteSharedUrl( );
     afx_msg void CopyUrl( );
     afx_msg void OnBnClickedDownloadurl( );
+
+    void GetFileSHA512(std::string& fileName, std::string& FileSHA512);
+private:
+    std::vector<std::string> m_VUpFileList;
+    qiuwanli::UserInfo user;
 };

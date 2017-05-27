@@ -3,17 +3,26 @@
 //
 
 #include "stdafx.h"
+#include "afxdialogex.h"
+
 #include "ThridDownClient.h"
 #include "ThridDownClientDlg.h"
-#include "afxdialogex.h"
+
+#include "SendFile.hpp"
+#include "Servers.hpp"
+
+#include <openssl/evp.h>  
+#include <boost/filesystem.hpp>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
+#include <boost/asio.hpp>
+#include "public.h"
 
 // CThridDownClientDlg 对话框
-
+ComData g_ComData;
 
 CThridDownClientDlg::CThridDownClientDlg(CWnd* pParent /*=NULL*/)
     : CDialogEx(IDD_THRIDDOWNCLIENT_DIALOG, pParent)
@@ -38,7 +47,7 @@ BEGIN_MESSAGE_MAP(CThridDownClientDlg, CDialogEx)
     ON_BN_CLICKED(IDOK, &CThridDownClientDlg::OnBnClickedOk)
     ON_BN_CLICKED(IDCANCEL, &CThridDownClientDlg::OnBnClickedCancel)
     ON_COMMAND(ID_32773, &CThridDownClientDlg::DeleteFile)
-    ON_COMMAND(ID_32774, &CThridDownClientDlg::On32774)
+    ON_COMMAND(ID_32774, &CThridDownClientDlg::OnUploadFile)
     ON_COMMAND(ID_32775, &CThridDownClientDlg::DownloadFile)
     ON_COMMAND(ID_32776, &CThridDownClientDlg::MakeShared)
     ON_COMMAND(ID_32779, &CThridDownClientDlg::StartDownload)
@@ -145,7 +154,46 @@ BOOL CThridDownClientDlg::OnInitDialog()
 
     FillData( );
 
+
+    runRecive( );
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+}
+
+void CThridDownClientDlg::runRecive( )
+{
+    try{
+        std::cerr << "Usage: server <address> <port> <threads> <blocksize>\n";
+
+        boost::asio::ip::address address = boost::asio::ip::address::from_string("127.0.0.1");
+        short port = 8889;
+        int thread_count = 4;
+        size_t block_size = 4096;
+
+        boost::asio::io_service ios;
+        server ssss(ios, boost::asio::ip::tcp::endpoint(address, port));
+        std::list<boost::thread*> threads;
+
+        while (--thread_count > 0)
+        {
+            boost::thread* new_thread = new boost::thread(
+                boost::bind(&boost::asio::io_service::run, &ios));
+            threads.push_back(new_thread);
+        }
+
+        ios.run( );
+
+        while (!threads.empty( ))
+        {
+            threads.front( )->join( );
+
+            delete threads.front( );
+
+            threads.pop_front( );
+        }
+    } catch (std::exception& e)
+    {
+        std::cerr << "Exception: " << e.what( ) << "\n";
+    }
 }
 
 // 如果向对话框添加最小化按钮，则需要下面的代码
@@ -401,9 +449,48 @@ void CThridDownClientDlg::DeleteFile( )
 }
 
 
-void CThridDownClientDlg::On32774( )
+void CThridDownClientDlg::OnUploadFile( )
 {
-    // TODO: 在此添加命令处理程序代码
+    CString str;
+    int nId;
+    //首先得到点击的位置
+    POSITION pos = m_FileList->GetFirstSelectedItemPosition( );
+    if (pos == NULL)
+    {
+        MessageBox(_T("请至少选择一项"), _T("提示"), MB_ICONEXCLAMATION);
+        return;
+    }
+    //得到行号，通过POSITION转化
+    nId = (int) m_FileList->GetNextSelectedItem(pos);
+
+    //得到列中的内容（0表示第一列，同理1,2,3...表示第二，三，四...列）
+    str = m_FileList->GetItemText(nId, 0);
+    //MessageBox(str);
+
+    //获取文件的FilsSHA512值
+
+    std::string filename = CT2A(str);
+    m_VUpFileList.push_back(filename);
+    std::string sha512;
+
+    GetFileSHA512(filename, sha512);
+    filename += '+';
+    filename += sha512;
+    filename += '+';
+    filename += user.userid();
+    filename += '+';
+    filename += user.userps( );
+
+    boost::asio::io_service io_ser; 
+    SendFile sender;
+    try
+    {
+        sender.senderLitter(io_ser, "127.0.0.1", 8089, filename.c_str( ), 'a');
+    }
+    catch (CException* e)
+    {
+    }
+    
 }
 
 
@@ -452,4 +539,56 @@ void CThridDownClientDlg::CopyUrl( )
 void CThridDownClientDlg::OnBnClickedDownloadurl( )
 {
     // TODO: 在此添加控件通知处理程序代码
+}
+
+void CThridDownClientDlg::GetFileSHA512(std::string& fileName, std::string& FileSHA512)
+{
+    EVP_MD_CTX mdctx;
+    const EVP_MD *md = NULL;
+    char buffer[256];
+    char FFFF[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
+
+    unsigned char mdValue[EVP_MAX_MD_SIZE] = {0};
+    unsigned int mdLen = 0;
+
+    OpenSSL_add_all_digests( );
+    md = EVP_get_digestbyname("sha512");
+
+    EVP_MD_CTX_init(&mdctx);
+    EVP_DigestInit_ex(&mdctx, md, NULL);
+
+    boost::filesystem::ifstream inFile(fileName, std::ios::in | std::ios::binary);
+
+    unsigned long endPos = inFile.tellg( );
+    inFile.seekg(0, std::ios::beg);
+    unsigned long inPos = 0;
+
+    while ((endPos - inPos) > 256)
+    {
+        inPos = inFile.tellg( );
+        inFile.read(buffer, 256);
+        EVP_DigestUpdate(&mdctx, buffer, 256);
+    }
+
+    inFile.read(buffer, endPos - inPos);
+    EVP_DigestUpdate(&mdctx, buffer, endPos - inPos);
+
+    EVP_DigestFinal_ex(&mdctx, mdValue, &mdLen);
+    EVP_MD_CTX_cleanup(&mdctx);
+
+    int j = 0;
+    for (j = 0; j < mdLen; j++)
+    {
+        printf("%s", mdValue[j]);
+    }
+
+    for (int ii = 0; ii < 64; ++ii)
+    {
+        int x = mdValue[ii];
+        int xx = x & 15;
+        int xxx = x & 240;
+        xxx = xxx >> 4;
+        FileSHA512 + FFFF[xxx] + FFFF[xx];
+    }
+    //FileSHA512
 }

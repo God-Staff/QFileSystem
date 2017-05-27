@@ -1,5 +1,6 @@
 #ifndef PUBLIC_H__
 #define PUBLIC_H__
+#define _CRT_SECURE_NO_WARNINGS
 #include <vector>
 #include <iostream>
 #include <string>

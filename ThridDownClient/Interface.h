@@ -27,7 +27,6 @@ enum ReposeType
     eTypeFileDownLogTable,
     eTypeFileDowning,
     eTypeFileDowningTable,
-    eTypeHeart,
     eTypeDoSomething,
     eTypeDoSomethingTable,
     eTypeBlockCheck,
@@ -116,14 +115,14 @@ public:
                             , const std::string& FileSHA512
                             , const std::string& FileMD5);
 
-    bool DoFileDowningTable(qiuwanli::FileDowning *fileDowning
-                            , const std::string& FileSHA512
-                            , const std::string& FileMD5
-                            , const std::string& FilePauseTime
-                            , unsigned long long FileDownloadBlockCount
-                            , unsigned long long FileTotalBlockCount
-                            , const std::string& FileSize
-                            , const std::string& BitMap);
+    bool CInterface::DoFileDowningTable(qiuwanli::FileDowning *fileDowning
+                                        , const std::string& FileSHA512
+                                        , const std::string& FileMD5
+                                        , const std::string& FilePauseTime
+                                        , unsigned long long FileDownloadBlockCount
+                                        , unsigned long long FileTotalBlockCount
+                                        , unsigned long long FileSize
+                                        , const std::string& BitMap);
 
     bool DoHeart(qiuwanli::Heart* heart
                  , const std::string& ID

@@ -1,8 +1,8 @@
 #ifndef SEND_FILE_HPP
 #define SEND_FILE_HPP
 
-//#include "public.h"
-#include "FileManage.hpp"
+#include "public.h"
+//#include "FileManage.hpp"
 
 #include <boost/asio.hpp>
 
@@ -12,6 +12,13 @@ public:
     SendFile( );
     ~SendFile( );
     
+    struct ListSer
+    {
+        std::string Ip;
+        size_t port;
+        unsigned long blocks;
+    };
+
     void Init(const char* filename);
 
     void sender(boost::asio::io_service &io
@@ -28,9 +35,10 @@ public:
 
 private:
     FILE *fp;
-    OptLog Logs;
+    //OptLog Logs;
     char buffer[k_buffer_size];
     DataBlockTypeInfo file_infos;
+    std::string filename;
 };
 
 #endif // !SEND_FILE_HPP

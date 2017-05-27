@@ -1,7 +1,9 @@
+#include "stdafx.h"
 #include "PublicStruct.pb.h"
 #include "Interface.h"
 #include "bitset"
 #include <boost/dynamic_bitset.hpp>
+#include "public.h"
 
 bool CInterface::DoConfigFile(qiuwanli::ConfigFile* conf
                               , const std::string& ID
@@ -21,6 +23,8 @@ bool CInterface::DoConfigFile(qiuwanli::ConfigFile* conf
     conf->set_remainsize(RemainSize);
     conf->set_serversip(ServersIP);
     conf->set_serversport(ServersPort);
+
+    return true;
 }
 
 bool CInterface::DoBlockInfoTable(qiuwanli::BlockInfo* blockInfo
@@ -37,6 +41,8 @@ bool CInterface::DoBlockInfoTable(qiuwanli::BlockInfo* blockInfo
     blockInfo->set_blocknumer(BlockNumer);
     blockInfo->set_cursize(CurSize);
     blockInfo->set_fileblockoffset(FileBlockOffset);
+
+    return true;
 }
 
 bool CInterface::DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
@@ -49,6 +55,8 @@ bool CInterface::DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
     file2Client->set_filesha512(FileSHA512);
     file2Client->set_cilentid(ClientID);
     file2Client->set_cilentport(ClientPort);
+
+    return true;
 }
 
 bool CInterface::DoClientConfigFileTable(qiuwanli::ClientConfigFile* conf
@@ -65,6 +73,8 @@ bool CInterface::DoClientConfigFileTable(qiuwanli::ClientConfigFile* conf
     conf->set_keymd5(PriKeyMD5);
     conf->set_totalsize(TotalSize);
     conf->set_remainsize(RemainSize);
+
+    return true;
 }
 
 bool CInterface::DoFileInfoListTable(qiuwanli::FileInfoList* fileInfo
@@ -85,6 +95,8 @@ bool CInterface::DoFileInfoListTable(qiuwanli::FileInfoList* fileInfo
     fileInfo->set_fileallblock(FileAllBlocks);
     fileInfo->set_filetotalsize(FileTotalSize);
     fileInfo->set_tag(Tag);
+
+    return true;
 }
 
 bool CInterface::DoUserInfoTable(qiuwanli::UserInfo* user
@@ -98,6 +110,8 @@ bool CInterface::DoUserInfoTable(qiuwanli::UserInfo* user
     {
         user->add_filesha512(item);
     }
+
+    return true;
 }
 
 bool CInterface::DoFileListTable(qiuwanli::FileList* FileList
@@ -108,6 +122,8 @@ bool CInterface::DoFileListTable(qiuwanli::FileList* FileList
     FileList->set_filename(FileName);
     FileList->set_filesize(FileSize);
     FileList->set_filesha512(FileSHA512);
+
+    return true;
 }
 
 bool CInterface::DoFileDownLogTable(qiuwanli::FileDownLog* fileDownLog
@@ -124,6 +140,8 @@ bool CInterface::DoFileDownLogTable(qiuwanli::FileDownLog* fileDownLog
     fileDownLog->set_downingstatus(DowningStatus);
     fileDownLog->set_filesha512(FileSHA512);
     fileDownLog->set_filemd5(FileMD5);
+
+    return true;
 }
 
 bool CInterface::DoFileDowningTable(qiuwanli::FileDowning *fileDowning
@@ -142,6 +160,8 @@ bool CInterface::DoFileDowningTable(qiuwanli::FileDowning *fileDowning
     fileDowning->set_filetotalblockcount(FileTotalBlockCount);
     fileDowning->set_filesize(FileSize);
     fileDowning->set_bitmap(BitMap);
+
+    return true;
 }
 
 bool CInterface::DoHeart(qiuwanli::Heart* heart
@@ -154,6 +174,8 @@ bool CInterface::DoHeart(qiuwanli::Heart* heart
     heart->set_remainsize(RemainSize);
     heart->set_totlesize(TotalSize);
     heart->set_prikeymd5(PriKeyMd5);
+
+    return true;
 }
 
 bool CInterface::DoSomethingTable(qiuwanli::DoSomething* doit
@@ -162,6 +184,8 @@ bool CInterface::DoSomethingTable(qiuwanli::DoSomething* doit
 {
     doit->set_key(Key);
     doit->set_filesha512(FileSHA512);
+
+    return true;
 }
 
 bool CInterface::DoBlockListForDownCheck(qiuwanli::BlockCheck* check
@@ -170,6 +194,8 @@ bool CInterface::DoBlockListForDownCheck(qiuwanli::BlockCheck* check
 {
     check->set_blockmd5(BlockMD5);
     check->set_blockitem(BlockItem);
+
+    return true;
 }
 
 bool CInterface::DoBlockListForDownCheckTable(
@@ -188,6 +214,8 @@ bool CInterface::DoBlockListForDownCheckTable(
         itemCheck->set_blockmd5( iter.first);
         itemCheck->set_blockitem( iter.second);
     }
+
+    return true;
 }
 
 bool CInterface::DoSharedTable(qiuwanli::SharedUrl* Url
@@ -204,6 +232,8 @@ bool CInterface::DoSharedTable(qiuwanli::SharedUrl* Url
     Url->set_filesize(FileSize);
     Url->set_userstutas(UserStutas);
     Url->set_userid(UserID);
+
+    return true;
 }
 
 bool CInterface::DoBlockList4DownTable(qiuwanli::BlockList4Down* BlockList
@@ -216,4 +246,6 @@ bool CInterface::DoBlockList4DownTable(qiuwanli::BlockList4Down* BlockList
     BlockList->set_blocknumer(BlockNumer);
     BlockList->set_blockmd5(BlockMD5);
     BlockList->set_saveserversip(SaveServersIP);
+
+    return true;
 }
