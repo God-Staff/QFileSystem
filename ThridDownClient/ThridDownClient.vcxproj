@@ -194,6 +194,7 @@
     <ClInclude Include="ComData.hpp" />
     <ClInclude Include="handler_allocator.hpp" />
     <ClInclude Include="Interface.h" />
+    <ClInclude Include="MD5.hpp" />
     <ClInclude Include="public.h" />
     <ClInclude Include="PublicStruct.pb.h" />
     <ClInclude Include="Resource.h" />
@@ -207,6 +208,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Interface.cpp" />
+    <ClCompile Include="MD5.cpp" />
     <ClCompile Include="PublicStruct.pb.cc" />
     <ClCompile Include="SendFile.cpp" />
     <ClCompile Include="stdafx.cpp">

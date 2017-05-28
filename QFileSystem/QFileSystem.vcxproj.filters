@@ -48,13 +48,13 @@
     <ClInclude Include="optlog.hpp">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="DataStruct.pb.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="public.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="SendFile.hpp">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="PublicStruct.pb.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -71,10 +71,10 @@
     <ClCompile Include="main.cpp">
       <Filter>头文件</Filter>
     </ClCompile>
-    <ClCompile Include="DataStruct.pb.cc">
+    <ClCompile Include="SendFile.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="SendFile.cpp">
+    <ClCompile Include="PublicStruct.pb.cc">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
@@ -87,6 +87,7 @@
       <Filter>资源文件</Filter>
     </None>
     <None Include="ClassDiagram.cd" />
+    <None Include="PublicStruct.proto" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="QFileSystem.rc">

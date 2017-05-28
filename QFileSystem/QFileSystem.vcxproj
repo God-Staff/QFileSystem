@@ -191,10 +191,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="constdate.hpp" />
-    <ClInclude Include="DataStruct.pb.h" />
     <ClInclude Include="handler_allocator.hpp" />
     <ClInclude Include="optlog.hpp" />
     <ClInclude Include="public.h" />
+    <ClInclude Include="PublicStruct.pb.h" />
     <ClInclude Include="QFileSystem.h" />
     <ClInclude Include="QFileSystemDlg.h" />
     <ClInclude Include="Resource.h" />
@@ -205,8 +205,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="DataStruct.pb.cc" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="PublicStruct.pb.cc" />
     <ClCompile Include="QFileSystem.cpp" />
     <ClCompile Include="QFileSystemDlg.cpp" />
     <ClCompile Include="SendFile.cpp" />
@@ -220,6 +220,7 @@
   <ItemGroup>
     <None Include="ClassDiagram.cd" />
     <None Include="date.proto" />
+    <None Include="PublicStruct.proto" />
     <None Include="QFileSystem.htm">
       <DeploymentContent>true</DeploymentContent>
     </None>

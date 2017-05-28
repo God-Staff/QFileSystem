@@ -4,10 +4,11 @@
 
 #pragma once
 //#include "constdate.hpp"
-#include "public.h"
-#include "DataStruct.pb.h"
 
-ComData g_ComData;
+#include "public.h"
+#include "PublicStruct.pb.h"
+
+
 // CQFileSystemDlg ¶Ô»°¿ò
 class CQFileSystemDlg : public CDialogEx
 {
@@ -107,10 +108,10 @@ public:
 public:
     qiuwanli::FileInfoList      m_CFileList;
     qiuwanli::File2ClientTable  m_CFileToClient;
-    qiuwanli::SharedTable       m_CSharedTable;
+    qiuwanli::SharedUrlTable       m_CSharedTable;
     qiuwanli::UserInfoTable     m_CUserInfo;
 
-    qiuwanli::HeartTable        m_CHeart;
-    qiuwanli::BlockListDownTable     m_CBlockDownList;
+    qiuwanli::Heart        m_CHeart;
+    qiuwanli::BlockListForDownCheckTable     m_CBlockDownList;
 };
 

@@ -1,8 +1,9 @@
 #ifndef SEND_FILE_HPP
 #define SEND_FILE_HPP
 
-//#include "public.h"
-#include "FileManage.hpp"
+#include "public.h"
+//#include "FileManage.hpp"
+#include "PublicStruct.pb.h"
 
 #include <boost/asio.hpp>
 
@@ -28,7 +29,7 @@ public:
 
 private:
     FILE *fp;
-    OptLog Logs;
+    //qiuwanli::Logs Logs;
     char buffer[k_buffer_size];
     DataBlockTypeInfo file_infos;
 };

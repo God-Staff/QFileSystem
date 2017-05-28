@@ -1,3 +1,5 @@
+#include "stdafx.h"
+
 #include "SendFile.hpp"
 
 
@@ -40,7 +42,6 @@ void SendFile::sender(boost::asio::io_service& io
 
     if (total_size > k_buffer_size)
     {
-        Logs.log("File name is too long");
         return;
     }
 
@@ -60,8 +61,6 @@ void SendFile::sender(boost::asio::io_service& io
     log += filename;
     log += " MsgType:";
     log += msg_type;
-
-    Logs.log(log);
 
     size_t len = total_size;
 

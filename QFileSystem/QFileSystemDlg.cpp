@@ -1,11 +1,9 @@
-
 // QFileSystemDlg.cpp : 实现文件
 //
 
 #include "stdafx.h"
-#include "QFileSystem.h"
-#include "QFileSystemDlg.h"
 #include "afxdialogex.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -13,6 +11,13 @@
 
 #include "SendFile.hpp"
 #include "Servers.hpp"
+#include "QFileSystem.h"
+#include "QFileSystemDlg.h"
+
+//#include "public.h"
+//#include "PublicStruct.pb.h"
+
+ComData g_ComData;
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 

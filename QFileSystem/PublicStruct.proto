@@ -50,7 +50,7 @@ message ClientConfigFile
 	string SaveIP=2;		//客户端对应IP
 	string PriKey=3;		//认证信息
 	string KeyMD5=4;		//用于验证
-	uint64 TotleSize=5;		//
+	uint64 TotalSize=5;		//
 	uint64 RemainSize=6;	//
 }
 message ClientConfigFileTable
@@ -90,35 +90,26 @@ message UserInfoTable
 message FileList
 {
 	string FileName=1;
-	string FileSize=2;
+	uint64 FileSize=2;
 	string FileSHA512=3;
 }
 message FileListTable
 {
 	repeated FileList File=1;
 }
-//保存文件传输完成的验证信息
-message FileList4Down
-{
-	string FileSHA512=1;
-	string FileMD5=2;
-}
-message FileList4DownTable
-{
-	repeated FileList4Down FileListForDown=1;
-}
 //正在下载的文件
-message FileDowningLog
+message FileDownLog
 {
-	string filename=1;
-	string filesize=2;
-	string downtime=3;
+	string FileName=1;
+	uint64 FileSize=2;
+	string FileDownTime=3;
 	string Downingstatus=4;
-	string filesha512=5;
+	string FileSHA512=5;
+	string FileMD5=6;
 }
-message FileDowningLogTable
+message FileDownLogTable
 {
-	repeated FileDowningLog FileDownLog=1;
+	repeated FileDownLog DownLog=1;
 }
 //保存文件所对应的文件块的下载列表
 
@@ -127,13 +118,11 @@ message FileDowning
 {
 	string FileSHA512 = 1;
 	string FileMD5 =2;
-	string FileName=3;
-	string FileDownTime=4;
-	uint64 FileDownloadBlockCount=5;
-	uint64 FileTotalBlockCount=6;
-	string FileSize=7;
-	uint32 BlockCount=8;
-	string BitMap=9;
+	string FilePauseTime=3;
+	uint64 FileDownloadBlockCount=4;
+	uint64 FileTotalBlockCount=5;
+	uint64 FileSize=6;
+	string BitMap=7;
 }
 message FileDowningTable
 {
@@ -147,11 +136,11 @@ message FileDowningTable
 message Heart
 {
 	string ID=1;			//ID编号
-	string RemainSize=2;	//剩余空间大小
-	string TotleSize=3;		//第一次是发送总大小，之后默认为空
+	uint64 RemainSize=2;	//剩余空间大小
+	uint64 TotleSize=3;		//第一次是发送总大小，之后默认为空
 	string PrikeyMd5=4;		//客户端私钥的MD5用于验证
 }
-//用于删除文件
+//用于删除文件,或分享文件
 message DoSomething
 {
 	string Key=1;
@@ -181,24 +170,24 @@ message BlockListForDownCheckTable
 }
 ////////////////////////////////////////////////////
 //分享列表
-message Shared
+message SharedUrl
 {
 	string Sha512=1;
 	string VerificationCode=2;
 	string SharedTime=3;
-	string FileSize=4;
+	uint64 FileSize=4;
 	string UserStutas=5;
 	string UserID=6;
 }
-message SharedTable
+message SharedUrlTable
 {
-	repeated Shared SharedInfo=1;
+	repeated SharedUrl SharedInfo=1;
 }
 //对应存储列表
 message BlockList4Down
 {
 	string FileSHA512=1;
-	string BlockNumer=2;
+	uint64 BlockNumer=2;
 	string BlockMD5=3;
 	string SaveServersIP=4;
 }
@@ -222,3 +211,6 @@ message LogsTable
 	string logdate=1;
 	repeated Logs log=2;
 }
+
+//protoc -I=./ --cpp_out=./ ./PublicStruct.proto
+//,
