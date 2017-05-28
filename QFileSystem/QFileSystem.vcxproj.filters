@@ -57,6 +57,9 @@
     <ClInclude Include="PublicStruct.pb.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Interface.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="QFileSystem.cpp">
@@ -68,13 +71,13 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>头文件</Filter>
-    </ClCompile>
     <ClCompile Include="SendFile.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="PublicStruct.pb.cc">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Interface.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

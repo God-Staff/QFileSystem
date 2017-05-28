@@ -7,6 +7,9 @@
 #include <list>
 #include <mutex>
 #include <cstdio>
+#include <ctime>
+#include <locale>
+
 
 #include <boost/asio.hpp>
 #include <boost/shared_ptr.hpp>
@@ -41,9 +44,9 @@ public:
     }
 
     //将目标文件进行分割为临时文件
-    void splistFile(std::string &file, std::vector<std::string>& vSendFileList)
+    void splistFile(std::string& filName,std::vector<std::string>& vSendFileList)
     {
-        boost::filesystem::fstream InFile(CurKeepFileName, std::ios::in | std::ios::binary);
+        boost::filesystem::fstream InFile(filName, std::ios::in | std::ios::binary);
         InFile.seekg(0, std::ios_base::end);
         int endpos = InFile.tellg( );
         char bufferFile[BLOCK_SIZE];
@@ -51,11 +54,12 @@ public:
         //int curpos = 0;
         int countNum = endpos / BLOCK_SIZE;
         int cunt = 0;
-        std::string blockname;
+
         while (!InFile.eof())
         {
             ++cunt;
-            blockname += '+';
+            std::string blockname = vstr[1];
+            blockname += "+";
             blockname += std::to_string(cunt);
 
             boost::filesystem::fstream files(blockname, std::ios::out | std::ios::binary);
@@ -89,41 +93,77 @@ public:
             {
                 iterServerIP = vpList.end( );
             }
-            char md5[128];
+            char md5[33];
             getFileMD5(iterFile->c_str(), md5);
 
-            std::string filenaame = *iterFile;
-            filenaame += '+';
-            filenaame += iterServerIP->first;
-            filenaame += '+';
-            filenaame += md5;
-            filenaame += '+';
-            for (auto x: g_ComData.curUploadFile)  
-            {
-                if (CurKeepFileName==x.first)
-                {
-                    filenaame += x.second;
-                }
-            }
-            try
-            {
-                send.sender(io_ser, iterServerIP->second.c_str( ), 8089, filenaame.c_str( ), 'd');
-               
+            std::string filename = *iterFile;
+            filename += "+";
+            filename += iterServerIP->first;
+            filename += "+";
+            filename += md5;
+
+            try{
+                send.sender(io_ser, iterServerIP->second.c_str( ), 8089, filename.c_str( ), 'd');
             }
             catch (CException* e)
-            {
-            }
-
-            for (auto xxx = g_ComData.curUploadFile.begin( ); xxx != g_ComData.curUploadFile.end( ); ++xxx)
-            {
-                if (xxx->first==CurKeepFileName)
-                {
-                    g_ComData.curUploadFile.erase(xxx);
-                }
-            }
-
+            {}
         }
         
+
+        std::string fileNameTmp;
+        //标记已完成传输的文件
+        g_ComData.DateChage |= 2;
+        for (auto xxx = g_ComData.m_UploadFile.begin(); xxx != g_ComData.m_UploadFile.end(); ++xxx)
+        {
+            if (xxx->m_FileSHA512== vstr[1])
+            {
+                fileNameTmp = xxx->m_FileName;
+                xxx = g_ComData.m_UploadFile.erase(xxx);
+            }
+        }
+        //文件传输完成时，向服务端发送文件完整信息
+        std::string filename=fileNameTmp;
+        filename += "+";
+        filename += vstr[1];
+        filename += "+";
+        char md5[33];
+        getFileMD5(iterFile->c_str( ), md5);
+        filename += md5;
+        filename += "+";
+
+        //获取时间
+        std::string stimeTmp;
+        char mbstr[32];
+        time_t now;
+        time(&now);
+        struct tm tmTmp;
+        localtime_s(&tmTmp, &now);
+        if (std::strftime(mbstr, 32, "%F %T",&tmTmp ))
+        {
+            stimeTmp = mbstr;
+        }
+        filename += stimeTmp;
+
+        //获取文件长度
+        boost::filesystem::fstream fileTmp(fileNameTmp, std::ios::in);
+        fileTmp.seekg(0, std::ios_base::end);
+        filename += std::to_string(fileTmp.tellg( ));
+        filename += "+";
+        filename += std::to_string((fileTmp.tellg( ) / BLOCK_SIZE) + 1);
+
+        //获取用户ID和PS
+        filename += "+";
+        filename += g_ComData.user.userid( );
+        filename += "+";
+        filename += g_ComData.user.userps( );
+
+        try
+        {
+            send.sender(io_ser, iterServerIP->second.c_str( ), 8089, filename.c_str( ), 'g');
+        } catch (CException* e)
+        {
+        }
+
         //删除临时文件
         for (auto x:vSendFileList)
         {
@@ -133,8 +173,8 @@ public:
 
     void DoSendFile( )
     {
-        boost::filesystem::fstream InFile(CurKeepFileName, std::ios::in | std::ios::binary);
-        boost::filesystem::fstream InFile2(CurKeepFileName, std::ios::in | std::ios::binary);
+        boost::filesystem::fstream InFile(vstr[0], std::ios::in | std::ios::binary);
+        //boost::filesystem::fstream InFile2(CurKeepFileName, std::ios::in | std::ios::binary);
 
         qiuwanli::ClientConfigFileTable ServerTable;
 
@@ -151,18 +191,19 @@ public:
         }
 
         std::vector<std::string> vSendFileList;
-
-        for (auto iter:g_ComData.curUploadFile)
+        
+        //遍历当前正打算上传的文件列表
+        for (auto iter:g_ComData.m_UploadFile)
         {
-            std::string file = iter.first;
-
-            splistFile(file,vSendFileList);
-
-            sendFileBlockToServer(vSendFileList, vpList);
+            if (vstr[1] == iter.m_FileSHA512)
+            {
+                std::string file = iter.m_FileName;
+                splistFile( file,vSendFileList);
+                sendFileBlockToServer(vSendFileList, vpList);
+            }
         }
 
         g_ComData.curUploadFile.resize(0);
-
     }
 
 	~Session ()
@@ -240,13 +281,13 @@ private:
 	}
 
     //先接收文件，在调用析构函数时，调用进程去传数据
-    void SaveFileToServer(const char* basename)
+    void SaveFileToServer()
     {
         //先解析服务器列表，在上传文件
         DoType = 6;
-        CurKeepFileName = basename;
+        //CurKeepFileName = basename;
         //接收文件
-        fopen_s(&fp_, basename, "wb");
+        fopen_s(&fp_, vstr[0].c_str( ), "wb");
         if (fp_ == NULL)
         {
             std::cerr << "Failed to open file to write\n";
@@ -277,38 +318,44 @@ private:
 
         //将const char* 分割
         std::string str(base_name_msg);
-        //std::vector<std::string>  vstr;
+        vstr.clear( );
         boost::split(vstr, str, boost::is_any_of("+"), boost::token_compress_on);
         basename = vstr[0].c_str( );
         const char* vcheck=vstr[1].c_str( );//验证信息
-        
-            //解析请求类型，调用不同的处理函数
-            switch ( file_info_.m_ReqiureType )
-            {
-            case 'b':
-                //文件秒传,通过设置公共变量通知界面，
-                break;
-            case 'c':
-                //解析服务器信息进行上传文件
-                SaveFileToServer(vstr[0].c_str( ));
-                break;
-            case 'x':       //文件下载块INFO
-                socket_.async_receive(
-                    boost::asio::buffer(buffer_, k_buffer_size)
-                    , boost::bind(&Session::CheckKey
-                    , shared_from_this( )
-                    , boost::asio::placeholders::error));
-                break;
-            case 'f':       //发送验证结果shibai
-                socket_.async_receive(
-                    boost::asio::buffer(buffer_, k_buffer_size)
-                    , boost::bind(&Session::handle_file
-                    , this
-                    , boost::asio::placeholders::error));
-                break;
-            default:
-                break;
-            }
+
+        //解析请求类型，调用不同的处理函数
+        switch (file_info_.m_ReqiureType)
+        {
+        case 'b':
+            //文件秒传,通过设置公共变量通知界面，
+            g_ComData.DateChage |= (size_t) 1;
+            g_ComData.DoneUploadFile.emplace_back(std::make_pair(vstr[0], vstr[1]));
+            break;
+        case 'c':
+            //解析服务器信息进行上传文件
+            SaveFileToServer( );
+            break;
+        case 'h':
+            //返回上传文件的完整性
+            g_ComData.DateChage |= (size_t)4;
+            break;
+        //case 'x':       //文件下载块INFO
+        //    socket_.async_receive(
+        //        boost::asio::buffer(buffer_, k_buffer_size)
+        //        , boost::bind(&Session::CheckKey
+        //        , shared_from_this( )
+        //        , boost::asio::placeholders::error));
+        //    break;
+        //case 'f':       //发送验证结果shibai
+        //    socket_.async_receive(
+        //        boost::asio::buffer(buffer_, k_buffer_size)
+        //        , boost::bind(&Session::handle_file
+        //        , this
+        //        , boost::asio::placeholders::error));
+        //    break;
+        default:
+            break;
+        }
 
     }
 
@@ -563,7 +610,7 @@ private:
     //qiuwanli::SerialToStream m_serial;
 
     int DoType;     //当文件接收完成时，记录该做什么事。
-    std::string CurKeepFileName;
+    //std::string CurKeepFileName;
 };
 
 

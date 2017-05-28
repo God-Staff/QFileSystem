@@ -1,231 +1,231 @@
-
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
-#include <boost/filesystem.hpp>
-
-#include "Interface.h"
-//#include "PublicStruct.pb.h"
-#include <string>
-
-CCInterface PublicData;
-
-//生成config配置文件
-void makesetfiles( )
-{
-    boost::filesystem::fstream output1("config", std::ios::out | std::ios::trunc | std::ios::binary);
-    qiuwanli::ConfigFile conf;
-
-    PublicData.DoConfigFile(&conf, "Client0001", "127.0.0.1", "qwerqwetqertwetyerthsfgshdfsgdfgs", "qwerqwet", 12345ull, 123124ull, "127.0.0.1", "9999");
-
-    if (!conf.SerializeToOstream(&output1))
-        std::cerr << "Failed to write Config:" << std::endl;
-    output1.close( );
-}
-
-
-
-void makeBlockInfoTableFile( )
-{
-    boost::filesystem::fstream output1("BlockInfoList", std::ios::out | std::ios::trunc | std::ios::binary);
-    qiuwanli::BlockInfoTable blockTable;
-
-    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertwetyerthsfgshdfsgdfgs", "qwerqwetqertwety", "123.zip", 12345ull, 123124ull, 34363656ull);
-    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertwetyerthsfsdfasfgdfgs", "fdfgdrtfgdgsfgsd", "1234.zip", 12345ull, 123124ull, 34656ull);    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertdfgherthsfgshdfsgdfgs", "qwerqwedfgdfwety", "1253.zip", 12345ull, 123124ull, 34356ull);    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwdfgrthwetyerthsfgshdfsgdfgs", "qsdfgsetqertwety", "1623.zip", 12345ull, 123124ull, 3436ull);
-
-    if (!blockTable.SerializeToOstream(&output1))
-        std::cerr << "Failed to write Config:" << std::endl;
-    output1.close( );
-}
-
-
-//void MakeHeartFile( )
+//#include <boost/filesystem.hpp>
+//
+//#include "Interface.h"
+////#include "PublicStruct.pb.h"
+//#include <string>
+//
+//CCInterface PublicData;
+//
+////生成config配置文件
+//void makesetfiles( )
 //{
-//    boost::filesystem::fstream output1("BlockInfoList", std::ios::out | std::ios::trunc | std::ios::binary);
-//    qiuwanli::Heart heart;
+//    boost::filesystem::fstream output1("config", std::ios::out | std::ios::trunc | std::ios::binary);
+//    qiuwanli::ConfigFile conf;
 //
-//    PublicData.DoHeart(&heart, "Client0001", 12345ull, 123124ull,"qwerqwetqertwetyerthsfgshdfsgdfgs");
+//    PublicData.DoConfigFile(&conf, "Client0001", "127.0.0.1", "qwerqwetqertwetyerthsfgshdfsgdfgs", "qwerqwet", 12345ull, 123124ull, "127.0.0.1", "9999");
 //
-//    //std::ostringstream it;
-//    char* tmpData = new char(heart.ByteSize( ));
-//    std::string nn;
-//    heart.SerializeToString(&nn);
-//    std::string text = stream.str( );
-//    char* ctext = string.c_str( );
-//    heart.SerializePartialToOstream()
-//    if (!heart.SerializeToOstream(&output1))
+//    if (!conf.SerializeToOstream(&output1))
 //        std::cerr << "Failed to write Config:" << std::endl;
 //    output1.close( );
 //}
-
-
-//服务端保存用户信息
-void ServerUserFiles( )
-{
-    std::fstream output("ServerUser", std::ios::out | std::ios::trunc | std::ios::binary);
-    if (!output)
-        return;
-
-    qiuwanli::UserInfoTable user;
-    PublicData.DoUserInfoTable(user.add_user( ), "100001", "123456", {"123.zip","12345.zip","123456.zip","1234567.zip"});
-    PublicData.DoUserInfoTable(user.add_user( ), "100002", "123456", {"123.zip","12345.zip","123456.zip"});
-    PublicData.DoUserInfoTable(user.add_user( ), "100003", "123456", {"12345.zip","123456.zip","1234567.zip"});
-
-    if (!user.SerializeToOstream(&output))
-        std::cerr << "Failed to write ServerUser:" << std::endl;
-    output.close( );
-}
-
-
-void DoClientConfigFile( )
-{
-    std::fstream output("ClientTable", std::ios::out | std::ios::trunc | std::ios::binary);
-    qiuwanli::ClientConfigFileTable clinetTable;
-
-    PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client001", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
-    PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client004", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
-    PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client002", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
-    PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client003", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
-    if (!clinetTable.SerializeToOstream(&output))
-        std::cerr << "Failed to write ServerUser:" << std::endl;
-    output.close( );
-}
-//FileDownLogFile
-void DoFileListFile( )
-{
-    std::fstream output("UsFileList", std::ios::out | std::ios::trunc | std::ios::binary);
-    qiuwanli::FileListTable listT;
-
-    PublicData.DoFileListTable(listT.add_file( ), "Filename",3456ull , "FileSHA512", "local");
-    PublicData.DoFileListTable(listT.add_file( ), "Filename2", 345ull, "FileSHA512", "server");
-    PublicData.DoFileListTable(listT.add_file( ), "Filename3",3456ull, "FileSHA512", "local");
-    PublicData.DoFileListTable(listT.add_file( ), "Filename4", 3453ull, "FileSHA512", "local");
-
-    if (!listT.SerializeToOstream(&output))
-        std::cerr << "Failed to write ServerUser:" << std::endl;
-    output.close( );
-}
-
-void DoFileInfoListFile( )
-{
-    std::fstream output("FileInfoList", std::ios::out | std::ios::trunc | std::ios::binary);
-    qiuwanli::FileInfoListTable listInfoT;
-
-    PublicData.DoFileInfoListTable(listInfoT.add_filelist( ), "Filesha512", "FileMD5", "FileName", "FileCreatedate", "Filechangdate", 23452, 345, "");
-    PublicData.DoFileInfoListTable(listInfoT.add_filelist( ), "Filesha512", "FileMD5", "FileName", "FileCreatedate", "Filechangdate", 23452, 345, "");
-    PublicData.DoFileInfoListTable(listInfoT.add_filelist( ), "Filesha512", "FileMD5", "FileName", "FileCreatedate", "Filechangdate", 23452, 345, "");
-    PublicData.DoFileInfoListTable(listInfoT.add_filelist( ), "Filesha512", "FileMD5", "FileName", "FileCreatedate", "Filechangdate", 23452, 345, "");
-
-
-    if (!listInfoT.SerializeToOstream(&output))
-        std::cerr << "Failed to write ServerUser:" << std::endl;
-    output.close( );
-}
 //
-//void FileDownLogFile( )
+//
+//
+//void makeBlockInfoTableFile( )
 //{
-//    std::fstream output1("downlog", std::ios::out | std::ios::trunc | std::ios::binary);
-//    if (!output1)
+//    boost::filesystem::fstream output1("BlockInfoList", std::ios::out | std::ios::trunc | std::ios::binary);
+//    qiuwanli::BlockInfoTable blockTable;
+//
+//    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertwetyerthsfgshdfsgdfgs", "qwerqwetqertwety", "123.zip", 12345ull, 123124ull, 34363656ull);
+//    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertwetyerthsfsdfasfgdfgs", "fdfgdrtfgdgsfgsd", "1234.zip", 12345ull, 123124ull, 34656ull);    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertdfgherthsfgshdfsgdfgs", "qwerqwedfgdfwety", "1253.zip", 12345ull, 123124ull, 34356ull);    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwdfgrthwetyerthsfgshdfsgdfgs", "qsdfgsetqertwety", "1623.zip", 12345ull, 123124ull, 3436ull);
+//
+//    if (!blockTable.SerializeToOstream(&output1))
+//        std::cerr << "Failed to write Config:" << std::endl;
+//    output1.close( );
+//}
+//
+//
+////void MakeHeartFile( )
+////{
+////    boost::filesystem::fstream output1("BlockInfoList", std::ios::out | std::ios::trunc | std::ios::binary);
+////    qiuwanli::Heart heart;
+////
+////    PublicData.DoHeart(&heart, "Client0001", 12345ull, 123124ull,"qwerqwetqertwetyerthsfgshdfsgdfgs");
+////
+////    //std::ostringstream it;
+////    char* tmpData = new char(heart.ByteSize( ));
+////    std::string nn;
+////    heart.SerializeToString(&nn);
+////    std::string text = stream.str( );
+////    char* ctext = string.c_str( );
+////    heart.SerializePartialToOstream()
+////    if (!heart.SerializeToOstream(&output1))
+////        std::cerr << "Failed to write Config:" << std::endl;
+////    output1.close( );
+////}
+//
+//
+////服务端保存用户信息
+//void ServerUserFiles( )
+//{
+//    std::fstream output("ServerUser", std::ios::out | std::ios::trunc | std::ios::binary);
+//    if (!output)
 //        return;
 //
-//    qiuwanli::FileDownLogFile downlog;
-//    MakeDownlog(downlog.add_filelog( ), "123", "1234", "1234", "1234", "1234");
-//    MakeDownlog(downlog.add_filelog( ), "qwer", "qwer", "qwer", "qwer", "qrwe");
-//    MakeDownlog(downlog.add_filelog( ), "asdf", "asdf", "asdf", "asdf", "asdf");
-//    MakeDownlog(downlog.add_filelog( ), "zxcv", "zxcv", "zxcv", "zxcv", "zxcv");
+//    qiuwanli::UserInfoTable user;
+//    PublicData.DoUserInfoTable(user.add_user( ), "100001", "123456", {"123.zip","12345.zip","123456.zip","1234567.zip"});
+//    PublicData.DoUserInfoTable(user.add_user( ), "100002", "123456", {"123.zip","12345.zip","123456.zip"});
+//    PublicData.DoUserInfoTable(user.add_user( ), "100003", "123456", {"12345.zip","123456.zip","1234567.zip"});
 //
-//    if (!downlog.SerializeToOstream(&output1))
-//        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
-//    output1.close( );
+//    if (!user.SerializeToOstream(&output))
+//        std::cerr << "Failed to write ServerUser:" << std::endl;
+//    output.close( );
+//}
+//
+//
+//void DoClientConfigFile( )
+//{
+//    std::fstream output("ClientTable", std::ios::out | std::ios::trunc | std::ios::binary);
+//    qiuwanli::ClientConfigFileTable clinetTable;
+//
+//    PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client001", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
+//    PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client004", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
+//    PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client002", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
+//    PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client003", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
+//    if (!clinetTable.SerializeToOstream(&output))
+//        std::cerr << "Failed to write ServerUser:" << std::endl;
+//    output.close( );
+//}
+////FileDownLogFile
+//void DoFileListFile( )
+//{
+//    std::fstream output("UsFileList", std::ios::out | std::ios::trunc | std::ios::binary);
+//    qiuwanli::FileListTable listT;
+//
+//    PublicData.DoFileListTable(listT.add_file( ), "Filename",3456ull , "FileSHA512", "local");
+//    PublicData.DoFileListTable(listT.add_file( ), "Filename2", 345ull, "FileSHA512", "server");
+//    PublicData.DoFileListTable(listT.add_file( ), "Filename3",3456ull, "FileSHA512", "local");
+//    PublicData.DoFileListTable(listT.add_file( ), "Filename4", 3453ull, "FileSHA512", "local");
+//
+//    if (!listT.SerializeToOstream(&output))
+//        std::cerr << "Failed to write ServerUser:" << std::endl;
+//    output.close( );
+//}
+//
+//void DoFileInfoListFile( )
+//{
+//    std::fstream output("FileInfoList", std::ios::out | std::ios::trunc | std::ios::binary);
+//    qiuwanli::FileInfoListTable listInfoT;
+//
+//    PublicData.DoFileInfoListTable(listInfoT.add_filelist( ), "Filesha512", "FileMD5", "FileName", "FileCreatedate", "Filechangdate", 23452, 345, "");
+//    PublicData.DoFileInfoListTable(listInfoT.add_filelist( ), "Filesha512", "FileMD5", "FileName", "FileCreatedate", "Filechangdate", 23452, 345, "");
+//    PublicData.DoFileInfoListTable(listInfoT.add_filelist( ), "Filesha512", "FileMD5", "FileName", "FileCreatedate", "Filechangdate", 23452, 345, "");
+//    PublicData.DoFileInfoListTable(listInfoT.add_filelist( ), "Filesha512", "FileMD5", "FileName", "FileCreatedate", "Filechangdate", 23452, 345, "");
+//
+//
+//    if (!listInfoT.SerializeToOstream(&output))
+//        std::cerr << "Failed to write ServerUser:" << std::endl;
+//    output.close( );
 //}
 ////
-//void MakeFileDowingLog( )
-//{
-//    std::fstream output1("downinglog", std::ios::out | std::ios::trunc | std::ios::binary);
-//    if (!output1)
-//        return;
-//
-//    qiuwanli::FileDownLogFiles downing;
-//    MakeFileDowingLog(downing.add_filedownlog( ), "filename1", "1234", "20170203", "wateing", "sha512");
-//    MakeFileDowingLog(downing.add_filedownlog( ), "filename12", "1234", "20170203", "wite", "sha512");
-//    MakeFileDowingLog(downing.add_filedownlog( ), "filename13", "1234", "20170203", "downing", "sha512");
-//    MakeFileDowingLog(downing.add_filedownlog( ), "filename14", "1234", "20170203", "wating", "sha512");
-//    MakeFileDowingLog(downing.add_filedownlog( ), "filename15", "1234", "20170203", "wating", "sha512");
-//
-//    if (!downing.SerializeToOstream(&output1))
-//        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
-//    output1.close( );
-//}
-//
-//void MakePath4FileOrDir( )
-//{
-//    std::fstream output1("MakePath4FileOrDir", std::ios::out | std::ios::trunc | std::ios::binary);
-//    if (!output1)
-//        return;
-//
-//    qiuwanli::AllFiles allfile;
-//    allfile.set_pathlist("default");
-//    MakePath4FileOrDir(allfile.add_filespath( ), "123a", "1234a", 1234lu);
-//    MakePath4FileOrDir(allfile.add_filespath( ), "123b", "1234b", 1234lu);
-//    MakePath4FileOrDir(allfile.add_filespath( ), "123c", "1234c", 1234lu);
-//    MakePath4FileOrDir(allfile.add_filespath( ), "123d", "1234d", 1234lu);
-//
-//    if (!allfile.SerializeToOstream(&output1))
-//        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
-//    output1.close( );
-//}
-//
-//void MakeFriendList( )
-//{
-//    std::fstream output1("FriendList", std::ios::out | std::ios::trunc | std::ios::binary);
-//    if (!output1)
-//        return;
-//
-//    qiuwanli::FriednList friends;
-//    MakeFriendList(friends.add_friend_( ), "123a", "1234z", "1234");
-//    MakeFriendList(friends.add_friend_( ), "123s", "1234x", "1234");
-//    MakeFriendList(friends.add_friend_( ), "123d", "1234c", "1234");
-//    MakeFriendList(friends.add_friend_( ), "123f", "1234v", "1234");
-//
-//    if (!friends.SerializeToOstream(&output1))
-//        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
-//    output1.close( );
-//}
-//
-//void MakeFileSharedLog( )
-//{
-//    std::fstream output1("FileSharedLog", std::ios::out | std::ios::trunc | std::ios::binary);
-//    if (!output1)
-//        return;
-//
-//    qiuwanli::FileShared fileshared;
-//    MakeFileSharedLog(fileshared.add_sharedlog( ), "qwer", "1234", 1234, 1234, "1234");
-//    MakeFileSharedLog(fileshared.add_sharedlog( ), "qwerasdf", "1234", 1234, 1234, "1234");
-//    MakeFileSharedLog(fileshared.add_sharedlog( ), "qwetqweqwe", "1234", 1234, 1234, "1234");
-//    MakeFileSharedLog(fileshared.add_sharedlog( ), "http://www.baidu.com", "1234", 1234, 1234, "1234");
-//    MakeFileSharedLog(fileshared.add_sharedlog( ), "123", "1234", 1234, 1234, "1234");
-//
-//    if (!fileshared.SerializeToOstream(&output1))
-//        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
-//    output1.close( );
-//}
-//初始化配置文件//
-int main( )
-{
-    DoFileInfoListFile( );
-    DoFileListFile( );
-    DoClientConfigFile( ); 
-    ServerUserFiles( );
-    makesetfiles( ); 
-    makeBlockInfoTableFile( ); 
-    
-    /*FileDownLogFile( );
-    MakeFileDowingLog( );
-    MakePath4FileOrDir( );
-    MakeFriendList( );
-    MakeFileSharedLog( );*/
-
-    return 0;
-}
+////void FileDownLogFile( )
+////{
+////    std::fstream output1("downlog", std::ios::out | std::ios::trunc | std::ios::binary);
+////    if (!output1)
+////        return;
+////
+////    qiuwanli::FileDownLogFile downlog;
+////    MakeDownlog(downlog.add_filelog( ), "123", "1234", "1234", "1234", "1234");
+////    MakeDownlog(downlog.add_filelog( ), "qwer", "qwer", "qwer", "qwer", "qrwe");
+////    MakeDownlog(downlog.add_filelog( ), "asdf", "asdf", "asdf", "asdf", "asdf");
+////    MakeDownlog(downlog.add_filelog( ), "zxcv", "zxcv", "zxcv", "zxcv", "zxcv");
+////
+////    if (!downlog.SerializeToOstream(&output1))
+////        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
+////    output1.close( );
+////}
 //////
+////void MakeFileDowingLog( )
+////{
+////    std::fstream output1("downinglog", std::ios::out | std::ios::trunc | std::ios::binary);
+////    if (!output1)
+////        return;
+////
+////    qiuwanli::FileDownLogFiles downing;
+////    MakeFileDowingLog(downing.add_filedownlog( ), "filename1", "1234", "20170203", "wateing", "sha512");
+////    MakeFileDowingLog(downing.add_filedownlog( ), "filename12", "1234", "20170203", "wite", "sha512");
+////    MakeFileDowingLog(downing.add_filedownlog( ), "filename13", "1234", "20170203", "downing", "sha512");
+////    MakeFileDowingLog(downing.add_filedownlog( ), "filename14", "1234", "20170203", "wating", "sha512");
+////    MakeFileDowingLog(downing.add_filedownlog( ), "filename15", "1234", "20170203", "wating", "sha512");
+////
+////    if (!downing.SerializeToOstream(&output1))
+////        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
+////    output1.close( );
+////}
+////
+////void MakePath4FileOrDir( )
+////{
+////    std::fstream output1("MakePath4FileOrDir", std::ios::out | std::ios::trunc | std::ios::binary);
+////    if (!output1)
+////        return;
+////
+////    qiuwanli::AllFiles allfile;
+////    allfile.set_pathlist("default");
+////    MakePath4FileOrDir(allfile.add_filespath( ), "123a", "1234a", 1234lu);
+////    MakePath4FileOrDir(allfile.add_filespath( ), "123b", "1234b", 1234lu);
+////    MakePath4FileOrDir(allfile.add_filespath( ), "123c", "1234c", 1234lu);
+////    MakePath4FileOrDir(allfile.add_filespath( ), "123d", "1234d", 1234lu);
+////
+////    if (!allfile.SerializeToOstream(&output1))
+////        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
+////    output1.close( );
+////}
+////
+////void MakeFriendList( )
+////{
+////    std::fstream output1("FriendList", std::ios::out | std::ios::trunc | std::ios::binary);
+////    if (!output1)
+////        return;
+////
+////    qiuwanli::FriednList friends;
+////    MakeFriendList(friends.add_friend_( ), "123a", "1234z", "1234");
+////    MakeFriendList(friends.add_friend_( ), "123s", "1234x", "1234");
+////    MakeFriendList(friends.add_friend_( ), "123d", "1234c", "1234");
+////    MakeFriendList(friends.add_friend_( ), "123f", "1234v", "1234");
+////
+////    if (!friends.SerializeToOstream(&output1))
+////        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
+////    output1.close( );
+////}
+////
+////void MakeFileSharedLog( )
+////{
+////    std::fstream output1("FileSharedLog", std::ios::out | std::ios::trunc | std::ios::binary);
+////    if (!output1)
+////        return;
+////
+////    qiuwanli::FileShared fileshared;
+////    MakeFileSharedLog(fileshared.add_sharedlog( ), "qwer", "1234", 1234, 1234, "1234");
+////    MakeFileSharedLog(fileshared.add_sharedlog( ), "qwerasdf", "1234", 1234, 1234, "1234");
+////    MakeFileSharedLog(fileshared.add_sharedlog( ), "qwetqweqwe", "1234", 1234, 1234, "1234");
+////    MakeFileSharedLog(fileshared.add_sharedlog( ), "http://www.baidu.com", "1234", 1234, 1234, "1234");
+////    MakeFileSharedLog(fileshared.add_sharedlog( ), "123", "1234", 1234, 1234, "1234");
+////
+////    if (!fileshared.SerializeToOstream(&output1))
+////        std::cerr << "Failed to write FileDownLogFile:" << std::endl;
+////    output1.close( );
+////}
+////初始化配置文件//
+//int main1( )
+//{
+//    DoFileInfoListFile( );
+//    DoFileListFile( );
+//    DoClientConfigFile( ); 
+//    ServerUserFiles( );
+//    makesetfiles( ); 
+//    makeBlockInfoTableFile( ); 
+//    
+//    /*FileDownLogFile( );
+//    MakeFileDowingLog( );
+//    MakePath4FileOrDir( );
+//    MakeFriendList( );
+//    MakeFileSharedLog( );*/
+//
+//    return 0;
+//}
+////////
 //////#include <iostream>  
 //////#include <openssl/sha.h>   
 //////#include <openssl/crypto.h>  // OPENSSL_cleanse
@@ -713,3 +713,30 @@ int main( )
 ////
 ////    return 0;
 ////}
+#include <iostream>
+#include <iomanip>
+#include <ctime>
+#include <stdio.h>
+
+int main( )
+{
+    char mbstr[100];
+
+    time_t now;
+    time(&now);
+
+    // 定义两个变量，存储转换结果
+    struct tm tmTmp;
+
+    // 转换为tm结构
+    localtime_s(&tmTmp, &now);
+
+
+    if (std::strftime(mbstr, 100, "%F %T", &tmTmp))
+    {
+        std::cout << mbstr << std::endl;
+    }
+
+
+    return 0;
+}

@@ -47,12 +47,24 @@ struct ComData
     qiuwanli::BlockInfoTable BlockTablePreDiff;
     qiuwanli::FileInfoListTable FileInfoList;
     qiuwanli::ClientConfigFileTable ClientConfigFile;
-
+    qiuwanli::UserInfo user;
 
     boost::filesystem::ofstream OpFile;
     boost::filesystem::ofstream OpFileBlockInfo;
     
     std::vector<std::pair<std::string, std::string>> curUploadFile;
+    struct Vec3
+    {
+        std::string m_FileName;
+        std::string m_FileSHA512;
+        int m_type;
+        Vec3(std::string& s1, std::string& s2, int type) 
+            :m_FileName(s1), m_FileSHA512(s2), m_type(type)
+        {}
+    };
+    std::vector<Vec3> m_UploadFile;
+    std::vector<std::pair<std::string, std::string>> DoneUploadFile;
+    size_t DateChage = 0;
 };
 
 extern ComData g_ComData;

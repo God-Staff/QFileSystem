@@ -18,10 +18,10 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ThridDownClient.h">
+    <ClInclude Include="TestMFCControl.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ThridDownClientDlg.h">
+    <ClInclude Include="TestMFCControlDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="stdafx.h">
@@ -33,70 +33,30 @@
     <ClInclude Include="Resource.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="PublicStruct.pb.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Interface.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="asnyListion.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="SendFile.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Servers.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Session.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="handler_allocator.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="public.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="MD5.hpp">
-      <Filter>头文件</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ThridDownClient.cpp">
+    <ClCompile Include="TestMFCControl.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ThridDownClientDlg.cpp">
+    <ClCompile Include="TestMFCControlDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="stdafx.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="PublicStruct.pb.cc">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Interface.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="SendFile.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="MD5.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="ThridDownClient.rc">
+    <ResourceCompile Include="TestMFCControl.rc">
       <Filter>资源文件</Filter>
     </ResourceCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="res\ThridDownClient.rc2">
+    <None Include="res\TestMFCControl.rc2">
       <Filter>资源文件</Filter>
     </None>
-    <None Include="PublicStruct.proto" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="res\ThridDownClient.ico">
+    <Image Include="res\TestMFCControl.ico">
       <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>

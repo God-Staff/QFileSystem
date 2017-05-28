@@ -49,9 +49,6 @@ void SendFile::sender(boost::asio::io_service& io
 
     clock_t cost_time = clock( );
 
-    const size_t k_buffer_size = 32 * 1024;
-    char buffer[k_buffer_size]{ };
-
     std::string sbuf = filename;//防止文件名中有空白字符
     size_t filename_size = sbuf.size( );//strlen (filename) + 1;
     size_t file_info_size = sizeof(file_info);
@@ -94,9 +91,6 @@ void SendFile::senderLitter(boost::asio::io_service& io
                       , const char* filename
                       , unsigned char msg_type)
 {
-    //const size_t k_buffer_size = 32 * 1024;
-    char buffer[k_buffer_size]{ };
-
     std::string sbuf = filename;//防止文件名中有空白字符
     size_t filename_size = sbuf.size( );//strlen (filename) + 1;
     size_t file_info_size = sizeof(file_info);

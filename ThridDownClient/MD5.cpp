@@ -266,7 +266,9 @@ void MD5Transform (uint32 buf[4], uint32 const in[16]) {
  *
  * @return     The bytes md 5.
  */
-int getBytesMD5 (const unsigned char* src, unsigned int length, char* md5) {
+int getBytesMD5 (const unsigned char* src, unsigned int length, char* md5) 
+{
+    char FFFF[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 	unsigned char i = 0;
 	unsigned char md5Bytes[16] = { 0 };
 	MD5_CTX context;
@@ -277,11 +279,17 @@ int getBytesMD5 (const unsigned char* src, unsigned int length, char* md5) {
 	MD5Init (&context);
 	MD5Update (&context, src, length);
 	MD5Final (md5Bytes, &context);
-	for (i = 0; i < 16; i++) {
-		//sprintf (md5, "%02X", md5Bytes[i]);
-		md5 += 2;
-	}
-	*md5 = '\0';
+    for (i = 0; i < 16; i++)
+    {
+        int x = md5Bytes[i];
+        int xx = x & 15;
+        int xxx = x & 240;
+        xxx = xxx >> 4;
+        md5[2 * i] = FFFF[xxx];
+        md5[2 * i + 1] = FFFF[xx];
+    }
+    *md5 = '\0';
+
 	return 0;
 }
 
@@ -293,7 +301,8 @@ int getBytesMD5 (const unsigned char* src, unsigned int length, char* md5) {
  *
  * @return     The string md 5.
  */
-int getStringMD5 (const char* src, char* md5) {
+int getStringMD5 (const char* src, char* md5) 
+{
 	return getBytesMD5 ((unsigned char*)src, strlen ((char*)src), md5);
 }
 
@@ -305,28 +314,39 @@ int getStringMD5 (const char* src, char* md5) {
  *
  * @return     The file md 5.
  */
-int getFileMD5 (const char* path, char* md5) {
+int getFileMD5 (const char* path, char* md5) 
+{
+    char FFFF[16] = {'0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'};
 	FILE* fp = NULL;
 	unsigned char buffer[MD5_FILE_BUFFER_LEN] = { 0 };
 	int count = 0;
 	MD5_CTX context;
 	unsigned char md5Bytes[16] = { 0 };
 	int i;
-	if (path == NULL || md5 == NULL) {
+	if (path == NULL || md5 == NULL) 
+    {
 		return -1;
 	}
 	fopen_s (&fp,path, "rb");
 	if (fp == NULL) {
 		return -1;
 	}
+
 	MD5Init (&context);
-	while ((count = fread (buffer, 1, MD5_FILE_BUFFER_LEN, fp)) > 0) {
+	while ((count = fread (buffer, 1, MD5_FILE_BUFFER_LEN, fp)) > 0) 
+    {
 		MD5Update (&context, buffer, count);
 	}
 	MD5Final (md5Bytes, &context);
-	for (i = 0; i < 16; i++) {
-		//sprintf (md5, "%02X", md5Bytes[i]);
-		md5 += 2;
+
+	for (i = 0; i < 16; i++) 
+    {
+        int x = md5Bytes[i];
+        int xx = x & 15;
+        int xxx = x & 240;
+        xxx = xxx >> 4;
+        md5[2 * i] = FFFF[xxx];
+        md5[2 * i + 1] = FFFF[xx];
 	}
 	*md5 = '\0';
 	return 0;

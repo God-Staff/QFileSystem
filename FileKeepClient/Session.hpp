@@ -21,6 +21,7 @@
 #include "FileManage.hpp"
 #include "SerializationToStream.hpp"
 #include "Interface.h"
+#include "SendFile.hpp"
 
 class Session : public boost::enable_shared_from_this<Session>
 {
@@ -64,6 +65,7 @@ public:
                 return;
             fst.read(buf, endpos);
 
+            //将数据块写到对应的偏移位置
             FileManage fileMange;
             fileMange.open(saveFileNamess);
             offset=fileMange.WriteFileBlockEnd(buf, endpos);
@@ -72,6 +74,23 @@ public:
             //将块信息写入块表
             CInterface fff;
             fff.DoBlockInfoTable(g_ComData.BlockTableDiff.add_block( ), vstr[4], vstr[3], saveFileNamess, std::stoi(vstr[1]), endpos, offset);
+
+            //并发送给目录服务端
+            boost::asio::io_service io_ser;
+            std::string filename=vstr[0];
+            filename += "+";
+            filename += vstr[3];
+            filename += "+";
+            filename += vstr[1];
+            filename += "+";
+            filename += "127.0.0.1";
+            try
+            {
+                SendFile send;
+                send.senderLitter(io_ser, "127.0.0.1", 8089, filename.c_str( ), 'f');
+            } catch (std::exception& e)
+            {
+            }
         }
 
         WriteBlock_ToFile( );
@@ -184,34 +203,34 @@ private:
              receive_file_content( );
         }
 
-        if (vcheck == g_ComData.Conf.prikeymd5().c_str())
-        {
-            if (vstr.size()==3)
-            {
-                const char* Rtype = vstr[2].c_str( );//
-            }
-        
-            //解析请求类型，调用不同的处理函数
-            switch ( file_info_.m_ReqiureType )
-            {
-            case 'a':       //请求建立连接
-                /*socket_.async_receive(
-                    boost::asio::buffer(buffer_, k_buffer_size)
-                    , boost::bind(&Session::CheckKey
-                    , shared_from_this( )
-                    , boost::asio::placeholders::error));*/
-                break;
-            case 'b':       //发送验证结果
-                socket_.async_receive(
-                    boost::asio::buffer(buffer_, k_buffer_size)
-                    , boost::bind(&Session::handle_file
-                    , this
-                    , boost::asio::placeholders::error));
-                break;
-            default:
-                break;
-            }
-        }
+        //if (vcheck == g_ComData.Conf.prikeymd5().c_str())
+        //{
+        //    if (vstr.size()==3)
+        //    {
+        //        const char* Rtype = vstr[2].c_str( );//
+        //    }
+        //
+        //    //解析请求类型，调用不同的处理函数
+        //    switch ( file_info_.m_ReqiureType )
+        //    {
+        //    case 'a':       //请求建立连接
+        //        /*socket_.async_receive(
+        //            boost::asio::buffer(buffer_, k_buffer_size)
+        //            , boost::bind(&Session::CheckKey
+        //            , shared_from_this( )
+        //            , boost::asio::placeholders::error));*/
+        //        break;
+        //    case 'b':       //发送验证结果
+        //        socket_.async_receive(
+        //            boost::asio::buffer(buffer_, k_buffer_size)
+        //            , boost::bind(&Session::handle_file
+        //            , this
+        //            , boost::asio::placeholders::error));
+        //        break;
+        //    default:
+        //        break;
+        //    }
+        //}
 
     }
 

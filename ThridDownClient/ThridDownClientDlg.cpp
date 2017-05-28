@@ -41,6 +41,7 @@ void CThridDownClientDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CThridDownClientDlg, CDialogEx)
 	ON_WM_PAINT()
 	ON_WM_QUERYDRAGICON()
+    ON_WM_TIMER()
     ON_NOTIFY(NM_RCLICK, IDC_LIST_FILE, &CThridDownClientDlg::OnNMRClickListFile)
     ON_NOTIFY(NM_RCLICK, IDC_LIST_ForDown, &CThridDownClientDlg::OnNMRClickListFordownMenu)
     ON_NOTIFY(NM_RCLICK, IDC_LIST_SHARED, &CThridDownClientDlg::OnNMRClickListSharedMenu)
@@ -58,6 +59,21 @@ BEGIN_MESSAGE_MAP(CThridDownClientDlg, CDialogEx)
     ON_BN_CLICKED(IDC_DownLoadURL, &CThridDownClientDlg::OnBnClickedDownloadurl)
 END_MESSAGE_MAP()
 
+void CThridDownClientDlg::OnTimer(UINT_PTR nIDEvent)
+{
+    switch (nIDEvent)
+    {
+    case 1:
+              
+        break;
+    case 2:
+        //在这添加执行定时器2的任务； 
+        break;
+    default:
+        break;
+    }
+    CDialogEx::OnTimer(nIDEvent);
+}
 
 // CThridDownClientDlg 消息处理程序
 
@@ -482,7 +498,8 @@ void CThridDownClientDlg::OnUploadFile( )
     std::string sha512;
 
     GetFileSHA512(filename, sha512);
-    g_ComData.curUploadFile.push_back(std::make_pair(filename, sha512));
+    g_ComData.m_UploadFile.push_back(ComData::Vec3(filename,sha512,0));
+    //g_ComData.curUploadFile.push_back(std::make_pair(filename, sha512));
     filename += '+';
     filename += sha512;
     filename += '+';
@@ -600,4 +617,10 @@ void CThridDownClientDlg::GetFileSHA512(std::string& fileName, std::string& File
         FileSHA512 + FFFF[xxx] + FFFF[xx];
     }
     //FileSHA512
+}
+
+void CThridDownClientDlg::UpDataUI()
+{
+    SetTimer(1, 15000,NULL);
+
 }

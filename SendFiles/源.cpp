@@ -17,7 +17,7 @@ void sender(boost::asio::io_service &io
             , const char*	ip_address
             , unsigned	port
             , const char* filename
-            , const char* msg_type)
+            , unsigned char msg_type)
 {
     FILE *fp = nullptr;
 
@@ -98,12 +98,48 @@ void sender(boost::asio::io_service &io
         << " bytes\n" << "speed: " << speed << " MB/s\n\n";
 }
 
+void sender3(boost::asio::io_service &io
+            , const char*	ip_address
+            , unsigned	port
+            , const char* filename
+            , unsigned char msg_type)
+{
+    clock_t cost_time = clock( );
+
+    const size_t k_buffer_size = 32 * 1024;
+    char buffer[k_buffer_size]{ };
+    File_info file_info;
+
+    std::string sbuf = filename;
+
+    size_t filename_size = sbuf.size( );
+    size_t file_info_size = sizeof(file_info);
+    size_t total_size = file_info_size + filename_size;
+
+    if (total_size > k_buffer_size)
+    {
+        std::cerr << "File name is too long";
+        return;
+    }
+    file_info.m_FileNameLength = filename_size;
+    file_info.m_RequireType = msg_type;
+    memcpy(buffer, &file_info, file_info_size);							//文件信息
+    memcpy(buffer + file_info_size, filename, filename_size);			//文件名/消息类型
+
+    boost::asio::ip::tcp::socket socket(io);
+    socket.connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address_v4::from_string(ip_address), port));
+
+    std::cout << "Sending file : " << filename << " MsgType:" << msg_type << std::endl;
+    size_t len = total_size;
+}
+
 int main( )
 {
     boost::asio::io_service io_ser;
     try
     {
-        sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (2)", "1001");
+        sender3(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (2)", 'a');
+        /*sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (2)", "1001");
         sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (3)", "1001");
         sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (4)", "1001");
         sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (5)", "1001");
@@ -136,7 +172,7 @@ int main( )
         sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (32)", "1001");
         sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (33)", "1001");
         sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (34)", "1001");
-        sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (35)", "1001");
+        sender(io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (35)", "1001");*/
     } catch (std::exception& err)
     {
         std::cerr << err.what( ) << "\n";

@@ -49,6 +49,17 @@ struct ComData
 
     boost::filesystem::ofstream OpFile;
     boost::filesystem::ofstream OpFileBlockInfo;
+    struct Vec4
+    {
+        std::string m_Sha512;
+        std::string m_md5;
+        long m_BlockNumer;
+        std::string m_IP;
+        Vec4(std::string& Sha512, std::string& md5, long BlockNumer, std::string& IP)
+            :m_Sha512(Sha512), m_md5(md5), m_BlockNumer(BlockNumer), m_IP(IP)
+        {}
+    };
+    std::vector<Vec4> BlockUploadList;
 };
 
 extern ComData g_ComData;

@@ -25,7 +25,8 @@ public:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
 
 
-// 实现
+    virtual void OnTimer(UINT_PTR nIDEvent);
+    // 实现
 protected:
 	HICON m_hIcon;
 
@@ -59,6 +60,8 @@ public:
     afx_msg void OnBnClickedDownloadurl( );
 
     void GetFileSHA512(std::string& fileName, std::string& FileSHA512);
+    void UpDataUI( );
+    VOID CALLBACK CountTime( );
 private:
     std::vector<std::string> m_VUpFileList;
     qiuwanli::UserInfo user;

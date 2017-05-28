@@ -192,6 +192,7 @@
   <ItemGroup>
     <ClInclude Include="constdate.hpp" />
     <ClInclude Include="handler_allocator.hpp" />
+    <ClInclude Include="Interface.h" />
     <ClInclude Include="optlog.hpp" />
     <ClInclude Include="public.h" />
     <ClInclude Include="PublicStruct.pb.h" />
@@ -205,7 +206,7 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Interface.cpp" />
     <ClCompile Include="PublicStruct.pb.cc" />
     <ClCompile Include="QFileSystem.cpp" />
     <ClCompile Include="QFileSystemDlg.cpp" />

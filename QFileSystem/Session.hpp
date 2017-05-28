@@ -156,10 +156,8 @@ private:
 
         //将const char* 分割
         std::string str(base_name_msg);
-        //std::vector<std::string>  vstr;
         boost::split(vstr, str, boost::is_any_of("+"), boost::token_compress_on);
         basename = vstr[0].c_str( );
-        //const char* vcheck = vstr[1].c_str( );//验证信息
 
         if (file_info_.m_ReqiureType == 'a')
         {
@@ -172,10 +170,12 @@ private:
                     SendFile sender;
                     try
                     {
-                        sender.senderLitter(io_ser, "127.0.0.1", 8089, "HaveFile", 'b');
+                        std::string name = vstr[0];
+                        name += "+";
+                        name += vstr[1];
+                        sender.senderLitter(io_ser, "127.0.0.1", 8089, name.c_str( ), 'b');
                     } catch (CException* e)
-                    {
-                    }
+                    {}
                 }
             }
 
@@ -194,9 +194,11 @@ private:
 
                 if (!ClientInfo.SerializePartialToOstream(&Op))
                 {
-
+                    return ;
                 }
                 std::string  filename = "ClientConfigFile";
+                filename += "+";
+                filename += vstr[1];
 
                 boost::asio::io_service io_ser;
                 SendFile sender;
@@ -204,42 +206,84 @@ private:
                 {
                     sender.sender(io_ser, "127.0.0.1", 8089, filename.c_str(), 'c');
                 } catch (CException* e)
+                { }
+            }
+
+            ////解析请求类型，调用不同的处理函数
+            //switch (file_info_.m_ReqiureType)
+            //{
+            //case 'a':       //请求建立连接
+            //    socket_.async_receive(
+            //        boost::asio::buffer(buffer_, k_buffer_size)
+            //        , boost::bind(&Session::CheckKey
+            //        , shared_from_this( )
+            //        , boost::asio::placeholders::error));
+            //    break;
+            //case 'b':       //发送验证结果
+            //    socket_.async_receive(
+            //        boost::asio::buffer(buffer_, k_buffer_size)
+            //        , boost::bind(&Session::handle_file
+            //        , this
+            //        , boost::asio::placeholders::error));
+            //    break;
+            //default:
+            //    break;
+            //}
+        }
+
+        //接收已经上传到存储服务端的文件块对应的信息
+        if (file_info_.m_ReqiureType == 'f')
+        {
+            g_ComData.BlockUploadList.emplace_back(ComData::Vec4(vstr[0], vstr[1], std::stol(vstr[2]), vstr[3]));
+        }
+
+        //文件传输完成，进行块统计
+        if (file_info_.m_ReqiureType == 'g')
+        {
+            //从中删选数据
+            std::vector<ComData::Vec4> CheckBlockList;
+            for (auto iter = g_ComData.BlockUploadList.begin( ); iter != g_ComData.BlockUploadList.end( ); ++iter)
+            {
+                if (iter->m_Sha512==vstr[1])
                 {
+                    CheckBlockList.emplace_back(ComData::Vec4(iter->m_Sha512, iter->m_md5, iter->m_BlockNumer, iter->m_IP));
+                    iter = g_ComData.BlockUploadList.erase(iter);
                 }
-
             }
 
-            if (file_info_.m_ReqiureType == 'a')
+
+            //检查文件是否完整
+            bool Full = false;
+            if (CheckBlockList.size()==std::stoi(vstr[5]))
             {
-
+                long num = 0;
+                //数据完整，添加到BlockInfoTable中,后序列化到文件
+                for (auto x : CheckBlockList)
+                {
+                    num += x.m_BlockNumer;
+                }
+                if (num == ((std::stol(vstr[5]) + long(1)) / 2))
+                {
+                    Full = true;
+                }
             }
 
+            boost::asio::io_service io_ser;
+            std::string  filename= vstr[0];
+            filename += "+";
+            if (Full)
+                filename += "true";
+            else
+                filename += "false";
 
-            if (vstr.size( ) == 3)
+            try
             {
-                const char* Rtype = vstr[2].c_str( );//
-            }
+                SendFile send;
+                send.sender(io_ser, "127.0.0.1", 8089, filename.c_str( ), 'h');
+            } catch (CException* e)
+            { }
+            
 
-            //解析请求类型，调用不同的处理函数
-            switch (file_info_.m_ReqiureType)
-            {
-            case 'a':       //请求建立连接
-                socket_.async_receive(
-                    boost::asio::buffer(buffer_, k_buffer_size)
-                    , boost::bind(&Session::CheckKey
-                    , shared_from_this( )
-                    , boost::asio::placeholders::error));
-                break;
-            case 'b':       //发送验证结果
-                socket_.async_receive(
-                    boost::asio::buffer(buffer_, k_buffer_size)
-                    , boost::bind(&Session::handle_file
-                    , this
-                    , boost::asio::placeholders::error));
-                break;
-            default:
-                break;
-            }
         }
     }
     //检查客户端携带的PirateKey的MD5是否正确，失败则关闭链接
