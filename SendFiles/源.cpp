@@ -6,10 +6,11 @@
 
 struct File_info 
 {
+    typedef unsigned long long Size_type;
     unsigned char   m_RequireType;
-	size_t          m_FileSize;
-	size_t          m_FileNameLength;
-	File_info () : m_FileSize(0), m_FileNameLength(0) {}
+    Size_type       m_FileSize;
+    size_t          m_FileNameLength;
+    File_info( ) : m_FileSize(0), m_FileNameLength(0), m_RequireType(0){ }
 };
 
 void sender (boost::asio::io_service &io
@@ -30,23 +31,29 @@ void sender (boost::asio::io_service &io
 	//使用智能指针，防止程序出现异常时，fclose未被调用。
 	boost::shared_ptr<FILE> file_ptr (fp, fclose);
 
+    fseek(fp, 0, SEEK_END);
+    File_info::Size_type fileLenth = ftell(fp);
+    rewind(fp);
+
 	clock_t cost_time = clock ();
 
 	const size_t k_buffer_size = 32 * 1024;
 	char buffer[k_buffer_size]{};
 	File_info file_info;
 
-	char buf[32 * 1024]{};
-	
-	strcat_s (buf, filename);
+	//char buf[32 * 1024]{};
+
+    std::string sbuf = filename;
+    sbuf += '+';
+    sbuf += msg_type;
+    std::cout<<sbuf.size( );
+
+	/*strcat_s (buf, filename);
 	strcat_s (buf, "+");
-	strcat_s (buf, msg_type);
-	filename = (const char*)buf;
+	strcat_s (buf, msg_type);*/
+	filename = sbuf.c_str();
 
-	//MessageBox ();
-	//const char* filename_msg = filename + msg_type;
-
-	size_t filename_size = strlen (filename) + 1;
+    size_t filename_size = sbuf.size( );//strlen (filename) + 1;
 	size_t file_info_size = sizeof (file_info);
 	size_t total_size = file_info_size + filename_size;
 
@@ -56,10 +63,8 @@ void sender (boost::asio::io_service &io
 		return;
 	}
 	file_info.m_FileNameLength = filename_size;
-	fseek (fp, 0, SEEK_END);
-	file_info.m_FileSize = ftell (fp);
-	rewind (fp);
-
+    file_info.m_FileSize = fileLenth;
+    file_info.m_RequireType = 'a';
     memcpy(buffer, &file_info, file_info_size);							//文件信息
     memcpy(buffer + file_info_size, filename, filename_size);			//文件名/消息类型
 
@@ -97,40 +102,40 @@ int main ()
 {
 	boost::asio::io_service io_ser;
 	try {
-        sender(io_ser, "127.0.0.1", 9999, "login - 副本 (2)", "1001");
-        sender(io_ser, "127.0.0.1", 9999, "login - 副本 (3)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (4)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (5)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (6)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (7)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (8)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (9)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (10)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (11)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (12)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (13)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (14)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (15)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (16)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (17)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (18)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (19)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (20)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (21)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (22)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (23)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (24)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (25)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (26)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (27)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (28)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (29)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (30)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (31)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (32)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (33)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (34)", "1001");
-		sender (io_ser, "127.0.0.1", 9999, "login - 副本 (35)", "1001");
+        sender(io_ser, "127.0.0.1", 9999,  "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (2)", "1001");
+        sender(io_ser, "127.0.0.1", 9999,  "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (3)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (4)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (5)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (6)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (7)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (8)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (9)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (10)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (11)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (12)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (13)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (14)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (15)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (16)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (17)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (18)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (19)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (20)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (21)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (22)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (23)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (24)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (25)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (26)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (27)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (28)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (29)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (30)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (31)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (32)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (33)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (34)", "1001");
+		sender (io_ser, "127.0.0.1", 9999, "F:\\WorkSpace\\QFileSystem\\Test\\ID2IP - 副本 (35)", "1001");
 	}
 	catch (std::exception& err) 
     {

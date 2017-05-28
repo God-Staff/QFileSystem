@@ -72,8 +72,8 @@ struct ComData
     qiuwanli::BlockInfoTable BlockTableDiff;
     qiuwanli::BlockInfoTable BlockTablePreDiff;
     OptLog opplog;
-    boost::filesystem::ofstream OpFile;
-    boost::filesystem::ofstream OpFileBlockInfo;
+    boost::filesystem::fstream OpFile;
+    boost::filesystem::fstream OpFileBlockInfo;
 };
 
 extern ComData g_ComData;

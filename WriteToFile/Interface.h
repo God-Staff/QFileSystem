@@ -1,6 +1,7 @@
 #pragma once
 #include <openssl/evp.h>  
 #include <boost/filesystem.hpp>
+#include "PublicStruct.pb.h"
 enum ReposeType
 {
     eTypeHeart = 0,
@@ -38,7 +39,7 @@ enum ReposeType
     eTypeBlockList4Down,
     eTypeBlockList4DownTable
 };
-class CInterface
+class CCInterface
 {
 public:
     bool DoConfigFile(qiuwanli::ConfigFile* conf
@@ -91,9 +92,10 @@ public:
     bool DoFileListTable(qiuwanli::FileList* FileList
                          , const std::string& FileName
                          , unsigned long long FileSize
-                         , const std::string& FileSHA512);
+                         , const std::string& FileSHA512
+                         , const std::string& Filestyle);
 
-    bool DoFileDownLogTable(qiuwanli::FileDownLog* fileDownLog
+    /*bool DoFileDownLogTable(qiuwanli::FileDownLog* fileDownLog
                             , const std::string& FileName
                             , unsigned long long FileSize
                             , const std::string& FileDownTime
@@ -143,7 +145,7 @@ public:
                                , unsigned long long BlockNumer
                                , const std::string& BlockMD5
                                , const std::string& SaveServersIP);
-
+                               */
 
 
     void GetFileSHA512(std::string& fileName, std::string& FileSHA512)

@@ -1,0 +1,1956 @@
+base_name_msg:P - 副本 (2)+1001basename:P - 副本 (2)msg_type:1001File Size:P - 副本 (2)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+base_name_msg:P - 副本 (3)+1001basename:P - 副本 (3)msg_type:1001File Size:P - 副本 (3)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.090000 s  bytes_writen: 6298556 bytes
+speed: 66.741901 MB/s
+
+
+base_name_msg:P - 副本 (4)+1001basename:P - 副本 (4)msg_type:1001File Size:P - 副本 (4)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+base_name_msg:P - 副本 (5)+1001basename:P - 副本 (5)msg_type:1001File Size:P - 副本 (5)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+base_name_msg:P - 副本 (6)+1001basename:P - 副本 (6)msg_type:1001File Size:P - 副本 (6)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.071000 s  bytes_writen: 6298556 bytes
+speed: 84.602410 MB/s
+
+
+base_name_msg:P - 副本 (7)+1001basename:P - 副本 (7)msg_type:1001File Size:P - 副本 (7)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.073000 s  bytes_writen: 6298556 bytes
+speed: 82.284535 MB/s
+
+
+base_name_msg:P - 副本 (8)+1001basename:P - 副本 (8)msg_type:1001File Size:P - 副本 (8)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+base_name_msg:P - 副本 (9)+1001basename:P - 副本 (9)msg_type:1001File Size:P - 副本 (9)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.073000 s  bytes_writen: 6298556 bytes
+speed: 82.284535 MB/s
+
+
+base_name_msg:P - 副本 (10)+1001basename:P - 副本 (10)msg_type:1001File Size:P - 副本 (10)+1001
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:P - 副本 (11)+1001basename:P - 副本 (11)msg_type:1001File Size:P - 副本 (11)+1001
+cost time: 0.081000 s  bytes_writen: 6298556 bytes
+speed: 74.157668 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+base_name_msg:P - 副本 (12)+1001basename:P - 副本 (12)msg_type:1001File Size:P - 副本 (12)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.070000 s  bytes_writen: 6298556 bytes
+speed: 85.811016 MB/s
+
+
+base_name_msg:P - 副本 (13)+1001basename:P - 副本 (13)msg_type:1001File Size:P - 副本 (13)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.091000 s  bytes_writen: 6298556 bytes
+speed: 66.008473 MB/s
+
+
+base_name_msg:P - 副本 (14)+1001basename:P - 副本 (14)msg_type:1001File Size:P - 副本 (14)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.085000 s  bytes_writen: 6298556 bytes
+speed: 70.667895 MB/s
+
+
+base_name_msg:P - 副本 (15)+1001basename:P - 副本 (15)msg_type:1001File Size:P - 副本 (15)+1001
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:P - 副本 (16)+1001basename:P - 副本 (16)msg_type:1001File Size:P - 副本 (16)+1001
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+base_name_msg:P - 副本 (17)+1001basename:P - 副本 (17)msg_type:1001File Size:P - 副本 (17)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+base_name_msg:P - 副本 (18)+1001basename:P - 副本 (18)msg_type:1001File Size:P - 副本 (18)+1001
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:P - 副本 (19)+1001basename:P - 副本 (19)msg_type:1001File Size:P - 副本 (19)+1001
+cost time: 0.083000 s  bytes_writen: 6298556 bytes
+speed: 72.370736 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+base_name_msg:P - 副本 (20)+1001basename:P - 副本 (20)msg_type:1001File Size:P - 副本 (20)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+base_name_msg:P - 副本 (21)+1001basename:P - 副本 (21)msg_type:1001File Size:P - 副本 (21)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.070000 s  bytes_writen: 6298556 bytes
+speed: 85.811016 MB/s
+
+
+base_name_msg:P - 副本 (22)+1001basename:P - 副本 (22)msg_type:1001File Size:P - 副本 (22)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+base_name_msg:P - 副本 (23)+1001basename:P - 副本 (23)msg_type:1001File Size:P - 副本 (23)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.083000 s  bytes_writen: 6298556 bytes
+speed: 72.370736 MB/s
+
+
+base_name_msg:P - 副本 (24)+1001basename:P - 副本 (24)msg_type:1001File Size:P - 副本 (24)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.081000 s  bytes_writen: 6298556 bytes
+speed: 74.157668 MB/s
+
+
+base_name_msg:P - 副本 (25)+1001basename:P - 副本 (25)msg_type:1001File Size:P - 副本 (25)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.081000 s  bytes_writen: 6298556 bytes
+speed: 74.157668 MB/s
+
+
+base_name_msg:P - 副本 (26)+1001basename:P - 副本 (26)msg_type:1001File Size:P - 副本 (26)+1001
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:P - 副本 (27)+1001basename:P - 副本 (27)msg_type:1001File Size:P - 副本 (27)+1001
+cost time: 0.091000 s  bytes_writen: 6298556 bytes
+speed: 66.008473 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+base_name_msg:P - 副本 (28)+1001basename:P - 副本 (28)msg_type:1001File Size:P - 副本 (28)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+base_name_msg:P - 副本 (29)+1001basename:P - 副本 (29)msg_type:1001File Size:P - 副本 (29)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+base_name_msg:P - 副本 (30)+1001basename:P - 副本 (30)msg_type:1001File Size:P - 副本 (30)+1001
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:P - 副本 (31)+1001basename:P - 副本 (31)msg_type:1001File Size:P - 副本 (31)+1001
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.071000 s  bytes_writen: 6298556 bytes
+speed: 84.602410 MB/s
+
+
+base_name_msg:P - 副本 (32)+1001basename:P - 副本 (32)msg_type:1001File Size:P - 副本 (32)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.068000 s  bytes_writen: 6298556 bytes
+speed: 88.334869 MB/s
+
+
+base_name_msg:P - 副本 (33)+1001basename:P - 副本 (33)msg_type:1001File Size:P - 副本 (33)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.072000 s  bytes_writen: 6298556 bytes
+speed: 83.427376 MB/s
+
+
+base_name_msg:P - 副本 (34)+1001basename:P - 副本 (34)msg_type:1001File Size:P - 副本 (34)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.120000 s  bytes_writen: 6298556 bytes
+speed: 50.056426 MB/s
+
+
+base_name_msg:P - 副本 (35)+1001basename:P - 副本 (35)msg_type:1001File Size:P - 副本 (35)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+base_name_msg:P - 副本 (2)+1001basename:P - 副本 (2)msg_type:1001File Size:P - 副本 (2)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+base_name_msg:P - 副本 (3)+1001basename:P - 副本 (3)msg_type:1001File Size:P - 副本 (3)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+base_name_msg:P - 副本 (4)+1001basename:P - 副本 (4)msg_type:1001File Size:P - 副本 (4)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.070000 s  bytes_writen: 6298556 bytes
+speed: 85.811016 MB/s
+
+
+base_name_msg:P - 副本 (5)+1001basename:P - 副本 (5)msg_type:1001File Size:P - 副本 (5)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.071000 s  bytes_writen: 6298556 bytes
+speed: 84.602410 MB/s
+
+
+base_name_msg:P - 副本 (6)+1001basename:P - 副本 (6)msg_type:1001File Size:P - 副本 (6)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.072000 s  bytes_writen: 6298556 bytes
+speed: 83.427376 MB/s
+
+
+base_name_msg:ID2IP - 副本 (3)+1001basename:ID2IP - 副本 (3)msg_type:1001File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+base_name_msg:ID2IP - 副本 (4)+1001basename:ID2IP - 副本 (4)msg_type:1001File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)+1001法国basename:ID2IP - 副本 (2)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 9.616000 s  bytes_writen: 6298556 bytes
+speed: 0.624664 MB/s
+
+
+base_name_msg:ID2IP - 副本 (3)+1001法国basename:ID2IP - 副本 (3)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+base_name_msg:ID2IP - 副本 (4)+1001法国basename:ID2IP - 副本 (4)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.070000 s  bytes_writen: 6298556 bytes
+speed: 85.811016 MB/s
+
+
+base_name_msg:ID2IP - 副本 (5)+1001法国basename:ID2IP - 副本 (5)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)basename:ID2IP - 副本 (2)msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.070000 s  bytes_writen: 6298556 bytes
+speed: 85.811016 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.071000 s  bytes_writen: 6298556 bytes
+speed: 84.602410 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (6)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (7)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.221000 s  bytes_writen: 6298556 bytes
+speed: 27.179960 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (8)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.066000 s  bytes_writen: 6298556 bytes
+speed: 91.011683 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (9)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+base_name_msg:W法国basename:W法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (10)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+base_name_msg:W法国basename:W法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (11)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.093000 s  bytes_writen: 6298556 bytes
+speed: 64.588936 MB/s
+
+
+base_name_msg:ID2IP - 副本 (12)basename:ID2IP - 副本 (12)msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (12)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.490000 s  bytes_writen: 6298556 bytes
+speed: 12.258717 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)basename:ID2IP - 副本 (2)msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 6.693000 s  bytes_writen: 6298556 bytes
+speed: 0.897471 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)
+cost time: 1.348000 s  bytes_writen: 6298556 bytes
+speed: 4.456062 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)
+cost time: 1.090000 s  bytes_writen: 6298556 bytes
+speed: 5.510799 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 1.405000 s  bytes_writen: 6298556 bytes
+speed: 4.275282 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)basename:ID2IP - 副本 (2)msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)
+cost time: 3.343000 s  bytes_writen: 6298556 bytes
+speed: 1.796821 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)
+cost time: 4.136000 s  bytes_writen: 6298556 bytes
+speed: 1.452314 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 15.489000 s  bytes_writen: 6298556 bytes
+speed: 0.387809 MB/s
+
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)
+filesize not matched! 6298556/27052109211893760
+
+cost time: 44.687000 s  bytes_writen: 6298556 bytes
+speed: 0.134419 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)basename:ID2IP - 副本 (2)msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)
+cost time: 2.252000 s  bytes_writen: 6298556 bytes
+speed: 2.667305 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)
+cost time: 8.459000 s  bytes_writen: 6298556 bytes
+speed: 0.710104 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)
+cost time: 3.725000 s  bytes_writen: 6298556 bytes
+speed: 1.612556 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 10.693000 s  bytes_writen: 6298556 bytes
+speed: 0.561748 MB/s
+
+
+cost time: 5.286000 s  bytes_writen: 0 bytes
+speed: 0.000000 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)basename:ID2IP - 副本 (2)msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)
+cost time: 0.090000 s  bytes_writen: 6298556 bytes
+speed: 66.741901 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)
+cost time: 0.088000 s  bytes_writen: 6298556 bytes
+speed: 68.258762 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (6)
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (7)
+cost time: 0.079000 s  bytes_writen: 6298556 bytes
+speed: 76.035077 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (8)
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:法国basename:法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (9)
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:W法国basename:W法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (10)
+cost time: 0.088000 s  bytes_writen: 6298556 bytes
+speed: 68.258762 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:W法国basename:W法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (11)
+cost time: 0.086000 s  bytes_writen: 6298556 bytes
+speed: 69.846175 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:W法国basename:W法国msg_type:File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (12)
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)+1001法国basename:ID2IP - 副本 (2)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (3)+1001法国basename:ID2IP - 副本 (3)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001法国
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (4)+1001法国basename:ID2IP - 副本 (4)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (5)+1001法国basename:ID2IP - 副本 (5)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)+1001法国
+cost time: 0.096000 s  bytes_writen: 6298556 bytes
+speed: 62.570532 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (6)+1001法国basename:ID2IP - 副本 (6)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (6)+1001法国
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (7)+1001法国basename:ID2IP - 副本 (7)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (7)+1001法国
+cost time: 0.067000 s  bytes_writen: 6298556 bytes
+speed: 89.653300 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (8)+1001法国basename:ID2IP - 副本 (8)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (8)+1001法国
+cost time: 0.065000 s  bytes_writen: 6298556 bytes
+speed: 92.411863 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (9)+1001法国basename:ID2IP - 副本 (9)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (9)+1001法国
+cost time: 0.067000 s  bytes_writen: 6298556 bytes
+speed: 89.653300 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+base_name_msg:ID2IP - 副本 (10)+1001法国basename:ID2IP - 副本 (10)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (10)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+base_name_msg:ID2IP - 副本 (11)+1001法国basename:ID2IP - 副本 (11)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (11)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (12)+1001法国basename:ID2IP - 副本 (12)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (12)+1001法国
+cost time: 0.095000 s  bytes_writen: 6298556 bytes
+speed: 63.229169 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (13)+1001法国basename:ID2IP - 副本 (13)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (13)+1001法国
+cost time: 0.106000 s  bytes_writen: 6298556 bytes
+speed: 56.667652 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (14)+1001法国basename:ID2IP - 副本 (14)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (14)+1001法国
+cost time: 0.093000 s  bytes_writen: 6298556 bytes
+speed: 64.588936 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (15)+1001法国basename:ID2IP - 副本 (15)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (15)+1001法国
+cost time: 0.073000 s  bytes_writen: 6298556 bytes
+speed: 82.284535 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (16)+1001法国basename:ID2IP - 副本 (16)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (16)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (17)+1001法国basename:ID2IP - 副本 (17)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (17)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (18)+1001法国basename:ID2IP - 副本 (18)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (18)+1001法国
+cost time: 0.089000 s  bytes_writen: 6298556 bytes
+speed: 67.491810 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.090000 s  bytes_writen: 6298556 bytes
+speed: 66.741901 MB/s
+
+
+base_name_msg:ID2IP - 副本 (19)+1001法国basename:ID2IP - 副本 (19)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (19)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (20)+1001法国basename:ID2IP - 副本 (20)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (20)+1001法国
+cost time: 0.170000 s  bytes_writen: 6298556 bytes
+speed: 35.333948 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (21)+1001法国basename:ID2IP - 副本 (21)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (21)+1001法国
+cost time: 0.144000 s  bytes_writen: 6298556 bytes
+speed: 41.713688 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (22)+1001法国basename:ID2IP - 副本 (22)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (22)+1001法国
+cost time: 0.092000 s  bytes_writen: 6298556 bytes
+speed: 65.290990 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (23)+1001法国basename:ID2IP - 副本 (23)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (23)+1001法国
+cost time: 0.111000 s  bytes_writen: 6298556 bytes
+speed: 54.115055 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (24)+1001法国basename:ID2IP - 副本 (24)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (24)+1001法国
+cost time: 0.130000 s  bytes_writen: 6298556 bytes
+speed: 46.205931 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.132000 s  bytes_writen: 6298556 bytes
+speed: 45.505842 MB/s
+
+
+base_name_msg:ID2IP - 副本 (25)+1001法国basename:ID2IP - 副本 (25)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (25)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (26)+1001法国basename:ID2IP - 副本 (26)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (26)+1001法国
+cost time: 0.115000 s  bytes_writen: 6298556 bytes
+speed: 52.232792 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (27)+1001法国basename:ID2IP - 副本 (27)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (27)+1001法国
+cost time: 0.110000 s  bytes_writen: 6298556 bytes
+speed: 54.607010 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (28)+1001法国basename:ID2IP - 副本 (28)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (28)+1001法国
+cost time: 0.106000 s  bytes_writen: 6298556 bytes
+speed: 56.667652 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (29)+1001法国basename:ID2IP - 副本 (29)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (29)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (30)+1001法国basename:ID2IP - 副本 (30)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (30)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (31)+1001法国basename:ID2IP - 副本 (31)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (31)+1001法国
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (32)+1001法国basename:ID2IP - 副本 (32)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (32)+1001法国
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (33)+1001法国basename:ID2IP - 副本 (33)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (33)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (34)+1001法国basename:ID2IP - 副本 (34)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (34)+1001法国
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (35)+1001法国basename:ID2IP - 副本 (35)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (35)+1001法国
+cost time: 0.067000 s  bytes_writen: 6298556 bytes
+speed: 89.653300 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.063000 s  bytes_writen: 6298556 bytes
+speed: 95.345573 MB/s
+
+
+cost time: 93.085000 s  bytes_writen: 0 bytes
+speed: 0.000000 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)+1001法国basename:ID2IP - 副本 (2)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (3)+1001法国basename:ID2IP - 副本 (3)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001法国
+cost time: 0.068000 s  bytes_writen: 6298556 bytes
+speed: 88.334869 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (4)+1001法国basename:ID2IP - 副本 (4)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001法国
+cost time: 0.066000 s  bytes_writen: 6298556 bytes
+speed: 91.011683 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (5)+1001法国basename:ID2IP - 副本 (5)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)+1001法国
+cost time: 0.062000 s  bytes_writen: 6298556 bytes
+speed: 96.883405 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (6)+1001法国basename:ID2IP - 副本 (6)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (6)+1001法国
+cost time: 0.056000 s  bytes_writen: 6298556 bytes
+speed: 107.263769 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (7)+1001法国basename:ID2IP - 副本 (7)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (7)+1001法国
+cost time: 0.049000 s  bytes_writen: 6298556 bytes
+speed: 122.587165 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (8)+1001法国basename:ID2IP - 副本 (8)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (8)+1001法国
+cost time: 0.054000 s  bytes_writen: 6298556 bytes
+speed: 111.236502 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (9)+1001法国basename:ID2IP - 副本 (9)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (9)+1001法国
+cost time: 0.059000 s  bytes_writen: 6298556 bytes
+speed: 101.809679 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (10)+1001法国basename:ID2IP - 副本 (10)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (10)+1001法国
+cost time: 0.054000 s  bytes_writen: 6298556 bytes
+speed: 111.236502 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+base_name_msg:ID2IP - 副本 (11)+1001法国basename:ID2IP - 副本 (11)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (11)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (12)+1001法国basename:ID2IP - 副本 (12)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (12)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (13)+1001法国basename:ID2IP - 副本 (13)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (13)+1001法国
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (14)+1001法国basename:ID2IP - 副本 (14)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (14)+1001法国
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (15)+1001法国basename:ID2IP - 副本 (15)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (15)+1001法国
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (16)+1001法国basename:ID2IP - 副本 (16)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (16)+1001法国
+cost time: 0.086000 s  bytes_writen: 6298556 bytes
+speed: 69.846175 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (17)+1001法国basename:ID2IP - 副本 (17)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (17)+1001法国
+cost time: 0.090000 s  bytes_writen: 6298556 bytes
+speed: 66.741901 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (18)+1001法国basename:ID2IP - 副本 (18)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (18)+1001法国
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (19)+1001法国basename:ID2IP - 副本 (19)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (19)+1001法国
+cost time: 0.083000 s  bytes_writen: 6298556 bytes
+speed: 72.370736 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (20)+1001法国basename:ID2IP - 副本 (20)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (20)+1001法国
+cost time: 0.086000 s  bytes_writen: 6298556 bytes
+speed: 69.846175 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (21)+1001法国basename:ID2IP - 副本 (21)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (21)+1001法国
+cost time: 0.086000 s  bytes_writen: 6298556 bytes
+speed: 69.846175 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (22)+1001法国basename:ID2IP - 副本 (22)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (22)+1001法国
+cost time: 0.102000 s  bytes_writen: 6298556 bytes
+speed: 58.889913 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (23)+1001法国basename:ID2IP - 副本 (23)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (23)+1001法国
+cost time: 0.169000 s  bytes_writen: 6298556 bytes
+speed: 35.543024 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (24)+1001法国basename:ID2IP - 副本 (24)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (24)+1001法国
+cost time: 0.136000 s  bytes_writen: 6298556 bytes
+speed: 44.167434 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (25)+1001法国basename:ID2IP - 副本 (25)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (25)+1001法国
+cost time: 0.102000 s  bytes_writen: 6298556 bytes
+speed: 58.889913 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (26)+1001法国basename:ID2IP - 副本 (26)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (26)+1001法国
+cost time: 0.081000 s  bytes_writen: 6298556 bytes
+speed: 74.157668 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (27)+1001法国basename:ID2IP - 副本 (27)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (27)+1001法国
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (28)+1001法国basename:ID2IP - 副本 (28)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (28)+1001法国
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (29)+1001法国basename:ID2IP - 副本 (29)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (29)+1001法国
+cost time: 0.085000 s  bytes_writen: 6298556 bytes
+speed: 70.667895 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (30)+1001法国basename:ID2IP - 副本 (30)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (30)+1001法国
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (31)+1001法国basename:ID2IP - 副本 (31)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (31)+1001法国
+cost time: 0.100000 s  bytes_writen: 6298556 bytes
+speed: 60.067711 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (32)+1001法国basename:ID2IP - 副本 (32)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (32)+1001法国
+cost time: 0.153000 s  bytes_writen: 6298556 bytes
+speed: 39.259942 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.140000 s  bytes_writen: 6298556 bytes
+speed: 42.905508 MB/s
+
+
+base_name_msg:ID2IP - 副本 (33)+1001法国basename:ID2IP - 副本 (33)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (33)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (34)+1001法国basename:ID2IP - 副本 (34)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (34)+1001法国
+cost time: 0.105000 s  bytes_writen: 6298556 bytes
+speed: 57.207344 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (35)+1001法国basename:ID2IP - 副本 (35)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (35)+1001法国
+cost time: 0.112000 s  bytes_writen: 6298556 bytes
+speed: 53.631885 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.120000 s  bytes_writen: 6298556 bytes
+speed: 50.056426 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)+1001法国basename:ID2IP - 副本 (2)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (3)+1001法国basename:ID2IP - 副本 (3)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001法国
+cost time: 0.072000 s  bytes_writen: 6298556 bytes
+speed: 83.427376 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (4)+1001法国basename:ID2IP - 副本 (4)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001法国
+cost time: 0.067000 s  bytes_writen: 6298556 bytes
+speed: 89.653300 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (5)+1001法国basename:ID2IP - 副本 (5)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)+1001法国
+cost time: 0.059000 s  bytes_writen: 6298556 bytes
+speed: 101.809679 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (6)+1001法国basename:ID2IP - 副本 (6)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (6)+1001法国
+cost time: 0.066000 s  bytes_writen: 6298556 bytes
+speed: 91.011683 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (7)+1001法国basename:ID2IP - 副本 (7)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (7)+1001法国
+cost time: 0.057000 s  bytes_writen: 6298556 bytes
+speed: 105.381949 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (8)+1001法国basename:ID2IP - 副本 (8)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (8)+1001法国
+cost time: 0.052000 s  bytes_writen: 6298556 bytes
+speed: 115.514829 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (9)+1001法国basename:ID2IP - 副本 (9)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (9)+1001法国
+cost time: 0.054000 s  bytes_writen: 6298556 bytes
+speed: 111.236502 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (10)+1001法国basename:ID2IP - 副本 (10)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (10)+1001法国
+cost time: 0.061000 s  bytes_writen: 6298556 bytes
+speed: 98.471657 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (11)+1001法国basename:ID2IP - 副本 (11)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (11)+1001法国
+cost time: 0.063000 s  bytes_writen: 6298556 bytes
+speed: 95.345573 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (12)+1001法国basename:ID2IP - 副本 (12)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (12)+1001法国
+cost time: 0.062000 s  bytes_writen: 6298556 bytes
+speed: 96.883405 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (13)+1001法国basename:ID2IP - 副本 (13)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (13)+1001法国
+cost time: 0.064000 s  bytes_writen: 6298556 bytes
+speed: 93.855798 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (14)+1001法国basename:ID2IP - 副本 (14)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (14)+1001法国
+cost time: 0.061000 s  bytes_writen: 6298556 bytes
+speed: 98.471657 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (15)+1001法国basename:ID2IP - 副本 (15)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (15)+1001法国
+cost time: 0.056000 s  bytes_writen: 6298556 bytes
+speed: 107.263769 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (16)+1001法国basename:ID2IP - 副本 (16)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (16)+1001法国
+cost time: 0.062000 s  bytes_writen: 6298556 bytes
+speed: 96.883405 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (17)+1001法国basename:ID2IP - 副本 (17)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (17)+1001法国
+cost time: 0.072000 s  bytes_writen: 6298556 bytes
+speed: 83.427376 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (18)+1001法国basename:ID2IP - 副本 (18)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (18)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (19)+1001法国basename:ID2IP - 副本 (19)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (19)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (20)+1001法国basename:ID2IP - 副本 (20)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (20)+1001法国
+cost time: 0.090000 s  bytes_writen: 6298556 bytes
+speed: 66.741901 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (21)+1001法国basename:ID2IP - 副本 (21)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (21)+1001法国
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (22)+1001法国basename:ID2IP - 副本 (22)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (22)+1001法国
+cost time: 0.100000 s  bytes_writen: 6298556 bytes
+speed: 60.067711 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (23)+1001法国basename:ID2IP - 副本 (23)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (23)+1001法国
+cost time: 0.088000 s  bytes_writen: 6298556 bytes
+speed: 68.258762 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (24)+1001法国basename:ID2IP - 副本 (24)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (24)+1001法国
+cost time: 0.140000 s  bytes_writen: 6298556 bytes
+speed: 42.905508 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (25)+1001法国basename:ID2IP - 副本 (25)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (25)+1001法国
+cost time: 0.148000 s  bytes_writen: 6298556 bytes
+speed: 40.586291 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (26)+1001法国basename:ID2IP - 副本 (26)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (26)+1001法国
+cost time: 0.116000 s  bytes_writen: 6298556 bytes
+speed: 51.782509 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (27)+1001法国basename:ID2IP - 副本 (27)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (27)+1001法国
+cost time: 0.096000 s  bytes_writen: 6298556 bytes
+speed: 62.570532 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (28)+1001法国basename:ID2IP - 副本 (28)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (28)+1001法国
+cost time: 0.124000 s  bytes_writen: 6298556 bytes
+speed: 48.441702 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (29)+1001法国basename:ID2IP - 副本 (29)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (29)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (30)+1001法国basename:ID2IP - 副本 (30)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (30)+1001法国
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (31)+1001法国basename:ID2IP - 副本 (31)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (31)+1001法国
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (32)+1001法国basename:ID2IP - 副本 (32)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (32)+1001法国
+cost time: 0.070000 s  bytes_writen: 6298556 bytes
+speed: 85.811016 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (33)+1001法国basename:ID2IP - 副本 (33)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (33)+1001法国
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (34)+1001法国basename:ID2IP - 副本 (34)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (34)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (35)+1001法国basename:ID2IP - 副本 (35)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (35)+1001法国
+cost time: 0.073000 s  bytes_writen: 6298556 bytes
+speed: 82.284535 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.079000 s  bytes_writen: 6298556 bytes
+speed: 76.035077 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)+1001法国basename:ID2IP - 副本 (2)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (3)+1001法国basename:ID2IP - 副本 (3)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001法国
+cost time: 0.104000 s  bytes_writen: 6298556 bytes
+speed: 57.757414 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (4)+1001法国basename:ID2IP - 副本 (4)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001法国
+cost time: 0.098000 s  bytes_writen: 6298556 bytes
+speed: 61.293583 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (5)+1001法国basename:ID2IP - 副本 (5)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)+1001法国
+cost time: 0.095000 s  bytes_writen: 6298556 bytes
+speed: 63.229169 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (6)+1001法国basename:ID2IP - 副本 (6)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (6)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (7)+1001法国basename:ID2IP - 副本 (7)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (7)+1001法国
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (8)+1001法国basename:ID2IP - 副本 (8)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (8)+1001法国
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (9)+1001法国basename:ID2IP - 副本 (9)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (9)+1001法国
+cost time: 0.081000 s  bytes_writen: 6298556 bytes
+speed: 74.157668 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (10)+1001法国basename:ID2IP - 副本 (10)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (10)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (11)+1001法国basename:ID2IP - 副本 (11)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (11)+1001法国
+cost time: 0.079000 s  bytes_writen: 6298556 bytes
+speed: 76.035077 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (12)+1001法国basename:ID2IP - 副本 (12)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (12)+1001法国
+cost time: 0.081000 s  bytes_writen: 6298556 bytes
+speed: 74.157668 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (13)+1001法国basename:ID2IP - 副本 (13)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (13)+1001法国
+cost time: 0.079000 s  bytes_writen: 6298556 bytes
+speed: 76.035077 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (14)+1001法国basename:ID2IP - 副本 (14)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (14)+1001法国
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (15)+1001法国basename:ID2IP - 副本 (15)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (15)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (16)+1001法国basename:ID2IP - 副本 (16)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (16)+1001法国
+cost time: 0.079000 s  bytes_writen: 6298556 bytes
+speed: 76.035077 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (17)+1001法国basename:ID2IP - 副本 (17)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (17)+1001法国
+cost time: 0.085000 s  bytes_writen: 6298556 bytes
+speed: 70.667895 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (18)+1001法国basename:ID2IP - 副本 (18)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (18)+1001法国
+cost time: 0.091000 s  bytes_writen: 6298556 bytes
+speed: 66.008473 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (19)+1001法国basename:ID2IP - 副本 (19)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (19)+1001法国
+cost time: 0.085000 s  bytes_writen: 6298556 bytes
+speed: 70.667895 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (20)+1001法国basename:ID2IP - 副本 (20)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (20)+1001法国
+cost time: 0.105000 s  bytes_writen: 6298556 bytes
+speed: 57.207344 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (21)+1001法国basename:ID2IP - 副本 (21)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (21)+1001法国
+cost time: 0.097000 s  bytes_writen: 6298556 bytes
+speed: 61.925475 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (22)+1001法国basename:ID2IP - 副本 (22)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (22)+1001法国
+cost time: 0.094000 s  bytes_writen: 6298556 bytes
+speed: 63.901820 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (23)+1001法国basename:ID2IP - 副本 (23)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (23)+1001法国
+cost time: 0.083000 s  bytes_writen: 6298556 bytes
+speed: 72.370736 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (24)+1001法国basename:ID2IP - 副本 (24)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (24)+1001法国
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (25)+1001法国basename:ID2IP - 副本 (25)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (25)+1001法国
+cost time: 0.087000 s  bytes_writen: 6298556 bytes
+speed: 69.043346 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (26)+1001法国basename:ID2IP - 副本 (26)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (26)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (27)+1001法国basename:ID2IP - 副本 (27)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (27)+1001法国
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (28)+1001法国basename:ID2IP - 副本 (28)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (28)+1001法国
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (29)+1001法国basename:ID2IP - 副本 (29)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (29)+1001法国
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (30)+1001法国basename:ID2IP - 副本 (30)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (30)+1001法国
+cost time: 0.104000 s  bytes_writen: 6298556 bytes
+speed: 57.757414 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (31)+1001法国basename:ID2IP - 副本 (31)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (31)+1001法国
+cost time: 0.105000 s  bytes_writen: 6298556 bytes
+speed: 57.207344 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (32)+1001法国basename:ID2IP - 副本 (32)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (32)+1001法国
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (33)+1001法国basename:ID2IP - 副本 (33)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (33)+1001法国
+cost time: 0.075000 s  bytes_writen: 6298556 bytes
+speed: 80.090281 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (34)+1001法国basename:ID2IP - 副本 (34)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (34)+1001法国
+cost time: 0.072000 s  bytes_writen: 6298556 bytes
+speed: 83.427376 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (35)+1001法国basename:ID2IP - 副本 (35)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (35)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.081000 s  bytes_writen: 6298556 bytes
+speed: 74.157668 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)+1001法国basename:ID2IP - 副本 (2)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (3)+1001法国basename:ID2IP - 副本 (3)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001法国
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (4)+1001法国basename:ID2IP - 副本 (4)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001法国
+cost time: 0.081000 s  bytes_writen: 6298556 bytes
+speed: 74.157668 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (5)+1001法国basename:ID2IP - 副本 (5)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)+1001法国
+cost time: 0.070000 s  bytes_writen: 6298556 bytes
+speed: 85.811016 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (6)+1001法国basename:ID2IP - 副本 (6)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (6)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (7)+1001法国basename:ID2IP - 副本 (7)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (7)+1001法国
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (8)+1001法国basename:ID2IP - 副本 (8)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (8)+1001法国
+cost time: 0.064000 s  bytes_writen: 6298556 bytes
+speed: 93.855798 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (9)+1001法国basename:ID2IP - 副本 (9)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (9)+1001法国
+cost time: 0.067000 s  bytes_writen: 6298556 bytes
+speed: 89.653300 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (10)+1001法国basename:ID2IP - 副本 (10)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (10)+1001法国
+cost time: 0.077000 s  bytes_writen: 6298556 bytes
+speed: 78.010014 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (11)+1001法国basename:ID2IP - 副本 (11)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (11)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (12)+1001法国basename:ID2IP - 副本 (12)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (12)+1001法国
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (13)+1001法国basename:ID2IP - 副本 (13)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (13)+1001法国
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (14)+1001法国basename:ID2IP - 副本 (14)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (14)+1001法国
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (15)+1001法国basename:ID2IP - 副本 (15)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (15)+1001法国
+cost time: 0.079000 s  bytes_writen: 6298556 bytes
+speed: 76.035077 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (16)+1001法国basename:ID2IP - 副本 (16)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (16)+1001法国
+cost time: 0.074000 s  bytes_writen: 6298556 bytes
+speed: 81.172582 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (17)+1001法国basename:ID2IP - 副本 (17)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (17)+1001法国
+cost time: 0.069000 s  bytes_writen: 6298556 bytes
+speed: 87.054653 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (18)+1001法国basename:ID2IP - 副本 (18)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (18)+1001法国
+cost time: 0.072000 s  bytes_writen: 6298556 bytes
+speed: 83.427376 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (19)+1001法国basename:ID2IP - 副本 (19)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (19)+1001法国
+cost time: 0.086000 s  bytes_writen: 6298556 bytes
+speed: 69.846175 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (20)+1001法国basename:ID2IP - 副本 (20)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (20)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (21)+1001法国basename:ID2IP - 副本 (21)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (21)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (22)+1001法国basename:ID2IP - 副本 (22)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (22)+1001法国
+cost time: 0.104000 s  bytes_writen: 6298556 bytes
+speed: 57.757414 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (23)+1001法国basename:ID2IP - 副本 (23)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (23)+1001法国
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (24)+1001法国basename:ID2IP - 副本 (24)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (24)+1001法国
+cost time: 0.085000 s  bytes_writen: 6298556 bytes
+speed: 70.667895 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (25)+1001法国basename:ID2IP - 副本 (25)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (25)+1001法国
+cost time: 0.072000 s  bytes_writen: 6298556 bytes
+speed: 83.427376 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (26)+1001法国basename:ID2IP - 副本 (26)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (26)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (27)+1001法国basename:ID2IP - 副本 (27)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (27)+1001法国
+cost time: 0.071000 s  bytes_writen: 6298556 bytes
+speed: 84.602410 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (28)+1001法国basename:ID2IP - 副本 (28)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (28)+1001法国
+cost time: 0.072000 s  bytes_writen: 6298556 bytes
+speed: 83.427376 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (29)+1001法国basename:ID2IP - 副本 (29)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (29)+1001法国
+cost time: 0.068000 s  bytes_writen: 6298556 bytes
+speed: 88.334869 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (30)+1001法国basename:ID2IP - 副本 (30)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (30)+1001法国
+cost time: 0.076000 s  bytes_writen: 6298556 bytes
+speed: 79.036462 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (31)+1001法国basename:ID2IP - 副本 (31)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (31)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (32)+1001法国basename:ID2IP - 副本 (32)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (32)+1001法国
+cost time: 0.087000 s  bytes_writen: 6298556 bytes
+speed: 69.043346 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (33)+1001法国basename:ID2IP - 副本 (33)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (33)+1001法国
+cost time: 0.078000 s  bytes_writen: 6298556 bytes
+speed: 77.009886 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (34)+1001法国basename:ID2IP - 副本 (34)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (34)+1001法国
+cost time: 0.084000 s  bytes_writen: 6298556 bytes
+speed: 71.509180 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+base_name_msg:ID2IP - 副本 (35)+1001法国basename:ID2IP - 副本 (35)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (35)+1001法国
+cost time: 0.080000 s  bytes_writen: 6298556 bytes
+speed: 75.084639 MB/s
+
+
+filesize not matched! 6298556/27052109211893760
+
+cost time: 0.082000 s  bytes_writen: 6298556 bytes
+speed: 73.253306 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)+1001法国basename:ID2IP - 副本 (2)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (2)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 80.568000 s  bytes_writen: 6298556 bytes
+speed: 0.074555 MB/s
+
+
+base_name_msg:ID2IP - 副本 (3)+1001法国basename:ID2IP - 副本 (3)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 1.716000 s  bytes_writen: 6298556 bytes
+speed: 3.500449 MB/s
+
+
+base_name_msg:ID2IP - 副本 (4)+1001法国basename:ID2IP - 副本 (4)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 17.109000 s  bytes_writen: 6298556 bytes
+speed: 0.351088 MB/s
+
+
+base_name_msg:ID2IP - 副本 (5)+1001法国basename:ID2IP - 副本 (5)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (5)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 90.644000 s  bytes_writen: 6298556 bytes
+speed: 0.066268 MB/s
+
+
+base_name_msg:ID2IP - 副本 (6)+1001法国basename:ID2IP - 副本 (6)msg_type:1001法国File Size:orkSpace\QFileSystem\Test\ID2IP - 副本 (6)+1001法国
+filesize not matched! 6298556/27052109211893760
+
+cost time: 58.828000 s  bytes_writen: 6298556 bytes
+speed: 0.102107 MB/s
+
+
+base_name_msg:ID2IP - 副本 (2)+1001basename:ID2IP - 副本 (2)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (2)+1001
+base_name_msg:ID2IP - 副本 (3)+1001basename:ID2IP - 副本 (3)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (3)+1001
+cost time: 0.228000 s  bytes_writen: 6298560 bytes
+speed: 26.345504 MB/s
+
+
+base_name_msg:ID2IP - 副本 (4)+1001basename:ID2IP - 副本 (4)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (4)+1001
+cost time: 0.274000 s  bytes_writen: 6298560 bytes
+speed: 21.922536 MB/s
+
+
+base_name_msg:ID2IP - 副本 (5)+1001basename:ID2IP - 副本 (5)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (5)+1001
+cost time: 0.147000 s  bytes_writen: 6298560 bytes
+speed: 40.862414 MB/s
+
+
+base_name_msg:ID2IP - 副本 (6)+1001basename:ID2IP - 副本 (6)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (6)+1001
+cost time: 0.076000 s  bytes_writen: 6298560 bytes
+speed: 79.036512 MB/s
+
+
+base_name_msg:ID2IP - 副本 (7)+1001basename:ID2IP - 副本 (7)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (7)+1001
+cost time: 0.074000 s  bytes_writen: 6298560 bytes
+speed: 81.172634 MB/s
+
+
+base_name_msg:ID2IP - 副本 (8)+1001basename:ID2IP - 副本 (8)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (8)+1001
+cost time: 0.081000 s  bytes_writen: 6298560 bytes
+speed: 74.157715 MB/s
+
+
+base_name_msg:ID2IP - 副本 (9)+1001basename:ID2IP - 副本 (9)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (9)+1001
+cost time: 0.078000 s  bytes_writen: 6298560 bytes
+speed: 77.009935 MB/s
+
+
+base_name_msg:ID2IP - 副本 (10)+1001basename:ID2IP - 副本 (10)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (10)+1001
+cost time: 0.086000 s  bytes_writen: 6298560 bytes
+speed: 69.846220 MB/s
+
+
+base_name_msg:ID2IP - 副本 (11)+1001basename:ID2IP - 副本 (11)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (11)+1001
+cost time: 0.103000 s  bytes_writen: 6298560 bytes
+speed: 58.318203 MB/s
+
+
+base_name_msg:ID2IP - 副本 (12)+1001basename:ID2IP - 副本 (12)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (12)+1001
+cost time: 0.106000 s  bytes_writen: 6298560 bytes
+speed: 56.667688 MB/s
+
+
+base_name_msg:ID2IP - 副本 (13)+1001basename:ID2IP - 副本 (13)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (13)+1001
+cost time: 0.113000 s  bytes_writen: 6298560 bytes
+speed: 53.157300 MB/s
+
+
+base_name_msg:ID2IP - 副本 (14)+1001basename:ID2IP - 副本 (14)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (14)+1001
+cost time: 0.111000 s  bytes_writen: 6298560 bytes
+speed: 54.115089 MB/s
+
+
+base_name_msg:ID2IP - 副本 (15)+1001basename:ID2IP - 副本 (15)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (15)+1001
+cost time: 0.111000 s  bytes_writen: 6298560 bytes
+speed: 54.115089 MB/s
+
+
+base_name_msg:ID2IP - 副本 (16)+1001basename:ID2IP - 副本 (16)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (16)+1001
+cost time: 0.111000 s  bytes_writen: 6298560 bytes
+speed: 54.115089 MB/s
+
+
+base_name_msg:ID2IP - 副本 (17)+1001basename:ID2IP - 副本 (17)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (17)+1001
+cost time: 0.123000 s  bytes_writen: 6298560 bytes
+speed: 48.835568 MB/s
+
+
+base_name_msg:ID2IP - 副本 (18)+1001basename:ID2IP - 副本 (18)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (18)+1001
+cost time: 0.123000 s  bytes_writen: 6298560 bytes
+speed: 48.835568 MB/s
+
+
+base_name_msg:ID2IP - 副本 (19)+1001basename:ID2IP - 副本 (19)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (19)+1001
+cost time: 0.100000 s  bytes_writen: 6298560 bytes
+speed: 60.067749 MB/s
+
+
+base_name_msg:ID2IP - 副本 (20)+1001basename:ID2IP - 副本 (20)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (20)+1001
+cost time: 0.108000 s  bytes_writen: 6298560 bytes
+speed: 55.618286 MB/s
+
+
+base_name_msg:ID2IP - 副本 (21)+1001basename:ID2IP - 副本 (21)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (21)+1001
+cost time: 0.092000 s  bytes_writen: 6298560 bytes
+speed: 65.291032 MB/s
+
+
+base_name_msg:ID2IP - 副本 (22)+1001basename:ID2IP - 副本 (22)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (22)+1001
+cost time: 0.098000 s  bytes_writen: 6298560 bytes
+speed: 61.293621 MB/s
+
+
+base_name_msg:ID2IP - 副本 (23)+1001basename:ID2IP - 副本 (23)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (23)+1001
+cost time: 0.106000 s  bytes_writen: 6298560 bytes
+speed: 56.667688 MB/s
+
+
+base_name_msg:ID2IP - 副本 (24)+1001basename:ID2IP - 副本 (24)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (24)+1001
+cost time: 0.112000 s  bytes_writen: 6298560 bytes
+speed: 53.631919 MB/s
+
+
+base_name_msg:ID2IP - 副本 (25)+1001basename:ID2IP - 副本 (25)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (25)+1001
+cost time: 0.116000 s  bytes_writen: 6298560 bytes
+speed: 51.782542 MB/s
+
+
+base_name_msg:ID2IP - 副本 (26)+1001basename:ID2IP - 副本 (26)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (26)+1001
+cost time: 0.103000 s  bytes_writen: 6298560 bytes
+speed: 58.318203 MB/s
+
+
+base_name_msg:ID2IP - 副本 (27)+1001basename:ID2IP - 副本 (27)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (27)+1001
+cost time: 0.092000 s  bytes_writen: 6298560 bytes
+speed: 65.291032 MB/s
+
+
+base_name_msg:ID2IP - 副本 (28)+1001basename:ID2IP - 副本 (28)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (28)+1001
+cost time: 0.114000 s  bytes_writen: 6298560 bytes
+speed: 52.691008 MB/s
+
+
+base_name_msg:ID2IP - 副本 (29)+1001basename:ID2IP - 副本 (29)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (29)+1001
+cost time: 0.130000 s  bytes_writen: 6298560 bytes
+speed: 46.205961 MB/s
+
+
+base_name_msg:ID2IP - 副本 (30)+1001basename:ID2IP - 副本 (30)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (30)+1001
+cost time: 0.115000 s  bytes_writen: 6298560 bytes
+speed: 52.232825 MB/s
+
+
+cost time: 0.117000 s  bytes_writen: 6298560 bytes
+speed: 51.339956 MB/s
+
+
+base_name_msg:ID2IP - 副本 (31)+1001basename:ID2IP - 副本 (31)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (31)+1001
+base_name_msg:ID2IP - 副本 (32)+1001basename:ID2IP - 副本 (32)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (32)+1001
+cost time: 0.094000 s  bytes_writen: 6298560 bytes
+speed: 63.901861 MB/s
+
+
+base_name_msg:ID2IP - 副本 (33)+1001basename:ID2IP - 副本 (33)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (33)+1001
+cost time: 0.093000 s  bytes_writen: 6298560 bytes
+speed: 64.588977 MB/s
+
+
+cost time: 0.099000 s  bytes_writen: 6298560 bytes
+speed: 60.674494 MB/s
+
+
+base_name_msg:ID2IP - 副本 (34)+1001basename:ID2IP - 副本 (34)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (34)+1001
+base_name_msg:ID2IP - 副本 (35)+1001basename:ID2IP - 副本 (35)msg_type:1001File Size:F:\WorkSpace\QFileSystem\Test\ID2IP - 副本 (35)+1001
+cost time: 0.111000 s  bytes_writen: 6298560 bytes
+speed: 54.115089 MB/s
+
+
+cost time: 0.108000 s  bytes_writen: 6298560 bytes
+speed: 55.618286 MB/s
+
+

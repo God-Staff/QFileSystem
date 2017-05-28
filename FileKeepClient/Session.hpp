@@ -20,6 +20,7 @@
 #include "handler_allocator.hpp"
 #include "FileManage.hpp"
 #include "SerializationToStream.hpp"
+#include "Interface.h"
 
 class Session : public boost::enable_shared_from_this<Session>
 {
@@ -45,6 +46,32 @@ public:
         if (fp_)
         {
             fclose(fp_);
+        }
+
+        if (m__type==6)
+        {
+            qiuwanli::BlockInfo blocktmp;
+
+            unsigned long long offset;
+            const std::string saveFileNamess = "DATA.dat";
+            //将数据块写入文件
+            boost::filesystem::fstream fst(vstr[0], std::ios::in | std::ios::binary);
+
+            char buf[BLOCK_SIZE];
+            fst.seekg(0, std::ios_base::end);
+            int endpos = fst.tellg( );
+            if (endpos > BLOCK_SIZE)
+                return;
+            fst.read(buf, endpos);
+
+            FileManage fileMange;
+            fileMange.open(saveFileNamess);
+            offset=fileMange.WriteFileBlockEnd(buf, endpos);
+
+
+            //将块信息写入块表
+            CInterface fff;
+            fff.DoBlockInfoTable(g_ComData.BlockTableDiff.add_block( ), vstr[4], vstr[3], saveFileNamess, std::stoi(vstr[1]), endpos, offset);
         }
 
         WriteBlock_ToFile( );
@@ -84,6 +111,7 @@ private:
         : socket_ (io)
         , fp_ (NULL)
         , total_bytes_writen_ (0)
+        , m__type(0)
 	{ 
     
     }
@@ -137,6 +165,25 @@ private:
         basename = vstr[0].c_str( );
         const char* vcheck=vstr[1].c_str( );//验证信息
         
+        //接收文件
+        if (file_info_.m_ReqiureType=='d')
+        {
+             if (vstr[2]!=g_ComData.Conf.prikeymd5())
+             {
+                 return;
+             }
+             m__type = 6;
+
+             fp_ = fopen(vstr[0].c_str(), "wb");
+             if (fp_ == NULL)
+             {
+                 std::cerr << "Failed to open file to write\n";
+                 return;
+             }
+
+             receive_file_content( );
+        }
+
         if (vcheck == g_ComData.Conf.prikeymd5().c_str())
         {
             if (vstr.size()==3)
@@ -148,11 +195,11 @@ private:
             switch ( file_info_.m_ReqiureType )
             {
             case 'a':       //请求建立连接
-                socket_.async_receive(
+                /*socket_.async_receive(
                     boost::asio::buffer(buffer_, k_buffer_size)
                     , boost::bind(&Session::CheckKey
                     , shared_from_this( )
-                    , boost::asio::placeholders::error));
+                    , boost::asio::placeholders::error));*/
                 break;
             case 'b':       //发送验证结果
                 socket_.async_receive(
@@ -168,52 +215,52 @@ private:
 
     }
 
-    //检查客户端携带的PirateKey的MD5是否正确，失败则关闭链接
-    void CheckKey(const boost::system::error_code& error)
-    {
-        //获取本机Prikey的md5与此比较;
-        qiuwanli::BlockListForDownCheckTable DownListTable;
+    ////检查客户端携带的PirateKey的MD5是否正确，失败则关闭链接
+    //void CheckKey(const boost::system::error_code& error)
+    //{
+    //    //获取本机Prikey的md5与此比较;
+    //    qiuwanli::BlockListForDownCheckTable DownListTable;
 
-        if (!DownListTable.ParseFromString(buffer_))
-        {	//打开失败
-            optlog.log("File Parse Fail!");
-        }
-        else
-        {	//解析配置文件
-            std::string md5= g_ComData.Conf.prikeymd5( );
-            if (DownListTable.prikeymd5().compare(md5) == 0)
-            {
-                PairVec ListForUp;
-                for (size_t index = 0; index < DownListTable.blocklistfordown_size( ); ++index)
-                {
-                    const qiuwanli::BlockListForDown& DownList = DownListTable.blocklistfordown(index);
-                    std::pair<std::string, std::vector<unsigned long>> pairs;
-                    pairs.first = DownList.filesha512( );
-                    std::vector<unsigned long> vec;
-                    for (size_t index = 0; index < DownList.blocks_size( ); ++index)
-                    {
-                        const qiuwanli::Block& Block = DownList.blocks(index);
-                        vec.emplace_back(Block.blockitem( ));
-                    }
+    //    if (!DownListTable.ParseFromString(buffer_))
+    //    {	//打开失败
+    //        optlog.log("File Parse Fail!");
+    //    }
+    //    else
+    //    {	//解析配置文件
+    //        std::string md5= g_ComData.Conf.prikeymd5( );
+    //        if (DownListTable.prikeymd5().compare(md5) == 0)
+    //        {
+    //            PairVec ListForUp;
+    //            for (size_t index = 0; index < DownListTable.blocklistfordown_size( ); ++index)
+    //            {
+    //                const qiuwanli::BlockListForDown& DownList = DownListTable.blocklistfordown(index);
+    //                std::pair<std::string, std::vector<unsigned long>> pairs;
+    //                pairs.first = DownList.filesha512( );
+    //                std::vector<unsigned long> vec;
+    //                for (size_t index = 0; index < DownList.blocks_size( ); ++index)
+    //                {
+    //                    const qiuwanli::Block& Block = DownList.blocks(index);
+    //                    vec.emplace_back(Block.blockitem( ));
+    //                }
 
-                    ListForUp.emplace_back(pairs);
-                }
-                
-                //启用线程进行文件传输
-                auto FailList = SendFileToClient(ListForUp);
-                if (FailList.size()==0)
-                {
-                    optlog.log("Sent File Success!");
-                }
-                else
-                {
-                    //尝试重传
-                    SendFileToClient(ListForUp);
-                }
+    //                ListForUp.emplace_back(pairs);
+    //            }
+    //            
+    //            //启用线程进行文件传输
+    //            auto FailList = SendFileToClient(ListForUp);
+    //            if (FailList.size()==0)
+    //            {
+    //                optlog.log("Sent File Success!");
+    //            }
+    //            else
+    //            {
+    //                //尝试重传
+    //                SendFileToClient(ListForUp);
+    //            }
 
-            }
-        }
-    }
+    //        }
+    //    }
+    //}
     
     //发送文件块，并将发送失败的列表，返回
     PairVec& SendFileToClient(PairVec& DownList)
@@ -429,6 +476,8 @@ private:
 
     FileManage m_FileManage;
     qiuwanli::SerialToStream m_serial;
+
+    int m__type;
 };
 
 

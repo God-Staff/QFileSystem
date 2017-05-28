@@ -50,7 +50,7 @@ message ClientConfigFile
 	string SaveIP=2;		//客户端对应IP
 	string PriKey=3;		//认证信息
 	string KeyMD5=4;		//用于验证
-	uint64 TotleSize=5;		//
+	uint64 TotalSize=5;		//
 	uint64 RemainSize=6;	//
 }
 message ClientConfigFileTable
@@ -90,8 +90,9 @@ message UserInfoTable
 message FileList
 {
 	string FileName=1;
-	string FileSize=2;
+	uint64 FileSize=2;
 	string FileSHA512=3;
+	string FileStyle=4;
 }
 message FileListTable
 {

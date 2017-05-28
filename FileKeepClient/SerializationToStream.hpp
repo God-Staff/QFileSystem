@@ -100,16 +100,16 @@ public:
                                    , const std::vector<std::pair<unsigned long, std::string> >& BlockList);
 
 
-    template<typename T>
-    /**
-     * 当文件传输完成，将块信息发送到目录服务器
-     * @param BlockInfo  快对象
-     * @param FileSHA512 文件的SHA512
-     * @param Blocks     块信息向量
-     */
-    void MakeBlock2Server(qiuwanli::BlockInfo2Server* BlockInfo
-                          , const std::string& FileSHA512
-                          , const std::vector<T>& Blocks);
+    //template<typename T>
+    ///**
+    // * 当文件传输完成，将块信息发送到目录服务器
+    // * @param BlockInfo  快对象
+    // * @param FileSHA512 文件的SHA512
+    // * @param Blocks     块信息向量
+    // */
+    //void MakeBlock2Server(qiuwanli::BlockInfo2Server* BlockInfo
+    //                      , const std::string& FileSHA512
+    //                      , const std::vector<T>& Blocks);
 
 };
 

@@ -139,7 +139,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, saveip_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, prikey_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, keymd5_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, totlesize_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, totalsize_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, remainsize_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFileTable, _internal_metadata_),
@@ -182,6 +182,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileList, filename_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileList, filesize_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileList, filesha512_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileList, filestyle_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileListTable, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -326,25 +327,25 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] = {
   { 72, -1, sizeof(UserInfo)},
   { 79, -1, sizeof(UserInfoTable)},
   { 84, -1, sizeof(FileList)},
-  { 91, -1, sizeof(FileListTable)},
-  { 96, -1, sizeof(FileList4Down)},
-  { 102, -1, sizeof(FileList4DownTable)},
-  { 107, -1, sizeof(FileDowningLog)},
-  { 116, -1, sizeof(FileDowningLogTable)},
-  { 121, -1, sizeof(FileDowning)},
-  { 134, -1, sizeof(FileDowningTable)},
-  { 139, -1, sizeof(Heart)},
-  { 147, -1, sizeof(DoSomething)},
-  { 153, -1, sizeof(DoSomethingTable)},
-  { 158, -1, sizeof(BlockCheck)},
-  { 164, -1, sizeof(BlockListForDownCheck)},
-  { 172, -1, sizeof(BlockListForDownCheckTable)},
-  { 177, -1, sizeof(Shared)},
-  { 187, -1, sizeof(SharedTable)},
-  { 192, -1, sizeof(BlockList4Down)},
-  { 200, -1, sizeof(BlockList4DownTable)},
-  { 205, -1, sizeof(Logs)},
-  { 214, -1, sizeof(LogsTable)},
+  { 92, -1, sizeof(FileListTable)},
+  { 97, -1, sizeof(FileList4Down)},
+  { 103, -1, sizeof(FileList4DownTable)},
+  { 108, -1, sizeof(FileDowningLog)},
+  { 117, -1, sizeof(FileDowningLogTable)},
+  { 122, -1, sizeof(FileDowning)},
+  { 135, -1, sizeof(FileDowningTable)},
+  { 140, -1, sizeof(Heart)},
+  { 148, -1, sizeof(DoSomething)},
+  { 154, -1, sizeof(DoSomethingTable)},
+  { 159, -1, sizeof(BlockCheck)},
+  { 165, -1, sizeof(BlockListForDownCheck)},
+  { 173, -1, sizeof(BlockListForDownCheckTable)},
+  { 178, -1, sizeof(Shared)},
+  { 188, -1, sizeof(SharedTable)},
+  { 193, -1, sizeof(BlockList4Down)},
+  { 201, -1, sizeof(BlockList4DownTable)},
+  { 206, -1, sizeof(Logs)},
+  { 215, -1, sizeof(LogsTable)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
@@ -528,7 +529,7 @@ void AddDescriptorsImpl() {
       "able\022+\n\014FileToClient\030\001 \003(\0132\025.qiuwanli.Fi"
       "le2Cilent\"{\n\020ClientConfigFile\022\020\n\010CilentI"
       "D\030\001 \001(\t\022\016\n\006SaveIP\030\002 \001(\t\022\016\n\006PriKey\030\003 \001(\t\022"
-      "\016\n\006KeyMD5\030\004 \001(\t\022\021\n\tTotleSize\030\005 \001(\004\022\022\n\nRe"
+      "\016\n\006KeyMD5\030\004 \001(\t\022\021\n\tTotalSize\030\005 \001(\004\022\022\n\nRe"
       "mainSize\030\006 \001(\004\"G\n\025ClientConfigFileTable\022"
       ".\n\nClientInfo\030\001 \003(\0132\032.qiuwanli.ClientCon"
       "figFile\"\257\001\n\014FileInfoList\022\022\n\nFileSHA512\030\001"
@@ -540,52 +541,52 @@ void AddDescriptorsImpl() {
       "InfoList\">\n\010UserInfo\022\016\n\006UserID\030\001 \001(\t\022\016\n\006"
       "UserPS\030\002 \001(\t\022\022\n\nFileSHA512\030\003 \003(\t\"1\n\rUser"
       "InfoTable\022 \n\004User\030\001 \003(\0132\022.qiuwanli.UserI"
-      "nfo\"B\n\010FileList\022\020\n\010FileName\030\001 \001(\t\022\020\n\010Fil"
-      "eSize\030\002 \001(\t\022\022\n\nFileSHA512\030\003 \001(\t\"1\n\rFileL"
-      "istTable\022 \n\004File\030\001 \003(\0132\022.qiuwanli.FileLi"
-      "st\"4\n\rFileList4Down\022\022\n\nFileSHA512\030\001 \001(\t\022"
-      "\017\n\007FileMD5\030\002 \001(\t\"F\n\022FileList4DownTable\0220"
-      "\n\017FileListForDown\030\001 \003(\0132\027.qiuwanli.FileL"
-      "ist4Down\"q\n\016FileDowningLog\022\020\n\010filename\030\001"
-      " \001(\t\022\020\n\010filesize\030\002 \001(\t\022\020\n\010downtime\030\003 \001(\t"
-      "\022\025\n\rDowningstatus\030\004 \001(\t\022\022\n\nfilesha512\030\005 "
-      "\001(\t\"D\n\023FileDowningLogTable\022-\n\013FileDownLo"
-      "g\030\001 \003(\0132\030.qiuwanli.FileDowningLog\"\315\001\n\013Fi"
-      "leDowning\022\022\n\nFileSHA512\030\001 \001(\t\022\017\n\007FileMD5"
-      "\030\002 \001(\t\022\020\n\010FileName\030\003 \001(\t\022\024\n\014FileDownTime"
-      "\030\004 \001(\t\022\036\n\026FileDownloadBlockCount\030\005 \001(\004\022\033"
-      "\n\023FileTotalBlockCount\030\006 \001(\004\022\020\n\010FileSize\030"
-      "\007 \001(\t\022\022\n\nBlockCount\030\010 \001(\r\022\016\n\006BitMap\030\t \001("
-      "\t\"G\n\020FileDowningTable\0223\n\024FileContinueTra"
-      "nsmit\030\001 \003(\0132\025.qiuwanli.FileDowning\"M\n\005He"
-      "art\022\n\n\002ID\030\001 \001(\t\022\022\n\nRemainSize\030\002 \001(\t\022\021\n\tT"
-      "otleSize\030\003 \001(\t\022\021\n\tPrikeyMd5\030\004 \001(\t\".\n\013DoS"
-      "omething\022\013\n\003Key\030\001 \001(\t\022\022\n\nFileSHA512\030\002 \001("
-      "\t\"9\n\020DoSomethingTable\022%\n\006DoSome\030\001 \003(\0132\025."
-      "qiuwanli.DoSomething\"1\n\nBlockCheck\022\021\n\tBl"
-      "ockItem\030\001 \001(\r\022\020\n\010BlockMD5\030\002 \001(\t\"y\n\025Block"
-      "ListForDownCheck\022\022\n\nFileSHA512\030\001 \001(\t\022\025\n\r"
-      "SaveServersIP\030\002 \001(\t\022\017\n\007FileMD5\030\003 \001(\t\022$\n\006"
-      "Blocks\030\004 \003(\0132\024.qiuwanli.BlockCheck\"W\n\032Bl"
-      "ockListForDownCheckTable\0229\n\020BlockListFor"
-      "Down\030\001 \003(\0132\037.qiuwanli.BlockListForDownCh"
-      "eck\"|\n\006Shared\022\016\n\006Sha512\030\001 \001(\t\022\030\n\020Verific"
-      "ationCode\030\002 \001(\t\022\022\n\nSharedTime\030\003 \001(\t\022\020\n\010F"
-      "ileSize\030\004 \001(\t\022\022\n\nUserStutas\030\005 \001(\t\022\016\n\006Use"
-      "rID\030\006 \001(\t\"3\n\013SharedTable\022$\n\nSharedInfo\030\001"
-      " \003(\0132\020.qiuwanli.Shared\"a\n\016BlockList4Down"
-      "\022\022\n\nFileSHA512\030\001 \001(\t\022\022\n\nBlockNumer\030\002 \001(\t"
-      "\022\020\n\010BlockMD5\030\003 \001(\t\022\025\n\rSaveServersIP\030\004 \001("
-      "\t\"I\n\023BlockList4DownTable\0222\n\020BlockListFor"
-      "Down\030\001 \003(\0132\030.qiuwanli.BlockList4Down\"g\n\004"
-      "Logs\022\017\n\007user_id\030\001 \001(\t\022\020\n\010log_date\030\002 \001(\004\022"
-      "\020\n\010log_info\030\003 \001(\t\022\020\n\010log_type\030\004 \001(\014\022\030\n\020u"
-      "ser_client_UUID\030\005 \001(\t\"9\n\tLogsTable\022\017\n\007lo"
-      "gdate\030\001 \001(\t\022\033\n\003log\030\002 \003(\0132\016.qiuwanli.Logs"
-      "b\006proto3"
+      "nfo\"U\n\010FileList\022\020\n\010FileName\030\001 \001(\t\022\020\n\010Fil"
+      "eSize\030\002 \001(\004\022\022\n\nFileSHA512\030\003 \001(\t\022\021\n\tFileS"
+      "tyle\030\004 \001(\t\"1\n\rFileListTable\022 \n\004File\030\001 \003("
+      "\0132\022.qiuwanli.FileList\"4\n\rFileList4Down\022\022"
+      "\n\nFileSHA512\030\001 \001(\t\022\017\n\007FileMD5\030\002 \001(\t\"F\n\022F"
+      "ileList4DownTable\0220\n\017FileListForDown\030\001 \003"
+      "(\0132\027.qiuwanli.FileList4Down\"q\n\016FileDowni"
+      "ngLog\022\020\n\010filename\030\001 \001(\t\022\020\n\010filesize\030\002 \001("
+      "\t\022\020\n\010downtime\030\003 \001(\t\022\025\n\rDowningstatus\030\004 \001"
+      "(\t\022\022\n\nfilesha512\030\005 \001(\t\"D\n\023FileDowningLog"
+      "Table\022-\n\013FileDownLog\030\001 \003(\0132\030.qiuwanli.Fi"
+      "leDowningLog\"\315\001\n\013FileDowning\022\022\n\nFileSHA5"
+      "12\030\001 \001(\t\022\017\n\007FileMD5\030\002 \001(\t\022\020\n\010FileName\030\003 "
+      "\001(\t\022\024\n\014FileDownTime\030\004 \001(\t\022\036\n\026FileDownloa"
+      "dBlockCount\030\005 \001(\004\022\033\n\023FileTotalBlockCount"
+      "\030\006 \001(\004\022\020\n\010FileSize\030\007 \001(\t\022\022\n\nBlockCount\030\010"
+      " \001(\r\022\016\n\006BitMap\030\t \001(\t\"G\n\020FileDowningTable"
+      "\0223\n\024FileContinueTransmit\030\001 \003(\0132\025.qiuwanl"
+      "i.FileDowning\"M\n\005Heart\022\n\n\002ID\030\001 \001(\t\022\022\n\nRe"
+      "mainSize\030\002 \001(\t\022\021\n\tTotleSize\030\003 \001(\t\022\021\n\tPri"
+      "keyMd5\030\004 \001(\t\".\n\013DoSomething\022\013\n\003Key\030\001 \001(\t"
+      "\022\022\n\nFileSHA512\030\002 \001(\t\"9\n\020DoSomethingTable"
+      "\022%\n\006DoSome\030\001 \003(\0132\025.qiuwanli.DoSomething\""
+      "1\n\nBlockCheck\022\021\n\tBlockItem\030\001 \001(\r\022\020\n\010Bloc"
+      "kMD5\030\002 \001(\t\"y\n\025BlockListForDownCheck\022\022\n\nF"
+      "ileSHA512\030\001 \001(\t\022\025\n\rSaveServersIP\030\002 \001(\t\022\017"
+      "\n\007FileMD5\030\003 \001(\t\022$\n\006Blocks\030\004 \003(\0132\024.qiuwan"
+      "li.BlockCheck\"W\n\032BlockListForDownCheckTa"
+      "ble\0229\n\020BlockListForDown\030\001 \003(\0132\037.qiuwanli"
+      ".BlockListForDownCheck\"|\n\006Shared\022\016\n\006Sha5"
+      "12\030\001 \001(\t\022\030\n\020VerificationCode\030\002 \001(\t\022\022\n\nSh"
+      "aredTime\030\003 \001(\t\022\020\n\010FileSize\030\004 \001(\t\022\022\n\nUser"
+      "Stutas\030\005 \001(\t\022\016\n\006UserID\030\006 \001(\t\"3\n\013SharedTa"
+      "ble\022$\n\nSharedInfo\030\001 \003(\0132\020.qiuwanli.Share"
+      "d\"a\n\016BlockList4Down\022\022\n\nFileSHA512\030\001 \001(\t\022"
+      "\022\n\nBlockNumer\030\002 \001(\t\022\020\n\010BlockMD5\030\003 \001(\t\022\025\n"
+      "\rSaveServersIP\030\004 \001(\t\"I\n\023BlockList4DownTa"
+      "ble\0222\n\020BlockListForDown\030\001 \003(\0132\030.qiuwanli"
+      ".BlockList4Down\"g\n\004Logs\022\017\n\007user_id\030\001 \001(\t"
+      "\022\020\n\010log_date\030\002 \001(\004\022\020\n\010log_info\030\003 \001(\t\022\020\n\010"
+      "log_type\030\004 \001(\014\022\030\n\020user_client_UUID\030\005 \001(\t"
+      "\"9\n\tLogsTable\022\017\n\007logdate\030\001 \001(\t\022\033\n\003log\030\002 "
+      "\003(\0132\016.qiuwanli.Logsb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 2768);
+      descriptor, 2787);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PublicStruct.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -3284,7 +3285,7 @@ const int ClientConfigFile::kCilentIDFieldNumber;
 const int ClientConfigFile::kSaveIPFieldNumber;
 const int ClientConfigFile::kPriKeyFieldNumber;
 const int ClientConfigFile::kKeyMD5FieldNumber;
-const int ClientConfigFile::kTotleSizeFieldNumber;
+const int ClientConfigFile::kTotalSizeFieldNumber;
 const int ClientConfigFile::kRemainSizeFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
@@ -3317,9 +3318,9 @@ ClientConfigFile::ClientConfigFile(const ClientConfigFile& from)
   if (from.keymd5().size() > 0) {
     keymd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.keymd5_);
   }
-  ::memcpy(&totlesize_, &from.totlesize_,
+  ::memcpy(&totalsize_, &from.totalsize_,
     reinterpret_cast<char*>(&remainsize_) -
-    reinterpret_cast<char*>(&totlesize_) + sizeof(remainsize_));
+    reinterpret_cast<char*>(&totalsize_) + sizeof(remainsize_));
   // @@protoc_insertion_point(copy_constructor:qiuwanli.ClientConfigFile)
 }
 
@@ -3328,8 +3329,8 @@ void ClientConfigFile::SharedCtor() {
   saveip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   prikey_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   keymd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&totlesize_, 0, reinterpret_cast<char*>(&remainsize_) -
-    reinterpret_cast<char*>(&totlesize_) + sizeof(remainsize_));
+  ::memset(&totalsize_, 0, reinterpret_cast<char*>(&remainsize_) -
+    reinterpret_cast<char*>(&totalsize_) + sizeof(remainsize_));
   _cached_size_ = 0;
 }
 
@@ -3374,8 +3375,8 @@ void ClientConfigFile::Clear() {
   saveip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   prikey_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   keymd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  ::memset(&totlesize_, 0, reinterpret_cast<char*>(&remainsize_) -
-    reinterpret_cast<char*>(&totlesize_) + sizeof(remainsize_));
+  ::memset(&totalsize_, 0, reinterpret_cast<char*>(&remainsize_) -
+    reinterpret_cast<char*>(&totalsize_) + sizeof(remainsize_));
 }
 
 bool ClientConfigFile::MergePartialFromCodedStream(
@@ -3448,13 +3449,13 @@ bool ClientConfigFile::MergePartialFromCodedStream(
         break;
       }
 
-      // uint64 TotleSize = 5;
+      // uint64 TotalSize = 5;
       case 5: {
         if (tag == 40u) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
-                 input, &totlesize_)));
+                 input, &totalsize_)));
         } else {
           goto handle_unusual;
         }
@@ -3538,9 +3539,9 @@ void ClientConfigFile::SerializeWithCachedSizes(
       4, this->keymd5(), output);
   }
 
-  // uint64 TotleSize = 5;
-  if (this->totlesize() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt64(5, this->totlesize(), output);
+  // uint64 TotalSize = 5;
+  if (this->totalsize() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(5, this->totalsize(), output);
   }
 
   // uint64 RemainSize = 6;
@@ -3599,9 +3600,9 @@ void ClientConfigFile::SerializeWithCachedSizes(
         4, this->keymd5(), target);
   }
 
-  // uint64 TotleSize = 5;
-  if (this->totlesize() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(5, this->totlesize(), target);
+  // uint64 TotalSize = 5;
+  if (this->totalsize() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(5, this->totalsize(), target);
   }
 
   // uint64 RemainSize = 6;
@@ -3645,11 +3646,11 @@ size_t ClientConfigFile::ByteSizeLong() const {
         this->keymd5());
   }
 
-  // uint64 TotleSize = 5;
-  if (this->totlesize() != 0) {
+  // uint64 TotalSize = 5;
+  if (this->totalsize() != 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::UInt64Size(
-        this->totlesize());
+        this->totalsize());
   }
 
   // uint64 RemainSize = 6;
@@ -3701,8 +3702,8 @@ void ClientConfigFile::MergeFrom(const ClientConfigFile& from) {
 
     keymd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.keymd5_);
   }
-  if (from.totlesize() != 0) {
-    set_totlesize(from.totlesize());
+  if (from.totalsize() != 0) {
+    set_totalsize(from.totalsize());
   }
   if (from.remainsize() != 0) {
     set_remainsize(from.remainsize());
@@ -3736,7 +3737,7 @@ void ClientConfigFile::InternalSwap(ClientConfigFile* other) {
   saveip_.Swap(&other->saveip_);
   prikey_.Swap(&other->prikey_);
   keymd5_.Swap(&other->keymd5_);
-  std::swap(totlesize_, other->totlesize_);
+  std::swap(totalsize_, other->totalsize_);
   std::swap(remainsize_, other->remainsize_);
   std::swap(_cached_size_, other->_cached_size_);
 }
@@ -3957,18 +3958,18 @@ void ClientConfigFile::set_allocated_keymd5(::std::string* keymd5) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.ClientConfigFile.KeyMD5)
 }
 
-// uint64 TotleSize = 5;
-void ClientConfigFile::clear_totlesize() {
-  totlesize_ = GOOGLE_ULONGLONG(0);
+// uint64 TotalSize = 5;
+void ClientConfigFile::clear_totalsize() {
+  totalsize_ = GOOGLE_ULONGLONG(0);
 }
-::google::protobuf::uint64 ClientConfigFile::totlesize() const {
-  // @@protoc_insertion_point(field_get:qiuwanli.ClientConfigFile.TotleSize)
-  return totlesize_;
+::google::protobuf::uint64 ClientConfigFile::totalsize() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.ClientConfigFile.TotalSize)
+  return totalsize_;
 }
-void ClientConfigFile::set_totlesize(::google::protobuf::uint64 value) {
+void ClientConfigFile::set_totalsize(::google::protobuf::uint64 value) {
   
-  totlesize_ = value;
-  // @@protoc_insertion_point(field_set:qiuwanli.ClientConfigFile.TotleSize)
+  totalsize_ = value;
+  // @@protoc_insertion_point(field_set:qiuwanli.ClientConfigFile.TotalSize)
 }
 
 // uint64 RemainSize = 6;
@@ -6147,6 +6148,7 @@ UserInfoTable::user() const {
 const int FileList::kFileNameFieldNumber;
 const int FileList::kFileSizeFieldNumber;
 const int FileList::kFileSHA512FieldNumber;
+const int FileList::kFileStyleFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 FileList::FileList()
@@ -6166,21 +6168,23 @@ FileList::FileList(const FileList& from)
   if (from.filename().size() > 0) {
     filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
   }
-  filesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.filesize().size() > 0) {
-    filesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesize_);
-  }
   filesha512_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.filesha512().size() > 0) {
     filesha512_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesha512_);
   }
+  filestyle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.filestyle().size() > 0) {
+    filestyle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filestyle_);
+  }
+  filesize_ = from.filesize_;
   // @@protoc_insertion_point(copy_constructor:qiuwanli.FileList)
 }
 
 void FileList::SharedCtor() {
   filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filesha512_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filestyle_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
   _cached_size_ = 0;
 }
 
@@ -6191,8 +6195,8 @@ FileList::~FileList() {
 
 void FileList::SharedDtor() {
   filename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filesha512_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filestyle_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void FileList::SetCachedSize(int size) const {
@@ -6221,8 +6225,9 @@ FileList* FileList::New(::google::protobuf::Arena* arena) const {
 void FileList::Clear() {
 // @@protoc_insertion_point(message_clear_start:qiuwanli.FileList)
   filename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filesha512_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filestyle_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
 }
 
 bool FileList::MergePartialFromCodedStream(
@@ -6250,15 +6255,13 @@ bool FileList::MergePartialFromCodedStream(
         break;
       }
 
-      // string FileSize = 2;
+      // uint64 FileSize = 2;
       case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_filesize()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filesize().data(), this->filesize().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.FileList.FileSize"));
+        if (tag == 16u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &filesize_)));
         } else {
           goto handle_unusual;
         }
@@ -6274,6 +6277,21 @@ bool FileList::MergePartialFromCodedStream(
             this->filesha512().data(), this->filesha512().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
             "qiuwanli.FileList.FileSHA512"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
+      // string FileStyle = 4;
+      case 4: {
+        if (tag == 34u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_filestyle()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->filestyle().data(), this->filestyle().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "qiuwanli.FileList.FileStyle"));
         } else {
           goto handle_unusual;
         }
@@ -6314,14 +6332,9 @@ void FileList::SerializeWithCachedSizes(
       1, this->filename(), output);
   }
 
-  // string FileSize = 2;
-  if (this->filesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesize().data(), this->filesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.FileList.FileSize");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->filesize(), output);
+  // uint64 FileSize = 2;
+  if (this->filesize() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->filesize(), output);
   }
 
   // string FileSHA512 = 3;
@@ -6332,6 +6345,16 @@ void FileList::SerializeWithCachedSizes(
       "qiuwanli.FileList.FileSHA512");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
       3, this->filesha512(), output);
+  }
+
+  // string FileStyle = 4;
+  if (this->filestyle().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filestyle().data(), this->filestyle().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "qiuwanli.FileList.FileStyle");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      4, this->filestyle(), output);
   }
 
   // @@protoc_insertion_point(serialize_end:qiuwanli.FileList)
@@ -6352,15 +6375,9 @@ void FileList::SerializeWithCachedSizes(
         1, this->filename(), target);
   }
 
-  // string FileSize = 2;
-  if (this->filesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesize().data(), this->filesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.FileList.FileSize");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->filesize(), target);
+  // uint64 FileSize = 2;
+  if (this->filesize() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->filesize(), target);
   }
 
   // string FileSHA512 = 3;
@@ -6372,6 +6389,17 @@ void FileList::SerializeWithCachedSizes(
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
         3, this->filesha512(), target);
+  }
+
+  // string FileStyle = 4;
+  if (this->filestyle().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filestyle().data(), this->filestyle().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "qiuwanli.FileList.FileStyle");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        4, this->filestyle(), target);
   }
 
   // @@protoc_insertion_point(serialize_to_array_end:qiuwanli.FileList)
@@ -6389,18 +6417,25 @@ size_t FileList::ByteSizeLong() const {
         this->filename());
   }
 
-  // string FileSize = 2;
-  if (this->filesize().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->filesize());
-  }
-
   // string FileSHA512 = 3;
   if (this->filesha512().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->filesha512());
+  }
+
+  // string FileStyle = 4;
+  if (this->filestyle().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->filestyle());
+  }
+
+  // uint64 FileSize = 2;
+  if (this->filesize() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->filesize());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -6433,13 +6468,16 @@ void FileList::MergeFrom(const FileList& from) {
 
     filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
   }
-  if (from.filesize().size() > 0) {
-
-    filesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesize_);
-  }
   if (from.filesha512().size() > 0) {
 
     filesha512_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesha512_);
+  }
+  if (from.filestyle().size() > 0) {
+
+    filestyle_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filestyle_);
+  }
+  if (from.filesize() != 0) {
+    set_filesize(from.filesize());
   }
 }
 
@@ -6467,8 +6505,9 @@ void FileList::Swap(FileList* other) {
 }
 void FileList::InternalSwap(FileList* other) {
   filename_.Swap(&other->filename_);
-  filesize_.Swap(&other->filesize_);
   filesha512_.Swap(&other->filesha512_);
+  filestyle_.Swap(&other->filestyle_);
+  std::swap(filesize_, other->filesize_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
@@ -6532,56 +6571,18 @@ void FileList::set_allocated_filename(::std::string* filename) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileList.FileName)
 }
 
-// string FileSize = 2;
+// uint64 FileSize = 2;
 void FileList::clear_filesize() {
-  filesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
 }
-const ::std::string& FileList::filesize() const {
+::google::protobuf::uint64 FileList::filesize() const {
   // @@protoc_insertion_point(field_get:qiuwanli.FileList.FileSize)
-  return filesize_.GetNoArena();
+  return filesize_;
 }
-void FileList::set_filesize(const ::std::string& value) {
+void FileList::set_filesize(::google::protobuf::uint64 value) {
   
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  filesize_ = value;
   // @@protoc_insertion_point(field_set:qiuwanli.FileList.FileSize)
-}
-#if LANG_CXX11
-void FileList::set_filesize(::std::string&& value) {
-  
-  filesize_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FileList.FileSize)
-}
-#endif
-void FileList::set_filesize(const char* value) {
-  
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.FileList.FileSize)
-}
-void FileList::set_filesize(const char* value, size_t size) {
-  
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FileList.FileSize)
-}
-::std::string* FileList::mutable_filesize() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.FileList.FileSize)
-  return filesize_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* FileList::release_filesize() {
-  // @@protoc_insertion_point(field_release:qiuwanli.FileList.FileSize)
-  
-  return filesize_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void FileList::set_allocated_filesize(::std::string* filesize) {
-  if (filesize != NULL) {
-    
-  } else {
-    
-  }
-  filesize_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filesize);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileList.FileSize)
 }
 
 // string FileSHA512 = 3;
@@ -6634,6 +6635,58 @@ void FileList::set_allocated_filesha512(::std::string* filesha512) {
   }
   filesha512_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filesha512);
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileList.FileSHA512)
+}
+
+// string FileStyle = 4;
+void FileList::clear_filestyle() {
+  filestyle_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& FileList::filestyle() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.FileList.FileStyle)
+  return filestyle_.GetNoArena();
+}
+void FileList::set_filestyle(const ::std::string& value) {
+  
+  filestyle_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:qiuwanli.FileList.FileStyle)
+}
+#if LANG_CXX11
+void FileList::set_filestyle(::std::string&& value) {
+  
+  filestyle_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FileList.FileStyle)
+}
+#endif
+void FileList::set_filestyle(const char* value) {
+  
+  filestyle_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.FileList.FileStyle)
+}
+void FileList::set_filestyle(const char* value, size_t size) {
+  
+  filestyle_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FileList.FileStyle)
+}
+::std::string* FileList::mutable_filestyle() {
+  
+  // @@protoc_insertion_point(field_mutable:qiuwanli.FileList.FileStyle)
+  return filestyle_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* FileList::release_filestyle() {
+  // @@protoc_insertion_point(field_release:qiuwanli.FileList.FileStyle)
+  
+  return filestyle_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void FileList::set_allocated_filestyle(::std::string* filestyle) {
+  if (filestyle != NULL) {
+    
+  } else {
+    
+  }
+  filestyle_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filestyle);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileList.FileStyle)
 }
 
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS

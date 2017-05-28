@@ -48,9 +48,10 @@ public:
 struct File_info 
 {
 	typedef unsigned long long Size_type;
+    unsigned char  m_RequireType;
 	Size_type filesize;
 	size_t filename_size;
-	File_info () : filesize (0), filename_size (0) { }
+	File_info () : filesize (0), filename_size (0),m_RequireType(0) { }
 };
 
 class Session : public boost::enable_shared_from_this<Session>
@@ -175,6 +176,10 @@ private:
 			return;
 		}
 
+        if (file_info_.m_RequireType=='a')
+        {
+            std::cout << std::endl <<"@@@@@@@@@@@@@@@@@@@@"<< std::endl;
+        }
 		receive_file_content ();
 	}
 

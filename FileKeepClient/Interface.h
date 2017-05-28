@@ -61,26 +61,27 @@ public:
         OpFile.close( );
     }
 
-    template<typename T1, typename T2>
-    bool SaveToFile(T1* FileType, T2 FileName)
-    {
-        //加载配置文件
-        boost::filesystem::fstream OpFile(FileName, std::ios::out | std::ios::binary);
-        if (!OpFile)
-        {
-            g_ComData.opplog.log(FileName + " 打开失败！");
-            return;
-        }
+    //template<typename T1, typename T2>
+    //bool SaveToFile(T1* FileType, T2 FileName)
+    //{
+    //    //加载配置文件
+    //    boost::filesystem::fstream OpFile(FileName, std::ios::out | std::ios::binary);
+    //    if (!OpFile)
+    //    {
+    //        g_ComData.opplog.log(FileName + " 打开失败！");
+    //        return false;
+    //    }
 
-        if (!FileType.SerializePartialToOstream(&g_ComData.OpFileBlockInfo))
-        {	//打开失败
-            g_ComData.OpFileBlockInfo.close( );
-            g_ComData.opplog.log("qiuwanli::ConfigFile 序列化失败！");
-            return;
-        }
+    //    if (!FileType.SerializePartialToOstream(&g_ComData.OpFileBlockInfo))
+    //    {	//打开失败
+    //        g_ComData.OpFileBlockInfo.close( );
+    //        g_ComData.opplog.log("qiuwanli::ConfigFile 序列化失败！");
+    //        return false;
+    //    }
 
-        OpFile.close( );
-    }
+    //    OpFile.close( );
+    //    return true;
+    //}
 
     bool DoConfigFile(qiuwanli::ConfigFile* conf
                       , const std::string& ID

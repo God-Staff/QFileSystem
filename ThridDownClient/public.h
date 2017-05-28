@@ -6,7 +6,7 @@
 #include <string>
 #include <boost/asio.hpp>
 #include <boost/filesystem.hpp>
-
+#include <queue>
 #include "PublicStruct.pb.h"
 
 //文件块大小//
@@ -35,7 +35,7 @@ struct DataBlockTypeInfo
     char m_ReqiureType;
     Size_type m_FileSize;
     unsigned int m_FileNameLength;
-    char m_UserID[11];
+    //char m_UserID[11];
     DataBlockTypeInfo( ) : m_FileSize(0), m_FileNameLength(0), m_ReqiureType(0) { }
 };
 
@@ -48,8 +48,11 @@ struct ComData
     qiuwanli::FileInfoListTable FileInfoList;
     qiuwanli::ClientConfigFileTable ClientConfigFile;
 
+
     boost::filesystem::ofstream OpFile;
     boost::filesystem::ofstream OpFileBlockInfo;
+    
+    std::vector<std::pair<std::string, std::string>> curUploadFile;
 };
 
 extern ComData g_ComData;

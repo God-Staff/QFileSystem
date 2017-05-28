@@ -99,19 +99,19 @@ void SerialToStream::MakeBlockListCheckForDown(qiuwanli::BlockListForDownCheck* 
     }
 
 }
-
-template<typename T>
-void SerialToStream::MakeBlock2Server(qiuwanli::BlockInfo2Server * BlockInfo
-                                      , const std::string & FileSHA512
-                                      , const std::vector<T>& Blocks)
-{ 
-    BlockInfo->set_filesha512(FileSHA512);
-    for (auto x : Blocks)
-    {
-        qiuwanli::BlockCheck* Item = BlockInfo->add_blocks( );
-        MakeBlock(Item, x);
-    }
-}
+//
+//template<typename T>
+//void SerialToStream::MakeBlock2Server(qiuwanli::BlockInfo2Server * BlockInfo
+//                                      , const std::string & FileSHA512
+//                                      , const std::vector<T>& Blocks)
+//{ 
+//    BlockInfo->set_filesha512(FileSHA512);
+//    for (auto x : Blocks)
+//    {
+//        qiuwanli::BlockCheck* Item = BlockInfo->add_blocks( );
+//        MakeBlock(Item, x);
+//    }
+//}
 
 
 }//! End NameSpace qiuwanli

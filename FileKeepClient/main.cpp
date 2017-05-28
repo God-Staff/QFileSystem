@@ -18,16 +18,16 @@ void initData( )
 {
     //加载配置文件
     boost::filesystem::fstream OpFile("config", std::ios::in | std::ios::binary);
-    if (!OpFile)
+    if (!OpFile.is_open())
     {
-        g_ComData.opplog.log("Conf 打开失败！");
+        //g_ComData.opplog.log("Conf 打开失败！");
         return;
     }
 
     if (!g_ComData.Conf.ParseFromIstream(&OpFile))
     {	//打开失败
         OpFile.close( );
-        g_ComData.opplog.log("qiuwanli::ConfigFile 解析失败！");
+        //g_ComData.opplog.log("qiuwanli::ConfigFile 解析失败！");
         return;
     }
 
@@ -67,11 +67,17 @@ void doItNextTime( )
     heart.set_totlesize((Space.capacity + Space.available) / Size_Mb);
     heart.set_prikeymd5(g_ComData.Conf.prikeymd5( ));
 
-    std::string name = "heart" + heart.id( ) + ".tmp";
-    PublicData.SaveToFile(&heart, name.c_str( ));
+    std::string name = "heart";
+        name += '+';
+        name += heart.id( ); 
+        name += '+';
+        name += std::to_string(heart.totlesize( ));
+        name += '+';
+        name += std::to_string(heart.totlesize( ));
+        name += '+';
+        name += heart.prikeymd5( );
+
     //再将数据同步到目录服务器，心跳连接
-    //std::string ttt;
-    //heart.SerializeToString(&ttt);
     try
     {
         boost::asio::io_service io;
@@ -82,11 +88,7 @@ void doItNextTime( )
                         , std::atoi(g_ComData.Conf.serversport( ).c_str())
                         , name.c_str( )
                         , 'h');
-        //senddata.senderLitter(io
-        //                      , g_ComData.Conf.serversip( ).c_str( )
-        //                      , std::atoi(g_ComData.Conf.serversport( ).c_str( ))
-        //                      , ttt.c_str( )
-        //                      , '1');
+
     }
     catch (std::exception e)
     {
@@ -106,7 +108,13 @@ void sendBlockInfoToServers( )
     {
         //qiuwanli::BlockInfo Info;
         std::string name = "BlockTableDiff" + g_ComData.Conf.id( );
-        PublicData.SaveToFile(&g_ComData.BlockTableDiff, name.c_str( ));
+        //PublicData.SaveToFile(&g_ComData.BlockTableDiff, name.c_str( ));
+        boost::filesystem::fstream tmp(name, std::ios::out | std::ios::binary);
+        if (g_ComData.BlockTableDiff.SerializePartialToOstream(&tmp))
+        {
+            return;
+        }
+        tmp.close( );
         try
         {
             boost::asio::io_service io;
@@ -119,13 +127,13 @@ void sendBlockInfoToServers( )
         {
             g_ComData.opplog.log("Heart Fail!\t");
         }
-    }
 
-    //将其合并
-    g_ComData.BlockTablePreDiff.MergeFrom(g_ComData.BlockTableDiff);
+        //将其合并
+        g_ComData.BlockTablePreDiff.MergeFrom(g_ComData.BlockTableDiff);
     
-    //清空数据，便于下次合并
-    g_ComData.BlockTableDiff.Clear( );
+        //清空数据，便于下次合并
+        g_ComData.BlockTableDiff.Clear( );
+    }
 
     Sleep(DelayTime_SendInfo);
     
