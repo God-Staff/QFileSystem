@@ -30,6 +30,7 @@ protected:
 
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
+    virtual void OnTimer(UINT_PTR nIDEvent);
     void runServer( );
     afx_msg void OnSysCommand(UINT nID, LPARAM lParam);
 	afx_msg void OnPaint();
@@ -40,26 +41,8 @@ protected:
     CListCtrl*  m_ListFile;
     CListCtrl*  m_ListSaveServer;
     CListCtrl*  m_ListShared;
-    CListCtrl*  m_ListClient;
-    CListCtrl*  m_ListLogs;
 
 	void updateList ();
-	//void MakeFilesLog (qiuwanli::File2Cilent * file
- //                      , std::string filename
- //                      , std::string sha512
- //                      , std::string client
- //                      , std::string createtime);
-	//void MakeLogs (qiuwanli::Logs * Log
- //                  , std::string user_id
- //                  , std::string logdate
- //                  , std::string loginfo
- //                  , std::string logtype);
-	//void MakeLogs (qiuwanli::ID2IP * id2ip
- //                  , std::string clientid
- //                  , std::string id
- //                  , std::string Prikey
- //                  , std::string KeyMd5
- //                  , std::string Others);
 
 	//发送发文件
     void sender(boost::asio::io_service &io
@@ -80,35 +63,21 @@ protected:
 		return wstrTo;
 	}
 
-	/*std::string& WStringToUTF8String (const std::wstring &wstr)
-	{
-		std::wstring_convert<std::codecvt_utf8<wchar_t>> conv;
-		std::string u8str = "";
-		u8str = conv.to_bytes (wstr);
-		return std::move (u8str);
-	}*/
-
 public:
 	afx_msg void OnNMRClickFileList(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnNMRClickClientList(NMHDR *pNMHDR, LRESULT *pResult);
     afx_msg void OnNMRClickSharedList(NMHDR *pNMHDR, LRESULT *pResult);
-    afx_msg void OnBnClickedend( );
-    afx_msg void OnBnClickedStart( );
-        
-
     
     //数据的初始化
     void InitData( );
     void LoadFileList( );
     void LoadSaveServerList( );
     void LoadSharedList( );
-    void LoadClientList( );
-    void LoadLogsList( );
 
 public:
     qiuwanli::FileInfoList      m_CFileList;
-    qiuwanli::File2ClientTable  m_CFileToClient;
-    qiuwanli::SharedUrlTable       m_CSharedTable;
+    //qiuwanli::File2ClientTable  m_CFileToClient;
+    qiuwanli::SharedTable       m_CSharedTable;
     qiuwanli::UserInfoTable     m_CUserInfo;
 
     qiuwanli::Heart        m_CHeart;

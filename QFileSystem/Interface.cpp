@@ -45,19 +45,19 @@ bool CInterface::DoBlockInfoTable(qiuwanli::BlockInfo* blockInfo
     return true;
 }
 
-bool CInterface::DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
-                                    , const std::string& FileName
-                                    , const std::string& FileSHA512
-                                    , const std::string& ClientID
-                                    , const std::string& ClientPort)
-{
-    file2Client->set_filename(FileName);
-    file2Client->set_filesha512(FileSHA512);
-    file2Client->set_cilentid(ClientID);
-    file2Client->set_cilentport(ClientPort);
-
-    return true;
-}
+//bool CInterface::DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
+//                                    , const std::string& FileName
+//                                    , const std::string& FileSHA512
+//                                    , const std::string& ClientID
+//                                    , const std::string& ClientPort)
+//{
+//    file2Client->set_filename(FileName);
+//    file2Client->set_filesha512(FileSHA512);
+//    file2Client->set_cilentid(ClientID);
+//    file2Client->set_cilentport(ClientPort);
+//
+//    return true;
+//}
 
 bool CInterface::DoClientConfigFileTable(qiuwanli::ClientConfigFile* conf
                                          , const std::string& CilentID
@@ -91,7 +91,7 @@ bool CInterface::DoFileInfoListTable(qiuwanli::FileInfoList* fileInfo
     fileInfo->set_filemd5(FileMD5);
     fileInfo->set_filename(FileName);
     fileInfo->set_filecreatedate(FileCreateDate);
-    fileInfo->set_filechangedate(FileChangeDate);
+    fileInfo->set_isshared(FileChangeDate);
     fileInfo->set_fileallblock(FileAllBlocks);
     fileInfo->set_filetotalsize(FileTotalSize);
     fileInfo->set_tag(Tag);
@@ -122,58 +122,6 @@ bool CInterface::DoFileListTable(qiuwanli::FileList* FileList
     FileList->set_filename(FileName);
     FileList->set_filesize(FileSize);
     FileList->set_filesha512(FileSHA512);
-
-    return true;
-}
-
-bool CInterface::DoFileDownLogTable(qiuwanli::FileDownLog* fileDownLog
-                                    , const std::string& FileName
-                                    , unsigned long long FileSize
-                                    , const std::string& FileDownTime
-                                    , const std::string& DowningStatus
-                                    , const std::string& FileSHA512
-                                    , const std::string& FileMD5)
-{
-    fileDownLog->set_filename(FileName);
-    fileDownLog->set_filesize(FileSize);
-    fileDownLog->set_filedowntime(FileDownTime);
-    fileDownLog->set_downingstatus(DowningStatus);
-    fileDownLog->set_filesha512(FileSHA512);
-    fileDownLog->set_filemd5(FileMD5);
-
-    return true;
-}
-
-bool CInterface::DoFileDowningTable(qiuwanli::FileDowning *fileDowning
-                                    , const std::string& FileSHA512
-                                    , const std::string& FileMD5
-                                    , const std::string& FilePauseTime
-                                    , unsigned long long FileDownloadBlockCount
-                                    , unsigned long long FileTotalBlockCount
-                                    , unsigned long long FileSize
-                                    , const std::string& BitMap)
-{
-    fileDowning->set_filesha512(FileSHA512);
-    fileDowning->set_filemd5(FileMD5);
-    fileDowning->set_filepausetime(FilePauseTime);
-    fileDowning->set_filedownloadblockcount(FileDownloadBlockCount);
-    fileDowning->set_filetotalblockcount(FileTotalBlockCount);
-    fileDowning->set_filesize(FileSize);
-    fileDowning->set_bitmap(BitMap);
-
-    return true;
-}
-
-bool CInterface::DoHeart(qiuwanli::Heart* heart
-                         , const std::string& ID
-                         , unsigned long long RemainSize
-                         , unsigned long long TotalSize
-                         , const std::string& PriKeyMd5)
-{
-    heart->set_id(ID);
-    heart->set_remainsize(RemainSize);
-    heart->set_totlesize(TotalSize);
-    heart->set_prikeymd5(PriKeyMd5);
 
     return true;
 }
@@ -218,7 +166,7 @@ bool CInterface::DoBlockListForDownCheckTable(
     return true;
 }
 
-bool CInterface::DoSharedTable(qiuwanli::SharedUrl* Url
+bool CInterface::DoSharedTable(qiuwanli::Shared* Url
                                , const std::string& FileSha512
                                , const std::string& VerificationCode
                                , const std::string& SharedTime
@@ -229,7 +177,7 @@ bool CInterface::DoSharedTable(qiuwanli::SharedUrl* Url
     Url->set_sha512(FileSha512);
     Url->set_verificationcode(VerificationCode);
     Url->set_sharedtime(SharedTime);
-    Url->set_filesize(FileSize);
+    //Url->set_filesize(FileSize);
     Url->set_userstutas(UserStutas);
     Url->set_userid(UserID);
 
@@ -243,7 +191,7 @@ bool CInterface::DoBlockList4DownTable(qiuwanli::BlockList4Down* BlockList
                                        , const std::string& SaveServersIP)
 {
     BlockList->set_filesha512(FileSHA512);
-    BlockList->set_blocknumer(BlockNumer);
+    //BlockList->set_blocknumer(BlockNumer);
     BlockList->set_blockmd5(BlockMD5);
     BlockList->set_saveserversip(SaveServersIP);
 

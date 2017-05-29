@@ -61,21 +61,19 @@ void doItNextTime( )
     g_ComData.Conf.set_totalsize((Space.capacity + Space.available) / Size_Mb);
     g_ComData.Conf.set_remainsize(Space.capacity / Size_Mb);
     
-    qiuwanli::Heart heart;
-    heart.set_id("");
-    heart.set_remainsize(Space.capacity / Size_Mb);
-    heart.set_totlesize((Space.capacity + Space.available) / Size_Mb);
-    heart.set_prikeymd5(g_ComData.Conf.prikeymd5( ));
+    //qiuwanli::Heart heart;
+    //heart.set_id("");
+    //heart.set_remainsize(Space.capacity / Size_Mb);
+    //heart.set_totlesize((Space.capacity + Space.available) / Size_Mb);
+    //heart.set_prikeymd5(g_ComData.Conf.prikeymd5( ));
 
-    std::string name = "heart";
+    std::string name = g_ComData.Conf.id( );
         name += '+';
-        name += heart.id( ); 
+        name += std::to_string(Space.capacity / Size_Mb);
         name += '+';
-        name += std::to_string(heart.totlesize( ));
+        name += std::to_string((Space.capacity + Space.available) / Size_Mb);
         name += '+';
-        name += std::to_string(heart.totlesize( ));
-        name += '+';
-        name += heart.prikeymd5( );
+        name += g_ComData.Conf.prikeymd5( );
 
     //再将数据同步到目录服务器，心跳连接
     try
@@ -83,11 +81,11 @@ void doItNextTime( )
         boost::asio::io_service io;
         SendFile senddata;
         std::string ip = g_ComData.Conf.serversip( );
-        senddata.sender(io
-                        , g_ComData.Conf.serversip( ).c_str()
-                        , std::atoi(g_ComData.Conf.serversport( ).c_str())
-                        , name.c_str( )
-                        , 'h');
+        senddata.senderLitter(io
+                              , g_ComData.Conf.serversip( ).c_str( )
+                              , std::atoi(g_ComData.Conf.serversport( ).c_str( ))
+                              , name.c_str( )
+                              , 'h');
 
     }
     catch (std::exception e)
@@ -233,7 +231,7 @@ int main (int argc, char* argv[])
 		}
 
 		boost::asio::ip::address address = boost::asio::ip::address::from_string (argv[1]);
-		short port = std::atoi (argv[2]);
+        short port = 8289;//std::atoi (argv[2]);
 		int thread_count = std::atoi (argv[3]);
 		size_t block_size = std::atoi (argv[4]);
 

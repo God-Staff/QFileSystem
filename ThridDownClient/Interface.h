@@ -58,11 +58,11 @@ public:
                           , const unsigned long long CurSize
                           , const unsigned long long FileBlockOffset);
 
-    bool DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
+    /*bool DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
                             , const std::string& FileName
                             , const std::string& FileSHA512
                             , const std::string& ClientID
-                            , const std::string& ClientPort);
+                            , const std::string& ClientPort);*/
 
     bool DoClientConfigFileTable(qiuwanli::ClientConfigFile* conf
                                  , const std::string& CilentID

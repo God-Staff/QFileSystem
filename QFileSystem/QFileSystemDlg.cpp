@@ -18,6 +18,7 @@
 //#include "PublicStruct.pb.h"
 
 ComData g_ComData;
+CInterface PublicData;
 
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
@@ -65,11 +66,10 @@ void CQFileSystemDlg::DoDataExchange(CDataExchange* pDX)
 
 BEGIN_MESSAGE_MAP(CQFileSystemDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
+    ON_WM_TIMER()           //定时器通知
 	ON_NOTIFY(NM_RCLICK, IDC_LIST_FILE, &CQFileSystemDlg::OnNMRClickFileList)
     ON_NOTIFY(NM_RCLICK, IDC_LIST_Save_Servers, &CQFileSystemDlg::OnNMRClickClientList)
     ON_NOTIFY(NM_RCLICK, IDC_LIST_Shared, &CQFileSystemDlg::OnNMRClickSharedList)
-    ON_BN_CLICKED(IDC_BUTTON1, &CQFileSystemDlg::OnBnClickedStart)
-    ON_BN_CLICKED(IDC_BUTTON2, &CQFileSystemDlg::OnBnClickedend)
 END_MESSAGE_MAP()
 
 
@@ -194,62 +194,6 @@ BOOL CQFileSystemDlg::OnInitDialog()
         m_ListShared->InsertColumn(i, &lvcolumn3);
     }
 
-    //下载端在线列表
-    m_ListClient = (CListCtrl*) GetDlgItem(IDC_LIST_Client);
-    DWORD dwStyle4 = GetWindowLong(m_ListClient->m_hWnd, GWL_STYLE);
-    SetWindowLong(m_ListClient->m_hWnd, GWL_STYLE, dwStyle4 | LVS_REPORT);
-
-    //设置listctrl可以整行选择和网格条纹
-    DWORD styles4 = m_ListClient->GetExtendedStyle( );
-    m_ListClient->SetExtendedStyle(styles4 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
-
-    //给listctrl设置5个标题栏
-    TCHAR rgtsz4[2][10] = {_T("用户ID"),_T("IP")};
-
-    //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
-    LV_COLUMN lvcolumn4;
-    CRect rect4;
-    m_ListClient->GetWindowRect(&rect4);
-    for (int i = 0; i < 2; i++)
-    {
-        lvcolumn4.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
-            | LVCF_WIDTH | LVCF_ORDER;
-        lvcolumn4.fmt = LVCFMT_LEFT;
-        lvcolumn4.pszText = rgtsz4[i];
-        lvcolumn4.iSubItem = i;
-        lvcolumn4.iOrder = i;
-        lvcolumn4.cx = rect4.Width( ) / 2;
-        m_ListClient->InsertColumn(i, &lvcolumn4);
-    }
-
-    //日志列表
-    m_ListLogs = (CListCtrl*) GetDlgItem(IDC_LIST_Logs);
-    DWORD dwStyle5 = GetWindowLong(m_ListLogs->m_hWnd, GWL_STYLE);
-    SetWindowLong(m_ListLogs->m_hWnd, GWL_STYLE, dwStyle5 | LVS_REPORT);
-
-    //设置listctrl可以整行选择和网格条纹
-    DWORD styles5 = m_ListLogs->GetExtendedStyle( );
-    m_ListLogs->SetExtendedStyle(styles5 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
-
-    //给listctrl设置5个标题栏
-    TCHAR rgtsz5[4][10] = {_T("时间"),_T("事件"),_T("用户ID"),_T("详情")};
-
-    //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
-    LV_COLUMN lvcolumn5;
-    CRect rect5;
-    m_ListLogs->GetWindowRect(&rect5);
-    for (int i = 0; i < 4; i++)
-    {
-        lvcolumn5.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
-                        | LVCF_WIDTH | LVCF_ORDER;
-        lvcolumn5.fmt = LVCFMT_LEFT;
-        lvcolumn5.pszText = rgtsz5[i];
-        lvcolumn5.iSubItem = i;
-        lvcolumn5.iOrder = i;
-        lvcolumn5.cx = rect5.Width( ) / 4;
-        m_ListLogs->InsertColumn(i, &lvcolumn5);
-    }
-
     InitData( );
 
 	//解析数据好友和分享链接数据
@@ -257,8 +201,85 @@ BOOL CQFileSystemDlg::OnInitDialog()
 
     runServer( );
 
+    SetTimer(1, 300, NULL);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
+}
+
+
+
+void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
+{
+    switch (nIDEvent)
+    {
+    case 1: //更新数据
+    {
+        if ((size_t(1)&g_ComData.m_UIChange) == 0)
+        {
+            return;
+        }
+
+        //更新UI文件列表
+        if ((size_t(1)&g_ComData.m_UIChange) == size_t(1))
+        {
+            for (auto xx : g_ComData.NotifyFileList)
+            {
+                CString x1;
+                x1 = xx.v1.c_str( );
+                m_ListFile->InsertItem(0, x1);
+
+                CString x2;
+                x2 = xx.v2.c_str( );
+                m_ListFile->SetItemText(0, 1, x2);
+
+                CString x3;
+                x3 = xx.v3.c_str( );
+                m_ListFile->SetItemText(0, 1, x3);
+
+                CString x4;
+                x4 = xx.v4.c_str( );
+                m_ListFile->SetItemText(0, 1, x4);
+
+                CString x5;
+                x5 = xx.v5.c_str( );
+                m_ListFile->SetItemText(0, 1, x5);
+            }
+            g_ComData.NotifyFileList.clear( );
+
+            //重置状态位
+            size_t tmp = size_t(1);
+            tmp = ~tmp;
+            g_ComData.m_UIChange &= tmp;
+        }
+
+        //更新UI文件列表
+
+        for (auto xx : g_ComData.m_HeartList)
+        {
+            CString x1;
+            x1 = xx.ClientID.c_str( );
+            m_ListFile->InsertItem(0, x1);
+
+            CString x2;
+            x2 = std::to_string(xx.Remain).c_str( );
+            m_ListFile->SetItemText(0, 1, x2);
+
+            CString x3;
+            x3 = std::to_string(xx.Total).c_str( );
+            m_ListFile->SetItemText(0, 1, x3);
+
+            CString x4;
+            x4 = xx.Prikeymd5.c_str( );
+            m_ListFile->SetItemText(0, 1, x4);
+        }
+        g_ComData.m_HeartList.clear( );
+
+    }
+    break;
+    default:
+        break;
+    }
+    CDialogEx::OnTimer(nIDEvent);
 }
 
 void runServers( )
@@ -268,7 +289,7 @@ void runServers( )
         std::cerr << "Usage: server <address> <port> <threads> <blocksize>\n";
 
         boost::asio::ip::address address = boost::asio::ip::address::from_string("127.0.0.1");
-        short port = 8089;
+        short port = 8189;
         int thread_count = 6;
         size_t block_size = 4096;
 
@@ -355,92 +376,9 @@ HCURSOR CQFileSystemDlg::OnQueryDragIcon()
 
 void CQFileSystemDlg::updateList ()
 {
-	//qiuwanli::ID2IPTable ips;
-	//qiuwanli::File2ClientServers client;
-
-	//std::fstream ipInfo ("ID2IP", std::ios::in | std::ios::binary);
-	//std::fstream clientInfo ("FileSharedLog", std::ios::in | std::ios::binary);
-
-	//if (!ipInfo)
-	//	MessageBox (L"配置文件打开失败！");
-
-	//if (!ips.ParseFromIstream (&ipInfo))
-	//{	//打开失败
-	//	MessageBox (L"配置文件加载失败！");
-	//	ipInfo.close ();
-	//}
-	//else
-	//{	//解析配置文件
-	//	for (int i = 0; i < ips.ip_size(); ++i)
-	//	{
-	//		const qiuwanli::ID2IP& myfriend = ips.ip(i);
-
-	//		m_ListSaveServer->InsertItem (i, StringToWstring (myfriend.cilentid()).c_str ());
- //           m_ListSaveServer->SetItemText (i, 1, StringToWstring (myfriend.ip ()).c_str ());
- //           m_ListSaveServer->SetItemText (i, 2, StringToWstring (myfriend.keymd5 ()).c_str ());
-	//	}
-	//}
-	//ipInfo.close ();
-
-	//if (!clientInfo)
-	//	MessageBox (L"sharedlist 配置文件打开失败！");
-
-	//if (!client.ParseFromIstream (&clientInfo))
-	//{	//打开失败
-	//	MessageBox (L" sharedlist 配置文件加载失败！");
-	//	clientInfo.close ();
-	//}
-	//else
-	//{	//解析配置文件
-	//	for (int i = 0; i < client.client_size(); ++i)
-	//	{
-	//		const qiuwanli::File2Cilent& shared = client.client (i);
-
-	//		m_ListFile->InsertItem (i, StringToWstring (shared.filename ()).c_str ());
- //           m_ListFile->SetItemText (i, 1, StringToWstring (shared.sha512 ()).c_str ());
- //           m_ListFile->SetItemText (i, 2, StringToWstring (shared.cilentid ()).c_str ());
- //           m_ListFile->SetItemText (i, 3, StringToWstring (shared.createdate ()).c_str ());
-	//	}
-	//}
-
-	//clientInfo.close ();
+	
 }
 
-//void CQFileSystemDlg::MakeFilesLog (qiuwanli::File2Cilent * file
-//                                    , std::string filename
-//                                    , std::string sha512
-//                                    , std::string client
-//                                    , std::string createtime)
-//{
-//	file->set_filename (filename);
-//	file->set_sha512 (sha512);
-//	file->set_cilentid (client);
-//	file->set_createdate (createtime);
-//}
-//
-//void CQFileSystemDlg::MakeLogs (qiuwanli::Logs * Log
-//                                , std::string user_id
-//                                , std::string logdate
-//                                , std::string loginfo
-//                                , std::string logtype) 
-//{
-//	Log->set_user_id (user_id);
-//	Log->set_log_date (logdate);
-//	Log->set_log_info (loginfo);
-//	Log->set_log_type (logtype);
-//}
-//void CQFileSystemDlg::MakeLogs (qiuwanli::ID2IP * id2ip
-//                                , std::string clientid
-//                                , std::string ip
-//                                , std::string Prikey
-//                                , std::string KeyMd5
-//                                , std::string Others)
-//{
-//	id2ip->set_cilentid (clientid);
-//	id2ip->set_ip (ip);
-//	id2ip->set_prikey (Prikey);
-//	id2ip->set_keymd5 (KeyMd5);
-//}
 
 void CQFileSystemDlg::sender (boost::asio::io_service &io
                               , const char*	ip_address
@@ -581,6 +519,98 @@ void CQFileSystemDlg::OnNMRClickSharedList(NMHDR *pNMHDR, LRESULT *pResult)
 
 void CQFileSystemDlg::InitData( )
 {
+    //解析文件列表
+    boost::filesystem::fstream readFile("FileInfoList", std::ios::in | std::ios::binary);
+    if (!readFile.is_open( ))
+        return;
+
+    if (!g_ComData.m_FileListTable.ParsePartialFromIstream(&readFile));
+
+    for (int index = 0; index < g_ComData.m_FileListTable.filelist_size( ); ++index)
+    {
+        //_T("文件名"), _T("SHA512"), _T("文件大小"), _T("创建时间"), _T("是否分享")
+        CString Data1;
+        Data1 = g_ComData.m_FileListTable.filelist(index).filename().c_str( );
+        m_ListFile->InsertItem(0, Data1);
+
+        CString Data2;
+        Data2 = g_ComData.m_FileListTable.filelist(index).filesha512( ).c_str( );
+        m_ListFile->SetItemText(0, 1, Data2);
+
+        CString Data3;
+        std::string ss=std::to_string(g_ComData.m_FileListTable.filelist(index).filetotalsize( ));
+        Data3 = ss.c_str( );
+        m_ListFile->SetItemText(0, 2, Data3);
+
+        CString Data4;
+        Data4 = g_ComData.m_FileListTable.filelist(index).filecreatedate( ).c_str( );
+        m_ListFile->SetItemText(0, 3, Data4);
+
+        CString Data5;
+        Data5 = g_ComData.m_FileListTable.filelist(index).isshared( ).c_str( );
+        m_ListFile->SetItemText(0, 4, Data5);
+
+    }
+
+    //解析存储端信息
+    boost::filesystem::fstream readClientFile("ClientTable", std::ios::in | std::ios::binary);
+    if (!readClientFile.is_open( ))
+        return;
+
+    if (!g_ComData.m_ClientConfigFile.ParsePartialFromIstream(&readClientFile));
+
+    for (int index = 0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
+    {
+        //_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")
+        CString Data1;
+        Data1 = g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ).c_str( );
+        m_ListSaveServer->InsertItem(0, Data1);
+
+        CString Data2;
+        Data2 = g_ComData.m_ClientConfigFile.clientinfo(index).saveip( ).c_str( );
+        m_ListSaveServer->SetItemText(0, 1, Data2);
+
+        CString Data3;
+        std::string ss = std::to_string(g_ComData.m_ClientConfigFile.clientinfo(index).remainsize( ));
+        Data3 = ss.c_str( );
+        m_ListSaveServer->SetItemText(0, 2, Data3);
+
+        CString Data4;
+        std::string ss1 = std::to_string(g_ComData.m_ClientConfigFile.clientinfo(index).totalsize( ));
+        Data4 = ss1.c_str( );
+        m_ListSaveServer->SetItemText(0, 3, Data4);
+        
+        //默认设置为离线，客户端发送Heart是进行变动
+        const std::string fff = "OFF";
+        auto tt = g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
+        tt->set_online("OFF");          //更改Protoc数据
+        m_ListSaveServer->SetItemText(0, 4, _T("OFF"));
+    }
+
+    //载入文件存储块对应的文件列表
+    boost::filesystem::fstream readBlockInfoFile("BlockInfoTable", std::ios::in | std::ios::binary);
+    if (readBlockInfoFile.is_open( ))
+    {
+        if (!g_ComData.m_BlockListForDownCheckTable.ParsePartialFromIstream(&readBlockInfoFile))
+            MessageBox(_T("BlockInfoTable 文件解析失败！"));
+    }
+    else
+    {
+        MessageBox(_T("BlockInfoTable 文件打开失败！"));
+    }
+    //for (int index = 0; index < g_ComData.m_BlockListForDownCheckTable.blocklistfordown_size( ); ++index)
+    
+
+    //载入用户列表
+    boost::filesystem::fstream readUserInfoFile("UserTable", std::ios::in | std::ios::binary);
+    if (!readUserInfoFile.is_open( ))//return;
+        MessageBox(_T("UserTable 文件打开失败！"));
+
+    if (!g_ComData.m_UserhasFile.ParsePartialFromIstream(&readUserInfoFile))
+        MessageBox(_T("UserTable 文件解析失败！"));
+
+
+
     m_ListFile->InsertItem(0, L"vc++开发大全");
     m_ListFile->SetItemText(0, 1, L"df89cia9da7dasd80ad87as0da0sd");
     m_ListFile->SetItemText(0, 2, L"8764253");
@@ -589,10 +619,6 @@ void CQFileSystemDlg::InitData( )
     m_ListFile->SetItemText(1, 1, L"df89cia9da7dasd80ad87as0da0sd");
     m_ListFile->SetItemText(1, 2, L"432534");
     m_ListFile->SetItemText(1, 3, L"20160304134409");
-    m_ListFile->InsertItem(2, L"CPlusPlus");
-    m_ListFile->SetItemText(2, 1, L"df89cia9da7dasd80ad87as0da0sd");
-    m_ListFile->SetItemText(2, 2, L"743563");
-    m_ListFile->SetItemText(3, 3, L"20160304132055");
 
     m_ListSaveServer->InsertItem(0, L"10004");
     m_ListSaveServer->SetItemText(0, 1, L"124.54.77.33");
@@ -603,9 +629,6 @@ void CQFileSystemDlg::InitData( )
     m_ListSaveServer->SetItemText(1, 2, L"86452623");
     m_ListSaveServer->SetItemText(1, 3, L"234452623");
     m_ListSaveServer->InsertItem(2, L"10008");
-    m_ListSaveServer->SetItemText(2, 1, L"124.54.77.123");
-    m_ListSaveServer->SetItemText(2, 2, L"23452623");
-    m_ListSaveServer->SetItemText(3, 3, L"777452623");
 
     m_ListShared->InsertItem(0, L"etynnh89adasdaa0nendjfaij09434f343");
     m_ListShared->SetItemText(0, 1, L"89adasdaa0nendjfaij09434f343");
@@ -615,42 +638,12 @@ void CQFileSystemDlg::InitData( )
     m_ListShared->SetItemText(1, 1, L"89adasdaa0nendjfaij09434f343");
     m_ListShared->SetItemText(1, 2, L"234534");
     m_ListShared->SetItemText(1, 3, L"2364565");
-    m_ListShared->InsertItem(2, L"fgfawe89adasdaa0nendjfaij09434f343");
-    m_ListShared->SetItemText(2, 1, L"89adasdaa0nendjfaij09434f343");
-    m_ListShared->SetItemText(2, 2, L"5hf2fd");
-    m_ListShared->SetItemText(2, 3, L"5634543");
 
-    m_ListClient->InsertItem(0, L"5634543");
-    m_ListClient->SetItemText(0, 1, L"174.74.77.33");
-    m_ListClient->InsertItem(1, L"2364565");
-    m_ListClient->SetItemText(1, 1, L"129.54.74.33");
-    m_ListClient->InsertItem(2, L"2054534");
-    m_ListClient->SetItemText(2, 1, L"177.58.97.33");
-
-    m_ListLogs->InsertItem(0, L"2017-05-14 05:30:22");
-    m_ListLogs->SetItemText(0, 1, L"上传");
-    m_ListLogs->SetItemText(0, 2, L"2364565");
-    m_ListLogs->SetItemText(0, 3, L"dafs");
-    m_ListLogs->InsertItem(1, L"2017-05-14 05:50:33");
-    m_ListLogs->SetItemText(1, 1, L"分享");
-    m_ListLogs->SetItemText(1, 2, L"2364565");
-    m_ListLogs->SetItemText(1, 3, L"dafs");
-    m_ListLogs->InsertItem(2, L"2017-05-15 09:07:42");
-    m_ListLogs->SetItemText(2, 1, L"下载");
-    m_ListLogs->SetItemText(2, 2, L"5634543");
-    m_ListLogs->SetItemText(3, 3, L"dafs");
-    m_ListLogs->InsertItem(2, L"2017-05-15 09:07:42");
-    m_ListLogs->SetItemText(2, 1, L"删除");
-    m_ListLogs->SetItemText(2, 2, L"2364565");
-    m_ListLogs->SetItemText(3, 3, L"dafs");
 
     //
     LoadFileList( );
     LoadSaveServerList( );
     LoadSharedList( );
-    LoadClientList( );
-    LoadLogsList( );
-
 }
 
 void CQFileSystemDlg::LoadFileList( )
@@ -666,27 +659,4 @@ void CQFileSystemDlg::LoadSharedList( )
 void CQFileSystemDlg::LoadSaveServerList( )
 {
 
-}
-
-void CQFileSystemDlg::LoadClientList( )
-{
-
-}
-
-void CQFileSystemDlg::LoadLogsList( )
-{
-
-}
-
-
-
-void CQFileSystemDlg::OnBnClickedStart( )
-{
-    // TODO: 在此添加控件通知处理程序代码
-}
-
-
-void CQFileSystemDlg::OnBnClickedend( )
-{
-    // TODO: 在此添加控件通知处理程序代码
 }

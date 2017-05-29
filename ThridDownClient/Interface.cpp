@@ -23,19 +23,19 @@ bool CInterface::DoBlockInfoTable(qiuwanli::BlockInfo* blockInfo
     return true;
 }
 
-bool CInterface::DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
-                                    , const std::string& FileName
-                                    , const std::string& FileSHA512
-                                    , const std::string& ClientID
-                                    , const std::string& ClientPort)
-{
-    file2Client->set_filename(FileName);
-    file2Client->set_filesha512(FileSHA512);
-    file2Client->set_cilentid(ClientID);
-    file2Client->set_cilentport(ClientPort);
-
-    return true;
-}
+//bool CInterface::DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
+//                                    , const std::string& FileName
+//                                    , const std::string& FileSHA512
+//                                    , const std::string& ClientID
+//                                    , const std::string& ClientPort)
+//{
+//    file2Client->set_filename(FileName);
+//    file2Client->set_filesha512(FileSHA512);
+//    file2Client->set_cilentid(ClientID);
+//    file2Client->set_cilentport(ClientPort);
+//
+//    return true;
+//}
 
 bool CInterface::DoClientConfigFileTable(qiuwanli::ClientConfigFile* conf
                                          , const std::string& CilentID

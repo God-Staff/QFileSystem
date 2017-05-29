@@ -101,11 +101,11 @@ public:
                           , const unsigned long long CurSize
                           , const unsigned long long FileBlockOffset);
 
-    bool DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
-                            , const std::string& FileName
-                            , const std::string& FileSHA512
-                            , const std::string& ClientID
-                            , const std::string& ClientPort);
+    //bool DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
+    //                        , const std::string& FileName
+    //                        , const std::string& FileSHA512
+    //                        , const std::string& ClientID
+    //                        , const std::string& ClientPort);
 
     bool DoClientConfigFileTable(qiuwanli::ClientConfigFile* conf
                                  , const std::string& CilentID
@@ -120,7 +120,7 @@ public:
                              , const std::string& FileMD5
                              , const std::string& FileName
                              , const std::string& FileCreateDate
-                             , const std::string& FileChangeDate
+                             , const std::string& isshared
                              , unsigned long long FileAllBlocks
                              , unsigned long long FileTotalSize
                              , const std::string& Tag);
@@ -135,13 +135,13 @@ public:
                          , unsigned long long FileSize
                          , const std::string& FileSHA512);
 
-    bool DoFileDownLogTable(qiuwanli::FileDownLog* fileDownLog
-                            , const std::string& FileName
-                            , unsigned long long FileSize
-                            , const std::string& FileDownTime
-                            , const std::string& DowningStatus
-                            , const std::string& FileSHA512
-                            , const std::string& FileMD5);
+    //bool DoFileDownLogTable(qiuwanli::FileDownLog* fileDownLog
+    //                        , const std::string& FileName
+    //                        , unsigned long long FileSize
+    //                        , const std::string& FileDownTime
+    //                        , const std::string& DowningStatus
+    //                        , const std::string& FileSHA512
+    //                        , const std::string& FileMD5);
 
     bool DoFileDowningTable(qiuwanli::FileDowning * fileDowning
                             , const std::string & FileSHA512
@@ -172,7 +172,7 @@ public:
                                       , const std::string& FileMd5
                                       , std::vector<std::pair<std::string, unsigned long long >>& vList);
 
-    bool DoSharedTable(qiuwanli::SharedUrl* Url
+    bool DoSharedTable(qiuwanli::Shared* Url
                        , const std::string& FileSha512
                        , const std::string& VerificationCode
                        , const std::string& SharedTime

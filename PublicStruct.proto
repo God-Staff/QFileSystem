@@ -53,6 +53,7 @@ message ClientConfigFile
 	string KeyMD5=4;		//用于验证
 	uint64 TotalSize=5;		//
 	uint64 RemainSize=6;	//
+	string OnLine=7;		//在线与否
 }
 message ClientConfigFileTable
 {
@@ -65,7 +66,7 @@ message FileInfoList
 	string FileMD5=2;
 	string FileName=3;
 	string FileCreateDate=4;
-	string FileChangeDate=5;
+	string isshared=5;	//是否被分享
 	uint64 FileAllBlock=6;
 	uint64 FileTotalSize=7;
 	string Tag=8;				//存储端ID
@@ -135,7 +136,7 @@ message FileDowning
 	uint64 FileDownloadBlockCount=5;
 	uint64 FileTotalBlockCount=6;
 	uint64 FileSize=7;
-	uint32 BlockCount=8;
+	uint64 BlockCount=8;
 	string BitMap=9;
 }
 message FileDowningTable
@@ -197,6 +198,7 @@ message SharedTable
 {
 	repeated Shared SharedInfo=1;
 }
+
 //对应存储列表
 message BlockList4Down
 {

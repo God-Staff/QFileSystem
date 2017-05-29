@@ -61,6 +61,7 @@ BEGIN_MESSAGE_MAP(CThridDownClientDlg, CDialogEx)
     ON_BN_CLICKED(IDC_DownLoadURL, &CThridDownClientDlg::OnBnClickedDownloadurl)
 END_MESSAGE_MAP()
 
+
 void CThridDownClientDlg::OnTimer(UINT_PTR nIDEvent)
 {
     switch (nIDEvent)
@@ -70,6 +71,56 @@ void CThridDownClientDlg::OnTimer(UINT_PTR nIDEvent)
         if ((size_t(1)&g_ComData.DateChage) == 0)
         {
             return;
+        }
+
+        //服务端文件存在时
+        if ((size_t(1)&g_ComData.DateChage) == size_t(1))
+        {
+            std::string  name;
+
+            for (auto x:g_ComData.DoneUploadFile)
+            {
+                name += x.first;
+                name += "\r\n";
+            }
+            g_ComData.DoneUploadFile.clear( );
+
+            name += "已妙传";
+            CString names;
+            names = name.c_str( );
+            MessageBox(names);
+            
+            //重置状态位
+            size_t tmp = size_t(1);
+            tmp = ~tmp;
+            g_ComData.DateChage &= tmp;
+            //更新文件列表
+            UpDataFileList( );
+        }
+
+        //文件上传完成
+        if ((size_t(2)&g_ComData.DateChage) == size_t(2))
+        {
+            std::string  name;
+
+            for (auto x : g_ComData.DoneUploadFile)
+            {
+                name += x.first;
+                name += "\r\n";
+            }
+            g_ComData.DoneUploadFile.clear( );
+
+            name += "传输完成！";
+            CString names;
+            names = name.c_str( );
+            MessageBox(names);
+
+            //重置状态位
+            size_t tmp = size_t(2);
+            tmp = ~tmp;
+            g_ComData.DateChage &= tmp;
+            //更新文件列表
+            UpDataFileList( );
         }
 
     }
@@ -189,17 +240,24 @@ BOOL CThridDownClientDlg::OnInitDialog()
 
 void CThridDownClientDlg::initLocalData( )
 {
+    //初始化本地用户数据
+    g_ComData.user.set_userid("100001");
+    g_ComData.user.set_userps("123456");
+
+    if (g_ComData.user.userid()=="100001")
+    {
+        MessageBox(_T("100001"));
+    }
     //读取本地配置信息
     boost::filesystem::fstream readFile("UserFileList", std::ios::in | std::ios::binary);
     if (!readFile.is_open( ))
         return;
     
-    if (!g_ComData.FileListT.ParsePartialFromIstream(&readFile));
-        //return;
+    if (!g_ComData.FileListT.ParsePartialFromIstream(&readFile))
+        MessageBox(_T("UserFileList Fail!"));
+
     //再读取本地文件，插入进去
     FilePathList FileList;
-   // std::string pathT= ".";
-    //boost::filesystem::path ppp;
     getFileList(boost::filesystem::current_path(), FileList);
     for (auto iter : FileList)
     {
@@ -290,7 +348,7 @@ void runservers()
         std::cerr << "Usage: server <address> <port> <threads> <blocksize>\n";
 
         boost::asio::ip::address address = boost::asio::ip::address::from_string("127.0.0.1");
-        short port = 8889;
+        short port = 8089;
         int thread_count = 4;
         size_t block_size = 4096;
 
@@ -578,13 +636,23 @@ void CThridDownClientDlg::OnUploadFile( )
     //MessageBox(str);
 
     //获取文件的FilsSHA512值
-
     std::string filename = CT2A(str);
-    //m_VUpFileList.push_back(filename);
-   
     std::string sha512;
-
     GetFileSHA512(filename, sha512);
+
+    for (int index = 0; g_ComData.FileListT.file_size( ); ++index)
+    {
+        if (g_ComData.FileListT.file(index).filename()==filename)
+        {
+            auto xx = g_ComData.FileListT.mutable_file(index);
+            //xx->set_filestyle("witeforUP");     //表示正在上传
+            xx->set_filesha512(sha512);
+        }
+    }
+    CString sha;
+    sha = sha512.c_str( );
+    m_FileList->SetItemText(nId, 2, sha);
+
     g_ComData.m_UploadFile.push_back(ComData::Vec3(filename,sha512,0));
     //g_ComData.curUploadFile.push_back(std::make_pair(filename, sha512));
     filename += '+';
@@ -592,13 +660,13 @@ void CThridDownClientDlg::OnUploadFile( )
     filename += '+';
     filename += user.userid();
     filename += '+';
-    filename += user.userps( );
+    filename += user.userps();
 
     boost::asio::io_service io_ser; 
     SendFile sender;
     try
     {
-        sender.senderLitter(io_ser, "127.0.0.1", 8089, filename.c_str( ), 'a');
+        sender.senderLitter(io_ser, "127.0.0.1", 8189, filename.c_str( ), 'a');
     }
     catch (CException* e)
     {
@@ -709,5 +777,38 @@ void CThridDownClientDlg::GetFileSHA512(std::string& fileName, std::string& File
 void CThridDownClientDlg::UpDataUI()
 {
     SetTimer(1, 15000,NULL);
+
+}
+
+
+void CThridDownClientDlg::UpDataFileList( )
+{
+    m_FileList->DeleteAllItems( );
+    for (size_t index = 0; index < g_ComData.FileListT.file_size( ); ++index)
+    {
+        CString DataT;
+        DataT = g_ComData.FileListT.file(index).filename( ).c_str( );
+        m_FileList->InsertItem(0, DataT);
+
+        CString Data2;
+        std::string ss = std::to_string(g_ComData.FileListT.file(index).filesize( ));
+        Data2 = ss.c_str( );
+        m_FileList->SetItemText(0, 1, Data2);
+
+        CString Data3;
+        Data3 = g_ComData.FileListT.file(index).filesha512( ).c_str( );
+        m_FileList->SetItemText(0, 2, Data3);
+
+        CString Data4;
+        Data4 = g_ComData.FileListT.file(index).filestyle( ).c_str( );
+        m_FileList->SetItemText(0, 3, Data4);
+    }
+}
+void CThridDownClientDlg::UpDataDownFileList( )
+{
+    //DeleteAllItems( );
+}
+void CThridDownClientDlg::UpDataSharedList( )
+{
 
 }

@@ -64,6 +64,9 @@ public:
 
     void GetFileSHA512(std::string& fileName, std::string& FileSHA512);
     void UpDataUI( );
+    void UpDataFileList( );
+    void UpDataDownFileList( );
+    void UpDataSharedList( );
     //VOID CALLBACK CountTime( );
 private:
     std::vector<std::string> m_VUpFileList;

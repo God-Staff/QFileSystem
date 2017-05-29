@@ -53,7 +53,7 @@ struct ComData
     boost::filesystem::ofstream OpFile;
     boost::filesystem::ofstream OpFileBlockInfo;
     
-    struct Vec3
+    struct Vec3//用于记录上传文件
     {
         std::string m_FileName;
         std::string m_FileSHA512;

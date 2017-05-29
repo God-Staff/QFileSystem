@@ -103,24 +103,35 @@ public:
             filename += md5;
 
             try{
-                send.sender(io_ser, iterServerIP->second.c_str( ), 8089, filename.c_str( ), 'd');
+                send.sender(io_ser, iterServerIP->second.c_str( ), 8289, filename.c_str( ), 'd');
             }
             catch (CException* e)
             {}
         }
         
-
+        //文件传输完成后，
         std::string fileNameTmp;
-        //标记已完成传输的文件
-        g_ComData.DateChage |= 2;
+        //标记已完成传输的文件 ,并设置定时器响应触发事件
+        g_ComData.DateChage |= (size_t) 2;
+        for (int index = 0; index < g_ComData.FileListT.file_size( ); ++index)
+        {
+            if (g_ComData.FileListT.file(index).filename( ) == vstr[0])
+            {
+                auto x = g_ComData.FileListT.mutable_file(index);
+                x->set_filestyle("已上传");
+            }
+        }
+        
         for (auto xxx = g_ComData.m_UploadFile.begin(); xxx != g_ComData.m_UploadFile.end(); ++xxx)
         {
-            if (xxx->m_FileSHA512== vstr[1])
+            if (xxx->m_FileSHA512 == vstr[1])
             {
                 fileNameTmp = xxx->m_FileName;
                 xxx = g_ComData.m_UploadFile.erase(xxx);
             }
         }
+
+        g_ComData.DoneUploadFile.emplace_back(std::make_pair(fileNameTmp, ""));
         //文件传输完成时，向服务端发送文件完整信息
         std::string filename=fileNameTmp;
         filename += "+";
@@ -174,33 +185,32 @@ public:
     void DoSendFile( )
     {
         boost::filesystem::fstream InFile(vstr[0], std::ios::in | std::ios::binary);
-        //boost::filesystem::fstream InFile2(CurKeepFileName, std::ios::in | std::ios::binary);
 
         qiuwanli::ClientConfigFileTable ServerTable;
 
         if (ServerTable.ParseFromIstream(&InFile))
             ;
 
-        int Count_thread = ServerTable.clientinfo_size( );
-        int SendBlocks = 0;
-        std::list<boost::thread*> threads;
+        //int Count_thread = ServerTable.clientinfo_size( );
+        //int SendBlocks = 0;
+        //std::list<boost::thread*> threads;
+
+        //用于存放存储端IP和对应的KeyMD5
         std::vector<std::pair<std::string, std::string>> vpList;
         for (int index = 0; index < ServerTable.clientinfo_size( ); ++index)
         {
             vpList.push_back(std::make_pair(ServerTable.clientinfo(index).keymd5(), ServerTable.clientinfo(index).saveip()));
         }
 
+        //用于存储分割后的文件块对应的文件名
         std::vector<std::string> vSendFileList;
         
         //遍历当前正打算上传的文件列表
         for (auto iter:g_ComData.m_UploadFile)
         {
-            if (vstr[1] == iter.m_FileSHA512)
-            {
-                std::string file = iter.m_FileName;
-                splistFile( file,vSendFileList);
-                sendFileBlockToServer(vSendFileList, vpList);
-            }
+            std::string file = iter.m_FileName;
+            splistFile( file,vSendFileList);
+            sendFileBlockToServer(vSendFileList, vpList);
         }
 
         g_ComData.curUploadFile.resize(0);
@@ -323,22 +333,53 @@ private:
         basename = vstr[0].c_str( );
         const char* vcheck=vstr[1].c_str( );//验证信息
 
+
         //解析请求类型，调用不同的处理函数
-        switch (file_info_.m_ReqiureType)
+
+        if(file_info_.m_ReqiureType=='b')
         {
-        case 'b':
             //文件秒传,通过设置公共变量通知界面，
-            g_ComData.DateChage |= (size_t) 1;
+            g_ComData.DateChage |= (size_t)1;
             g_ComData.DoneUploadFile.emplace_back(std::make_pair(vstr[0], vstr[1]));
-            break;
-        case 'c':
-            //解析服务器信息进行上传文件
+            
+            for (int index = 0; index < g_ComData.FileListT.file_size( ); ++index)
+            {
+                if (g_ComData.FileListT.file(index).filename()==vstr[0])
+                {
+                    auto x=g_ComData.FileListT.mutable_file(index);
+                    x->set_filestyle("已上传");
+                }
+            }
+
+            return;
+        }
+        //解析服务器信息进行上传文件
+        if (file_info_.m_ReqiureType == 'c')
+        {
             SaveFileToServer( );
-            break;
-        case 'h':
-            //返回上传文件的完整性
-            g_ComData.DateChage |= (size_t)4;
-            break;
+        }
+
+        //文件块上传结果（成功/失败）
+        if (file_info_.m_ReqiureType == 'e')
+        {
+            if (vstr[2]=="Success")
+            {
+                //文件块发送成功
+            }
+            if (vstr[2] == "Fail")
+            {
+                //文件块发送失败
+                //添加到重复发送队列，再次发送
+            }
+        }
+
+        //返回上传文件的完整性
+        if (file_info_.m_ReqiureType == 'h')
+        {
+            g_ComData.DateChage |= (size_t) 4;
+        }
+
+
         //case 'x':       //文件下载块INFO
         //    socket_.async_receive(
         //        boost::asio::buffer(buffer_, k_buffer_size)
@@ -353,12 +394,7 @@ private:
         //        , this
         //        , boost::asio::placeholders::error));
         //    break;
-        default:
-            break;
-        }
-
     }
-
 
 
     //检查客户端携带的PirateKey的MD5是否正确，失败则关闭链接

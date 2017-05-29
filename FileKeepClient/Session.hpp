@@ -55,39 +55,58 @@ public:
 
             unsigned long long offset;
             const std::string saveFileNamess = "DATA.dat";
+
+            std::string filename = vstr[0];
+            filename += vstr[1];
             //将数据块写入文件
-            boost::filesystem::fstream fst(vstr[0], std::ios::in | std::ios::binary);
+            boost::filesystem::fstream fst(filename, std::ios::in | std::ios::binary);
+
+            //fst.seekg(0, std::ios_base::end);
+            //int endpos = fst.tellg( );
+            //if (endpos > BLOCK_SIZE)
+            //    return;
 
             char buf[BLOCK_SIZE];
-            fst.seekg(0, std::ios_base::end);
-            int endpos = fst.tellg( );
-            if (endpos > BLOCK_SIZE)
-                return;
-            fst.read(buf, endpos);
+            fst.read(buf, file_info_.m_FileSize);
+            //fst.read(buf, endpos);
+
 
             //将数据块写到对应的偏移位置
             FileManage fileMange;
             fileMange.open(saveFileNamess);
-            offset=fileMange.WriteFileBlockEnd(buf, endpos);
+            offset=fileMange.WriteFileBlockEnd(buf, file_info_.m_FileSize);
 
 
             //将块信息写入块表
             CInterface fff;
-            fff.DoBlockInfoTable(g_ComData.BlockTableDiff.add_block( ), vstr[4], vstr[3], saveFileNamess, std::stoi(vstr[1]), endpos, offset);
+            fff.DoBlockInfoTable(g_ComData.BlockTableDiff.add_block( ), vstr[4], vstr[3], saveFileNamess, std::stoi(vstr[1]), file_info_.m_FileSize, offset);
 
-            //并发送给目录服务端
+            //并抄送给目录服务端
             boost::asio::io_service io_ser;
-            std::string filename=vstr[0];
-            filename += "+";
-            filename += vstr[3];
-            filename += "+";
-            filename += vstr[1];
-            filename += "+";
-            filename += "127.0.0.1";
+            std::string filenames=vstr[0];
+            filenames += "+";
+            filenames += vstr[3];
+            filenames += "+";
+            filenames += vstr[1];
+            filenames += "+";
+            filenames += "127.0.0.1";
+            SendFile send;
             try
             {
-                SendFile send;
-                send.senderLitter(io_ser, "127.0.0.1", 8089, filename.c_str( ), 'f');
+                send.senderLitter(io_ser, "127.0.0.1", 8189, filenames.c_str( ), 'f');
+            } catch (std::exception& e)
+            {
+            }
+            filenames.clear( );
+            filenames += vstr[1];
+            filenames += "+";
+            filenames += vstr[3];
+            filenames += "+";
+            filenames += "Success";
+            //将文件接受结果，发送给客户端
+            try
+            {
+                send.senderLitter(io_ser, "127.0.0.1", 8089, filenames.c_str( ), 'e');
             } catch (std::exception& e)
             {
             }
@@ -192,8 +211,9 @@ private:
                  return;
              }
              m__type = 6;
-
-             fp_ = fopen(vstr[0].c_str(), "wb");
+             std::string filename = vstr[0];
+             filename += vstr[1];
+             fp_ = fopen(filename.c_str(), "wb");
              if (fp_ == NULL)
              {
                  std::cerr << "Failed to open file to write\n";
@@ -400,7 +420,7 @@ private:
 
                 m_serial.MakeBlockInfo(addItem, vstr[0], vstr[1]
                                        , m_FileManage.getFileName( )
-                                       , std::atoi(vstr[2].c_str( ))
+                                       , std::atoll(vstr[2].c_str( ))
                                        , total_bytes_writen_, offset);
                 
             }

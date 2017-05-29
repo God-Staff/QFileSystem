@@ -81,8 +81,8 @@ public:
             {
                 std::string filesha512;
                 //size_t offset = m_FileManage.WriteFileBlockEnd(buffer_,k_buffer_size);
-                extern ComData g_ComData;
-                qiuwanli::BlockInfo* addItem = g_ComData.BlockTableDiff.add_block( );
+                //extern ComData g_ComData;
+                //qiuwanli::BlockInfo* addItem = g_ComData.BlockTableDiff.add_block( );
 
             }
 
@@ -161,10 +161,27 @@ private:
 
         if (file_info_.m_ReqiureType == 'a')
         {
-            //查找文件SHA512
-            for (int i = 0; i < g_ComData.FileInfoList.filelist_size( ); ++i)
+            //查找用户和密码，验证
+            bool isok = false;
+            for (int index = 0; index < g_ComData.m_UserhasFile.user_size( ); ++index)
             {
-                if (g_ComData.FileInfoList.filelist(i).filesha512( ) == vstr[1])
+                if (g_ComData.m_UserhasFile.user(index).userid().c_str()==vstr[2])
+                {
+                    if (g_ComData.m_UserhasFile.user(index).userps( ).c_str( )==vstr[3])
+                    {
+                        isok = true;
+                    }
+                }
+            }
+            if (!isok)
+            {
+                return;
+            }
+
+            //查找文件SHA512
+            for (int i = 0; i < g_ComData.m_FileListTable.filelist_size( ); ++i)
+            {
+                if (g_ComData.m_FileListTable.filelist(i).filesha512( ) == vstr[1])
                 {
                     boost::asio::io_service io_ser;
                     SendFile sender;
@@ -176,16 +193,17 @@ private:
                         sender.senderLitter(io_ser, "127.0.0.1", 8089, name.c_str( ), 'b');
                     } catch (CException* e)
                     {}
+                    return;
                 }
             }
 
             //文件不存在，查找当前可存储的服务端，并发送
             qiuwanli::ClientConfigFileTable ClientInfo;
-            for (int i = 0; i < g_ComData.ClientConfigFile.clientinfo_size( ); ++i)
+            for (int i = 0; i < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++i)
             {
-                if (g_ComData.ClientConfigFile.clientinfo(i).remainsize( ) > 1024 * 1024 * 1024)
+                if (g_ComData.m_ClientConfigFile.clientinfo(i).remainsize( ) > 1024 * 1024 * 1024)
                 {
-                    const qiuwanli::ClientConfigFile& conf = g_ComData.ClientConfigFile.clientinfo(i);
+                    const qiuwanli::ClientConfigFile& conf = g_ComData.m_ClientConfigFile.clientinfo(i);
 
                     ClientInfo.MergeFrom(conf);
                 }
@@ -234,7 +252,9 @@ private:
         //接收已经上传到存储服务端的文件块对应的信息
         if (file_info_.m_ReqiureType == 'f')
         {
-            g_ComData.BlockUploadList.emplace_back(ComData::Vec4(vstr[0], vstr[1], std::stol(vstr[2]), vstr[3]));
+            PublicData.DoBlockList4DownTable(g_ComData.m_BlockToFileTableTmp.add_blocklistfordown( )
+                                             , vstr[0], std::stol(vstr[2]), vstr[1], vstr[3]);
+            // g_ComData.BlockUploadList.emplace_back(ComData::Vec4(vstr[0], vstr[1], std::stol(vstr[2]), vstr[3]));
         }
 
         //文件传输完成，进行块统计
@@ -244,12 +264,21 @@ private:
             std::vector<ComData::Vec4> CheckBlockList;
             for (auto iter = g_ComData.BlockUploadList.begin( ); iter != g_ComData.BlockUploadList.end( ); ++iter)
             {
-                if (iter->m_Sha512==vstr[1])
+                if (iter->m_Sha512 == vstr[1])
                 {
                     CheckBlockList.emplace_back(ComData::Vec4(iter->m_Sha512, iter->m_md5, iter->m_BlockNumer, iter->m_IP));
                     iter = g_ComData.BlockUploadList.erase(iter);
                 }
             }
+
+            //for (int index = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
+            //{
+            //    auto item = g_ComData.m_BlockToFileTableTmp.blocklistfordown(index);
+            //    g_ComData.m_BlockToFileTableTmp.MergeFrom(item);
+
+            //    item.Clear( );
+            //}
+         
 
 
             //检查文件是否完整
@@ -272,9 +301,24 @@ private:
             std::string  filename= vstr[0];
             filename += "+";
             if (Full)
+            {
                 filename += "true";
+                PublicData.DoFileInfoListTable(g_ComData.m_FileListTable.add_filelist( )
+                                               , vstr[0], vstr[1], vstr[2], vstr[3], vstr[4]
+                                               , atoll(vstr[5].c_str( )), atoll(vstr[6].c_str( )), vstr[7]);
+                
+                //将块信息临时存放表写入到块信息列表
+                g_ComData.m_BlockToFileTable.MergeFrom(g_ComData.m_BlockToFileTableTmp);
+
+                //设置响应条件，更新UI
+                g_ComData.m_UIChange |= (size_t)1;
+                g_ComData.NotifyFileList.emplace_back(ComData::VecStr5(vstr[0], vstr[1], vstr[5], vstr[3], "否"));
+            }
             else
+            {   //若数据不完整则将，愿数据块信息插入到块信息临时存放表
                 filename += "false";
+                g_ComData.BlockUploadList.insert(g_ComData.BlockUploadList.end( ), CheckBlockList.begin( ), CheckBlockList.end( ));
+            }
 
             try
             {
@@ -285,6 +329,13 @@ private:
             
 
         }
+
+        //存储端发来的心跳连接
+        if (file_info_.m_ReqiureType=='i')
+        {
+            g_ComData.m_HeartList.emplace_back(ComData::HeartLink(vstr[0], atoll(vstr[0].c_str( )), atoll(vstr[0].c_str( )), vstr[3]));
+        }
+
     }
     //检查客户端携带的PirateKey的MD5是否正确，失败则关闭链接
     void CheckKey(const boost::system::error_code& error)
