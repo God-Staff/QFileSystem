@@ -8,6 +8,7 @@
 #include <boost/filesystem.hpp>
 #include <queue>
 #include "PublicStruct.pb.h"
+#include "Interface.h"
 
 //文件块大小//
 const unsigned int BLOCK_SIZE = 1024 * 64;
@@ -41,18 +42,17 @@ struct DataBlockTypeInfo
 
 struct ComData
 {
-    qiuwanli::ConfigFile Conf;
     qiuwanli::BlockInfoTable BlockTable;
     qiuwanli::BlockInfoTable BlockTableDiff;
     qiuwanli::BlockInfoTable BlockTablePreDiff;
     qiuwanli::FileInfoListTable FileInfoList;
     qiuwanli::ClientConfigFileTable ClientConfigFile;
-    qiuwanli::UserInfo user;
+    qiuwanli::FileListTable FileListT;                  //文件保存列表
+    qiuwanli::UserInfo user;                            //用户信息
 
     boost::filesystem::ofstream OpFile;
     boost::filesystem::ofstream OpFileBlockInfo;
     
-    std::vector<std::pair<std::string, std::string>> curUploadFile;
     struct Vec3
     {
         std::string m_FileName;
@@ -62,11 +62,17 @@ struct ComData
             :m_FileName(s1), m_FileSHA512(s2), m_type(type)
         {}
     };
-    std::vector<Vec3> m_UploadFile;
+   
+    std::vector<std::pair<std::string, std::string>> curUploadFile;
     std::vector<std::pair<std::string, std::string>> DoneUploadFile;
+    std::vector<Vec3> m_UploadFile;
     size_t DateChage = 0;
 };
 
+typedef std::vector<boost::filesystem::path> FilePathList;
+typedef std::vector<std::vector<boost::filesystem::path>> AllFilePathList;
+
 extern ComData g_ComData;
+extern CInterface PublicData;
 
 #endif // !PUBLIC_H__

@@ -23,6 +23,8 @@
 
 // CThridDownClientDlg 对话框
 ComData g_ComData;
+CInterface PublicData;
+
 
 CThridDownClientDlg::CThridDownClientDlg(CWnd* pParent /*=NULL*/)
     : CDialogEx(IDD_THRIDDOWNCLIENT_DIALOG, pParent)
@@ -63,8 +65,14 @@ void CThridDownClientDlg::OnTimer(UINT_PTR nIDEvent)
 {
     switch (nIDEvent)
     {
-    case 1:
-              
+    case 1: //更新数据
+    {
+        if ((size_t(1)&g_ComData.DateChage) == 0)
+        {
+            return;
+        }
+
+    }
         break;
     case 2:
         //在这添加执行定时器2的任务； 
@@ -167,14 +175,114 @@ BOOL CThridDownClientDlg::OnInitDialog()
         m_SharedList->InsertColumn(i, &lvcolumn3);
     }
 
-
+    //初始化数据
+    initLocalData( );
     FillData( );
 
-
     runRecive( );
+    //添加定时器
+    SetTimer(1, 300, NULL);
+    //SetTimer(1, 5000, NULL);
+    //SetTimer(1, 5000, NULL);
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
+void CThridDownClientDlg::initLocalData( )
+{
+    //读取本地配置信息
+    boost::filesystem::fstream readFile("UserFileList", std::ios::in | std::ios::binary);
+    if (!readFile.is_open( ))
+        return;
+    
+    if (!g_ComData.FileListT.ParsePartialFromIstream(&readFile));
+        //return;
+    //再读取本地文件，插入进去
+    FilePathList FileList;
+   // std::string pathT= ".";
+    //boost::filesystem::path ppp;
+    getFileList(boost::filesystem::current_path(), FileList);
+    for (auto iter : FileList)
+    {
+        bool same = false;
+        for (size_t index = 0; index < g_ComData.FileListT.file_size( ); ++index)
+        {
+            if (g_ComData.FileListT.file(index).filename() == iter)
+            {
+                same = true;
+            }
+        }
+        if (!same)
+        {
+            std::string sha512;
+            std::string flie = iter.generic_string( );
+           // PublicData.GetFileSHA512(flie, sha512);
+
+            PublicData.DoFileListTable(g_ComData.FileListT.add_file( ), iter.generic_string(), boost::filesystem::file_size(iter), sha512, "本地");
+        }
+    }
+    //填充数据到UI界面
+    for (size_t index = 0; index < g_ComData.FileListT.file_size( ); ++index)
+    {
+        CString DataT;
+        DataT = g_ComData.FileListT.file(index).filename( ).c_str( );
+        m_FileList->InsertItem(0, DataT);
+
+        CString Data2;
+        std::string ss = std::to_string(g_ComData.FileListT.file(index).filesize( ));
+        Data2 = ss.c_str( );
+        m_FileList->SetItemText(0, 1, Data2);
+
+        CString Data3;
+        Data3 = g_ComData.FileListT.file(index).filesha512( ).c_str( );
+        m_FileList->SetItemText(0, 2, Data3);
+
+        CString Data4;
+        Data4 = g_ComData.FileListT.file(index).filestyle( ).c_str( );
+        m_FileList->SetItemText(0, 3, Data4);
+    }
+
+    //文件下载列表
+
+
+}
+
+//获取文件夹下的文件
+void CThridDownClientDlg::getFileList(
+    const boost::filesystem::path& pathDir
+    , std::vector<boost::filesystem::path>& Lists)
+{
+    //try 当访问到无法访问的目录时，跳过//
+    try
+    {
+        if (exists(pathDir))
+        {
+            if (is_regular_file(pathDir))
+            {
+                std::cout << pathDir << " size is " << boost::filesystem::file_size(pathDir) << '\n';
+            }
+            else if (is_directory(pathDir))
+            {
+                for (auto& CurPathList : boost::filesystem::directory_iterator(pathDir))
+                {
+                    //获取文件名称
+                    if (is_regular_file(CurPathList))
+                        Lists.push_back(CurPathList.path().filename());
+                }
+            }
+            else
+            {
+                std::cout << pathDir << " exists, but is not a regular file or directory\n";
+            }
+        }
+        else
+        {
+            std::cout << pathDir << " does not exist\n";
+        }
+    } catch (const boost::filesystem::filesystem_error& ex)
+    {
+        std::cout << ex.what( ) << '\n';
+    }
+}
 
 void runservers()
 {
@@ -397,27 +505,6 @@ void CThridDownClientDlg::OnBnClickedCancel( )
 
 void CThridDownClientDlg::FillData( )
 {
-    //////////////////////////////////////
-    m_FileList->InsertItem(0, _T("123"));
-    m_FileList->SetItemText(0, 1, _T("234"));
-    m_FileList->SetItemText(0, 2, _T("345"));
-    m_FileList->SetItemText(0, 3, _T("已分享"));
-
-    m_FileList->InsertItem(1, _T("123"));
-    m_FileList->SetItemText(1, 1, _T("234"));
-    m_FileList->SetItemText(1, 2, _T("345"));
-    m_FileList->SetItemText(1, 3, _T("已上传"));
-
-    m_FileList->InsertItem(2, _T("123"));
-    m_FileList->SetItemText(2, 1, _T("234"));
-    m_FileList->SetItemText(2, 2, _T("345"));
-    m_FileList->SetItemText(2, 3, _T("本地"));
-
-    m_FileList->InsertItem(3, _T("123"));
-    m_FileList->SetItemText(3, 1, _T("234"));
-    m_FileList->SetItemText(3, 2, _T("345"));
-    m_FileList->SetItemText(3, 3, _T("本地"));
-
     /////////////////////////////////////////
     m_DownList->InsertItem(0, _T("123"));
     m_DownList->SetItemText(0, 1, _T("234"));

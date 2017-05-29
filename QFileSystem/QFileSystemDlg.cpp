@@ -52,14 +52,6 @@ BEGIN_MESSAGE_MAP(CAboutDlg, CDialogEx)
 END_MESSAGE_MAP()
 
 
-// CQFileSystemDlg 对话框
-
-//BEGIN_DHTML_EVENT_MAP(CQFileSystemDlg)
-//	//DHTML_EVENT_ONCLICK(_T("ButtonOK"), OnButtonOK)
-//	//DHTML_EVENT_ONCLICK(_T("ButtonCancel"), OnButtonCancel)
-//END_DHTML_EVENT_MAP()
-
-
 CQFileSystemDlg::CQFileSystemDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_QFILESYSTEM_DIALOG, pParent)
 {
@@ -202,8 +194,6 @@ BOOL CQFileSystemDlg::OnInitDialog()
         m_ListShared->InsertColumn(i, &lvcolumn3);
     }
 
-
-
     //下载端在线列表
     m_ListClient = (CListCtrl*) GetDlgItem(IDC_LIST_Client);
     DWORD dwStyle4 = GetWindowLong(m_ListClient->m_hWnd, GWL_STYLE);
@@ -231,8 +221,6 @@ BOOL CQFileSystemDlg::OnInitDialog()
         lvcolumn4.cx = rect4.Width( ) / 2;
         m_ListClient->InsertColumn(i, &lvcolumn4);
     }
-
-
 
     //日志列表
     m_ListLogs = (CListCtrl*) GetDlgItem(IDC_LIST_Logs);

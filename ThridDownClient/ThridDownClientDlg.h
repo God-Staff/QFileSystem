@@ -8,6 +8,8 @@
 #include <iostream>
 #include <vector>
 #include "PublicStruct.pb.h"
+#include <boost/asio.hpp>
+#include <boost/filesystem.hpp>
 
 // CThridDownClientDlg 对话框
 class CThridDownClientDlg : public CDialogEx
@@ -23,8 +25,6 @@ public:
 
 	protected:
 	virtual void DoDataExchange(CDataExchange* pDX);	// DDX/DDV 支持
-
-
     virtual void OnTimer(UINT_PTR nIDEvent);
     // 实现
 protected:
@@ -32,6 +32,9 @@ protected:
 
 	// 生成的消息映射函数
 	virtual BOOL OnInitDialog();
+    void initLocalData( );
+    void getFileList(const boost::filesystem::path& pathDir, std::vector<boost::filesystem::path>& Lists);
+    //AllFilePathList GetFilePathList(const FilePathList & pathDir);
     void runRecive( );
     afx_msg void OnPaint( );
 	afx_msg HCURSOR OnQueryDragIcon();
@@ -61,7 +64,7 @@ public:
 
     void GetFileSHA512(std::string& fileName, std::string& FileSHA512);
     void UpDataUI( );
-    VOID CALLBACK CountTime( );
+    //VOID CALLBACK CountTime( );
 private:
     std::vector<std::string> m_VUpFileList;
     qiuwanli::UserInfo user;

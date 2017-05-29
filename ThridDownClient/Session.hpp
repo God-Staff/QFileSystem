@@ -373,7 +373,7 @@ private:
         }
         else
         {	//½âÎöÅäÖÃÎÄ¼ş
-            std::string md5= g_ComData.Conf.prikeymd5( );
+            //std::string md5= g_ComData.Conf.prikeymd5( );
             /*if (DownListTable.prikeymd5().compare(md5) == 0)
             {
                 PairVec ListForUp;

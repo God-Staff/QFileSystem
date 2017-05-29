@@ -32,17 +32,18 @@ message BlockInfoTable
 ////////////////////////////////////////////////////
 //目录服务器
 //服务端
-message File2Cilent
-{
-	string FileName=1;		//文件名
-	string FileSHA512=2;	//唯一标识SHA512
-	string CilentID=3;		//客户端ID
-	string CilentPort=4;	//端口号
-}
-message File2ClientTable
-{
-	repeated File2Cilent FileToClient=1;
-}
+//message File2Cilent
+//{
+//	string FileName=1;		//文件名
+//	string FileSHA512=2;	//唯一标识SHA512
+//	string CilentID=3;		//客户端ID
+//	string CilentPort=4;	//端口号
+//}
+//message File2ClientTable
+//{
+//	repeated File2Cilent FileToClient=1;
+//}
+
 //文件存储端的信息
 message ClientConfigFile
 {
@@ -67,7 +68,7 @@ message FileInfoList
 	string FileChangeDate=5;
 	uint64 FileAllBlock=6;
 	uint64 FileTotalSize=7;
-	string Tag=8;
+	string Tag=8;				//存储端ID
 }
 message FileInfoListTable
 {
@@ -112,10 +113,11 @@ message FileList4DownTable
 message FileDowningLog
 {
 	string filename=1;
-	string filesize=2;
+	uint64 filesize=2;
 	string downtime=3;
 	string Downingstatus=4;
 	string filesha512=5;
+	string FileMd5=6;
 }
 message FileDowningLogTable
 {
@@ -132,7 +134,7 @@ message FileDowning
 	string FileDownTime=4;
 	uint64 FileDownloadBlockCount=5;
 	uint64 FileTotalBlockCount=6;
-	string FileSize=7;
+	uint64 FileSize=7;
 	uint32 BlockCount=8;
 	string BitMap=9;
 }
@@ -149,7 +151,7 @@ message Heart
 {
 	string ID=1;			//ID编号
 	string RemainSize=2;	//剩余空间大小
-	string TotleSize=3;		//第一次是发送总大小，之后默认为空
+	uint64 TotleSize=3;		//第一次是发送总大小，之后默认为空
 	string PrikeyMd5=4;		//客户端私钥的MD5用于验证
 }
 //用于删除文件
@@ -187,7 +189,7 @@ message Shared
 	string Sha512=1;
 	string VerificationCode=2;
 	string SharedTime=3;
-	string FileSize=4;
+	uint64 FileSize=4;
 	string UserStutas=5;
 	string UserID=6;
 }
@@ -199,7 +201,7 @@ message SharedTable
 message BlockList4Down
 {
 	string FileSHA512=1;
-	string BlockNumer=2;
+	uint64 BlockNumer=2;
 	string BlockMD5=3;
 	string SaveServersIP=4;
 }

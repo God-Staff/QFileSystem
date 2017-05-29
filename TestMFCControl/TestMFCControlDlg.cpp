@@ -6,7 +6,7 @@
 #include "TestMFCControl.h"
 #include "TestMFCControlDlg.h"
 #include "afxdialogex.h"
-
+#include "afxwin2.inl"
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
@@ -47,8 +47,6 @@ END_MESSAGE_MAP()
 
 // CTestMFCControlDlg 对话框
 
-
-
 CTestMFCControlDlg::CTestMFCControlDlg(CWnd* pParent /*=NULL*/)
 	: CDialogEx(IDD_TESTMFCCONTROL_DIALOG, pParent)
 {
@@ -63,9 +61,32 @@ void CTestMFCControlDlg::DoDataExchange(CDataExchange* pDX)
 BEGIN_MESSAGE_MAP(CTestMFCControlDlg, CDialogEx)
 	ON_WM_SYSCOMMAND()
 	ON_WM_PAINT()
+    ON_WM_TIMER( )
 	ON_WM_QUERYDRAGICON()
+    ON_BN_CLICKED(IDOK, &CTestMFCControlDlg::OnBnClickedOk)
+    ON_BN_CLICKED(IDCANCEL, &CTestMFCControlDlg::OnBnClickedCancel)
 END_MESSAGE_MAP()
 
+
+void CTestMFCControlDlg::OnTimer(UINT_PTR nIDEvent)
+{
+    switch (nIDEvent)
+    {
+    case 1:
+    {
+        CStatic* it = (CStatic*) GetDlgItem(IDC_STATIC);
+        CString item;
+        it->GetWindowText(item);
+        item += "a";
+        it->SetWindowText(item);
+    }
+        break;
+    default:
+        break;
+    }
+    
+    CDialogEx::OnTimer(nIDEvent);
+}
 
 // CTestMFCControlDlg 消息处理程序
 
@@ -152,3 +173,26 @@ HCURSOR CTestMFCControlDlg::OnQueryDragIcon()
 	return static_cast<HCURSOR>(m_hIcon);
 }
 
+
+
+void CTestMFCControlDlg::OnBnClickedOk( )
+{
+    // TODO: 在此添加控件通知处理程序代码
+    OnUpdateUITTT( );
+    //CDialogEx::OnOK( );
+}
+
+
+void CTestMFCControlDlg::OnBnClickedCancel( )
+{
+    // TODO: 在此添加控件通知处理程序代码
+    CDialogEx::OnCancel( );
+}
+
+
+void CTestMFCControlDlg::OnUpdateUITTT( )
+{
+    SetTimer(1, 5000, NULL);
+    UpdateWindow( );
+    //OnUpdateUITTT( );
+}
