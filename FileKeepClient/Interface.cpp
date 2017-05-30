@@ -71,7 +71,7 @@ bool CInterface::DoClientConfigFileTable(qiuwanli::ClientConfigFile* conf
     conf->set_keymd5(PriKeyMD5);
     conf->set_totalsize(TotalSize);
     conf->set_remainsize(RemainSize);
-
+    conf->set_online("ON");
     return true;
 }
 

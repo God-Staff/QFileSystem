@@ -348,7 +348,7 @@ int getFileMD5 (const char* path, char* md5)
         md5[2 * i] = FFFF[xxx];
         md5[2 * i + 1] = FFFF[xx];
 	}
-	*md5 = '\0';
+	md5[32] = '\0';
 	return 0;
 }
 

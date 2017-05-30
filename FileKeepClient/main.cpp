@@ -21,14 +21,14 @@ void initData( )
     if (!OpFile.is_open())
     {
         //g_ComData.opplog.log("Conf 打开失败！");
-        return;
+        //return;
     }
 
     if (!g_ComData.Conf.ParseFromIstream(&OpFile))
     {	//打开失败
         OpFile.close( );
         //g_ComData.opplog.log("qiuwanli::ConfigFile 解析失败！");
-        return;
+       // return;
     }
 
     OpFile.close( );
@@ -38,14 +38,14 @@ void initData( )
     if (!OpFileBlockInfo)
     {
         g_ComData.opplog.log("BlockTable.db 打开失败！");
-        return;
+        //return;
     }
 
     if (!g_ComData.BlockTable.ParseFromIstream(&OpFileBlockInfo))
     {	//打开失败
         OpFileBlockInfo.close( );
         g_ComData.opplog.log("qiuwanli::ConfigFile 解析失败！");
-        return;
+        //return;
     }
 
     OpFileBlockInfo.close( );
@@ -67,13 +67,13 @@ void doItNextTime( )
     //heart.set_totlesize((Space.capacity + Space.available) / Size_Mb);
     //heart.set_prikeymd5(g_ComData.Conf.prikeymd5( ));
 
-    std::string name = g_ComData.Conf.id( );
+    std::string name = "100001";//g_ComData.Conf.id( );
         name += '+';
         name += std::to_string(Space.capacity / Size_Mb);
         name += '+';
         name += std::to_string((Space.capacity + Space.available) / Size_Mb);
         name += '+';
-        name += g_ComData.Conf.prikeymd5( );
+        name += "rwergsergttsghts"; //g_ComData.Conf.prikeymd5( );
 
     //再将数据同步到目录服务器，心跳连接
     try
@@ -82,15 +82,15 @@ void doItNextTime( )
         SendFile senddata;
         std::string ip = g_ComData.Conf.serversip( );
         senddata.senderLitter(io
-                              , g_ComData.Conf.serversip( ).c_str( )
-                              , std::atoi(g_ComData.Conf.serversport( ).c_str( ))
+                              , "127.0.0.1"//g_ComData.Conf.serversip( ).c_str( )
+                              , 8189//std::atoi(g_ComData.Conf.serversport( ).c_str( ))
                               , name.c_str( )
-                              , 'h');
+                              , 'i');
 
     }
     catch (std::exception e)
     {
-        g_ComData.opplog.log("Heart Fail!\t");
+        //g_ComData.opplog.log("Heart Fail!\t");
     }
 
     //延时60秒在发送心跳连接
@@ -104,27 +104,28 @@ void sendBlockInfoToServers( )
     //将最近15秒内接收到的块信息，发送给服务端
     if (g_ComData.BlockTableDiff.block_size( ))
     {
-        //qiuwanli::BlockInfo Info;
-        std::string name = "BlockTableDiff" + g_ComData.Conf.id( );
-        //PublicData.SaveToFile(&g_ComData.BlockTableDiff, name.c_str( ));
-        boost::filesystem::fstream tmp(name, std::ios::out | std::ios::binary);
-        if (g_ComData.BlockTableDiff.SerializePartialToOstream(&tmp))
-        {
-            return;
-        }
-        tmp.close( );
-        try
-        {
-            boost::asio::io_service io;
-            SendFile senddata;
-            senddata.sender(io, g_ComData.Conf.serversip( ).c_str( )
-                            , std::atoi(g_ComData.Conf.serversport( ).c_str( ))
-                            , name.c_str( )
-                            , 'u');
-        } catch (std::exception e)
-        {
-            g_ComData.opplog.log("Heart Fail!\t");
-        }
+        ////qiuwanli::BlockInfo Info;
+        //std::string name = "BlockTableDiff" + g_ComData.Conf.id( );
+        ////PublicData.SaveToFile(&g_ComData.BlockTableDiff, name.c_str( ));
+        //boost::filesystem::fstream tmp(name, std::ios::out | std::ios::binary);
+        //if (!g_ComData.BlockTableDiff.SerializePartialToOstream(&tmp))
+        //{
+        //    return;
+        //}
+        //tmp.close( );
+        //try
+        //{
+        //    boost::asio::io_service io;
+        //    SendFile senddata;
+        //    senddata.sender(io
+        //                    , "127.0.0.1"//g_ComData.Conf.serversip( ).c_str( )
+        //                    , 8189//std::atoi(g_ComData.Conf.serversport( ).c_str( ))
+        //                    , name.c_str( )
+        //                    , 'u');
+        //} catch (std::exception e)
+        //{
+        //    g_ComData.opplog.log("Heart Fail!\t");
+        //}
 
         //将其合并
         g_ComData.BlockTablePreDiff.MergeFrom(g_ComData.BlockTableDiff);
@@ -159,7 +160,7 @@ void Init( )
     if (!g_ComData.OpFile)
     {
         g_ComData.opplog.log("Conf 打开失败！");
-        return;
+       // return;
     }
 
     //加载文件块信息表
@@ -167,7 +168,7 @@ void Init( )
     if (!g_ComData.OpFileBlockInfo)
     {
         g_ComData.opplog.log("BlockTable.db 打开失败！");
-        return;
+        //return;
     }
 }
 
@@ -181,6 +182,7 @@ void DelayWirte( )
     }
 
     g_ComData.BlockTable.MergeFrom(g_ComData.BlockTablePreDiff);
+    g_ComData.BlockTablePreDiff.Clear( );
 
     if (!g_ComData.BlockTable.SerializePartialToOstream(&g_ComData.OpFileBlockInfo))
     {	//打开失败
@@ -208,7 +210,7 @@ int main (int argc, char* argv[])
 
         //发送数据
         boost::thread BlockInfoThread(sendBlockInfoToServers);
-        BlockInfoThread.join( );
+        BlockInfoThread.detach( );
         std::cout << "1";
 
         //创建进程去，管理序列化文件的更新
@@ -220,20 +222,14 @@ int main (int argc, char* argv[])
             Sleep(DelayWriteToFile);
             DelayWirte( );
         });
-        FileManage.join( );
+        FileManage.detach( );
         std::cout << "1";
 
-
-		if (argc != 5)
-		{
-			std::cerr << "Usage: server <address> <port> <threads> <blocksize>\n";
-			return 1;
-		}
-
-		boost::asio::ip::address address = boost::asio::ip::address::from_string (argv[1]);
+        //
+		boost::asio::ip::address address = boost::asio::ip::address::from_string ("127.0.0.1");
         short port = 8289;//std::atoi (argv[2]);
-		int thread_count = std::atoi (argv[3]);
-		size_t block_size = std::atoi (argv[4]);
+        int thread_count = 8;//std::atoi (argv[3]);
+        size_t block_size = 4096;//std::atoi (argv[4]);
 
 		boost::asio::io_service ios;
 

@@ -46,7 +46,7 @@ struct ComData
     qiuwanli::BlockInfoTable BlockTableDiff;
     qiuwanli::BlockInfoTable BlockTablePreDiff;
     qiuwanli::FileInfoListTable FileInfoList;
-    qiuwanli::ClientConfigFileTable ClientConfigFile;
+    qiuwanli::ClientConfigFileTable ServerTable;
     qiuwanli::FileListTable FileListT;                  //文件保存列表
     qiuwanli::UserInfo user;                            //用户信息
 

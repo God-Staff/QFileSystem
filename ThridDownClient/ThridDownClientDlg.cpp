@@ -1,7 +1,6 @@
 
 // ThridDownClientDlg.cpp : 实现文件
 //
-
 #include "stdafx.h"
 #include "afxdialogex.h"
 
@@ -244,14 +243,10 @@ void CThridDownClientDlg::initLocalData( )
     g_ComData.user.set_userid("100001");
     g_ComData.user.set_userps("123456");
 
-    if (g_ComData.user.userid()=="100001")
-    {
-        MessageBox(_T("100001"));
-    }
     //读取本地配置信息
     boost::filesystem::fstream readFile("UserFileList", std::ios::in | std::ios::binary);
     if (!readFile.is_open( ))
-        return;
+        ;//return;
     
     if (!g_ComData.FileListT.ParsePartialFromIstream(&readFile))
         MessageBox(_T("UserFileList Fail!"));
@@ -278,6 +273,12 @@ void CThridDownClientDlg::initLocalData( )
             PublicData.DoFileListTable(g_ComData.FileListT.add_file( ), iter.generic_string(), boost::filesystem::file_size(iter), sha512, "本地");
         }
     }
+;
+    m_FileList->InsertItem(0, _T("ADF"));
+    m_FileList->SetItemText(0, 1, _T(""));
+    m_FileList->SetItemText(0, 2, _T(""));
+    m_FileList->SetItemText(0, 3, _T(""));
+
     //填充数据到UI界面
     for (size_t index = 0; index < g_ComData.FileListT.file_size( ); ++index)
     {
@@ -640,9 +641,9 @@ void CThridDownClientDlg::OnUploadFile( )
     std::string sha512;
     GetFileSHA512(filename, sha512);
 
-    for (int index = 0; g_ComData.FileListT.file_size( ); ++index)
+    for (int index = 0;index< g_ComData.FileListT.file_size( ); ++index)
     {
-        if (g_ComData.FileListT.file(index).filename()==filename)
+        if (0==g_ComData.FileListT.file(index).filename().compare(filename))
         {
             auto xx = g_ComData.FileListT.mutable_file(index);
             //xx->set_filestyle("witeforUP");     //表示正在上传
@@ -658,9 +659,9 @@ void CThridDownClientDlg::OnUploadFile( )
     filename += '+';
     filename += sha512;
     filename += '+';
-    filename += user.userid();
+    filename += g_ComData.user.userid();
     filename += '+';
-    filename += user.userps();
+    filename += g_ComData.user.userps();
 
     boost::asio::io_service io_ser; 
     SendFile sender;
@@ -757,20 +758,20 @@ void CThridDownClientDlg::GetFileSHA512(std::string& fileName, std::string& File
     EVP_DigestFinal_ex(&mdctx, mdValue, &mdLen);
     EVP_MD_CTX_cleanup(&mdctx);
 
-    int j = 0;
-    for (j = 0; j < mdLen; j++)
-    {
-        printf("%s", mdValue[j]);
-    }
-
+    char sha[129];
     for (int ii = 0; ii < 64; ++ii)
     {
         int x = mdValue[ii];
         int xx = x & 15;
         int xxx = x & 240;
         xxx = xxx >> 4;
-        FileSHA512 + FFFF[xxx] + FFFF[xx];
+        //FileSHA512 += FFFF[xxx];
+        //FileSHA512 += FFFF[xx];
+        sha[2 * ii] = FFFF[xxx];
+        sha[2 * ii + 1] = FFFF[xx];
     }
+    sha[128] = '\0';
+    FileSHA512 = sha;
     //FileSHA512
 }
 

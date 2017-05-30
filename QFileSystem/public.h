@@ -33,10 +33,10 @@ using PairVec = std::vector<std::pair<std::string, std::vector<unsigned long>>>;
 struct DataBlockTypeInfo
 {
     using  Size_type = unsigned long long;
-    char m_ReqiureType;
+    unsigned char m_ReqiureType;
     Size_type m_FileSize;
-    unsigned int m_FileNameLength;
-    char m_UserID[11];
+    size_t m_FileNameLength;
+    //char m_UserID[11];
     DataBlockTypeInfo( ) : m_FileSize(0), m_FileNameLength(0), m_ReqiureType(0) { }
 };
 

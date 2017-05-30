@@ -147,13 +147,13 @@ BOOL CQFileSystemDlg::OnInitDialog()
     m_ListSaveServer->SetExtendedStyle(styles2 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     //给listctrl设置5个标题栏
-    TCHAR rgtsz2[4][10] = {_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")};
+    TCHAR rgtsz2[5][10] = {_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间"),_T("状态")};
 
     //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
     LV_COLUMN lvcolumn2;
     CRect rect2;
     m_ListSaveServer->GetWindowRect(&rect2);
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
         lvcolumn2.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
             | LVCF_WIDTH | LVCF_ORDER;
@@ -161,7 +161,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
         lvcolumn2.pszText = rgtsz2[i];
         lvcolumn2.iSubItem = i;
         lvcolumn2.iOrder = i;
-        lvcolumn2.cx = rect2.Width( ) / 4;
+        lvcolumn2.cx = rect2.Width( ) / 5;
         m_ListSaveServer->InsertColumn(i, &lvcolumn2);
     }
 
@@ -201,7 +201,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
 
     runServer( );
 
-    SetTimer(1, 300, NULL);
+    SetTimer(1, 3000, NULL);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
@@ -214,11 +214,6 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
     {
     case 1: //更新数据
     {
-        if ((size_t(1)&g_ComData.m_UIChange) == 0)
-        {
-            return;
-        }
-
         //更新UI文件列表
         if ((size_t(1)&g_ComData.m_UIChange) == size_t(1))
         {
@@ -251,28 +246,40 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
             tmp = ~tmp;
             g_ComData.m_UIChange &= tmp;
         }
-
-        //更新UI文件列表
-
-        for (auto xx : g_ComData.m_HeartList)
+        if ((size_t(2)&g_ComData.m_UIChange) == size_t(2))
         {
-            CString x1;
-            x1 = xx.ClientID.c_str( );
-            m_ListFile->InsertItem(0, x1);
+            //更新UI，Heart文件列表
+            bool nee = false;
+            for (auto xx : g_ComData.m_HeartList)
+            {
+                for (int index=0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
+                {
+                    if (g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ) == xx.ClientID)
+                    {
+                        nee = true;
+                        auto item = g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
+                        item->set_online("ON");
+                        //PublicData.DoClientConfigFileTable()
+                    }
+                }
+               
+                //动态添加列表
+                if (nee == false)
+                {
+                    PublicData.DoClientConfigFileTable(g_ComData.m_ClientConfigFile.add_clientinfo( ), xx.ClientID, "127.0.0.1", "213dfsefgser", xx.Prikeymd5, xx.Remain, xx.Total);
+                }
+            }
+           
+           
+            g_ComData.m_HeartList.clear( );
 
-            CString x2;
-            x2 = std::to_string(xx.Remain).c_str( );
-            m_ListFile->SetItemText(0, 1, x2);
+            //重置状态位
+            size_t tmp = size_t(2);
+            tmp = ~tmp;
+            g_ComData.m_UIChange &= tmp;
 
-            CString x3;
-            x3 = std::to_string(xx.Total).c_str( );
-            m_ListFile->SetItemText(0, 1, x3);
-
-            CString x4;
-            x4 = xx.Prikeymd5.c_str( );
-            m_ListFile->SetItemText(0, 1, x4);
+            LoadSaveServerList( );
         }
-        g_ComData.m_HeartList.clear( );
 
     }
     break;
@@ -642,7 +649,7 @@ void CQFileSystemDlg::InitData( )
 
     //
     LoadFileList( );
-    LoadSaveServerList( );
+    //LoadSaveServerList( );
     LoadSharedList( );
 }
 
@@ -659,4 +666,31 @@ void CQFileSystemDlg::LoadSharedList( )
 void CQFileSystemDlg::LoadSaveServerList( )
 {
 
+    m_ListSaveServer->DeleteAllItems( );
+
+    for (int index = 0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
+    {
+        //_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")
+        CString Data1;
+        Data1 = g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ).c_str( );
+        m_ListSaveServer->InsertItem(0, Data1);
+
+        CString Data2;
+        Data2 = g_ComData.m_ClientConfigFile.clientinfo(index).saveip( ).c_str( );
+        m_ListSaveServer->SetItemText(0, 1, Data2);
+
+        CString Data3;
+        std::string ss = std::to_string(g_ComData.m_ClientConfigFile.clientinfo(index).remainsize( ));
+        Data3 = ss.c_str( );
+        m_ListSaveServer->SetItemText(0, 2, Data3);
+
+        CString Data4;
+        std::string ss1 = std::to_string(g_ComData.m_ClientConfigFile.clientinfo(index).totalsize( ));
+        Data4 = ss1.c_str( );
+        m_ListSaveServer->SetItemText(0, 3, Data4);
+
+        CString Data5;
+        Data5 = g_ComData.m_ClientConfigFile.clientinfo(index).online( ).c_str( );
+        m_ListSaveServer->SetItemText(0, 4, Data5);
+    }
 }

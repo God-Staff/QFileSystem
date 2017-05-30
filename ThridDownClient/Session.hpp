@@ -24,6 +24,8 @@
 #include "MD5.hpp"
 #include "public.h"
 
+#include "SendFile.hpp"
+
 class Session : public boost::enable_shared_from_this<Session>
 {
 public:
@@ -48,65 +50,81 @@ public:
     {
         boost::filesystem::fstream InFile(filName, std::ios::in | std::ios::binary);
         InFile.seekg(0, std::ios_base::end);
-        int endpos = InFile.tellg( );
+        size_t endpos = InFile.tellg( );
         char bufferFile[BLOCK_SIZE];
         InFile.seekg(0, std::ios_base::beg);
         //int curpos = 0;
-        int countNum = endpos / BLOCK_SIZE;
+        size_t countNum = endpos / BLOCK_SIZE + 1;
         int cunt = 0;
+        size_t readSize = 0;
 
-        while (!InFile.eof())
-        {
+        do {
             ++cunt;
-            std::string blockname = vstr[1];
-            blockname += "+";
+            std::string blockname = vstr[0];
+            blockname += "-";
             blockname += std::to_string(cunt);
-
+            readSize = BLOCK_SIZE;
             boost::filesystem::fstream files(blockname, std::ios::out | std::ios::binary);
-            if (cunt <= countNum)
+            if ( countNum>1)
             {
                 InFile.read(bufferFile, BLOCK_SIZE);
-                files.write(bufferFile, BLOCK_SIZE);
             }
             else
             {
-                InFile.read(bufferFile, endpos % BLOCK_SIZE);
-                files.write(bufferFile, endpos % BLOCK_SIZE);
+                readSize = endpos % BLOCK_SIZE;
+                InFile.read(bufferFile, readSize);
             }
+
+            files.write(bufferFile, readSize);
             files.close( );
 
             vSendFileList.push_back(blockname);
-        }
+        } while (--countNum);
+
+        InFile.close( );
     }
 
     //将文件块发送到存储服务端
-    void sendFileBlockToServer(std::vector<std::string>& vSendFileList, std::vector<std::pair<std::string, std::string>>& vpList)
+    void sendFileBlockToServer(std::vector<std::string>& vSendFileList )
     {
         auto iterFile = vSendFileList.begin( );
-        auto iterServerIP = vpList.begin( );
-        SendFile send;
-        boost::asio::io_service io_ser;
+        //auto iterServerIP = vpList.begin( );
+        size_t index = 0;
 
-        for (;iterFile!=vSendFileList.end();++iterFile,++iterServerIP)
+        for (;iterFile!=vSendFileList.end()&&1;++iterFile,++index)
         {
-            if (iterServerIP==vpList.end())
+            if (index == g_ComData.ServerTable.clientinfo_size())
             {
-                iterServerIP = vpList.end( );
+                index = 0;
             }
             char md5[33];
             getFileMD5(iterFile->c_str(), md5);
 
-            std::string filename = *iterFile;
-            filename += "+";
-            filename += iterServerIP->first;
-            filename += "+";
-            filename += md5;
+            std::string filename1 = *iterFile;
+            //将const char* 分割
+            std::vector<std::string> uuu;
+            boost::split(uuu, filename1, boost::is_any_of("-"), boost::token_compress_on);
 
-            try{
-                send.sender(io_ser, iterServerIP->second.c_str( ), 8289, filename.c_str( ), 'd');
+            auto Itemm = g_ComData.ServerTable.clientinfo(index);
+
+            std::string filenames = filename1;
+            filenames += "+";
+            filenames += uuu[1];
+            filenames += "+";
+            filenames += Itemm.keymd5();
+            filenames += "+";
+            filenames += md5;
+
+            try
+            {
+                boost::asio::io_service io_ser;
+                SendFile sends;
+                sends.sender(io_ser, Itemm.saveip().c_str(), 8289, filenames.c_str( ), 'd');
             }
             catch (CException* e)
-            {}
+            {
+                //发送文件到存储端
+            }
         }
         
         //文件传输完成后，
@@ -122,14 +140,9 @@ public:
             }
         }
         
-        for (auto xxx = g_ComData.m_UploadFile.begin(); xxx != g_ComData.m_UploadFile.end(); ++xxx)
-        {
-            if (xxx->m_FileSHA512 == vstr[1])
-            {
-                fileNameTmp = xxx->m_FileName;
-                xxx = g_ComData.m_UploadFile.erase(xxx);
-            }
-        }
+        auto xxx = g_ComData.m_UploadFile.begin( );
+        fileNameTmp = xxx->m_FileName;
+        g_ComData.m_UploadFile.erase(xxx);
 
         g_ComData.DoneUploadFile.emplace_back(std::make_pair(fileNameTmp, ""));
         //文件传输完成时，向服务端发送文件完整信息
@@ -138,7 +151,7 @@ public:
         filename += vstr[1];
         filename += "+";
         char md5[33];
-        getFileMD5(iterFile->c_str( ), md5);
+        getFileMD5(fileNameTmp.c_str( ), md5);
         filename += md5;
         filename += "+";
 
@@ -170,37 +183,30 @@ public:
 
         try
         {
-            send.sender(io_ser, iterServerIP->second.c_str( ), 8089, filename.c_str( ), 'g');
-        } catch (CException* e)
+            SendFile send; 
+            boost::asio::io_service io_ser;
+            send.senderLitter(io_ser, "127.0.0.1", 8189, filename.c_str( ), 'g');
+        } catch (std::exception* e)
         {
+           // std::cout << e.what( ) << std::endl;
         }
 
         //删除临时文件
         for (auto x:vSendFileList)
         {
-            remove(x.c_str( ));
+            boost::filesystem::path p(x);
+            boost::filesystem::remove(p);
         }
     }
 
     void DoSendFile( )
     {
-        boost::filesystem::fstream InFile(vstr[0], std::ios::in | std::ios::binary);
+        boost::filesystem::fstream InFile("ClientConfigFile", std::ios::in | std::ios::binary);
 
-        qiuwanli::ClientConfigFileTable ServerTable;
+        //qiuwanli::ClientConfigFileTable ServerTable;
 
-        if (ServerTable.ParseFromIstream(&InFile))
+        if (!g_ComData.ServerTable.ParsePartialFromIstream(&InFile))
             ;
-
-        //int Count_thread = ServerTable.clientinfo_size( );
-        //int SendBlocks = 0;
-        //std::list<boost::thread*> threads;
-
-        //用于存放存储端IP和对应的KeyMD5
-        std::vector<std::pair<std::string, std::string>> vpList;
-        for (int index = 0; index < ServerTable.clientinfo_size( ); ++index)
-        {
-            vpList.push_back(std::make_pair(ServerTable.clientinfo(index).keymd5(), ServerTable.clientinfo(index).saveip()));
-        }
 
         //用于存储分割后的文件块对应的文件名
         std::vector<std::string> vSendFileList;
@@ -210,7 +216,7 @@ public:
         {
             std::string file = iter.m_FileName;
             splistFile( file,vSendFileList);
-            sendFileBlockToServer(vSendFileList, vpList);
+            sendFileBlockToServer(vSendFileList);
         }
 
         g_ComData.curUploadFile.resize(0);
@@ -218,17 +224,6 @@ public:
 
 	~Session ()
 	{
-        if (fp_)
-        {
-            fclose(fp_);
-        }
-
-        //传输文件到存储服务端
-        if (DoType == 6)
-        {
-            DoSendFile();
-        }
-
         WriteBlock_ToFile( );
 
 		std::cout << "\n Thread ID: " << boost::this_thread::get_id () << std::endl;
@@ -518,10 +513,17 @@ private:
             }
 
             DataBlockTypeInfo::Size_type filesize = file_info_.m_FileSize;
-            if (total_bytes_writen_ != filesize)
+            if (total_bytes_writen_ == filesize)
             {
+                if (fp_)
+                {
+                    fclose(fp_);
+                }
+                //传输文件到存储服务端
+                if (DoType == 6)
+                    DoSendFile( );
             }
-			
+
             return;
 		}
 		total_bytes_writen_ += fwrite (buffer_, 1, bytes_transferred, fp_);

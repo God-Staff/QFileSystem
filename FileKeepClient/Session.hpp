@@ -206,10 +206,12 @@ private:
         //接收文件
         if (file_info_.m_ReqiureType=='d')
         {
+            std::cout << "DDDDDDDDDD" << std::endl;
              if (vstr[2]!=g_ComData.Conf.prikeymd5())
              {
                  return;
              }
+     
              m__type = 6;
              std::string filename = vstr[0];
              filename += vstr[1];

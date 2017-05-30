@@ -201,19 +201,23 @@ private:
             qiuwanli::ClientConfigFileTable ClientInfo;
             for (int i = 0; i < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++i)
             {
-                if (g_ComData.m_ClientConfigFile.clientinfo(i).remainsize( ) > 1024 * 1024 * 1024)
-                {
-                    const qiuwanli::ClientConfigFile& conf = g_ComData.m_ClientConfigFile.clientinfo(i);
+                const qiuwanli::ClientConfigFile& conf = g_ComData.m_ClientConfigFile.clientinfo(i);
 
-                    ClientInfo.MergeFrom(conf);
-                }
-
-                boost::filesystem::fstream Op("ClientConfigFile", std::ios::out | std::ios::binary);
+                PublicData.DoClientConfigFileTable(ClientInfo.add_clientinfo( )
+                                                   , conf.cilentid( )
+                                                   , conf.saveip( )
+                                                   , conf.prikey( )
+                                                   , conf.keymd5( )
+                                                   , conf.totalsize( )
+                                                   , conf.remainsize( ));
+            }
+                boost::filesystem::fstream Op("ClientConfigFile", std::ios::out | std::ios::binary | std::ios::app);
 
                 if (!ClientInfo.SerializePartialToOstream(&Op))
                 {
                     return ;
                 }
+                Op.close( );
                 std::string  filename = "ClientConfigFile";
                 filename += "+";
                 filename += vstr[1];
@@ -225,7 +229,7 @@ private:
                     sender.sender(io_ser, "127.0.0.1", 8089, filename.c_str(), 'c');
                 } catch (CException* e)
                 { }
-            }
+            
 
             ////解析请求类型，调用不同的处理函数
             //switch (file_info_.m_ReqiureType)
@@ -333,7 +337,8 @@ private:
         //存储端发来的心跳连接
         if (file_info_.m_ReqiureType=='i')
         {
-            g_ComData.m_HeartList.emplace_back(ComData::HeartLink(vstr[0], atoll(vstr[0].c_str( )), atoll(vstr[0].c_str( )), vstr[3]));
+            g_ComData.m_UIChange |= size_t(2);
+            g_ComData.m_HeartList.emplace_back(ComData::HeartLink(vstr[0], atol(vstr[1].c_str( )), atol(vstr[2].c_str( )), vstr[3]));
         }
 
     }
