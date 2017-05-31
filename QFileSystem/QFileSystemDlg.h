@@ -41,6 +41,7 @@ protected:
     CListCtrl*  m_ListFile;
     CListCtrl*  m_ListSaveServer;
     CListCtrl*  m_ListShared;
+    CListCtrl*  m_ListBlockInfo;
 
 	void updateList ();
 

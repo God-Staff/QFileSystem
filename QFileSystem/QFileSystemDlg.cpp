@@ -194,6 +194,35 @@ BOOL CQFileSystemDlg::OnInitDialog()
         m_ListShared->InsertColumn(i, &lvcolumn3);
     }
 
+
+    //分享列表
+    m_ListBlockInfo = (CListCtrl*) GetDlgItem(IDC_LIST_BLOCKINFO);
+    DWORD dwStyle4 = GetWindowLong(m_ListBlockInfo->m_hWnd, GWL_STYLE);
+    SetWindowLong(m_ListBlockInfo->m_hWnd, GWL_STYLE, dwStyle4 | LVS_REPORT);
+
+    //设置listctrl可以整行选择和网格条纹
+    DWORD styles4 = m_ListBlockInfo->GetExtendedStyle( );
+    m_ListBlockInfo->SetExtendedStyle(styles4 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
+
+    //给listctrl设置5个标题栏
+    TCHAR rgtsz4[4][10] = {_T("文件SHA512"),_T("文件块号"),_T("块的MD5"),_T("存储位置")};
+
+    //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
+    LV_COLUMN lvcolumn4;
+    CRect rect4;
+    m_ListBlockInfo->GetWindowRect(&rect4);
+    for (int i = 0; i < 4; i++)
+    {
+        lvcolumn4.mask = LVCF_FMT | LVCF_SUBITEM | LVCF_TEXT
+            | LVCF_WIDTH | LVCF_ORDER;
+        lvcolumn4.fmt = LVCFMT_LEFT;
+        lvcolumn4.pszText = rgtsz4[i];
+        lvcolumn4.iSubItem = i;
+        lvcolumn4.iOrder = i;
+        lvcolumn4.cx = rect4.Width( ) / 4;
+        m_ListBlockInfo->InsertColumn(i, &lvcolumn4);
+    }
+
     InitData( );
 
 	//解析数据好友和分享链接数据
