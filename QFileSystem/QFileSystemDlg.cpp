@@ -297,8 +297,8 @@ void runServers( )
 
         boost::asio::ip::address address = boost::asio::ip::address::from_string("127.0.0.1");
         short port = 8189;
-        int thread_count = 6;
-        size_t block_size = 4096;
+        int thread_count = 16;
+        size_t block_size = k_buffer_size;
 
         boost::asio::io_service ios;
         server ssss(ios, boost::asio::ip::tcp::endpoint(address, port));
@@ -626,16 +626,6 @@ void CQFileSystemDlg::InitData( )
     m_ListFile->SetItemText(1, 1, L"df89cia9da7dasd80ad87as0da0sd");
     m_ListFile->SetItemText(1, 2, L"432534");
     m_ListFile->SetItemText(1, 3, L"20160304134409");
-
-    m_ListSaveServer->InsertItem(0, L"10004");
-    m_ListSaveServer->SetItemText(0, 1, L"124.54.77.33");
-    m_ListSaveServer->SetItemText(0, 2, L"23452623");
-    m_ListSaveServer->SetItemText(0, 3, L"923452623");
-    m_ListSaveServer->InsertItem(1, L"10070");
-    m_ListSaveServer->SetItemText(1, 1, L"124.54.74.33");
-    m_ListSaveServer->SetItemText(1, 2, L"86452623");
-    m_ListSaveServer->SetItemText(1, 3, L"234452623");
-    m_ListSaveServer->InsertItem(2, L"10008");
 
     m_ListShared->InsertItem(0, L"etynnh89adasdaa0nendjfaij09434f343");
     m_ListShared->SetItemText(0, 1, L"89adasdaa0nendjfaij09434f343");

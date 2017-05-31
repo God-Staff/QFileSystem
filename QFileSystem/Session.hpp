@@ -191,8 +191,10 @@ private:
                         name += "+";
                         name += vstr[1];
                         sender.senderLitter(io_ser, "127.0.0.1", 8089, name.c_str( ), 'b');
-                    } catch (CException* e)
-                    {}
+                    } catch (std::exception& e)
+                    {
+                        std::cout << e.what( ) << std::endl;
+                    }
                     return;
                 }
             }
@@ -227,8 +229,10 @@ private:
                 try
                 {
                     sender.sender(io_ser, "127.0.0.1", 8089, filename.c_str(), 'c');
-                } catch (CException* e)
-                { }
+                } catch (std::exception& e)
+                {
+                    std::cout << e.what( ) << std::endl;
+                }
             
 
             ////解析请求类型，调用不同的处理函数
@@ -268,21 +272,18 @@ private:
             std::vector<ComData::Vec4> CheckBlockList;
             for (auto iter = g_ComData.BlockUploadList.begin( ); iter != g_ComData.BlockUploadList.end( ); ++iter)
             {
-                if (iter->m_Sha512 == vstr[1])
+                if (iter->m_Sha512.compare( vstr[1]))
                 {
                     CheckBlockList.emplace_back(ComData::Vec4(iter->m_Sha512, iter->m_md5, iter->m_BlockNumer, iter->m_IP));
                     iter = g_ComData.BlockUploadList.erase(iter);
                 }
             }
 
-            //for (int index = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
-            //{
-            //    auto item = g_ComData.m_BlockToFileTableTmp.blocklistfordown(index);
-            //    g_ComData.m_BlockToFileTableTmp.MergeFrom(item);
-
-            //    item.Clear( );
-            //}
-         
+            for (int index = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
+            {
+                auto item = g_ComData.m_BlockToFileTableTmp.blocklistfordown(index);
+                PublicData.DoBlockList4DownTable(g_ComData.m_BlockToFileTableTmp.add_blocklistfordown( ), item.filesha512( ), item.blocknumer( ), item.blockmd5( ), item.saveserversip( ));
+            }
 
 
             //检查文件是否完整
@@ -295,18 +296,19 @@ private:
                 {
                     num += x.m_BlockNumer;
                 }
-                if (num == ((std::stol(vstr[5]) + long(1)) / 2))
+                long count = std::stol(vstr[5]);
+                if (num ==((count + long(1))*count / 2))
                 {
                     Full = true;
                 }
             }
 
-            boost::asio::io_service io_ser;
-            std::string  filename= vstr[0];
-            filename += "+";
+
+            std::string  filenamed = vstr[0];
+            filenamed += "+";
             if (Full)
             {
-                filename += "true";
+                filenamed += "true";
                 PublicData.DoFileInfoListTable(g_ComData.m_FileListTable.add_filelist( )
                                                , vstr[0], vstr[1], vstr[2], vstr[3], vstr[4]
                                                , atoll(vstr[5].c_str( )), atoll(vstr[6].c_str( )), vstr[7]);
@@ -320,18 +322,24 @@ private:
             }
             else
             {   //若数据不完整则将，愿数据块信息插入到块信息临时存放表
-                filename += "false";
-                g_ComData.BlockUploadList.insert(g_ComData.BlockUploadList.end( ), CheckBlockList.begin( ), CheckBlockList.end( ));
+                filenamed += "false";
+                //for (auto x : CheckBlockList)
+                //{
+                //    g_ComData.BlockUploadList.push_back(x);
+                //}
+                //g_ComData.BlockUploadList.insert(g_ComData.BlockUploadList.end( ), CheckBlockList.begin( ), CheckBlockList.end( ));
             }
 
             try
             {
+                boost::asio::io_service io_ser;
                 SendFile send;
-                send.sender(io_ser, "127.0.0.1", 8089, filename.c_str( ), 'h');
-            } catch (CException* e)
-            { }
+                send.senderLitter(io_ser, "127.0.0.1", 8089, filenamed.c_str( ), 'h');
+            } catch (std::exception& e)
+            { 
+                std::cout << e.what( ) << std::endl;
+            }
             
-
         }
 
         //存储端发来的心跳连接

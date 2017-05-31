@@ -41,7 +41,7 @@ private:
     //OptLog Logs;
     char buffer[k_buffer_size];
     File_info file_info;
-    std::string filename;
+    std::string m_CurFileName;
 };
 
 #endif // !SEND_FILE_HPP

@@ -13,7 +13,10 @@ SendFile::SendFile( ) : fp(nullptr)
 
 SendFile::~SendFile( )
 {
-
+    //if (m_CurFileName.compare(""))
+    //{
+    //    boost::filesystem::remove(m_CurFileName);
+    //}
 }
 
 void SendFile::Init(const char* filename)
@@ -39,6 +42,7 @@ void SendFile::sender(boost::asio::io_service& io
     boost::split(vstr, str, boost::is_any_of("+"), boost::token_compress_on);
     fileee = vstr[0].c_str( );
     Init(fileee);
+    m_CurFileName = vstr[0];
 
     //使用智能指针，防止程序出现异常时，fclose未被调用。
     boost::shared_ptr<FILE> file_ptr(fp, fclose);
@@ -46,11 +50,6 @@ void SendFile::sender(boost::asio::io_service& io
     fseek(fp, 0, SEEK_END);
     File_info::Size_type fileLenth = ftell(fp);
     rewind(fp);
-
-    clock_t cost_time = clock( );
-
-    const size_t k_buffer_size = 32 * 1024;
-    char buffer[k_buffer_size]{ };
 
     std::string sbuf = filename;//防止文件名中有空白字符
     size_t filename_size = sbuf.size( );//strlen (filename) + 1;
@@ -94,9 +93,6 @@ void SendFile::senderLitter(boost::asio::io_service& io
                             , const char* filename
                             , unsigned char msg_type)
 {
-    //const size_t k_buffer_size = 32 * 1024;
-    char buffer[k_buffer_size]{ };
-
     std::string sbuf = filename;//防止文件名中有空白字符
     size_t filename_size = sbuf.size( );//strlen (filename) + 1;
     size_t file_info_size = sizeof(file_info);
@@ -114,8 +110,6 @@ void SendFile::senderLitter(boost::asio::io_service& io
     boost::asio::ip::tcp::socket socket(io);
     socket.connect(boost::asio::ip::tcp::endpoint(boost::asio::ip::address_v4::from_string(ip_address), port));
 
-    size_t len = total_size;
     //先发送文件头，之后发送data
-    socket.send(boost::asio::buffer(buffer, len), 0);
-
+    socket.send(boost::asio::buffer(buffer, total_size), 0);
 }

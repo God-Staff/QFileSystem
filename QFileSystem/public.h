@@ -11,12 +11,12 @@
 #include "Interface.h"
 
 //文件块大小//
-const unsigned int BLOCK_SIZE = 1024 * 64;
+const unsigned int BLOCK_SIZE = 1024 * 32;
 const unsigned int FILE_MAX = ~0;
 //k*1024
 const unsigned int k_times = 32;
 
-const unsigned long k_buffer_size = 1024 * k_times;
+const size_t k_buffer_size = 1024 * k_times;
 //常量数据
 
 const unsigned long DelayTime_Heart = 60 * 1000;
