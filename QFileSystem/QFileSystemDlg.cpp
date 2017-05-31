@@ -176,7 +176,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
     m_ListShared->SetExtendedStyle(styles3 | LVS_EX_FULLROWSELECT | LVS_EX_GRIDLINES);
 
     //给listctrl设置5个标题栏
-    TCHAR rgtsz3[4][10] = {_T("URL"),_T("文件标识"),_T("验证信息"),_T("用户ID")};
+    TCHAR rgtsz3[4][10] = {_T("文件标识"),_T("验证信息"),_T("用户ID"),_T("文件大小")};
 
     //修改数组大小，可以确定分栏数和没栏长度，如果修改下面的数据（蓝色部分）也要跟着改变
     LV_COLUMN lvcolumn3;
@@ -230,13 +230,14 @@ BOOL CQFileSystemDlg::OnInitDialog()
 
     runServer( );
 
-    SetTimer(1, 3000, NULL);
+    SetTimer(1, 1000, NULL);
+    SetTimer(2, 30000, NULL);
 
 	return TRUE;  // 除非将焦点设置到控件，否则返回 TRUE
 }
 
 
-
+//定时器
 void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
 {
     switch (nIDEvent)
@@ -275,6 +276,8 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
             tmp = ~tmp;
             g_ComData.m_UIChange &= tmp;
         }
+
+        //更新在线的存储端
         if ((size_t(2)&g_ComData.m_UIChange) == size_t(2))
         {
             //更新UI，Heart文件列表
@@ -288,7 +291,6 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
                         nee = true;
                         auto item = g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
                         item->set_online("ON");
-                        //PublicData.DoClientConfigFileTable()
                     }
                 }
                
@@ -299,7 +301,6 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
                 }
             }
            
-           
             g_ComData.m_HeartList.clear( );
 
             //重置状态位
@@ -307,8 +308,57 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
             tmp = ~tmp;
             g_ComData.m_UIChange &= tmp;
 
-            LoadSaveServerList( );
+            //更新界面
+            UpDateUISaveServerList( );
         }
+
+        //定时更新显示，已经接受到的数据块
+        if ((size_t(4)&g_ComData.m_UIChange) == size_t(4))
+        {
+            for (auto xxxx : g_ComData.g_AddBlockTmp)
+            {
+                if (xxxx.size( ) == 4)
+                {
+                    CString Data1;
+                    auto xx = xxxx.begin( );
+                    Data1 = xx->c_str( );
+                    m_ListBlockInfo->InsertItem(0, Data1);
+
+                    ++xx;
+                    CString Data3;
+                    std::string ss = xx->c_str( );
+                    Data3 = ss.c_str( );
+                    m_ListBlockInfo->SetItemText(0, 1, Data3);
+
+                    ++xx;
+                    CString Data2;
+                    Data2 = xx->c_str( );
+                    m_ListBlockInfo->SetItemText(0, 2, Data2);
+
+                    ++xx;
+                    CString Data4;
+                    Data4 = xx->c_str( );
+                    m_ListBlockInfo->SetItemText(0, 3, Data4);
+                }
+            }
+            g_ComData.g_AddBlockTmp.clear( );
+
+            //重置状态位
+            size_t tmp = size_t(4);
+            tmp = ~tmp;
+            g_ComData.m_UIChange &= tmp;
+        }
+    }
+    case 2:
+    {
+        //定时数据到保存文件
+        WriteBlockInfo( );
+        WriteFileInfoList( );
+        WriteSaveServerList( );
+        WriteUserInfo( );
+        //WriteSaveServerList( );
+        WriteSharedList( );
+        //
 
     }
     break;
@@ -552,21 +602,104 @@ void CQFileSystemDlg::OnNMRClickSharedList(NMHDR *pNMHDR, LRESULT *pResult)
     *pResult = 0;
 }
 
-
 void CQFileSystemDlg::InitData( )
 {
-    //解析文件列表
+    //初始化列表
+    ReadBlockInfo( );
+    ReadFileInfoList( );
+    ReadSaveServerList( );
+    ReadSharedList( );
+    readUserInfo( );
+}
+
+//载入文件存储块对应的文件列表
+void CQFileSystemDlg::ReadBlockInfo( )
+{
+    boost::filesystem::fstream readBlockInfoFile("ServerBlockInfoFiles", std::ios::in | std::ios::binary);
+    if (readBlockInfoFile.is_open( ))
+    {
+        if (!g_ComData.m_BlockToFileTable.ParseFromIstream(&readBlockInfoFile))
+            MessageBox(_T("ServerBlockInfoFiles 文件解析失败！"));
+    }
+    else
+    {
+        MessageBox(_T("ServerBlockInfoFiles 文件打开失败！"));
+    }
+
+    for (int index = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
+    {
+        //_T("文件名"), _T("SHA512"), _T("文件大小"), _T("创建时间"), _T("是否分享")
+        CString Data1;
+        Data1 = g_ComData.m_BlockToFileTable.blocklistfordown(index).filesha512( ).c_str( );
+        m_ListBlockInfo->InsertItem(0, Data1);
+
+        CString Data3;
+        std::string ss = std::to_string(g_ComData.m_BlockToFileTable.blocklistfordown(index).blocknumer( ));
+        Data3 = ss.c_str( );
+        m_ListBlockInfo->SetItemText(0, 1, Data3);
+
+        CString Data2;
+        Data2 = g_ComData.m_BlockToFileTable.blocklistfordown(index).blockmd5( ).c_str( );
+        m_ListBlockInfo->SetItemText(0, 2, Data2);
+
+        CString Data4;
+        Data4 = g_ComData.m_BlockToFileTable.blocklistfordown(index).saveserversip( ).c_str( );
+        m_ListBlockInfo->SetItemText(0, 3, Data4);
+    }
+
+    readBlockInfoFile.close( );
+}
+void CQFileSystemDlg::UpdateUIBlockInfo( )
+{
+    m_ListBlockInfo->DeleteAllItems( );
+
+    for (int index = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
+    {
+        CString Data1;
+        Data1 = g_ComData.m_BlockToFileTable.blocklistfordown(index).filesha512( ).c_str( );
+        m_ListBlockInfo->InsertItem(0, Data1);
+
+        CString Data3;
+        std::string ss = std::to_string(g_ComData.m_BlockToFileTable.blocklistfordown(index).blocknumer( ));
+        Data3 = ss.c_str( );
+        m_ListBlockInfo->SetItemText(0, 1, Data3);
+
+        CString Data2;
+        Data2 = g_ComData.m_BlockToFileTable.blocklistfordown(index).blockmd5( ).c_str( );
+        m_ListBlockInfo->SetItemText(0, 2, Data2);
+
+        CString Data4;
+        Data4 = g_ComData.m_BlockToFileTable.blocklistfordown(index).saveserversip( ).c_str( );
+        m_ListBlockInfo->SetItemText(0, 3, Data4);
+    }
+}
+void  CQFileSystemDlg::WriteBlockInfo( )
+{
+    boost::filesystem::fstream readBlockInfoFile("ServerBlockInfoFiles", std::ios::out | std::ios::binary);
+    if (readBlockInfoFile.is_open( ))
+        MessageBox(_T("ServerBlockInfoFiles 文件打开失败！"));
+    if (!g_ComData.m_BlockListForDownCheckTable.ParseFromIstream(&readBlockInfoFile))
+        MessageBox(_T("ServerBlockInfoFiles 文件解析失败！"));
+
+    readBlockInfoFile.close( );
+}
+
+//解析文件列表
+void CQFileSystemDlg::ReadFileInfoList( )
+{ 
     boost::filesystem::fstream readFile("FileInfoList", std::ios::in | std::ios::binary);
     if (!readFile.is_open( ))
         return;
 
     if (!g_ComData.m_FileListTable.ParsePartialFromIstream(&readFile));
 
+    readFile.close( );
+
     for (int index = 0; index < g_ComData.m_FileListTable.filelist_size( ); ++index)
     {
         //_T("文件名"), _T("SHA512"), _T("文件大小"), _T("创建时间"), _T("是否分享")
         CString Data1;
-        Data1 = g_ComData.m_FileListTable.filelist(index).filename().c_str( );
+        Data1 = g_ComData.m_FileListTable.filelist(index).filename( ).c_str( );
         m_ListFile->InsertItem(0, Data1);
 
         CString Data2;
@@ -574,7 +707,7 @@ void CQFileSystemDlg::InitData( )
         m_ListFile->SetItemText(0, 1, Data2);
 
         CString Data3;
-        std::string ss=std::to_string(g_ComData.m_FileListTable.filelist(index).filetotalsize( ));
+        std::string ss = std::to_string(g_ComData.m_FileListTable.filelist(index).filetotalsize( ));
         Data3 = ss.c_str( );
         m_ListFile->SetItemText(0, 2, Data3);
 
@@ -587,13 +720,128 @@ void CQFileSystemDlg::InitData( )
         m_ListFile->SetItemText(0, 4, Data5);
 
     }
+}
+void CQFileSystemDlg::UpdateUIFileInfoList( )
+{ 
+    m_ListFile->DeleteAllItems( );
 
-    //解析存储端信息
+    for (int index = 0; index < g_ComData.m_FileListTable.filelist_size( ); ++index)
+    {
+        //_T("文件名"), _T("SHA512"), _T("文件大小"), _T("创建时间"), _T("是否分享")
+        CString Data1;
+        Data1 = g_ComData.m_FileListTable.filelist(index).filename( ).c_str( );
+        m_ListFile->InsertItem(0, Data1);
+
+        CString Data2;
+        Data2 = g_ComData.m_FileListTable.filelist(index).filesha512( ).c_str( );
+        m_ListFile->SetItemText(0, 1, Data2);
+
+        CString Data3;
+        std::string ss = std::to_string(g_ComData.m_FileListTable.filelist(index).filetotalsize( ));
+        Data3 = ss.c_str( );
+        m_ListFile->SetItemText(0, 2, Data3);
+
+        CString Data4;
+        Data4 = g_ComData.m_FileListTable.filelist(index).filecreatedate( ).c_str( );
+        m_ListFile->SetItemText(0, 3, Data4);
+
+        CString Data5;
+        Data5 = g_ComData.m_FileListTable.filelist(index).isshared( ).c_str( );
+        m_ListFile->SetItemText(0, 4, Data5);
+
+    }
+}
+void CQFileSystemDlg::WriteFileInfoList( )
+{ 
+    boost::filesystem::fstream readFile("FileInfoList", std::ios::out | std::ios::binary);
+    if (!readFile.is_open( ))
+        return;
+
+    if (!g_ComData.m_FileListTable.SerializePartialToOstream(&readFile));
+
+    readFile.close( );
+}
+
+//分享列表
+void CQFileSystemDlg::ReadSharedList( )
+{ 
+    boost::filesystem::fstream readFile("SharedInfoList", std::ios::in | std::ios::binary);
+    if (!readFile.is_open( ))
+        return;
+
+    if (!g_ComData.m_SharedTable.ParsePartialFromIstream(&readFile));
+
+    for (int index = 0; index < g_ComData.m_SharedTable.sharedinfo_size( ); ++index)
+    {
+        //_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")
+        CString Data1;
+        Data1 = g_ComData.m_SharedTable.sharedinfo(index).sha512( ).c_str( );
+        m_ListShared->InsertItem(0, Data1);
+
+        CString Data2;
+        Data2 = g_ComData.m_SharedTable.sharedinfo(index).verificationcode( ).c_str( );
+        m_ListShared->SetItemText(0, 1, Data2);
+
+        CString Data3;
+        Data3 = g_ComData.m_SharedTable.sharedinfo(index).userid( ).c_str( );
+        m_ListShared->SetItemText(0, 2, Data3);
+
+        CString Data4;
+        std::string ss1 = std::to_string(g_ComData.m_SharedTable.sharedinfo(index).filesize( ));
+        Data4 = ss1.c_str( );
+        m_ListShared->SetItemText(0, 3, Data4);
+    }
+
+    readFile.close( );
+}
+void CQFileSystemDlg::UpdateUISharedList( )
+{ 
+    m_ListShared->DeleteAllItems( );
+
+    for (int index = 0; index < g_ComData.m_SharedTable.sharedinfo_size( ); ++index)
+    {
+        //_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")
+        CString Data1;
+        Data1 = g_ComData.m_SharedTable.sharedinfo(index).sha512( ).c_str( );
+        m_ListShared->InsertItem(0, Data1);
+
+        CString Data2;
+        Data2 = g_ComData.m_SharedTable.sharedinfo(index).verificationcode( ).c_str( );
+        m_ListShared->SetItemText(0, 1, Data2);
+
+        CString Data3;
+        Data3 = g_ComData.m_SharedTable.sharedinfo(index).userid( ).c_str( );
+        m_ListShared->SetItemText(0, 2, Data3);
+
+        CString Data4;
+        std::string ss1 = std::to_string(g_ComData.m_SharedTable.sharedinfo(index).filesize( ));
+        Data4 = ss1.c_str( );
+        m_ListShared->SetItemText(0, 3, Data4);
+    }
+}
+void CQFileSystemDlg::WriteSharedList( )
+{
+    boost::filesystem::fstream readFile("SharedInfoList", std::ios::out | std::ios::binary);
+    if (!readFile.is_open( ))
+        return;
+
+    if (!g_ComData.m_SharedTable.SerializePartialToOstream(&readFile))
+        ;
+
+    readFile.close( );
+}
+
+//解析存储端信息
+void CQFileSystemDlg::ReadSaveServerList( )
+{ 
     boost::filesystem::fstream readClientFile("ClientTable", std::ios::in | std::ios::binary);
     if (!readClientFile.is_open( ))
         return;
 
-    if (!g_ComData.m_ClientConfigFile.ParsePartialFromIstream(&readClientFile));
+    if (!g_ComData.m_ClientConfigFile.ParsePartialFromIstream(&readClientFile))
+        ;
+
+    readClientFile.close( );
 
     for (int index = 0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
     {
@@ -615,76 +863,16 @@ void CQFileSystemDlg::InitData( )
         std::string ss1 = std::to_string(g_ComData.m_ClientConfigFile.clientinfo(index).totalsize( ));
         Data4 = ss1.c_str( );
         m_ListSaveServer->SetItemText(0, 3, Data4);
-        
+
         //默认设置为离线，客户端发送Heart是进行变动
         const std::string fff = "OFF";
         auto tt = g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
         tt->set_online("OFF");          //更改Protoc数据
         m_ListSaveServer->SetItemText(0, 4, _T("OFF"));
     }
-
-    //载入文件存储块对应的文件列表
-    boost::filesystem::fstream readBlockInfoFile("BlockInfoTable", std::ios::in | std::ios::binary);
-    if (readBlockInfoFile.is_open( ))
-    {
-        if (!g_ComData.m_BlockListForDownCheckTable.ParsePartialFromIstream(&readBlockInfoFile))
-            MessageBox(_T("BlockInfoTable 文件解析失败！"));
-    }
-    else
-    {
-        MessageBox(_T("BlockInfoTable 文件打开失败！"));
-    }
-    //for (int index = 0; index < g_ComData.m_BlockListForDownCheckTable.blocklistfordown_size( ); ++index)
-    
-
-    //载入用户列表
-    boost::filesystem::fstream readUserInfoFile("UserTable", std::ios::in | std::ios::binary);
-    if (!readUserInfoFile.is_open( ))//return;
-        MessageBox(_T("UserTable 文件打开失败！"));
-
-    if (!g_ComData.m_UserhasFile.ParsePartialFromIstream(&readUserInfoFile))
-        MessageBox(_T("UserTable 文件解析失败！"));
-
-
-
-    m_ListFile->InsertItem(0, L"vc++开发大全");
-    m_ListFile->SetItemText(0, 1, L"df89cia9da7dasd80ad87as0da0sd");
-    m_ListFile->SetItemText(0, 2, L"8764253");
-    m_ListFile->SetItemText(0, 3, L"20160304133307");
-    m_ListFile->InsertItem(1, L"Boost开发大全");
-    m_ListFile->SetItemText(1, 1, L"df89cia9da7dasd80ad87as0da0sd");
-    m_ListFile->SetItemText(1, 2, L"432534");
-    m_ListFile->SetItemText(1, 3, L"20160304134409");
-
-    m_ListShared->InsertItem(0, L"etynnh89adasdaa0nendjfaij09434f343");
-    m_ListShared->SetItemText(0, 1, L"89adasdaa0nendjfaij09434f343");
-    m_ListShared->SetItemText(0, 2, L"5efwg4");
-    m_ListShared->SetItemText(0, 3, L"2054534");
-    m_ListShared->InsertItem(1, L"bsgrts89adasdaa0nendjfaij09434f343");
-    m_ListShared->SetItemText(1, 1, L"89adasdaa0nendjfaij09434f343");
-    m_ListShared->SetItemText(1, 2, L"234534");
-    m_ListShared->SetItemText(1, 3, L"2364565");
-
-
-    //
-    LoadFileList( );
-    //LoadSaveServerList( );
-    LoadSharedList( );
 }
-
-void CQFileSystemDlg::LoadFileList( )
+void CQFileSystemDlg::UpDateUISaveServerList( )
 {
-
-}
-
-void CQFileSystemDlg::LoadSharedList( )
-{
-
-}
-
-void CQFileSystemDlg::LoadSaveServerList( )
-{
-
     m_ListSaveServer->DeleteAllItems( );
 
     for (int index = 0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
@@ -713,3 +901,39 @@ void CQFileSystemDlg::LoadSaveServerList( )
         m_ListSaveServer->SetItemText(0, 4, Data5);
     }
 }
+void CQFileSystemDlg::WriteSaveServerList( )
+{ 
+    boost::filesystem::fstream readClientFile("ClientTable", std::ios::out | std::ios::binary);
+    if (!readClientFile.is_open( ))
+        return;
+
+    if (!g_ComData.m_ClientConfigFile.SerializePartialToOstream(&readClientFile))
+        ;
+
+    readClientFile.close( );
+}
+
+//载入用户列表
+void CQFileSystemDlg::readUserInfo( )
+{
+    boost::filesystem::fstream readUserInfoFile("UserTable", std::ios::in | std::ios::binary);
+    if (!readUserInfoFile.is_open( ))//return;
+        MessageBox(_T("UserTable 文件打开失败！"));
+
+    if (!g_ComData.m_UserhasFile.ParseFromIstream(&readUserInfoFile))
+        MessageBox(_T("UserTable 文件解析失败！"));
+
+    readUserInfoFile.close( );
+}
+void CQFileSystemDlg::WriteUserInfo( )
+{
+    boost::filesystem::fstream readUserInfoFile("UserTable", std::ios::out | std::ios::binary);
+    if (!readUserInfoFile.is_open( ))//return;
+        MessageBox(_T("UserTable 文件打开失败！"));
+
+    if (!g_ComData.m_UserhasFile.SerializePartialToOstream(&readUserInfoFile))
+        MessageBox(_T("UserTable 文件解析失败！"));
+
+    readUserInfoFile.close( );
+}
+

@@ -28,15 +28,97 @@ void makeBlockInfoTableFile( )
     boost::filesystem::fstream output1("BlockInfoList", std::ios::out | std::ios::trunc | std::ios::binary);
     qiuwanli::BlockInfoTable blockTable;
 
-    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertwetyerthsfgshdfsgdfgs", "qwerqwetqertwety", "123.zip", 12345ull, 123124ull, 34363656ull);
-    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertwetyerthsfsdfasfgdfgs", "fdfgdrtfgdgsfgsd", "1234.zip", 12345ull, 123124ull, 34656ull);    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwetqertdfgherthsfgshdfsgdfgs", "qwerqwedfgdfwety", "1253.zip", 12345ull, 123124ull, 34356ull);    PublicData.DoBlockInfoTable(blockTable.add_block( ), "qwerqwdfgrthwetyerthsfgshdfsgdfgs", "qsdfgsetqertwety", "1623.zip", 12345ull, 123124ull, 3436ull);
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "3F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E85", "F1C6A45DA26F319A01933A5C7463E85", "BlockData.db", 1ull, 32768ull, 3453ull);    
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "3F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E85", "F1C6A45DA26F319A01933A5C7463E85", "BlockData.db", 3ull, 32768ull, 3453ull);    
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "3F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E85", "F1C6A45DA26F319A01933A5C7463E85", "BlockData.db", 2ull, 32768ull, 3423ull);    
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "3F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E85", "F1C6A45DA26F319A01933A5C7463E85", "BlockData.db", 4ull, 43243ull, 3403ull);
 
-    if (!blockTable.SerializeToOstream(&output1))
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6", "DA96E50B0396F8B7269B3DAC406F12E6", "BlockData.db", 1ull, 32768ull, 3803ull); 
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6", "F1C6A45DA26F319A01933A5C7463E85", "BlockData.db", 4ull, 4243ull, 3483ull); 
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6", "F1C6A45DA26F319A01933A5C7463E85", "BlockData.db", 3ull, 32768ull, 3454ull); 
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6DA96E50B0396F8B7269B3DAC406F12E6", "F1C6A45DA26F319A01933A5C7463E85", "BlockData.db", 2ull, 32768ull, 3407ull);
+   
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", "5D492643DD5DCA59C9E4ABD812CF05FE", "BlockData.db", 1ull, 32768ull, 343ull);
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", "5D492643DD5DCA59C9E4ABD812CF05FE", "CBlockData.db", 3ull, 4243ull, 54ull);
+    PublicData.DoBlockInfoTable(blockTable.add_block( ), "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", "5D492643DD5DCA59C9E4ABD812CF05FE", "BlockData.db", 2ull, 32768ull, 307ull);
+
+    if (!blockTable.SerializePartialToOstream(&output1))
         std::cerr << "Failed to write Config:" << std::endl;
     output1.close( );
 }
 
 
+bool DoBlockList4DownTable(qiuwanli::BlockList4Down* BlockList
+                           , const std::string& FileSHA512
+                           , unsigned long long BlockNumer
+                           , const std::string& BlockMD5
+                           , const std::string& SaveServersIP)
+{
+    BlockList->set_filesha512(FileSHA512);
+    BlockList->set_blocknumer(BlockNumer);
+    BlockList->set_blockmd5(BlockMD5);
+    BlockList->set_saveserversip(SaveServersIP);
+
+    return true;
+}
+
+
+//服务端保存用户信息
+void ServerBlockInfoFiles( )
+{
+    std::fstream output("ServerBlockInfoFiles", std::ios::out | std::ios::trunc | std::ios::binary);
+    if (!output)
+        return;
+
+    qiuwanli::BlockList4DownTable blocks;
+    DoBlockList4DownTable(blocks.add_blocklistfordown( ), "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", 1ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");
+    DoBlockList4DownTable(blocks.add_blocklistfordown( ), "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", 2ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");
+    DoBlockList4DownTable(blocks.add_blocklistfordown( ), "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", 3ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");
+    DoBlockList4DownTable(blocks.add_blocklistfordown( ), "3F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E85", 1ull, "F1C6A45DA26F319A01933A5C7463E81", "127.0.0.1");
+    DoBlockList4DownTable(blocks.add_blocklistfordown( ), "3F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E85", 4ull, "F1C6A45DA26F319A01933A5C7463E82", "127.0.0.1");
+    DoBlockList4DownTable(blocks.add_blocklistfordown( ), "3F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E85", 3ull, "F1C6A45DA26F319A01933A5C7463E83", "127.0.0.1");
+    DoBlockList4DownTable(blocks.add_blocklistfordown( ), "3F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E853F1C6A45DA26F319A01933A5C7463E85", 2ull, "F1C6A45DA26F319A01933A5C7463E84", "127.0.0.1");
+
+    if (!blocks.SerializePartialToOstream(&output))
+        std::cerr << "Failed to write ServerUser:" << std::endl;
+    output.close( );
+}
+
+
+bool DoSharedTable(qiuwanli::Shared* Url
+                               , const std::string& FileSha512
+                               , const std::string& VerificationCode
+                               , const std::string& SharedTime
+                               , unsigned long long FileSize
+                               , const std::string& UserStutas
+                               , const std::string& UserID)
+{
+    Url->set_sha512(FileSha512);
+    Url->set_verificationcode(VerificationCode);
+    Url->set_sharedtime(SharedTime);
+    Url->set_filesize(FileSize);
+    Url->set_userstutas(UserStutas);
+    Url->set_userid(UserID);
+
+    return true;
+}
+
+
+//服务端保存用户信息
+void SharedTableFiles( )
+{
+    std::fstream output("SharedFiles", std::ios::out | std::ios::trunc | std::ios::binary);
+    if (!output)
+        return;
+
+    qiuwanli::SharedTable blocks;
+    DoSharedTable(blocks.add_sharedinfo( ), "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE","345234","", 13452ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");
+    DoSharedTable(blocks.add_sharedinfo( ), "4ABD812CF05FE5D4925D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", "345234", "", 153653ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");    DoSharedTable(blocks.add_sharedinfo( ), "643DD5DCA59C9E4ABD815D492643DD5DCA59C9E4ABD812CF05FE5D4922CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", "353252", "", 123452546ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");    DoSharedTable(blocks.add_sharedinfo( ), "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", "324452", "", 43563ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");    DoSharedTable(blocks.add_sharedinfo( ), "9C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA5", "234234", "", 34561ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");    DoSharedTable(blocks.add_sharedinfo( ), "CA59C9E4ABD812CF05FE5D492643D5D492643DD5DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE", "234523", "", 1564462ull, "5D492643DD5DCA59C9E4ABD812CF05FE", "127.0.0.1");
+
+    if (!blocks.SerializePartialToOstream(&output))
+        std::cerr << "Failed to write ServerUser:" << std::endl;
+    output.close( );
+}
 //void MakeHeartFile( )
 //{
 //    boost::filesystem::fstream output1("BlockInfoList", std::ios::out | std::ios::trunc | std::ios::binary);
@@ -69,7 +151,7 @@ void ServerUserFiles( )
     PublicData.DoUserInfoTable(user.add_user( ), "100002", "123456", {"123.zip","12345.zip","123456.zip"});
     PublicData.DoUserInfoTable(user.add_user( ), "100003", "123456", {"12345.zip","123456.zip","1234567.zip"});
 
-    if (!user.SerializeToOstream(&output))
+    if (!user.SerializePartialToOstream(&output))
         std::cerr << "Failed to write ServerUser:" << std::endl;
     output.close( );
 }
@@ -84,7 +166,7 @@ void DoClientConfigFile( )
     PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client004", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
     PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client002", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
     PublicData.DoClientConfigFileTable(clinetTable.add_clientinfo( ), "Client003", "127.0.0.1", "24352346356345asdfa", "fawefasdfa", 234563ull, 25423ull);
-    if (!clinetTable.SerializeToOstream(&output))
+    if (!clinetTable.SerializePartialToOstream(&output))
         std::cerr << "Failed to write ServerUser:" << std::endl;
     output.close( );
 }
@@ -99,7 +181,7 @@ void DoFileListFile( )
     PublicData.DoFileListTable(listT.add_file( ), "Filename3",3456ull, "FileSHA512", "local");
     PublicData.DoFileListTable(listT.add_file( ), "Filename4", 3453ull, "FileSHA512", "local");
 
-    if (!listT.SerializeToOstream(&output))
+    if (!listT.SerializePartialToOstream(&output))
         std::cerr << "Failed to write ServerUser:" << std::endl;
     output.close( );
 }
@@ -208,20 +290,93 @@ void DoFileInfoListFile( )
 //    output1.close( );
 //}
 //初始化配置文件//
-int main1( )
+
+#include <vector>
+struct ttt
 {
-    DoFileInfoListFile( );
-    DoFileListFile( );
-    DoClientConfigFile( ); 
-    ServerUserFiles( );
-    makesetfiles( ); 
-    makeBlockInfoTableFile( ); 
-    
-    /*FileDownLogFile( );
-    MakeFileDowingLog( );
-    MakePath4FileOrDir( );
-    MakeFriendList( );
-    MakeFileSharedLog( );*/
+    int x1=0;
+    int x2=0;
+};
+
+int main( )
+{
+
+    std::vector<ttt> tt2;
+    ttt t1,t2,t3,t4,t5,t6;
+    t1.x1 = 23;
+    t1.x2 = 123;
+    t2.x1 = 234;
+    t2.x2 = 34;
+    t3.x1 = 123;
+    t3.x2 = 456;
+
+    tt2.push_back(t1);
+    tt2.push_back(t3);
+    tt2.push_back(t2);
+
+    t4.x1 = 123;
+    t4.x2 = 456;
+    t5.x1 = 123;
+    t6.x2 = 456;
+    std::vector<ttt> tt1;
+    std::vector<ttt> tt3;
+    std::vector<ttt> tt4;
+    tt1.push_back(t4);
+    tt1.push_back(t5);
+    tt1.push_back(t6);
+
+    for (auto x : tt1)
+    {
+        std::cout << x.x1 << " " << x.x2 << std::endl;
+    }
+    for (auto x : tt2)
+    {
+        std::cout << x.x1 << " " << x.x2 << std::endl;
+    }
+
+    std::cout << std::endl;
+    tt1.insert(tt1.begin( ), tt2.begin( ), tt2.end( ));
+
+    for (auto x : tt1)
+    {
+        std::cout << x.x1 << " " << x.x2 << std::endl;
+    }
+
+    std::cout << std::endl;
+    tt2.insert(tt2.end( ), tt1.begin( ), tt1.end( ));
+    for (auto x : tt2)
+    {
+        std::cout << x.x1 << " " << x.x2 << std::endl;
+    }
+
+    std::cout << std::endl;
+    tt3.insert(tt3.end( ), tt1.begin( ), tt1.end( ));
+    for (auto x : tt3)
+    {
+        std::cout << x.x1 << " " << x.x2 << std::endl;
+    }
+    std::cout << std::endl;
+    tt2.insert(tt2.end( ), tt4.begin( ), tt4.end( ));
+    for (auto x : tt2)
+    {
+        std::cout << x.x1 << " " << x.x2 << std::endl;
+    }
+    //DoFileInfoListFile( );
+    //DoFileListFile( );
+    //DoClientConfigFile( ); 
+    //ServerUserFiles( );
+    //makesetfiles( ); 
+    //makeBlockInfoTableFile( ); 
+    //ServerBlockInfoFiles( );
+
+    //SharedTableFiles( );
+
+
+    ///*FileDownLogFile( );
+    //MakeFileDowingLog( );
+    //MakePath4FileOrDir( );
+    //MakeFriendList( );
+    //MakeFileSharedLog( );*/
 
     return 0;
 }

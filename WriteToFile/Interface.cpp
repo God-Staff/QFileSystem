@@ -41,18 +41,18 @@ bool CCInterface::DoBlockInfoTable(qiuwanli::BlockInfo* blockInfo
     return true;
 }
 
-bool CCInterface::DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
-                                    , const std::string& FileName
-                                    , const std::string& FileSHA512
-                                    , const std::string& ClientID
-                                    , const std::string& ClientPort)
-{
-    file2Client->set_filename(FileName);
-    file2Client->set_filesha512(FileSHA512);
-    file2Client->set_cilentid(ClientID);
-    file2Client->set_cilentport(ClientPort);
-    return true;
-}
+//bool CCInterface::DoFile2ClientTable(qiuwanli::File2Cilent* file2Client
+//                                    , const std::string& FileName
+//                                    , const std::string& FileSHA512
+//                                    , const std::string& ClientID
+//                                    , const std::string& ClientPort)
+//{
+//    file2Client->set_filename(FileName);
+//    file2Client->set_filesha512(FileSHA512);
+//    file2Client->set_cilentid(ClientID);
+//    file2Client->set_cilentport(ClientPort);
+//    return true;
+//}
 
 bool CCInterface::DoClientConfigFileTable(qiuwanli::ClientConfigFile* conf
                                          , const std::string& CilentID
@@ -86,7 +86,7 @@ bool CCInterface::DoFileInfoListTable(qiuwanli::FileInfoList* fileInfo
     fileInfo->set_filemd5(FileMD5);
     fileInfo->set_filename(FileName);
     fileInfo->set_filecreatedate(FileCreateDate);
-    fileInfo->set_filechangedate(FileChangeDate);
+    fileInfo->set_isshared(FileChangeDate);
     fileInfo->set_fileallblock(FileAllBlocks);
     fileInfo->set_filetotalsize(FileTotalSize);
     fileInfo->set_tag(Tag);

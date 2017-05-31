@@ -24,10 +24,6 @@ class BlockInfoDefaultTypeInternal : public ::google::protobuf::internal::Explic
 } _BlockInfo_default_instance_;
 class BlockInfoTableDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<BlockInfoTable> {
 } _BlockInfoTable_default_instance_;
-class File2CilentDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<File2Cilent> {
-} _File2Cilent_default_instance_;
-class File2ClientTableDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<File2ClientTable> {
-} _File2ClientTable_default_instance_;
 class ClientConfigFileDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<ClientConfigFile> {
 } _ClientConfigFile_default_instance_;
 class ClientConfigFileTableDefaultTypeInternal : public ::google::protobuf::internal::ExplicitlyConstructed<ClientConfigFileTable> {
@@ -86,7 +82,7 @@ namespace protobuf_PublicStruct_2eproto {
 
 namespace {
 
-::google::protobuf::Metadata file_level_metadata[31];
+::google::protobuf::Metadata file_level_metadata[29];
 
 }  // namespace
 
@@ -119,19 +115,6 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   ~0u,  // no _oneof_case_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(BlockInfoTable, block_),
   ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(File2Cilent, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(File2Cilent, filename_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(File2Cilent, filesha512_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(File2Cilent, cilentid_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(File2Cilent, cilentport_),
-  ~0u,  // no _has_bits_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(File2ClientTable, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(File2ClientTable, filetoclient_),
-  ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -141,6 +124,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, keymd5_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, totalsize_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, remainsize_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFile, online_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(ClientConfigFileTable, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -154,7 +138,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileInfoList, filemd5_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileInfoList, filename_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileInfoList, filecreatedate_),
-  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileInfoList, filechangedate_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileInfoList, isshared_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileInfoList, fileallblock_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileInfoList, filetotalsize_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileInfoList, tag_),
@@ -208,6 +192,7 @@ const ::google::protobuf::uint32 TableStruct::offsets[] = {
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileDowningLog, downtime_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileDowningLog, downingstatus_),
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileDowningLog, filesha512_),
+  GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileDowningLog, filemd5_),
   ~0u,  // no _has_bits_
   GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(FileDowningLogTable, _internal_metadata_),
   ~0u,  // no _extensions_
@@ -318,42 +303,38 @@ static const ::google::protobuf::internal::MigrationSchema schemas[] = {
   { 0, -1, sizeof(ConfigFile)},
   { 12, -1, sizeof(BlockInfo)},
   { 22, -1, sizeof(BlockInfoTable)},
-  { 27, -1, sizeof(File2Cilent)},
-  { 35, -1, sizeof(File2ClientTable)},
-  { 40, -1, sizeof(ClientConfigFile)},
-  { 50, -1, sizeof(ClientConfigFileTable)},
-  { 55, -1, sizeof(FileInfoList)},
-  { 67, -1, sizeof(FileInfoListTable)},
-  { 72, -1, sizeof(UserInfo)},
-  { 79, -1, sizeof(UserInfoTable)},
-  { 84, -1, sizeof(FileList)},
-  { 92, -1, sizeof(FileListTable)},
-  { 97, -1, sizeof(FileList4Down)},
-  { 103, -1, sizeof(FileList4DownTable)},
-  { 108, -1, sizeof(FileDowningLog)},
-  { 117, -1, sizeof(FileDowningLogTable)},
-  { 122, -1, sizeof(FileDowning)},
-  { 135, -1, sizeof(FileDowningTable)},
-  { 140, -1, sizeof(Heart)},
-  { 148, -1, sizeof(DoSomething)},
-  { 154, -1, sizeof(DoSomethingTable)},
-  { 159, -1, sizeof(BlockCheck)},
-  { 165, -1, sizeof(BlockListForDownCheck)},
-  { 173, -1, sizeof(BlockListForDownCheckTable)},
-  { 178, -1, sizeof(Shared)},
-  { 188, -1, sizeof(SharedTable)},
-  { 193, -1, sizeof(BlockList4Down)},
-  { 201, -1, sizeof(BlockList4DownTable)},
-  { 206, -1, sizeof(Logs)},
-  { 215, -1, sizeof(LogsTable)},
+  { 27, -1, sizeof(ClientConfigFile)},
+  { 38, -1, sizeof(ClientConfigFileTable)},
+  { 43, -1, sizeof(FileInfoList)},
+  { 55, -1, sizeof(FileInfoListTable)},
+  { 60, -1, sizeof(UserInfo)},
+  { 67, -1, sizeof(UserInfoTable)},
+  { 72, -1, sizeof(FileList)},
+  { 80, -1, sizeof(FileListTable)},
+  { 85, -1, sizeof(FileList4Down)},
+  { 91, -1, sizeof(FileList4DownTable)},
+  { 96, -1, sizeof(FileDowningLog)},
+  { 106, -1, sizeof(FileDowningLogTable)},
+  { 111, -1, sizeof(FileDowning)},
+  { 124, -1, sizeof(FileDowningTable)},
+  { 129, -1, sizeof(Heart)},
+  { 137, -1, sizeof(DoSomething)},
+  { 143, -1, sizeof(DoSomethingTable)},
+  { 148, -1, sizeof(BlockCheck)},
+  { 154, -1, sizeof(BlockListForDownCheck)},
+  { 162, -1, sizeof(BlockListForDownCheckTable)},
+  { 167, -1, sizeof(Shared)},
+  { 177, -1, sizeof(SharedTable)},
+  { 182, -1, sizeof(BlockList4Down)},
+  { 190, -1, sizeof(BlockList4DownTable)},
+  { 195, -1, sizeof(Logs)},
+  { 204, -1, sizeof(LogsTable)},
 };
 
 static ::google::protobuf::Message const * const file_default_instances[] = {
   reinterpret_cast<const ::google::protobuf::Message*>(&_ConfigFile_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_BlockInfo_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_BlockInfoTable_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_File2Cilent_default_instance_),
-  reinterpret_cast<const ::google::protobuf::Message*>(&_File2ClientTable_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_ClientConfigFile_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_ClientConfigFileTable_default_instance_),
   reinterpret_cast<const ::google::protobuf::Message*>(&_FileInfoList_default_instance_),
@@ -400,7 +381,7 @@ void protobuf_AssignDescriptorsOnce() {
 void protobuf_RegisterTypes(const ::std::string&) GOOGLE_ATTRIBUTE_COLD;
 void protobuf_RegisterTypes(const ::std::string&) {
   protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 31);
+  ::google::protobuf::internal::RegisterAllTypes(file_level_metadata, 29);
 }
 
 }  // namespace
@@ -412,62 +393,58 @@ void TableStruct::Shutdown() {
   delete file_level_metadata[1].reflection;
   _BlockInfoTable_default_instance_.Shutdown();
   delete file_level_metadata[2].reflection;
-  _File2Cilent_default_instance_.Shutdown();
-  delete file_level_metadata[3].reflection;
-  _File2ClientTable_default_instance_.Shutdown();
-  delete file_level_metadata[4].reflection;
   _ClientConfigFile_default_instance_.Shutdown();
-  delete file_level_metadata[5].reflection;
+  delete file_level_metadata[3].reflection;
   _ClientConfigFileTable_default_instance_.Shutdown();
-  delete file_level_metadata[6].reflection;
+  delete file_level_metadata[4].reflection;
   _FileInfoList_default_instance_.Shutdown();
-  delete file_level_metadata[7].reflection;
+  delete file_level_metadata[5].reflection;
   _FileInfoListTable_default_instance_.Shutdown();
-  delete file_level_metadata[8].reflection;
+  delete file_level_metadata[6].reflection;
   _UserInfo_default_instance_.Shutdown();
-  delete file_level_metadata[9].reflection;
+  delete file_level_metadata[7].reflection;
   _UserInfoTable_default_instance_.Shutdown();
-  delete file_level_metadata[10].reflection;
+  delete file_level_metadata[8].reflection;
   _FileList_default_instance_.Shutdown();
-  delete file_level_metadata[11].reflection;
+  delete file_level_metadata[9].reflection;
   _FileListTable_default_instance_.Shutdown();
-  delete file_level_metadata[12].reflection;
+  delete file_level_metadata[10].reflection;
   _FileList4Down_default_instance_.Shutdown();
-  delete file_level_metadata[13].reflection;
+  delete file_level_metadata[11].reflection;
   _FileList4DownTable_default_instance_.Shutdown();
-  delete file_level_metadata[14].reflection;
+  delete file_level_metadata[12].reflection;
   _FileDowningLog_default_instance_.Shutdown();
-  delete file_level_metadata[15].reflection;
+  delete file_level_metadata[13].reflection;
   _FileDowningLogTable_default_instance_.Shutdown();
-  delete file_level_metadata[16].reflection;
+  delete file_level_metadata[14].reflection;
   _FileDowning_default_instance_.Shutdown();
-  delete file_level_metadata[17].reflection;
+  delete file_level_metadata[15].reflection;
   _FileDowningTable_default_instance_.Shutdown();
-  delete file_level_metadata[18].reflection;
+  delete file_level_metadata[16].reflection;
   _Heart_default_instance_.Shutdown();
-  delete file_level_metadata[19].reflection;
+  delete file_level_metadata[17].reflection;
   _DoSomething_default_instance_.Shutdown();
-  delete file_level_metadata[20].reflection;
+  delete file_level_metadata[18].reflection;
   _DoSomethingTable_default_instance_.Shutdown();
-  delete file_level_metadata[21].reflection;
+  delete file_level_metadata[19].reflection;
   _BlockCheck_default_instance_.Shutdown();
-  delete file_level_metadata[22].reflection;
+  delete file_level_metadata[20].reflection;
   _BlockListForDownCheck_default_instance_.Shutdown();
-  delete file_level_metadata[23].reflection;
+  delete file_level_metadata[21].reflection;
   _BlockListForDownCheckTable_default_instance_.Shutdown();
-  delete file_level_metadata[24].reflection;
+  delete file_level_metadata[22].reflection;
   _Shared_default_instance_.Shutdown();
-  delete file_level_metadata[25].reflection;
+  delete file_level_metadata[23].reflection;
   _SharedTable_default_instance_.Shutdown();
-  delete file_level_metadata[26].reflection;
+  delete file_level_metadata[24].reflection;
   _BlockList4Down_default_instance_.Shutdown();
-  delete file_level_metadata[27].reflection;
+  delete file_level_metadata[25].reflection;
   _BlockList4DownTable_default_instance_.Shutdown();
-  delete file_level_metadata[28].reflection;
+  delete file_level_metadata[26].reflection;
   _Logs_default_instance_.Shutdown();
-  delete file_level_metadata[29].reflection;
+  delete file_level_metadata[27].reflection;
   _LogsTable_default_instance_.Shutdown();
-  delete file_level_metadata[30].reflection;
+  delete file_level_metadata[28].reflection;
 }
 
 void TableStruct::InitDefaultsImpl() {
@@ -477,8 +454,6 @@ void TableStruct::InitDefaultsImpl() {
   _ConfigFile_default_instance_.DefaultConstruct();
   _BlockInfo_default_instance_.DefaultConstruct();
   _BlockInfoTable_default_instance_.DefaultConstruct();
-  _File2Cilent_default_instance_.DefaultConstruct();
-  _File2ClientTable_default_instance_.DefaultConstruct();
   _ClientConfigFile_default_instance_.DefaultConstruct();
   _ClientConfigFileTable_default_instance_.DefaultConstruct();
   _FileInfoList_default_instance_.DefaultConstruct();
@@ -523,70 +498,67 @@ void AddDescriptorsImpl() {
       "aveFileName\030\003 \001(\t\022\022\n\nBlockNumer\030\004 \001(\004\022\017\n"
       "\007CurSize\030\005 \001(\004\022\027\n\017FileBlockOffset\030\006 \001(\004\""
       "4\n\016BlockInfoTable\022\"\n\005Block\030\001 \003(\0132\023.qiuwa"
-      "nli.BlockInfo\"Y\n\013File2Cilent\022\020\n\010FileName"
-      "\030\001 \001(\t\022\022\n\nFileSHA512\030\002 \001(\t\022\020\n\010CilentID\030\003"
-      " \001(\t\022\022\n\nCilentPort\030\004 \001(\t\"\?\n\020File2ClientT"
-      "able\022+\n\014FileToClient\030\001 \003(\0132\025.qiuwanli.Fi"
-      "le2Cilent\"{\n\020ClientConfigFile\022\020\n\010CilentI"
-      "D\030\001 \001(\t\022\016\n\006SaveIP\030\002 \001(\t\022\016\n\006PriKey\030\003 \001(\t\022"
-      "\016\n\006KeyMD5\030\004 \001(\t\022\021\n\tTotalSize\030\005 \001(\004\022\022\n\nRe"
-      "mainSize\030\006 \001(\004\"G\n\025ClientConfigFileTable\022"
-      ".\n\nClientInfo\030\001 \003(\0132\032.qiuwanli.ClientCon"
-      "figFile\"\257\001\n\014FileInfoList\022\022\n\nFileSHA512\030\001"
-      " \001(\t\022\017\n\007FileMD5\030\002 \001(\t\022\020\n\010FileName\030\003 \001(\t\022"
-      "\026\n\016FileCreateDate\030\004 \001(\t\022\026\n\016FileChangeDat"
-      "e\030\005 \001(\t\022\024\n\014FileAllBlock\030\006 \001(\004\022\025\n\rFileTot"
-      "alSize\030\007 \001(\004\022\013\n\003Tag\030\010 \001(\t\"=\n\021FileInfoLis"
-      "tTable\022(\n\010FileList\030\001 \003(\0132\026.qiuwanli.File"
-      "InfoList\">\n\010UserInfo\022\016\n\006UserID\030\001 \001(\t\022\016\n\006"
-      "UserPS\030\002 \001(\t\022\022\n\nFileSHA512\030\003 \003(\t\"1\n\rUser"
-      "InfoTable\022 \n\004User\030\001 \003(\0132\022.qiuwanli.UserI"
-      "nfo\"U\n\010FileList\022\020\n\010FileName\030\001 \001(\t\022\020\n\010Fil"
-      "eSize\030\002 \001(\004\022\022\n\nFileSHA512\030\003 \001(\t\022\021\n\tFileS"
-      "tyle\030\004 \001(\t\"1\n\rFileListTable\022 \n\004File\030\001 \003("
-      "\0132\022.qiuwanli.FileList\"4\n\rFileList4Down\022\022"
-      "\n\nFileSHA512\030\001 \001(\t\022\017\n\007FileMD5\030\002 \001(\t\"F\n\022F"
-      "ileList4DownTable\0220\n\017FileListForDown\030\001 \003"
-      "(\0132\027.qiuwanli.FileList4Down\"q\n\016FileDowni"
-      "ngLog\022\020\n\010filename\030\001 \001(\t\022\020\n\010filesize\030\002 \001("
-      "\t\022\020\n\010downtime\030\003 \001(\t\022\025\n\rDowningstatus\030\004 \001"
-      "(\t\022\022\n\nfilesha512\030\005 \001(\t\"D\n\023FileDowningLog"
-      "Table\022-\n\013FileDownLog\030\001 \003(\0132\030.qiuwanli.Fi"
-      "leDowningLog\"\315\001\n\013FileDowning\022\022\n\nFileSHA5"
-      "12\030\001 \001(\t\022\017\n\007FileMD5\030\002 \001(\t\022\020\n\010FileName\030\003 "
-      "\001(\t\022\024\n\014FileDownTime\030\004 \001(\t\022\036\n\026FileDownloa"
-      "dBlockCount\030\005 \001(\004\022\033\n\023FileTotalBlockCount"
-      "\030\006 \001(\004\022\020\n\010FileSize\030\007 \001(\t\022\022\n\nBlockCount\030\010"
-      " \001(\r\022\016\n\006BitMap\030\t \001(\t\"G\n\020FileDowningTable"
-      "\0223\n\024FileContinueTransmit\030\001 \003(\0132\025.qiuwanl"
-      "i.FileDowning\"M\n\005Heart\022\n\n\002ID\030\001 \001(\t\022\022\n\nRe"
-      "mainSize\030\002 \001(\t\022\021\n\tTotleSize\030\003 \001(\t\022\021\n\tPri"
-      "keyMd5\030\004 \001(\t\".\n\013DoSomething\022\013\n\003Key\030\001 \001(\t"
-      "\022\022\n\nFileSHA512\030\002 \001(\t\"9\n\020DoSomethingTable"
-      "\022%\n\006DoSome\030\001 \003(\0132\025.qiuwanli.DoSomething\""
-      "1\n\nBlockCheck\022\021\n\tBlockItem\030\001 \001(\r\022\020\n\010Bloc"
-      "kMD5\030\002 \001(\t\"y\n\025BlockListForDownCheck\022\022\n\nF"
-      "ileSHA512\030\001 \001(\t\022\025\n\rSaveServersIP\030\002 \001(\t\022\017"
-      "\n\007FileMD5\030\003 \001(\t\022$\n\006Blocks\030\004 \003(\0132\024.qiuwan"
-      "li.BlockCheck\"W\n\032BlockListForDownCheckTa"
-      "ble\0229\n\020BlockListForDown\030\001 \003(\0132\037.qiuwanli"
-      ".BlockListForDownCheck\"|\n\006Shared\022\016\n\006Sha5"
-      "12\030\001 \001(\t\022\030\n\020VerificationCode\030\002 \001(\t\022\022\n\nSh"
-      "aredTime\030\003 \001(\t\022\020\n\010FileSize\030\004 \001(\t\022\022\n\nUser"
-      "Stutas\030\005 \001(\t\022\016\n\006UserID\030\006 \001(\t\"3\n\013SharedTa"
-      "ble\022$\n\nSharedInfo\030\001 \003(\0132\020.qiuwanli.Share"
-      "d\"a\n\016BlockList4Down\022\022\n\nFileSHA512\030\001 \001(\t\022"
-      "\022\n\nBlockNumer\030\002 \001(\t\022\020\n\010BlockMD5\030\003 \001(\t\022\025\n"
-      "\rSaveServersIP\030\004 \001(\t\"I\n\023BlockList4DownTa"
-      "ble\0222\n\020BlockListForDown\030\001 \003(\0132\030.qiuwanli"
-      ".BlockList4Down\"g\n\004Logs\022\017\n\007user_id\030\001 \001(\t"
-      "\022\020\n\010log_date\030\002 \001(\004\022\020\n\010log_info\030\003 \001(\t\022\020\n\010"
-      "log_type\030\004 \001(\014\022\030\n\020user_client_UUID\030\005 \001(\t"
-      "\"9\n\tLogsTable\022\017\n\007logdate\030\001 \001(\t\022\033\n\003log\030\002 "
-      "\003(\0132\016.qiuwanli.Logsb\006proto3"
+      "nli.BlockInfo\"\213\001\n\020ClientConfigFile\022\020\n\010Ci"
+      "lentID\030\001 \001(\t\022\016\n\006SaveIP\030\002 \001(\t\022\016\n\006PriKey\030\003"
+      " \001(\t\022\016\n\006KeyMD5\030\004 \001(\t\022\021\n\tTotalSize\030\005 \001(\004\022"
+      "\022\n\nRemainSize\030\006 \001(\004\022\016\n\006OnLine\030\007 \001(\t\"G\n\025C"
+      "lientConfigFileTable\022.\n\nClientInfo\030\001 \003(\013"
+      "2\032.qiuwanli.ClientConfigFile\"\251\001\n\014FileInf"
+      "oList\022\022\n\nFileSHA512\030\001 \001(\t\022\017\n\007FileMD5\030\002 \001"
+      "(\t\022\020\n\010FileName\030\003 \001(\t\022\026\n\016FileCreateDate\030\004"
+      " \001(\t\022\020\n\010isshared\030\005 \001(\t\022\024\n\014FileAllBlock\030\006"
+      " \001(\004\022\025\n\rFileTotalSize\030\007 \001(\004\022\013\n\003Tag\030\010 \001(\t"
+      "\"=\n\021FileInfoListTable\022(\n\010FileList\030\001 \003(\0132"
+      "\026.qiuwanli.FileInfoList\">\n\010UserInfo\022\016\n\006U"
+      "serID\030\001 \001(\t\022\016\n\006UserPS\030\002 \001(\t\022\022\n\nFileSHA51"
+      "2\030\003 \003(\t\"1\n\rUserInfoTable\022 \n\004User\030\001 \003(\0132\022"
+      ".qiuwanli.UserInfo\"U\n\010FileList\022\020\n\010FileNa"
+      "me\030\001 \001(\t\022\020\n\010FileSize\030\002 \001(\004\022\022\n\nFileSHA512"
+      "\030\003 \001(\t\022\021\n\tFileStyle\030\004 \001(\t\"1\n\rFileListTab"
+      "le\022 \n\004File\030\001 \003(\0132\022.qiuwanli.FileList\"4\n\r"
+      "FileList4Down\022\022\n\nFileSHA512\030\001 \001(\t\022\017\n\007Fil"
+      "eMD5\030\002 \001(\t\"F\n\022FileList4DownTable\0220\n\017File"
+      "ListForDown\030\001 \003(\0132\027.qiuwanli.FileList4Do"
+      "wn\"\202\001\n\016FileDowningLog\022\020\n\010filename\030\001 \001(\t\022"
+      "\020\n\010filesize\030\002 \001(\004\022\020\n\010downtime\030\003 \001(\t\022\025\n\rD"
+      "owningstatus\030\004 \001(\t\022\022\n\nfilesha512\030\005 \001(\t\022\017"
+      "\n\007FileMd5\030\006 \001(\t\"D\n\023FileDowningLogTable\022-"
+      "\n\013FileDownLog\030\001 \003(\0132\030.qiuwanli.FileDowni"
+      "ngLog\"\315\001\n\013FileDowning\022\022\n\nFileSHA512\030\001 \001("
+      "\t\022\017\n\007FileMD5\030\002 \001(\t\022\020\n\010FileName\030\003 \001(\t\022\024\n\014"
+      "FileDownTime\030\004 \001(\t\022\036\n\026FileDownloadBlockC"
+      "ount\030\005 \001(\004\022\033\n\023FileTotalBlockCount\030\006 \001(\004\022"
+      "\020\n\010FileSize\030\007 \001(\004\022\022\n\nBlockCount\030\010 \001(\004\022\016\n"
+      "\006BitMap\030\t \001(\t\"G\n\020FileDowningTable\0223\n\024Fil"
+      "eContinueTransmit\030\001 \003(\0132\025.qiuwanli.FileD"
+      "owning\"M\n\005Heart\022\n\n\002ID\030\001 \001(\t\022\022\n\nRemainSiz"
+      "e\030\002 \001(\t\022\021\n\tTotleSize\030\003 \001(\004\022\021\n\tPrikeyMd5\030"
+      "\004 \001(\t\".\n\013DoSomething\022\013\n\003Key\030\001 \001(\t\022\022\n\nFil"
+      "eSHA512\030\002 \001(\t\"9\n\020DoSomethingTable\022%\n\006DoS"
+      "ome\030\001 \003(\0132\025.qiuwanli.DoSomething\"1\n\nBloc"
+      "kCheck\022\021\n\tBlockItem\030\001 \001(\r\022\020\n\010BlockMD5\030\002 "
+      "\001(\t\"y\n\025BlockListForDownCheck\022\022\n\nFileSHA5"
+      "12\030\001 \001(\t\022\025\n\rSaveServersIP\030\002 \001(\t\022\017\n\007FileM"
+      "D5\030\003 \001(\t\022$\n\006Blocks\030\004 \003(\0132\024.qiuwanli.Bloc"
+      "kCheck\"W\n\032BlockListForDownCheckTable\0229\n\020"
+      "BlockListForDown\030\001 \003(\0132\037.qiuwanli.BlockL"
+      "istForDownCheck\"|\n\006Shared\022\016\n\006Sha512\030\001 \001("
+      "\t\022\030\n\020VerificationCode\030\002 \001(\t\022\022\n\nSharedTim"
+      "e\030\003 \001(\t\022\020\n\010FileSize\030\004 \001(\004\022\022\n\nUserStutas\030"
+      "\005 \001(\t\022\016\n\006UserID\030\006 \001(\t\"3\n\013SharedTable\022$\n\n"
+      "SharedInfo\030\001 \003(\0132\020.qiuwanli.Shared\"a\n\016Bl"
+      "ockList4Down\022\022\n\nFileSHA512\030\001 \001(\t\022\022\n\nBloc"
+      "kNumer\030\002 \001(\004\022\020\n\010BlockMD5\030\003 \001(\t\022\025\n\rSaveSe"
+      "rversIP\030\004 \001(\t\"I\n\023BlockList4DownTable\0222\n\020"
+      "BlockListForDown\030\001 \003(\0132\030.qiuwanli.BlockL"
+      "ist4Down\"g\n\004Logs\022\017\n\007user_id\030\001 \001(\t\022\020\n\010log"
+      "_date\030\002 \001(\004\022\020\n\010log_info\030\003 \001(\t\022\020\n\010log_typ"
+      "e\030\004 \001(\014\022\030\n\020user_client_UUID\030\005 \001(\t\"9\n\tLog"
+      "sTable\022\017\n\007logdate\030\001 \001(\t\022\033\n\003log\030\002 \003(\0132\016.q"
+      "iuwanli.Logsb\006proto3"
   };
   ::google::protobuf::DescriptorPool::InternalAddGeneratedFile(
-      descriptor, 2787);
+      descriptor, 2660);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PublicStruct.proto", &protobuf_RegisterTypes);
   ::google::protobuf::internal::OnShutdown(&TableStruct::Shutdown);
@@ -2431,862 +2403,13 @@ BlockInfoTable::block() const {
 // ===================================================================
 
 #if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int File2Cilent::kFileNameFieldNumber;
-const int File2Cilent::kFileSHA512FieldNumber;
-const int File2Cilent::kCilentIDFieldNumber;
-const int File2Cilent::kCilentPortFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-File2Cilent::File2Cilent()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_PublicStruct_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:qiuwanli.File2Cilent)
-}
-File2Cilent::File2Cilent(const File2Cilent& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.filename().size() > 0) {
-    filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
-  }
-  filesha512_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.filesha512().size() > 0) {
-    filesha512_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesha512_);
-  }
-  cilentid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.cilentid().size() > 0) {
-    cilentid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cilentid_);
-  }
-  cilentport_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.cilentport().size() > 0) {
-    cilentport_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cilentport_);
-  }
-  // @@protoc_insertion_point(copy_constructor:qiuwanli.File2Cilent)
-}
-
-void File2Cilent::SharedCtor() {
-  filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesha512_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  cilentid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  cilentport_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  _cached_size_ = 0;
-}
-
-File2Cilent::~File2Cilent() {
-  // @@protoc_insertion_point(destructor:qiuwanli.File2Cilent)
-  SharedDtor();
-}
-
-void File2Cilent::SharedDtor() {
-  filename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesha512_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  cilentid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  cilentport_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-void File2Cilent::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* File2Cilent::descriptor() {
-  protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[3].descriptor;
-}
-
-const File2Cilent& File2Cilent::default_instance() {
-  protobuf_PublicStruct_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
-
-File2Cilent* File2Cilent::New(::google::protobuf::Arena* arena) const {
-  File2Cilent* n = new File2Cilent;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void File2Cilent::Clear() {
-// @@protoc_insertion_point(message_clear_start:qiuwanli.File2Cilent)
-  filename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesha512_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  cilentid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  cilentport_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-
-bool File2Cilent::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:qiuwanli.File2Cilent)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // string FileName = 1;
-      case 1: {
-        if (tag == 10u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_filename()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filename().data(), this->filename().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.File2Cilent.FileName"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string FileSHA512 = 2;
-      case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_filesha512()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filesha512().data(), this->filesha512().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.File2Cilent.FileSHA512"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string CilentID = 3;
-      case 3: {
-        if (tag == 26u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cilentid()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->cilentid().data(), this->cilentid().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.File2Cilent.CilentID"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      // string CilentPort = 4;
-      case 4: {
-        if (tag == 34u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_cilentport()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->cilentport().data(), this->cilentport().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.File2Cilent.CilentPort"));
-        } else {
-          goto handle_unusual;
-        }
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:qiuwanli.File2Cilent)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:qiuwanli.File2Cilent)
-  return false;
-#undef DO_
-}
-
-void File2Cilent::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:qiuwanli.File2Cilent)
-  // string FileName = 1;
-  if (this->filename().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filename().data(), this->filename().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.File2Cilent.FileName");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      1, this->filename(), output);
-  }
-
-  // string FileSHA512 = 2;
-  if (this->filesha512().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesha512().data(), this->filesha512().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.File2Cilent.FileSHA512");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->filesha512(), output);
-  }
-
-  // string CilentID = 3;
-  if (this->cilentid().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->cilentid().data(), this->cilentid().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.File2Cilent.CilentID");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->cilentid(), output);
-  }
-
-  // string CilentPort = 4;
-  if (this->cilentport().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->cilentport().data(), this->cilentport().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.File2Cilent.CilentPort");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->cilentport(), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:qiuwanli.File2Cilent)
-}
-
-::google::protobuf::uint8* File2Cilent::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:qiuwanli.File2Cilent)
-  // string FileName = 1;
-  if (this->filename().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filename().data(), this->filename().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.File2Cilent.FileName");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        1, this->filename(), target);
-  }
-
-  // string FileSHA512 = 2;
-  if (this->filesha512().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesha512().data(), this->filesha512().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.File2Cilent.FileSHA512");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->filesha512(), target);
-  }
-
-  // string CilentID = 3;
-  if (this->cilentid().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->cilentid().data(), this->cilentid().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.File2Cilent.CilentID");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->cilentid(), target);
-  }
-
-  // string CilentPort = 4;
-  if (this->cilentport().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->cilentport().data(), this->cilentport().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.File2Cilent.CilentPort");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->cilentport(), target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:qiuwanli.File2Cilent)
-  return target;
-}
-
-size_t File2Cilent::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:qiuwanli.File2Cilent)
-  size_t total_size = 0;
-
-  // string FileName = 1;
-  if (this->filename().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->filename());
-  }
-
-  // string FileSHA512 = 2;
-  if (this->filesha512().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->filesha512());
-  }
-
-  // string CilentID = 3;
-  if (this->cilentid().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cilentid());
-  }
-
-  // string CilentPort = 4;
-  if (this->cilentport().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->cilentport());
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void File2Cilent::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:qiuwanli.File2Cilent)
-  GOOGLE_DCHECK_NE(&from, this);
-  const File2Cilent* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const File2Cilent>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.File2Cilent)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:qiuwanli.File2Cilent)
-    MergeFrom(*source);
-  }
-}
-
-void File2Cilent::MergeFrom(const File2Cilent& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:qiuwanli.File2Cilent)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  if (from.filename().size() > 0) {
-
-    filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
-  }
-  if (from.filesha512().size() > 0) {
-
-    filesha512_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesha512_);
-  }
-  if (from.cilentid().size() > 0) {
-
-    cilentid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cilentid_);
-  }
-  if (from.cilentport().size() > 0) {
-
-    cilentport_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.cilentport_);
-  }
-}
-
-void File2Cilent::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:qiuwanli.File2Cilent)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void File2Cilent::CopyFrom(const File2Cilent& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:qiuwanli.File2Cilent)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool File2Cilent::IsInitialized() const {
-  return true;
-}
-
-void File2Cilent::Swap(File2Cilent* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void File2Cilent::InternalSwap(File2Cilent* other) {
-  filename_.Swap(&other->filename_);
-  filesha512_.Swap(&other->filesha512_);
-  cilentid_.Swap(&other->cilentid_);
-  cilentport_.Swap(&other->cilentport_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata File2Cilent::GetMetadata() const {
-  protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[3];
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// File2Cilent
-
-// string FileName = 1;
-void File2Cilent::clear_filename() {
-  filename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-const ::std::string& File2Cilent::filename() const {
-  // @@protoc_insertion_point(field_get:qiuwanli.File2Cilent.FileName)
-  return filename_.GetNoArena();
-}
-void File2Cilent::set_filename(const ::std::string& value) {
-  
-  filename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:qiuwanli.File2Cilent.FileName)
-}
-#if LANG_CXX11
-void File2Cilent::set_filename(::std::string&& value) {
-  
-  filename_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.File2Cilent.FileName)
-}
-#endif
-void File2Cilent::set_filename(const char* value) {
-  
-  filename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.File2Cilent.FileName)
-}
-void File2Cilent::set_filename(const char* value, size_t size) {
-  
-  filename_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.File2Cilent.FileName)
-}
-::std::string* File2Cilent::mutable_filename() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.File2Cilent.FileName)
-  return filename_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* File2Cilent::release_filename() {
-  // @@protoc_insertion_point(field_release:qiuwanli.File2Cilent.FileName)
-  
-  return filename_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void File2Cilent::set_allocated_filename(::std::string* filename) {
-  if (filename != NULL) {
-    
-  } else {
-    
-  }
-  filename_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filename);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.File2Cilent.FileName)
-}
-
-// string FileSHA512 = 2;
-void File2Cilent::clear_filesha512() {
-  filesha512_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-const ::std::string& File2Cilent::filesha512() const {
-  // @@protoc_insertion_point(field_get:qiuwanli.File2Cilent.FileSHA512)
-  return filesha512_.GetNoArena();
-}
-void File2Cilent::set_filesha512(const ::std::string& value) {
-  
-  filesha512_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:qiuwanli.File2Cilent.FileSHA512)
-}
-#if LANG_CXX11
-void File2Cilent::set_filesha512(::std::string&& value) {
-  
-  filesha512_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.File2Cilent.FileSHA512)
-}
-#endif
-void File2Cilent::set_filesha512(const char* value) {
-  
-  filesha512_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.File2Cilent.FileSHA512)
-}
-void File2Cilent::set_filesha512(const char* value, size_t size) {
-  
-  filesha512_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.File2Cilent.FileSHA512)
-}
-::std::string* File2Cilent::mutable_filesha512() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.File2Cilent.FileSHA512)
-  return filesha512_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* File2Cilent::release_filesha512() {
-  // @@protoc_insertion_point(field_release:qiuwanli.File2Cilent.FileSHA512)
-  
-  return filesha512_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void File2Cilent::set_allocated_filesha512(::std::string* filesha512) {
-  if (filesha512 != NULL) {
-    
-  } else {
-    
-  }
-  filesha512_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filesha512);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.File2Cilent.FileSHA512)
-}
-
-// string CilentID = 3;
-void File2Cilent::clear_cilentid() {
-  cilentid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-const ::std::string& File2Cilent::cilentid() const {
-  // @@protoc_insertion_point(field_get:qiuwanli.File2Cilent.CilentID)
-  return cilentid_.GetNoArena();
-}
-void File2Cilent::set_cilentid(const ::std::string& value) {
-  
-  cilentid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:qiuwanli.File2Cilent.CilentID)
-}
-#if LANG_CXX11
-void File2Cilent::set_cilentid(::std::string&& value) {
-  
-  cilentid_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.File2Cilent.CilentID)
-}
-#endif
-void File2Cilent::set_cilentid(const char* value) {
-  
-  cilentid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.File2Cilent.CilentID)
-}
-void File2Cilent::set_cilentid(const char* value, size_t size) {
-  
-  cilentid_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.File2Cilent.CilentID)
-}
-::std::string* File2Cilent::mutable_cilentid() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.File2Cilent.CilentID)
-  return cilentid_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* File2Cilent::release_cilentid() {
-  // @@protoc_insertion_point(field_release:qiuwanli.File2Cilent.CilentID)
-  
-  return cilentid_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void File2Cilent::set_allocated_cilentid(::std::string* cilentid) {
-  if (cilentid != NULL) {
-    
-  } else {
-    
-  }
-  cilentid_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cilentid);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.File2Cilent.CilentID)
-}
-
-// string CilentPort = 4;
-void File2Cilent::clear_cilentport() {
-  cilentport_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-const ::std::string& File2Cilent::cilentport() const {
-  // @@protoc_insertion_point(field_get:qiuwanli.File2Cilent.CilentPort)
-  return cilentport_.GetNoArena();
-}
-void File2Cilent::set_cilentport(const ::std::string& value) {
-  
-  cilentport_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:qiuwanli.File2Cilent.CilentPort)
-}
-#if LANG_CXX11
-void File2Cilent::set_cilentport(::std::string&& value) {
-  
-  cilentport_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.File2Cilent.CilentPort)
-}
-#endif
-void File2Cilent::set_cilentport(const char* value) {
-  
-  cilentport_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.File2Cilent.CilentPort)
-}
-void File2Cilent::set_cilentport(const char* value, size_t size) {
-  
-  cilentport_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.File2Cilent.CilentPort)
-}
-::std::string* File2Cilent::mutable_cilentport() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.File2Cilent.CilentPort)
-  return cilentport_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* File2Cilent::release_cilentport() {
-  // @@protoc_insertion_point(field_release:qiuwanli.File2Cilent.CilentPort)
-  
-  return cilentport_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void File2Cilent::set_allocated_cilentport(::std::string* cilentport) {
-  if (cilentport != NULL) {
-    
-  } else {
-    
-  }
-  cilentport_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), cilentport);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.File2Cilent.CilentPort)
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
-const int File2ClientTable::kFileToClientFieldNumber;
-#endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
-
-File2ClientTable::File2ClientTable()
-  : ::google::protobuf::Message(), _internal_metadata_(NULL) {
-  if (GOOGLE_PREDICT_TRUE(this != internal_default_instance())) {
-    protobuf_PublicStruct_2eproto::InitDefaults();
-  }
-  SharedCtor();
-  // @@protoc_insertion_point(constructor:qiuwanli.File2ClientTable)
-}
-File2ClientTable::File2ClientTable(const File2ClientTable& from)
-  : ::google::protobuf::Message(),
-      _internal_metadata_(NULL),
-      filetoclient_(from.filetoclient_),
-      _cached_size_(0) {
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:qiuwanli.File2ClientTable)
-}
-
-void File2ClientTable::SharedCtor() {
-  _cached_size_ = 0;
-}
-
-File2ClientTable::~File2ClientTable() {
-  // @@protoc_insertion_point(destructor:qiuwanli.File2ClientTable)
-  SharedDtor();
-}
-
-void File2ClientTable::SharedDtor() {
-}
-
-void File2ClientTable::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* File2ClientTable::descriptor() {
-  protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[4].descriptor;
-}
-
-const File2ClientTable& File2ClientTable::default_instance() {
-  protobuf_PublicStruct_2eproto::InitDefaults();
-  return *internal_default_instance();
-}
-
-File2ClientTable* File2ClientTable::New(::google::protobuf::Arena* arena) const {
-  File2ClientTable* n = new File2ClientTable;
-  if (arena != NULL) {
-    arena->Own(n);
-  }
-  return n;
-}
-
-void File2ClientTable::Clear() {
-// @@protoc_insertion_point(message_clear_start:qiuwanli.File2ClientTable)
-  filetoclient_.Clear();
-}
-
-bool File2ClientTable::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!GOOGLE_PREDICT_TRUE(EXPRESSION)) goto failure
-  ::google::protobuf::uint32 tag;
-  // @@protoc_insertion_point(parse_start:qiuwanli.File2ClientTable)
-  for (;;) {
-    ::std::pair< ::google::protobuf::uint32, bool> p = input->ReadTagWithCutoffNoLastTag(127u);
-    tag = p.first;
-    if (!p.second) goto handle_unusual;
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // repeated .qiuwanli.File2Cilent FileToClient = 1;
-      case 1: {
-        if (tag == 10u) {
-          DO_(input->IncrementRecursionDepth());
-          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtualNoRecursionDepth(
-                input, add_filetoclient()));
-        } else {
-          goto handle_unusual;
-        }
-        input->UnsafeDecrementRecursionDepth();
-        break;
-      }
-
-      default: {
-      handle_unusual:
-        if (tag == 0 ||
-            ::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          goto success;
-        }
-        DO_(::google::protobuf::internal::WireFormatLite::SkipField(input, tag));
-        break;
-      }
-    }
-  }
-success:
-  // @@protoc_insertion_point(parse_success:qiuwanli.File2ClientTable)
-  return true;
-failure:
-  // @@protoc_insertion_point(parse_failure:qiuwanli.File2ClientTable)
-  return false;
-#undef DO_
-}
-
-void File2ClientTable::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // @@protoc_insertion_point(serialize_start:qiuwanli.File2ClientTable)
-  // repeated .qiuwanli.File2Cilent FileToClient = 1;
-  for (unsigned int i = 0, n = this->filetoclient_size(); i < n; i++) {
-    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
-      1, this->filetoclient(i), output);
-  }
-
-  // @@protoc_insertion_point(serialize_end:qiuwanli.File2ClientTable)
-}
-
-::google::protobuf::uint8* File2ClientTable::InternalSerializeWithCachedSizesToArray(
-    bool deterministic, ::google::protobuf::uint8* target) const {
-  (void)deterministic;  // Unused
-  // @@protoc_insertion_point(serialize_to_array_start:qiuwanli.File2ClientTable)
-  // repeated .qiuwanli.File2Cilent FileToClient = 1;
-  for (unsigned int i = 0, n = this->filetoclient_size(); i < n; i++) {
-    target = ::google::protobuf::internal::WireFormatLite::
-      InternalWriteMessageNoVirtualToArray(
-        1, this->filetoclient(i), false, target);
-  }
-
-  // @@protoc_insertion_point(serialize_to_array_end:qiuwanli.File2ClientTable)
-  return target;
-}
-
-size_t File2ClientTable::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:qiuwanli.File2ClientTable)
-  size_t total_size = 0;
-
-  // repeated .qiuwanli.File2Cilent FileToClient = 1;
-  {
-    unsigned int count = this->filetoclient_size();
-    total_size += 1UL * count;
-    for (unsigned int i = 0; i < count; i++) {
-      total_size +=
-        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
-          this->filetoclient(i));
-    }
-  }
-
-  int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = cached_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void File2ClientTable::MergeFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_merge_from_start:qiuwanli.File2ClientTable)
-  GOOGLE_DCHECK_NE(&from, this);
-  const File2ClientTable* source =
-      ::google::protobuf::internal::DynamicCastToGenerated<const File2ClientTable>(
-          &from);
-  if (source == NULL) {
-  // @@protoc_insertion_point(generalized_merge_from_cast_fail:qiuwanli.File2ClientTable)
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-  // @@protoc_insertion_point(generalized_merge_from_cast_success:qiuwanli.File2ClientTable)
-    MergeFrom(*source);
-  }
-}
-
-void File2ClientTable::MergeFrom(const File2ClientTable& from) {
-// @@protoc_insertion_point(class_specific_merge_from_start:qiuwanli.File2ClientTable)
-  GOOGLE_DCHECK_NE(&from, this);
-  _internal_metadata_.MergeFrom(from._internal_metadata_);
-  filetoclient_.MergeFrom(from.filetoclient_);
-}
-
-void File2ClientTable::CopyFrom(const ::google::protobuf::Message& from) {
-// @@protoc_insertion_point(generalized_copy_from_start:qiuwanli.File2ClientTable)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void File2ClientTable::CopyFrom(const File2ClientTable& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:qiuwanli.File2ClientTable)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool File2ClientTable::IsInitialized() const {
-  return true;
-}
-
-void File2ClientTable::Swap(File2ClientTable* other) {
-  if (other == this) return;
-  InternalSwap(other);
-}
-void File2ClientTable::InternalSwap(File2ClientTable* other) {
-  filetoclient_.UnsafeArenaSwap(&other->filetoclient_);
-  std::swap(_cached_size_, other->_cached_size_);
-}
-
-::google::protobuf::Metadata File2ClientTable::GetMetadata() const {
-  protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[4];
-}
-
-#if PROTOBUF_INLINE_NOT_IN_HEADERS
-// File2ClientTable
-
-// repeated .qiuwanli.File2Cilent FileToClient = 1;
-int File2ClientTable::filetoclient_size() const {
-  return filetoclient_.size();
-}
-void File2ClientTable::clear_filetoclient() {
-  filetoclient_.Clear();
-}
-const ::qiuwanli::File2Cilent& File2ClientTable::filetoclient(int index) const {
-  // @@protoc_insertion_point(field_get:qiuwanli.File2ClientTable.FileToClient)
-  return filetoclient_.Get(index);
-}
-::qiuwanli::File2Cilent* File2ClientTable::mutable_filetoclient(int index) {
-  // @@protoc_insertion_point(field_mutable:qiuwanli.File2ClientTable.FileToClient)
-  return filetoclient_.Mutable(index);
-}
-::qiuwanli::File2Cilent* File2ClientTable::add_filetoclient() {
-  // @@protoc_insertion_point(field_add:qiuwanli.File2ClientTable.FileToClient)
-  return filetoclient_.Add();
-}
-::google::protobuf::RepeatedPtrField< ::qiuwanli::File2Cilent >*
-File2ClientTable::mutable_filetoclient() {
-  // @@protoc_insertion_point(field_mutable_list:qiuwanli.File2ClientTable.FileToClient)
-  return &filetoclient_;
-}
-const ::google::protobuf::RepeatedPtrField< ::qiuwanli::File2Cilent >&
-File2ClientTable::filetoclient() const {
-  // @@protoc_insertion_point(field_list:qiuwanli.File2ClientTable.FileToClient)
-  return filetoclient_;
-}
-
-#endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
-
-// ===================================================================
-
-#if !defined(_MSC_VER) || _MSC_VER >= 1900
 const int ClientConfigFile::kCilentIDFieldNumber;
 const int ClientConfigFile::kSaveIPFieldNumber;
 const int ClientConfigFile::kPriKeyFieldNumber;
 const int ClientConfigFile::kKeyMD5FieldNumber;
 const int ClientConfigFile::kTotalSizeFieldNumber;
 const int ClientConfigFile::kRemainSizeFieldNumber;
+const int ClientConfigFile::kOnLineFieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 ClientConfigFile::ClientConfigFile()
@@ -3318,6 +2441,10 @@ ClientConfigFile::ClientConfigFile(const ClientConfigFile& from)
   if (from.keymd5().size() > 0) {
     keymd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.keymd5_);
   }
+  online_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.online().size() > 0) {
+    online_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.online_);
+  }
   ::memcpy(&totalsize_, &from.totalsize_,
     reinterpret_cast<char*>(&remainsize_) -
     reinterpret_cast<char*>(&totalsize_) + sizeof(remainsize_));
@@ -3329,6 +2456,7 @@ void ClientConfigFile::SharedCtor() {
   saveip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   prikey_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   keymd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  online_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&totalsize_, 0, reinterpret_cast<char*>(&remainsize_) -
     reinterpret_cast<char*>(&totalsize_) + sizeof(remainsize_));
   _cached_size_ = 0;
@@ -3344,6 +2472,7 @@ void ClientConfigFile::SharedDtor() {
   saveip_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   prikey_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   keymd5_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  online_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void ClientConfigFile::SetCachedSize(int size) const {
@@ -3353,7 +2482,7 @@ void ClientConfigFile::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* ClientConfigFile::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[5].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[3].descriptor;
 }
 
 const ClientConfigFile& ClientConfigFile::default_instance() {
@@ -3375,6 +2504,7 @@ void ClientConfigFile::Clear() {
   saveip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   prikey_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   keymd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  online_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&totalsize_, 0, reinterpret_cast<char*>(&remainsize_) -
     reinterpret_cast<char*>(&totalsize_) + sizeof(remainsize_));
 }
@@ -3475,6 +2605,21 @@ bool ClientConfigFile::MergePartialFromCodedStream(
         break;
       }
 
+      // string OnLine = 7;
+      case 7: {
+        if (tag == 58u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_online()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->online().data(), this->online().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "qiuwanli.ClientConfigFile.OnLine"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -3549,6 +2694,16 @@ void ClientConfigFile::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(6, this->remainsize(), output);
   }
 
+  // string OnLine = 7;
+  if (this->online().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->online().data(), this->online().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "qiuwanli.ClientConfigFile.OnLine");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      7, this->online(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:qiuwanli.ClientConfigFile)
 }
 
@@ -3610,6 +2765,17 @@ void ClientConfigFile::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(6, this->remainsize(), target);
   }
 
+  // string OnLine = 7;
+  if (this->online().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->online().data(), this->online().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "qiuwanli.ClientConfigFile.OnLine");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        7, this->online(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:qiuwanli.ClientConfigFile)
   return target;
 }
@@ -3644,6 +2810,13 @@ size_t ClientConfigFile::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->keymd5());
+  }
+
+  // string OnLine = 7;
+  if (this->online().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->online());
   }
 
   // uint64 TotalSize = 5;
@@ -3702,6 +2875,10 @@ void ClientConfigFile::MergeFrom(const ClientConfigFile& from) {
 
     keymd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.keymd5_);
   }
+  if (from.online().size() > 0) {
+
+    online_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.online_);
+  }
   if (from.totalsize() != 0) {
     set_totalsize(from.totalsize());
   }
@@ -3737,6 +2914,7 @@ void ClientConfigFile::InternalSwap(ClientConfigFile* other) {
   saveip_.Swap(&other->saveip_);
   prikey_.Swap(&other->prikey_);
   keymd5_.Swap(&other->keymd5_);
+  online_.Swap(&other->online_);
   std::swap(totalsize_, other->totalsize_);
   std::swap(remainsize_, other->remainsize_);
   std::swap(_cached_size_, other->_cached_size_);
@@ -3744,7 +2922,7 @@ void ClientConfigFile::InternalSwap(ClientConfigFile* other) {
 
 ::google::protobuf::Metadata ClientConfigFile::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[5];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[3];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -3986,6 +3164,58 @@ void ClientConfigFile::set_remainsize(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:qiuwanli.ClientConfigFile.RemainSize)
 }
 
+// string OnLine = 7;
+void ClientConfigFile::clear_online() {
+  online_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& ClientConfigFile::online() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.ClientConfigFile.OnLine)
+  return online_.GetNoArena();
+}
+void ClientConfigFile::set_online(const ::std::string& value) {
+  
+  online_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:qiuwanli.ClientConfigFile.OnLine)
+}
+#if LANG_CXX11
+void ClientConfigFile::set_online(::std::string&& value) {
+  
+  online_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.ClientConfigFile.OnLine)
+}
+#endif
+void ClientConfigFile::set_online(const char* value) {
+  
+  online_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.ClientConfigFile.OnLine)
+}
+void ClientConfigFile::set_online(const char* value, size_t size) {
+  
+  online_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.ClientConfigFile.OnLine)
+}
+::std::string* ClientConfigFile::mutable_online() {
+  
+  // @@protoc_insertion_point(field_mutable:qiuwanli.ClientConfigFile.OnLine)
+  return online_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* ClientConfigFile::release_online() {
+  // @@protoc_insertion_point(field_release:qiuwanli.ClientConfigFile.OnLine)
+  
+  return online_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void ClientConfigFile::set_allocated_online(::std::string* online) {
+  if (online != NULL) {
+    
+  } else {
+    
+  }
+  online_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), online);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.ClientConfigFile.OnLine)
+}
+
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -4030,7 +3260,7 @@ void ClientConfigFileTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* ClientConfigFileTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[6].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[4].descriptor;
 }
 
 const ClientConfigFileTable& ClientConfigFileTable::default_instance() {
@@ -4195,7 +3425,7 @@ void ClientConfigFileTable::InternalSwap(ClientConfigFileTable* other) {
 
 ::google::protobuf::Metadata ClientConfigFileTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[6];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[4];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -4240,7 +3470,7 @@ const int FileInfoList::kFileSHA512FieldNumber;
 const int FileInfoList::kFileMD5FieldNumber;
 const int FileInfoList::kFileNameFieldNumber;
 const int FileInfoList::kFileCreateDateFieldNumber;
-const int FileInfoList::kFileChangeDateFieldNumber;
+const int FileInfoList::kIssharedFieldNumber;
 const int FileInfoList::kFileAllBlockFieldNumber;
 const int FileInfoList::kFileTotalSizeFieldNumber;
 const int FileInfoList::kTagFieldNumber;
@@ -4275,9 +3505,9 @@ FileInfoList::FileInfoList(const FileInfoList& from)
   if (from.filecreatedate().size() > 0) {
     filecreatedate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filecreatedate_);
   }
-  filechangedate_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.filechangedate().size() > 0) {
-    filechangedate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filechangedate_);
+  isshared_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.isshared().size() > 0) {
+    isshared_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.isshared_);
   }
   tag_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.tag().size() > 0) {
@@ -4294,7 +3524,7 @@ void FileInfoList::SharedCtor() {
   filemd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filecreatedate_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filechangedate_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  isshared_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   tag_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&fileallblock_, 0, reinterpret_cast<char*>(&filetotalsize_) -
     reinterpret_cast<char*>(&fileallblock_) + sizeof(filetotalsize_));
@@ -4311,7 +3541,7 @@ void FileInfoList::SharedDtor() {
   filemd5_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filecreatedate_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filechangedate_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  isshared_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   tag_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -4322,7 +3552,7 @@ void FileInfoList::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileInfoList::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[7].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[5].descriptor;
 }
 
 const FileInfoList& FileInfoList::default_instance() {
@@ -4344,7 +3574,7 @@ void FileInfoList::Clear() {
   filemd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filecreatedate_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filechangedate_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  isshared_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   tag_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&fileallblock_, 0, reinterpret_cast<char*>(&filetotalsize_) -
     reinterpret_cast<char*>(&fileallblock_) + sizeof(filetotalsize_));
@@ -4420,15 +3650,15 @@ bool FileInfoList::MergePartialFromCodedStream(
         break;
       }
 
-      // string FileChangeDate = 5;
+      // string isshared = 5;
       case 5: {
         if (tag == 42u) {
           DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_filechangedate()));
+                input, this->mutable_isshared()));
           DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filechangedate().data(), this->filechangedate().length(),
+            this->isshared().data(), this->isshared().length(),
             ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.FileInfoList.FileChangeDate"));
+            "qiuwanli.FileInfoList.isshared"));
         } else {
           goto handle_unusual;
         }
@@ -4540,14 +3770,14 @@ void FileInfoList::SerializeWithCachedSizes(
       4, this->filecreatedate(), output);
   }
 
-  // string FileChangeDate = 5;
-  if (this->filechangedate().size() > 0) {
+  // string isshared = 5;
+  if (this->isshared().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filechangedate().data(), this->filechangedate().length(),
+      this->isshared().data(), this->isshared().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.FileInfoList.FileChangeDate");
+      "qiuwanli.FileInfoList.isshared");
     ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      5, this->filechangedate(), output);
+      5, this->isshared(), output);
   }
 
   // uint64 FileAllBlock = 6;
@@ -4621,15 +3851,15 @@ void FileInfoList::SerializeWithCachedSizes(
         4, this->filecreatedate(), target);
   }
 
-  // string FileChangeDate = 5;
-  if (this->filechangedate().size() > 0) {
+  // string isshared = 5;
+  if (this->isshared().size() > 0) {
     ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filechangedate().data(), this->filechangedate().length(),
+      this->isshared().data(), this->isshared().length(),
       ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.FileInfoList.FileChangeDate");
+      "qiuwanli.FileInfoList.isshared");
     target =
       ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        5, this->filechangedate(), target);
+        5, this->isshared(), target);
   }
 
   // uint64 FileAllBlock = 6;
@@ -4689,11 +3919,11 @@ size_t FileInfoList::ByteSizeLong() const {
         this->filecreatedate());
   }
 
-  // string FileChangeDate = 5;
-  if (this->filechangedate().size() > 0) {
+  // string isshared = 5;
+  if (this->isshared().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->filechangedate());
+        this->isshared());
   }
 
   // string Tag = 8;
@@ -4759,9 +3989,9 @@ void FileInfoList::MergeFrom(const FileInfoList& from) {
 
     filecreatedate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filecreatedate_);
   }
-  if (from.filechangedate().size() > 0) {
+  if (from.isshared().size() > 0) {
 
-    filechangedate_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filechangedate_);
+    isshared_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.isshared_);
   }
   if (from.tag().size() > 0) {
 
@@ -4802,7 +4032,7 @@ void FileInfoList::InternalSwap(FileInfoList* other) {
   filemd5_.Swap(&other->filemd5_);
   filename_.Swap(&other->filename_);
   filecreatedate_.Swap(&other->filecreatedate_);
-  filechangedate_.Swap(&other->filechangedate_);
+  isshared_.Swap(&other->isshared_);
   tag_.Swap(&other->tag_);
   std::swap(fileallblock_, other->fileallblock_);
   std::swap(filetotalsize_, other->filetotalsize_);
@@ -4811,7 +4041,7 @@ void FileInfoList::InternalSwap(FileInfoList* other) {
 
 ::google::protobuf::Metadata FileInfoList::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[7];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[5];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -5025,56 +4255,56 @@ void FileInfoList::set_allocated_filecreatedate(::std::string* filecreatedate) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileInfoList.FileCreateDate)
 }
 
-// string FileChangeDate = 5;
-void FileInfoList::clear_filechangedate() {
-  filechangedate_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+// string isshared = 5;
+void FileInfoList::clear_isshared() {
+  isshared_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-const ::std::string& FileInfoList::filechangedate() const {
-  // @@protoc_insertion_point(field_get:qiuwanli.FileInfoList.FileChangeDate)
-  return filechangedate_.GetNoArena();
+const ::std::string& FileInfoList::isshared() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.FileInfoList.isshared)
+  return isshared_.GetNoArena();
 }
-void FileInfoList::set_filechangedate(const ::std::string& value) {
+void FileInfoList::set_isshared(const ::std::string& value) {
   
-  filechangedate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
-  // @@protoc_insertion_point(field_set:qiuwanli.FileInfoList.FileChangeDate)
+  isshared_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:qiuwanli.FileInfoList.isshared)
 }
 #if LANG_CXX11
-void FileInfoList::set_filechangedate(::std::string&& value) {
+void FileInfoList::set_isshared(::std::string&& value) {
   
-  filechangedate_.SetNoArena(
+  isshared_.SetNoArena(
     &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FileInfoList.FileChangeDate)
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FileInfoList.isshared)
 }
 #endif
-void FileInfoList::set_filechangedate(const char* value) {
+void FileInfoList::set_isshared(const char* value) {
   
-  filechangedate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.FileInfoList.FileChangeDate)
+  isshared_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.FileInfoList.isshared)
 }
-void FileInfoList::set_filechangedate(const char* value, size_t size) {
+void FileInfoList::set_isshared(const char* value, size_t size) {
   
-  filechangedate_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+  isshared_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
       ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FileInfoList.FileChangeDate)
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FileInfoList.isshared)
 }
-::std::string* FileInfoList::mutable_filechangedate() {
+::std::string* FileInfoList::mutable_isshared() {
   
-  // @@protoc_insertion_point(field_mutable:qiuwanli.FileInfoList.FileChangeDate)
-  return filechangedate_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  // @@protoc_insertion_point(field_mutable:qiuwanli.FileInfoList.isshared)
+  return isshared_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-::std::string* FileInfoList::release_filechangedate() {
-  // @@protoc_insertion_point(field_release:qiuwanli.FileInfoList.FileChangeDate)
+::std::string* FileInfoList::release_isshared() {
+  // @@protoc_insertion_point(field_release:qiuwanli.FileInfoList.isshared)
   
-  return filechangedate_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  return isshared_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
-void FileInfoList::set_allocated_filechangedate(::std::string* filechangedate) {
-  if (filechangedate != NULL) {
+void FileInfoList::set_allocated_isshared(::std::string* isshared) {
+  if (isshared != NULL) {
     
   } else {
     
   }
-  filechangedate_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filechangedate);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileInfoList.FileChangeDate)
+  isshared_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), isshared);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileInfoList.isshared)
 }
 
 // uint64 FileAllBlock = 6;
@@ -5201,7 +4431,7 @@ void FileInfoListTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileInfoListTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[8].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[6].descriptor;
 }
 
 const FileInfoListTable& FileInfoListTable::default_instance() {
@@ -5366,7 +4596,7 @@ void FileInfoListTable::InternalSwap(FileInfoListTable* other) {
 
 ::google::protobuf::Metadata FileInfoListTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[8];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[6];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -5460,7 +4690,7 @@ void UserInfo::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* UserInfo::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[9].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[7].descriptor;
 }
 
 const UserInfo& UserInfo::default_instance() {
@@ -5730,7 +4960,7 @@ void UserInfo::InternalSwap(UserInfo* other) {
 
 ::google::protobuf::Metadata UserInfo::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[9];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[7];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -5939,7 +5169,7 @@ void UserInfoTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* UserInfoTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[10].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[8].descriptor;
 }
 
 const UserInfoTable& UserInfoTable::default_instance() {
@@ -6104,7 +5334,7 @@ void UserInfoTable::InternalSwap(UserInfoTable* other) {
 
 ::google::protobuf::Metadata UserInfoTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[10];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[8];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -6206,7 +5436,7 @@ void FileList::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileList::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[11].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[9].descriptor;
 }
 
 const FileList& FileList::default_instance() {
@@ -6513,7 +5743,7 @@ void FileList::InternalSwap(FileList* other) {
 
 ::google::protobuf::Metadata FileList::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[11];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[9];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -6733,7 +5963,7 @@ void FileListTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileListTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[12].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[10].descriptor;
 }
 
 const FileListTable& FileListTable::default_instance() {
@@ -6898,7 +6128,7 @@ void FileListTable::InternalSwap(FileListTable* other) {
 
 ::google::protobuf::Metadata FileListTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[12];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[10];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -6990,7 +6220,7 @@ void FileList4Down::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileList4Down::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[13].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[11].descriptor;
 }
 
 const FileList4Down& FileList4Down::default_instance() {
@@ -7213,7 +6443,7 @@ void FileList4Down::InternalSwap(FileList4Down* other) {
 
 ::google::protobuf::Metadata FileList4Down::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[13];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[11];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -7367,7 +6597,7 @@ void FileList4DownTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileList4DownTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[14].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[12].descriptor;
 }
 
 const FileList4DownTable& FileList4DownTable::default_instance() {
@@ -7532,7 +6762,7 @@ void FileList4DownTable::InternalSwap(FileList4DownTable* other) {
 
 ::google::protobuf::Metadata FileList4DownTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[14];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[12];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -7578,6 +6808,7 @@ const int FileDowningLog::kFilesizeFieldNumber;
 const int FileDowningLog::kDowntimeFieldNumber;
 const int FileDowningLog::kDowningstatusFieldNumber;
 const int FileDowningLog::kFilesha512FieldNumber;
+const int FileDowningLog::kFileMd5FieldNumber;
 #endif  // !defined(_MSC_VER) || _MSC_VER >= 1900
 
 FileDowningLog::FileDowningLog()
@@ -7597,10 +6828,6 @@ FileDowningLog::FileDowningLog(const FileDowningLog& from)
   if (from.filename().size() > 0) {
     filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
   }
-  filesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.filesize().size() > 0) {
-    filesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesize_);
-  }
   downtime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.downtime().size() > 0) {
     downtime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.downtime_);
@@ -7613,15 +6840,21 @@ FileDowningLog::FileDowningLog(const FileDowningLog& from)
   if (from.filesha512().size() > 0) {
     filesha512_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesha512_);
   }
+  filemd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  if (from.filemd5().size() > 0) {
+    filemd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filemd5_);
+  }
+  filesize_ = from.filesize_;
   // @@protoc_insertion_point(copy_constructor:qiuwanli.FileDowningLog)
 }
 
 void FileDowningLog::SharedCtor() {
   filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   downtime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   downingstatus_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filesha512_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filemd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
   _cached_size_ = 0;
 }
 
@@ -7632,10 +6865,10 @@ FileDowningLog::~FileDowningLog() {
 
 void FileDowningLog::SharedDtor() {
   filename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   downtime_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   downingstatus_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filesha512_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filemd5_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
 void FileDowningLog::SetCachedSize(int size) const {
@@ -7645,7 +6878,7 @@ void FileDowningLog::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileDowningLog::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[15].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[13].descriptor;
 }
 
 const FileDowningLog& FileDowningLog::default_instance() {
@@ -7664,10 +6897,11 @@ FileDowningLog* FileDowningLog::New(::google::protobuf::Arena* arena) const {
 void FileDowningLog::Clear() {
 // @@protoc_insertion_point(message_clear_start:qiuwanli.FileDowningLog)
   filename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   downtime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   downingstatus_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filesha512_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filemd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
 }
 
 bool FileDowningLog::MergePartialFromCodedStream(
@@ -7695,15 +6929,13 @@ bool FileDowningLog::MergePartialFromCodedStream(
         break;
       }
 
-      // string filesize = 2;
+      // uint64 filesize = 2;
       case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_filesize()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filesize().data(), this->filesize().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.FileDowningLog.filesize"));
+        if (tag == 16u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &filesize_)));
         } else {
           goto handle_unusual;
         }
@@ -7755,6 +6987,21 @@ bool FileDowningLog::MergePartialFromCodedStream(
         break;
       }
 
+      // string FileMd5 = 6;
+      case 6: {
+        if (tag == 50u) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
+                input, this->mutable_filemd5()));
+          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+            this->filemd5().data(), this->filemd5().length(),
+            ::google::protobuf::internal::WireFormatLite::PARSE,
+            "qiuwanli.FileDowningLog.FileMd5"));
+        } else {
+          goto handle_unusual;
+        }
+        break;
+      }
+
       default: {
       handle_unusual:
         if (tag == 0 ||
@@ -7789,14 +7036,9 @@ void FileDowningLog::SerializeWithCachedSizes(
       1, this->filename(), output);
   }
 
-  // string filesize = 2;
-  if (this->filesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesize().data(), this->filesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.FileDowningLog.filesize");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->filesize(), output);
+  // uint64 filesize = 2;
+  if (this->filesize() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->filesize(), output);
   }
 
   // string downtime = 3;
@@ -7829,6 +7071,16 @@ void FileDowningLog::SerializeWithCachedSizes(
       5, this->filesha512(), output);
   }
 
+  // string FileMd5 = 6;
+  if (this->filemd5().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filemd5().data(), this->filemd5().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "qiuwanli.FileDowningLog.FileMd5");
+    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
+      6, this->filemd5(), output);
+  }
+
   // @@protoc_insertion_point(serialize_end:qiuwanli.FileDowningLog)
 }
 
@@ -7847,15 +7099,9 @@ void FileDowningLog::SerializeWithCachedSizes(
         1, this->filename(), target);
   }
 
-  // string filesize = 2;
-  if (this->filesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesize().data(), this->filesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.FileDowningLog.filesize");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->filesize(), target);
+  // uint64 filesize = 2;
+  if (this->filesize() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->filesize(), target);
   }
 
   // string downtime = 3;
@@ -7891,6 +7137,17 @@ void FileDowningLog::SerializeWithCachedSizes(
         5, this->filesha512(), target);
   }
 
+  // string FileMd5 = 6;
+  if (this->filemd5().size() > 0) {
+    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
+      this->filemd5().data(), this->filemd5().length(),
+      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
+      "qiuwanli.FileDowningLog.FileMd5");
+    target =
+      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
+        6, this->filemd5(), target);
+  }
+
   // @@protoc_insertion_point(serialize_to_array_end:qiuwanli.FileDowningLog)
   return target;
 }
@@ -7904,13 +7161,6 @@ size_t FileDowningLog::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->filename());
-  }
-
-  // string filesize = 2;
-  if (this->filesize().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->filesize());
   }
 
   // string downtime = 3;
@@ -7932,6 +7182,20 @@ size_t FileDowningLog::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->filesha512());
+  }
+
+  // string FileMd5 = 6;
+  if (this->filemd5().size() > 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::StringSize(
+        this->filemd5());
+  }
+
+  // uint64 filesize = 2;
+  if (this->filesize() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->filesize());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -7964,10 +7228,6 @@ void FileDowningLog::MergeFrom(const FileDowningLog& from) {
 
     filename_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filename_);
   }
-  if (from.filesize().size() > 0) {
-
-    filesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesize_);
-  }
   if (from.downtime().size() > 0) {
 
     downtime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.downtime_);
@@ -7979,6 +7239,13 @@ void FileDowningLog::MergeFrom(const FileDowningLog& from) {
   if (from.filesha512().size() > 0) {
 
     filesha512_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesha512_);
+  }
+  if (from.filemd5().size() > 0) {
+
+    filemd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filemd5_);
+  }
+  if (from.filesize() != 0) {
+    set_filesize(from.filesize());
   }
 }
 
@@ -8006,16 +7273,17 @@ void FileDowningLog::Swap(FileDowningLog* other) {
 }
 void FileDowningLog::InternalSwap(FileDowningLog* other) {
   filename_.Swap(&other->filename_);
-  filesize_.Swap(&other->filesize_);
   downtime_.Swap(&other->downtime_);
   downingstatus_.Swap(&other->downingstatus_);
   filesha512_.Swap(&other->filesha512_);
+  filemd5_.Swap(&other->filemd5_);
+  std::swap(filesize_, other->filesize_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata FileDowningLog::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[15];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[13];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -8073,56 +7341,18 @@ void FileDowningLog::set_allocated_filename(::std::string* filename) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileDowningLog.filename)
 }
 
-// string filesize = 2;
+// uint64 filesize = 2;
 void FileDowningLog::clear_filesize() {
-  filesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
 }
-const ::std::string& FileDowningLog::filesize() const {
+::google::protobuf::uint64 FileDowningLog::filesize() const {
   // @@protoc_insertion_point(field_get:qiuwanli.FileDowningLog.filesize)
-  return filesize_.GetNoArena();
+  return filesize_;
 }
-void FileDowningLog::set_filesize(const ::std::string& value) {
+void FileDowningLog::set_filesize(::google::protobuf::uint64 value) {
   
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  filesize_ = value;
   // @@protoc_insertion_point(field_set:qiuwanli.FileDowningLog.filesize)
-}
-#if LANG_CXX11
-void FileDowningLog::set_filesize(::std::string&& value) {
-  
-  filesize_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FileDowningLog.filesize)
-}
-#endif
-void FileDowningLog::set_filesize(const char* value) {
-  
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.FileDowningLog.filesize)
-}
-void FileDowningLog::set_filesize(const char* value, size_t size) {
-  
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FileDowningLog.filesize)
-}
-::std::string* FileDowningLog::mutable_filesize() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.FileDowningLog.filesize)
-  return filesize_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* FileDowningLog::release_filesize() {
-  // @@protoc_insertion_point(field_release:qiuwanli.FileDowningLog.filesize)
-  
-  return filesize_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void FileDowningLog::set_allocated_filesize(::std::string* filesize) {
-  if (filesize != NULL) {
-    
-  } else {
-    
-  }
-  filesize_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filesize);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileDowningLog.filesize)
 }
 
 // string downtime = 3;
@@ -8281,6 +7511,58 @@ void FileDowningLog::set_allocated_filesha512(::std::string* filesha512) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileDowningLog.filesha512)
 }
 
+// string FileMd5 = 6;
+void FileDowningLog::clear_filemd5() {
+  filemd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+const ::std::string& FileDowningLog::filemd5() const {
+  // @@protoc_insertion_point(field_get:qiuwanli.FileDowningLog.FileMd5)
+  return filemd5_.GetNoArena();
+}
+void FileDowningLog::set_filemd5(const ::std::string& value) {
+  
+  filemd5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  // @@protoc_insertion_point(field_set:qiuwanli.FileDowningLog.FileMd5)
+}
+#if LANG_CXX11
+void FileDowningLog::set_filemd5(::std::string&& value) {
+  
+  filemd5_.SetNoArena(
+    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
+  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FileDowningLog.FileMd5)
+}
+#endif
+void FileDowningLog::set_filemd5(const char* value) {
+  
+  filemd5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
+  // @@protoc_insertion_point(field_set_char:qiuwanli.FileDowningLog.FileMd5)
+}
+void FileDowningLog::set_filemd5(const char* value, size_t size) {
+  
+  filemd5_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
+      ::std::string(reinterpret_cast<const char*>(value), size));
+  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FileDowningLog.FileMd5)
+}
+::std::string* FileDowningLog::mutable_filemd5() {
+  
+  // @@protoc_insertion_point(field_mutable:qiuwanli.FileDowningLog.FileMd5)
+  return filemd5_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+::std::string* FileDowningLog::release_filemd5() {
+  // @@protoc_insertion_point(field_release:qiuwanli.FileDowningLog.FileMd5)
+  
+  return filemd5_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+}
+void FileDowningLog::set_allocated_filemd5(::std::string* filemd5) {
+  if (filemd5 != NULL) {
+    
+  } else {
+    
+  }
+  filemd5_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filemd5);
+  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileDowningLog.FileMd5)
+}
+
 #endif  // PROTOBUF_INLINE_NOT_IN_HEADERS
 
 // ===================================================================
@@ -8325,7 +7607,7 @@ void FileDowningLogTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileDowningLogTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[16].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[14].descriptor;
 }
 
 const FileDowningLogTable& FileDowningLogTable::default_instance() {
@@ -8490,7 +7772,7 @@ void FileDowningLogTable::InternalSwap(FileDowningLogTable* other) {
 
 ::google::protobuf::Metadata FileDowningLogTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[16];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[14];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -8571,10 +7853,6 @@ FileDowning::FileDowning(const FileDowning& from)
   if (from.filedowntime().size() > 0) {
     filedowntime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filedowntime_);
   }
-  filesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.filesize().size() > 0) {
-    filesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesize_);
-  }
   bitmap_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.bitmap().size() > 0) {
     bitmap_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bitmap_);
@@ -8590,7 +7868,6 @@ void FileDowning::SharedCtor() {
   filemd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filename_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filedowntime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   bitmap_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&filedownloadblockcount_, 0, reinterpret_cast<char*>(&blockcount_) -
     reinterpret_cast<char*>(&filedownloadblockcount_) + sizeof(blockcount_));
@@ -8607,7 +7884,6 @@ void FileDowning::SharedDtor() {
   filemd5_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filename_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filedowntime_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   bitmap_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -8618,7 +7894,7 @@ void FileDowning::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileDowning::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[17].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[15].descriptor;
 }
 
 const FileDowning& FileDowning::default_instance() {
@@ -8640,7 +7916,6 @@ void FileDowning::Clear() {
   filemd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filename_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   filedowntime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   bitmap_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   ::memset(&filedownloadblockcount_, 0, reinterpret_cast<char*>(&blockcount_) -
     reinterpret_cast<char*>(&filedownloadblockcount_) + sizeof(blockcount_));
@@ -8742,27 +8017,25 @@ bool FileDowning::MergePartialFromCodedStream(
         break;
       }
 
-      // string FileSize = 7;
+      // uint64 FileSize = 7;
       case 7: {
-        if (tag == 58u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_filesize()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filesize().data(), this->filesize().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.FileDowning.FileSize"));
+        if (tag == 56u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &filesize_)));
         } else {
           goto handle_unusual;
         }
         break;
       }
 
-      // uint32 BlockCount = 8;
+      // uint64 BlockCount = 8;
       case 8: {
         if (tag == 64u) {
 
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::uint32, ::google::protobuf::internal::WireFormatLite::TYPE_UINT32>(
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
                  input, &blockcount_)));
         } else {
           goto handle_unusual;
@@ -8859,19 +8132,14 @@ void FileDowning::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteUInt64(6, this->filetotalblockcount(), output);
   }
 
-  // string FileSize = 7;
-  if (this->filesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesize().data(), this->filesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.FileDowning.FileSize");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      7, this->filesize(), output);
+  // uint64 FileSize = 7;
+  if (this->filesize() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(7, this->filesize(), output);
   }
 
-  // uint32 BlockCount = 8;
+  // uint64 BlockCount = 8;
   if (this->blockcount() != 0) {
-    ::google::protobuf::internal::WireFormatLite::WriteUInt32(8, this->blockcount(), output);
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(8, this->blockcount(), output);
   }
 
   // string BitMap = 9;
@@ -8945,20 +8213,14 @@ void FileDowning::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(6, this->filetotalblockcount(), target);
   }
 
-  // string FileSize = 7;
-  if (this->filesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesize().data(), this->filesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.FileDowning.FileSize");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        7, this->filesize(), target);
+  // uint64 FileSize = 7;
+  if (this->filesize() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(7, this->filesize(), target);
   }
 
-  // uint32 BlockCount = 8;
+  // uint64 BlockCount = 8;
   if (this->blockcount() != 0) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteUInt32ToArray(8, this->blockcount(), target);
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(8, this->blockcount(), target);
   }
 
   // string BitMap = 9;
@@ -9008,13 +8270,6 @@ size_t FileDowning::ByteSizeLong() const {
         this->filedowntime());
   }
 
-  // string FileSize = 7;
-  if (this->filesize().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->filesize());
-  }
-
   // string BitMap = 9;
   if (this->bitmap().size() > 0) {
     total_size += 1 +
@@ -9036,10 +8291,17 @@ size_t FileDowning::ByteSizeLong() const {
         this->filetotalblockcount());
   }
 
-  // uint32 BlockCount = 8;
+  // uint64 FileSize = 7;
+  if (this->filesize() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->filesize());
+  }
+
+  // uint64 BlockCount = 8;
   if (this->blockcount() != 0) {
     total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::UInt32Size(
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
         this->blockcount());
   }
 
@@ -9085,10 +8347,6 @@ void FileDowning::MergeFrom(const FileDowning& from) {
 
     filedowntime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filedowntime_);
   }
-  if (from.filesize().size() > 0) {
-
-    filesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesize_);
-  }
   if (from.bitmap().size() > 0) {
 
     bitmap_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.bitmap_);
@@ -9098,6 +8356,9 @@ void FileDowning::MergeFrom(const FileDowning& from) {
   }
   if (from.filetotalblockcount() != 0) {
     set_filetotalblockcount(from.filetotalblockcount());
+  }
+  if (from.filesize() != 0) {
+    set_filesize(from.filesize());
   }
   if (from.blockcount() != 0) {
     set_blockcount(from.blockcount());
@@ -9131,17 +8392,17 @@ void FileDowning::InternalSwap(FileDowning* other) {
   filemd5_.Swap(&other->filemd5_);
   filename_.Swap(&other->filename_);
   filedowntime_.Swap(&other->filedowntime_);
-  filesize_.Swap(&other->filesize_);
   bitmap_.Swap(&other->bitmap_);
   std::swap(filedownloadblockcount_, other->filedownloadblockcount_);
   std::swap(filetotalblockcount_, other->filetotalblockcount_);
+  std::swap(filesize_, other->filesize_);
   std::swap(blockcount_, other->blockcount_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata FileDowning::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[17];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[15];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -9383,67 +8644,29 @@ void FileDowning::set_filetotalblockcount(::google::protobuf::uint64 value) {
   // @@protoc_insertion_point(field_set:qiuwanli.FileDowning.FileTotalBlockCount)
 }
 
-// string FileSize = 7;
+// uint64 FileSize = 7;
 void FileDowning::clear_filesize() {
-  filesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
 }
-const ::std::string& FileDowning::filesize() const {
+::google::protobuf::uint64 FileDowning::filesize() const {
   // @@protoc_insertion_point(field_get:qiuwanli.FileDowning.FileSize)
-  return filesize_.GetNoArena();
+  return filesize_;
 }
-void FileDowning::set_filesize(const ::std::string& value) {
+void FileDowning::set_filesize(::google::protobuf::uint64 value) {
   
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  filesize_ = value;
   // @@protoc_insertion_point(field_set:qiuwanli.FileDowning.FileSize)
 }
-#if LANG_CXX11
-void FileDowning::set_filesize(::std::string&& value) {
-  
-  filesize_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.FileDowning.FileSize)
-}
-#endif
-void FileDowning::set_filesize(const char* value) {
-  
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.FileDowning.FileSize)
-}
-void FileDowning::set_filesize(const char* value, size_t size) {
-  
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.FileDowning.FileSize)
-}
-::std::string* FileDowning::mutable_filesize() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.FileDowning.FileSize)
-  return filesize_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* FileDowning::release_filesize() {
-  // @@protoc_insertion_point(field_release:qiuwanli.FileDowning.FileSize)
-  
-  return filesize_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void FileDowning::set_allocated_filesize(::std::string* filesize) {
-  if (filesize != NULL) {
-    
-  } else {
-    
-  }
-  filesize_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filesize);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.FileDowning.FileSize)
-}
 
-// uint32 BlockCount = 8;
+// uint64 BlockCount = 8;
 void FileDowning::clear_blockcount() {
-  blockcount_ = 0u;
+  blockcount_ = GOOGLE_ULONGLONG(0);
 }
-::google::protobuf::uint32 FileDowning::blockcount() const {
+::google::protobuf::uint64 FileDowning::blockcount() const {
   // @@protoc_insertion_point(field_get:qiuwanli.FileDowning.BlockCount)
   return blockcount_;
 }
-void FileDowning::set_blockcount(::google::protobuf::uint32 value) {
+void FileDowning::set_blockcount(::google::protobuf::uint64 value) {
   
   blockcount_ = value;
   // @@protoc_insertion_point(field_set:qiuwanli.FileDowning.BlockCount)
@@ -9545,7 +8768,7 @@ void FileDowningTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* FileDowningTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[18].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[16].descriptor;
 }
 
 const FileDowningTable& FileDowningTable::default_instance() {
@@ -9710,7 +8933,7 @@ void FileDowningTable::InternalSwap(FileDowningTable* other) {
 
 ::google::protobuf::Metadata FileDowningTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[18];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[16];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -9778,22 +9001,19 @@ Heart::Heart(const Heart& from)
   if (from.remainsize().size() > 0) {
     remainsize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.remainsize_);
   }
-  totlesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.totlesize().size() > 0) {
-    totlesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.totlesize_);
-  }
   prikeymd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.prikeymd5().size() > 0) {
     prikeymd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.prikeymd5_);
   }
+  totlesize_ = from.totlesize_;
   // @@protoc_insertion_point(copy_constructor:qiuwanli.Heart)
 }
 
 void Heart::SharedCtor() {
   id_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   remainsize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  totlesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   prikeymd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  totlesize_ = GOOGLE_ULONGLONG(0);
   _cached_size_ = 0;
 }
 
@@ -9805,7 +9025,6 @@ Heart::~Heart() {
 void Heart::SharedDtor() {
   id_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   remainsize_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  totlesize_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   prikeymd5_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
 
@@ -9816,7 +9035,7 @@ void Heart::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* Heart::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[19].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[17].descriptor;
 }
 
 const Heart& Heart::default_instance() {
@@ -9836,8 +9055,8 @@ void Heart::Clear() {
 // @@protoc_insertion_point(message_clear_start:qiuwanli.Heart)
   id_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   remainsize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  totlesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   prikeymd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  totlesize_ = GOOGLE_ULONGLONG(0);
 }
 
 bool Heart::MergePartialFromCodedStream(
@@ -9880,15 +9099,13 @@ bool Heart::MergePartialFromCodedStream(
         break;
       }
 
-      // string TotleSize = 3;
+      // uint64 TotleSize = 3;
       case 3: {
-        if (tag == 26u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_totlesize()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->totlesize().data(), this->totlesize().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.Heart.TotleSize"));
+        if (tag == 24u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &totlesize_)));
         } else {
           goto handle_unusual;
         }
@@ -9954,14 +9171,9 @@ void Heart::SerializeWithCachedSizes(
       2, this->remainsize(), output);
   }
 
-  // string TotleSize = 3;
-  if (this->totlesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->totlesize().data(), this->totlesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.Heart.TotleSize");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      3, this->totlesize(), output);
+  // uint64 TotleSize = 3;
+  if (this->totlesize() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(3, this->totlesize(), output);
   }
 
   // string PrikeyMd5 = 4;
@@ -10003,15 +9215,9 @@ void Heart::SerializeWithCachedSizes(
         2, this->remainsize(), target);
   }
 
-  // string TotleSize = 3;
-  if (this->totlesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->totlesize().data(), this->totlesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.Heart.TotleSize");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        3, this->totlesize(), target);
+  // uint64 TotleSize = 3;
+  if (this->totlesize() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(3, this->totlesize(), target);
   }
 
   // string PrikeyMd5 = 4;
@@ -10047,18 +9253,18 @@ size_t Heart::ByteSizeLong() const {
         this->remainsize());
   }
 
-  // string TotleSize = 3;
-  if (this->totlesize().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->totlesize());
-  }
-
   // string PrikeyMd5 = 4;
   if (this->prikeymd5().size() > 0) {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->prikeymd5());
+  }
+
+  // uint64 TotleSize = 3;
+  if (this->totlesize() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->totlesize());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -10095,13 +9301,12 @@ void Heart::MergeFrom(const Heart& from) {
 
     remainsize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.remainsize_);
   }
-  if (from.totlesize().size() > 0) {
-
-    totlesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.totlesize_);
-  }
   if (from.prikeymd5().size() > 0) {
 
     prikeymd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.prikeymd5_);
+  }
+  if (from.totlesize() != 0) {
+    set_totlesize(from.totlesize());
   }
 }
 
@@ -10130,14 +9335,14 @@ void Heart::Swap(Heart* other) {
 void Heart::InternalSwap(Heart* other) {
   id_.Swap(&other->id_);
   remainsize_.Swap(&other->remainsize_);
-  totlesize_.Swap(&other->totlesize_);
   prikeymd5_.Swap(&other->prikeymd5_);
+  std::swap(totlesize_, other->totlesize_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata Heart::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[19];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[17];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -10247,56 +9452,18 @@ void Heart::set_allocated_remainsize(::std::string* remainsize) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.Heart.RemainSize)
 }
 
-// string TotleSize = 3;
+// uint64 TotleSize = 3;
 void Heart::clear_totlesize() {
-  totlesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  totlesize_ = GOOGLE_ULONGLONG(0);
 }
-const ::std::string& Heart::totlesize() const {
+::google::protobuf::uint64 Heart::totlesize() const {
   // @@protoc_insertion_point(field_get:qiuwanli.Heart.TotleSize)
-  return totlesize_.GetNoArena();
+  return totlesize_;
 }
-void Heart::set_totlesize(const ::std::string& value) {
+void Heart::set_totlesize(::google::protobuf::uint64 value) {
   
-  totlesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  totlesize_ = value;
   // @@protoc_insertion_point(field_set:qiuwanli.Heart.TotleSize)
-}
-#if LANG_CXX11
-void Heart::set_totlesize(::std::string&& value) {
-  
-  totlesize_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Heart.TotleSize)
-}
-#endif
-void Heart::set_totlesize(const char* value) {
-  
-  totlesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.Heart.TotleSize)
-}
-void Heart::set_totlesize(const char* value, size_t size) {
-  
-  totlesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.Heart.TotleSize)
-}
-::std::string* Heart::mutable_totlesize() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.Heart.TotleSize)
-  return totlesize_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* Heart::release_totlesize() {
-  // @@protoc_insertion_point(field_release:qiuwanli.Heart.TotleSize)
-  
-  return totlesize_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void Heart::set_allocated_totlesize(::std::string* totlesize) {
-  if (totlesize != NULL) {
-    
-  } else {
-    
-  }
-  totlesize_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), totlesize);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.Heart.TotleSize)
 }
 
 // string PrikeyMd5 = 4;
@@ -10407,7 +9574,7 @@ void DoSomething::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* DoSomething::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[20].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[18].descriptor;
 }
 
 const DoSomething& DoSomething::default_instance() {
@@ -10630,7 +9797,7 @@ void DoSomething::InternalSwap(DoSomething* other) {
 
 ::google::protobuf::Metadata DoSomething::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[20];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[18];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -10784,7 +9951,7 @@ void DoSomethingTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* DoSomethingTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[21].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[19].descriptor;
 }
 
 const DoSomethingTable& DoSomethingTable::default_instance() {
@@ -10949,7 +10116,7 @@ void DoSomethingTable::InternalSwap(DoSomethingTable* other) {
 
 ::google::protobuf::Metadata DoSomethingTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[21];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[19];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -11037,7 +10204,7 @@ void BlockCheck::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* BlockCheck::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[22].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[20].descriptor;
 }
 
 const BlockCheck& BlockCheck::default_instance() {
@@ -11246,7 +10413,7 @@ void BlockCheck::InternalSwap(BlockCheck* other) {
 
 ::google::protobuf::Metadata BlockCheck::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[22];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[20];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -11383,7 +10550,7 @@ void BlockListForDownCheck::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* BlockListForDownCheck::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[23].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[21].descriptor;
 }
 
 const BlockListForDownCheck& BlockListForDownCheck::default_instance() {
@@ -11695,7 +10862,7 @@ void BlockListForDownCheck::InternalSwap(BlockListForDownCheck* other) {
 
 ::google::protobuf::Metadata BlockListForDownCheck::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[23];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[21];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -11931,7 +11098,7 @@ void BlockListForDownCheckTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* BlockListForDownCheckTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[24].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[22].descriptor;
 }
 
 const BlockListForDownCheckTable& BlockListForDownCheckTable::default_instance() {
@@ -12096,7 +11263,7 @@ void BlockListForDownCheckTable::InternalSwap(BlockListForDownCheckTable* other)
 
 ::google::protobuf::Metadata BlockListForDownCheckTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[24];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[22];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -12170,10 +11337,6 @@ Shared::Shared(const Shared& from)
   if (from.sharedtime().size() > 0) {
     sharedtime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.sharedtime_);
   }
-  filesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.filesize().size() > 0) {
-    filesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesize_);
-  }
   userstutas_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.userstutas().size() > 0) {
     userstutas_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.userstutas_);
@@ -12182,6 +11345,7 @@ Shared::Shared(const Shared& from)
   if (from.userid().size() > 0) {
     userid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.userid_);
   }
+  filesize_ = from.filesize_;
   // @@protoc_insertion_point(copy_constructor:qiuwanli.Shared)
 }
 
@@ -12189,9 +11353,9 @@ void Shared::SharedCtor() {
   sha512_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   verificationcode_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sharedtime_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   userstutas_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   userid_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
   _cached_size_ = 0;
 }
 
@@ -12204,7 +11368,6 @@ void Shared::SharedDtor() {
   sha512_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   verificationcode_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sharedtime_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   userstutas_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   userid_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -12216,7 +11379,7 @@ void Shared::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* Shared::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[25].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[23].descriptor;
 }
 
 const Shared& Shared::default_instance() {
@@ -12237,9 +11400,9 @@ void Shared::Clear() {
   sha512_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   verificationcode_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   sharedtime_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  filesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   userstutas_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   userid_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
 }
 
 bool Shared::MergePartialFromCodedStream(
@@ -12297,15 +11460,13 @@ bool Shared::MergePartialFromCodedStream(
         break;
       }
 
-      // string FileSize = 4;
+      // uint64 FileSize = 4;
       case 4: {
-        if (tag == 34u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_filesize()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->filesize().data(), this->filesize().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.Shared.FileSize"));
+        if (tag == 32u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &filesize_)));
         } else {
           goto handle_unusual;
         }
@@ -12396,14 +11557,9 @@ void Shared::SerializeWithCachedSizes(
       3, this->sharedtime(), output);
   }
 
-  // string FileSize = 4;
-  if (this->filesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesize().data(), this->filesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.Shared.FileSize");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      4, this->filesize(), output);
+  // uint64 FileSize = 4;
+  if (this->filesize() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(4, this->filesize(), output);
   }
 
   // string UserStutas = 5;
@@ -12466,15 +11622,9 @@ void Shared::SerializeWithCachedSizes(
         3, this->sharedtime(), target);
   }
 
-  // string FileSize = 4;
-  if (this->filesize().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->filesize().data(), this->filesize().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.Shared.FileSize");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        4, this->filesize(), target);
+  // uint64 FileSize = 4;
+  if (this->filesize() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(4, this->filesize(), target);
   }
 
   // string UserStutas = 5;
@@ -12528,13 +11678,6 @@ size_t Shared::ByteSizeLong() const {
         this->sharedtime());
   }
 
-  // string FileSize = 4;
-  if (this->filesize().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->filesize());
-  }
-
   // string UserStutas = 5;
   if (this->userstutas().size() > 0) {
     total_size += 1 +
@@ -12547,6 +11690,13 @@ size_t Shared::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->userid());
+  }
+
+  // uint64 FileSize = 4;
+  if (this->filesize() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->filesize());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -12587,10 +11737,6 @@ void Shared::MergeFrom(const Shared& from) {
 
     sharedtime_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.sharedtime_);
   }
-  if (from.filesize().size() > 0) {
-
-    filesize_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesize_);
-  }
   if (from.userstutas().size() > 0) {
 
     userstutas_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.userstutas_);
@@ -12598,6 +11744,9 @@ void Shared::MergeFrom(const Shared& from) {
   if (from.userid().size() > 0) {
 
     userid_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.userid_);
+  }
+  if (from.filesize() != 0) {
+    set_filesize(from.filesize());
   }
 }
 
@@ -12627,15 +11776,15 @@ void Shared::InternalSwap(Shared* other) {
   sha512_.Swap(&other->sha512_);
   verificationcode_.Swap(&other->verificationcode_);
   sharedtime_.Swap(&other->sharedtime_);
-  filesize_.Swap(&other->filesize_);
   userstutas_.Swap(&other->userstutas_);
   userid_.Swap(&other->userid_);
+  std::swap(filesize_, other->filesize_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata Shared::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[25];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[23];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -12797,56 +11946,18 @@ void Shared::set_allocated_sharedtime(::std::string* sharedtime) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.Shared.SharedTime)
 }
 
-// string FileSize = 4;
+// uint64 FileSize = 4;
 void Shared::clear_filesize() {
-  filesize_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  filesize_ = GOOGLE_ULONGLONG(0);
 }
-const ::std::string& Shared::filesize() const {
+::google::protobuf::uint64 Shared::filesize() const {
   // @@protoc_insertion_point(field_get:qiuwanli.Shared.FileSize)
-  return filesize_.GetNoArena();
+  return filesize_;
 }
-void Shared::set_filesize(const ::std::string& value) {
+void Shared::set_filesize(::google::protobuf::uint64 value) {
   
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  filesize_ = value;
   // @@protoc_insertion_point(field_set:qiuwanli.Shared.FileSize)
-}
-#if LANG_CXX11
-void Shared::set_filesize(::std::string&& value) {
-  
-  filesize_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.Shared.FileSize)
-}
-#endif
-void Shared::set_filesize(const char* value) {
-  
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.Shared.FileSize)
-}
-void Shared::set_filesize(const char* value, size_t size) {
-  
-  filesize_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.Shared.FileSize)
-}
-::std::string* Shared::mutable_filesize() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.Shared.FileSize)
-  return filesize_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* Shared::release_filesize() {
-  // @@protoc_insertion_point(field_release:qiuwanli.Shared.FileSize)
-  
-  return filesize_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void Shared::set_allocated_filesize(::std::string* filesize) {
-  if (filesize != NULL) {
-    
-  } else {
-    
-  }
-  filesize_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), filesize);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.Shared.FileSize)
 }
 
 // string UserStutas = 5;
@@ -12997,7 +12108,7 @@ void SharedTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* SharedTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[26].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[24].descriptor;
 }
 
 const SharedTable& SharedTable::default_instance() {
@@ -13162,7 +12273,7 @@ void SharedTable::InternalSwap(SharedTable* other) {
 
 ::google::protobuf::Metadata SharedTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[26];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[24];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -13226,10 +12337,6 @@ BlockList4Down::BlockList4Down(const BlockList4Down& from)
   if (from.filesha512().size() > 0) {
     filesha512_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesha512_);
   }
-  blocknumer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  if (from.blocknumer().size() > 0) {
-    blocknumer_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.blocknumer_);
-  }
   blockmd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   if (from.blockmd5().size() > 0) {
     blockmd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.blockmd5_);
@@ -13238,14 +12345,15 @@ BlockList4Down::BlockList4Down(const BlockList4Down& from)
   if (from.saveserversip().size() > 0) {
     saveserversip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.saveserversip_);
   }
+  blocknumer_ = from.blocknumer_;
   // @@protoc_insertion_point(copy_constructor:qiuwanli.BlockList4Down)
 }
 
 void BlockList4Down::SharedCtor() {
   filesha512_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  blocknumer_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   blockmd5_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   saveserversip_.UnsafeSetDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  blocknumer_ = GOOGLE_ULONGLONG(0);
   _cached_size_ = 0;
 }
 
@@ -13256,7 +12364,6 @@ BlockList4Down::~BlockList4Down() {
 
 void BlockList4Down::SharedDtor() {
   filesha512_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  blocknumer_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   blockmd5_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   saveserversip_.DestroyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
 }
@@ -13268,7 +12375,7 @@ void BlockList4Down::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* BlockList4Down::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[27].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[25].descriptor;
 }
 
 const BlockList4Down& BlockList4Down::default_instance() {
@@ -13287,9 +12394,9 @@ BlockList4Down* BlockList4Down::New(::google::protobuf::Arena* arena) const {
 void BlockList4Down::Clear() {
 // @@protoc_insertion_point(message_clear_start:qiuwanli.BlockList4Down)
   filesha512_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-  blocknumer_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   blockmd5_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
   saveserversip_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  blocknumer_ = GOOGLE_ULONGLONG(0);
 }
 
 bool BlockList4Down::MergePartialFromCodedStream(
@@ -13317,15 +12424,13 @@ bool BlockList4Down::MergePartialFromCodedStream(
         break;
       }
 
-      // string BlockNumer = 2;
+      // uint64 BlockNumer = 2;
       case 2: {
-        if (tag == 18u) {
-          DO_(::google::protobuf::internal::WireFormatLite::ReadString(
-                input, this->mutable_blocknumer()));
-          DO_(::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-            this->blocknumer().data(), this->blocknumer().length(),
-            ::google::protobuf::internal::WireFormatLite::PARSE,
-            "qiuwanli.BlockList4Down.BlockNumer"));
+        if (tag == 16u) {
+
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::uint64, ::google::protobuf::internal::WireFormatLite::TYPE_UINT64>(
+                 input, &blocknumer_)));
         } else {
           goto handle_unusual;
         }
@@ -13396,14 +12501,9 @@ void BlockList4Down::SerializeWithCachedSizes(
       1, this->filesha512(), output);
   }
 
-  // string BlockNumer = 2;
-  if (this->blocknumer().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->blocknumer().data(), this->blocknumer().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.BlockList4Down.BlockNumer");
-    ::google::protobuf::internal::WireFormatLite::WriteStringMaybeAliased(
-      2, this->blocknumer(), output);
+  // uint64 BlockNumer = 2;
+  if (this->blocknumer() != 0) {
+    ::google::protobuf::internal::WireFormatLite::WriteUInt64(2, this->blocknumer(), output);
   }
 
   // string BlockMD5 = 3;
@@ -13444,15 +12544,9 @@ void BlockList4Down::SerializeWithCachedSizes(
         1, this->filesha512(), target);
   }
 
-  // string BlockNumer = 2;
-  if (this->blocknumer().size() > 0) {
-    ::google::protobuf::internal::WireFormatLite::VerifyUtf8String(
-      this->blocknumer().data(), this->blocknumer().length(),
-      ::google::protobuf::internal::WireFormatLite::SERIALIZE,
-      "qiuwanli.BlockList4Down.BlockNumer");
-    target =
-      ::google::protobuf::internal::WireFormatLite::WriteStringToArray(
-        2, this->blocknumer(), target);
+  // uint64 BlockNumer = 2;
+  if (this->blocknumer() != 0) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteUInt64ToArray(2, this->blocknumer(), target);
   }
 
   // string BlockMD5 = 3;
@@ -13492,13 +12586,6 @@ size_t BlockList4Down::ByteSizeLong() const {
         this->filesha512());
   }
 
-  // string BlockNumer = 2;
-  if (this->blocknumer().size() > 0) {
-    total_size += 1 +
-      ::google::protobuf::internal::WireFormatLite::StringSize(
-        this->blocknumer());
-  }
-
   // string BlockMD5 = 3;
   if (this->blockmd5().size() > 0) {
     total_size += 1 +
@@ -13511,6 +12598,13 @@ size_t BlockList4Down::ByteSizeLong() const {
     total_size += 1 +
       ::google::protobuf::internal::WireFormatLite::StringSize(
         this->saveserversip());
+  }
+
+  // uint64 BlockNumer = 2;
+  if (this->blocknumer() != 0) {
+    total_size += 1 +
+      ::google::protobuf::internal::WireFormatLite::UInt64Size(
+        this->blocknumer());
   }
 
   int cached_size = ::google::protobuf::internal::ToCachedSize(total_size);
@@ -13543,10 +12637,6 @@ void BlockList4Down::MergeFrom(const BlockList4Down& from) {
 
     filesha512_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.filesha512_);
   }
-  if (from.blocknumer().size() > 0) {
-
-    blocknumer_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.blocknumer_);
-  }
   if (from.blockmd5().size() > 0) {
 
     blockmd5_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.blockmd5_);
@@ -13554,6 +12644,9 @@ void BlockList4Down::MergeFrom(const BlockList4Down& from) {
   if (from.saveserversip().size() > 0) {
 
     saveserversip_.AssignWithDefault(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), from.saveserversip_);
+  }
+  if (from.blocknumer() != 0) {
+    set_blocknumer(from.blocknumer());
   }
 }
 
@@ -13581,15 +12674,15 @@ void BlockList4Down::Swap(BlockList4Down* other) {
 }
 void BlockList4Down::InternalSwap(BlockList4Down* other) {
   filesha512_.Swap(&other->filesha512_);
-  blocknumer_.Swap(&other->blocknumer_);
   blockmd5_.Swap(&other->blockmd5_);
   saveserversip_.Swap(&other->saveserversip_);
+  std::swap(blocknumer_, other->blocknumer_);
   std::swap(_cached_size_, other->_cached_size_);
 }
 
 ::google::protobuf::Metadata BlockList4Down::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[27];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[25];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -13647,56 +12740,18 @@ void BlockList4Down::set_allocated_filesha512(::std::string* filesha512) {
   // @@protoc_insertion_point(field_set_allocated:qiuwanli.BlockList4Down.FileSHA512)
 }
 
-// string BlockNumer = 2;
+// uint64 BlockNumer = 2;
 void BlockList4Down::clear_blocknumer() {
-  blocknumer_.ClearToEmptyNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
+  blocknumer_ = GOOGLE_ULONGLONG(0);
 }
-const ::std::string& BlockList4Down::blocknumer() const {
+::google::protobuf::uint64 BlockList4Down::blocknumer() const {
   // @@protoc_insertion_point(field_get:qiuwanli.BlockList4Down.BlockNumer)
-  return blocknumer_.GetNoArena();
+  return blocknumer_;
 }
-void BlockList4Down::set_blocknumer(const ::std::string& value) {
+void BlockList4Down::set_blocknumer(::google::protobuf::uint64 value) {
   
-  blocknumer_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), value);
+  blocknumer_ = value;
   // @@protoc_insertion_point(field_set:qiuwanli.BlockList4Down.BlockNumer)
-}
-#if LANG_CXX11
-void BlockList4Down::set_blocknumer(::std::string&& value) {
-  
-  blocknumer_.SetNoArena(
-    &::google::protobuf::internal::GetEmptyStringAlreadyInited(), std::move(value));
-  // @@protoc_insertion_point(field_set_rvalue:qiuwanli.BlockList4Down.BlockNumer)
-}
-#endif
-void BlockList4Down::set_blocknumer(const char* value) {
-  
-  blocknumer_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), ::std::string(value));
-  // @@protoc_insertion_point(field_set_char:qiuwanli.BlockList4Down.BlockNumer)
-}
-void BlockList4Down::set_blocknumer(const char* value, size_t size) {
-  
-  blocknumer_.SetNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(),
-      ::std::string(reinterpret_cast<const char*>(value), size));
-  // @@protoc_insertion_point(field_set_pointer:qiuwanli.BlockList4Down.BlockNumer)
-}
-::std::string* BlockList4Down::mutable_blocknumer() {
-  
-  // @@protoc_insertion_point(field_mutable:qiuwanli.BlockList4Down.BlockNumer)
-  return blocknumer_.MutableNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-::std::string* BlockList4Down::release_blocknumer() {
-  // @@protoc_insertion_point(field_release:qiuwanli.BlockList4Down.BlockNumer)
-  
-  return blocknumer_.ReleaseNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited());
-}
-void BlockList4Down::set_allocated_blocknumer(::std::string* blocknumer) {
-  if (blocknumer != NULL) {
-    
-  } else {
-    
-  }
-  blocknumer_.SetAllocatedNoArena(&::google::protobuf::internal::GetEmptyStringAlreadyInited(), blocknumer);
-  // @@protoc_insertion_point(field_set_allocated:qiuwanli.BlockList4Down.BlockNumer)
 }
 
 // string BlockMD5 = 3;
@@ -13847,7 +12902,7 @@ void BlockList4DownTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* BlockList4DownTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[28].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[26].descriptor;
 }
 
 const BlockList4DownTable& BlockList4DownTable::default_instance() {
@@ -14012,7 +13067,7 @@ void BlockList4DownTable::InternalSwap(BlockList4DownTable* other) {
 
 ::google::protobuf::Metadata BlockList4DownTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[28];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[26];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -14121,7 +13176,7 @@ void Logs::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* Logs::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[29].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[27].descriptor;
 }
 
 const Logs& Logs::default_instance() {
@@ -14465,7 +13520,7 @@ void Logs::InternalSwap(Logs* other) {
 
 ::google::protobuf::Metadata Logs::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[29];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[27];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS
@@ -14744,7 +13799,7 @@ void LogsTable::SetCachedSize(int size) const {
 }
 const ::google::protobuf::Descriptor* LogsTable::descriptor() {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[30].descriptor;
+  return protobuf_PublicStruct_2eproto::file_level_metadata[28].descriptor;
 }
 
 const LogsTable& LogsTable::default_instance() {
@@ -14958,7 +14013,7 @@ void LogsTable::InternalSwap(LogsTable* other) {
 
 ::google::protobuf::Metadata LogsTable::GetMetadata() const {
   protobuf_PublicStruct_2eproto::protobuf_AssignDescriptorsOnce();
-  return protobuf_PublicStruct_2eproto::file_level_metadata[30];
+  return protobuf_PublicStruct_2eproto::file_level_metadata[28];
 }
 
 #if PROTOBUF_INLINE_NOT_IN_HEADERS

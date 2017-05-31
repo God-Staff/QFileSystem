@@ -71,9 +71,16 @@ public:
     
     //数据的初始化
     void InitData( );
-    void LoadFileList( );
-    void LoadSaveServerList( );
-    void LoadSharedList( );
+    void ReadBlockInfo( );
+    void UpdateUIBlockInfo( );
+    void WriteBlockInfo( );
+    void ReadFileInfoList( );
+    void UpdateUIFileInfoList( );
+    void ReadSaveServerList( );
+    void UpDateUISaveServerList( );
+    void WriteSaveServerList( );
+    void readUserInfo( );
+    void WriteUserInfo( );
 
 public:
     qiuwanli::FileInfoList      m_CFileList;
@@ -83,5 +90,9 @@ public:
 
     qiuwanli::Heart        m_CHeart;
     qiuwanli::BlockListForDownCheckTable     m_CBlockDownList;
+    void WriteFileInfoList( );
+    void ReadSharedList( );
+    void UpdateUISharedList( );
+    void WriteSharedList( );
 };
 

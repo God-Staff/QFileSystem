@@ -44,10 +44,10 @@ struct ComData
 {
     qiuwanli::ClientConfigFileTable m_ClientConfigFile;// 保存存储服务信息，并用于上传文件
     qiuwanli::FileInfoListTable m_FileListTable;    //文件存储列表
+    qiuwanli::SharedTable m_SharedTable;
     qiuwanli::BlockList4DownTable m_BlockToFileTable;
     qiuwanli::BlockList4DownTable m_BlockToFileTableTmp;
     qiuwanli::UserInfoTable m_UserhasFile;
-    qiuwanli::SharedTable m_SharedTable;
     qiuwanli::BlockListForDownCheckTable m_BlockListForDownCheckTable;  //用于文件下载时，传输文件块存储信息
 
     boost::filesystem::ofstream OpFile;
@@ -86,7 +86,7 @@ struct ComData
         ClientID(ID), Remain(Remain), Total(total), Prikeymd5(Prikeymd5){ }
     };
     std::vector<HeartLink> m_HeartList;
-
+    std::vector<std::vector<std::string> > g_AddBlockTmp;
 };
 
 extern ComData g_ComData;
