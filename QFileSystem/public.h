@@ -6,7 +6,7 @@
 #include <boost/asio.hpp>
 #include <boost/filesystem.hpp>
 #include <vector>
-
+#include <mutex>
 #include "PublicStruct.pb.h"
 #include "Interface.h"
 
@@ -91,5 +91,7 @@ struct ComData
 
 extern ComData g_ComData;
 extern CInterface PublicData;
+
+extern std::mutex g_mutex;
 
 #endif // !PUBLIC_H__

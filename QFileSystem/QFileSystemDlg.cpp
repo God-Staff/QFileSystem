@@ -14,9 +14,9 @@
 #include "QFileSystem.h"
 #include "QFileSystemDlg.h"
 
-//#include "public.h"
+#include "public.h"
 //#include "PublicStruct.pb.h"
-
+//std::mutex g_mutex;
 ComData g_ComData;
 CInterface PublicData;
 
@@ -79,6 +79,7 @@ BOOL CQFileSystemDlg::OnInitDialog()
 {
     CDialogEx::OnInitDialog();
 
+    //::InitializeCriticalSection(&g_ComData);
 	// 将“关于...”菜单项添加到系统菜单中。
 
 	// IDM_ABOUTBOX 必须在系统命令范围内。
@@ -244,10 +245,11 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
     {
     case 1: //更新数据
     {
+        std::lock_guard<std::mutex> guard(g_mutex);
         //更新UI文件列表
-        if ((size_t(1)&g_ComData.m_UIChange) == size_t(1))
+        if (((size_t(1)&g_ComData.m_UIChange) == size_t(1)) && (g_ComData.NotifyFileList.size( )))
         {
-            for (auto xx : g_ComData.NotifyFileList)
+            for (auto xx :g_ComData.NotifyFileList)
             {
                 CString x1;
                 x1 = xx.v1.c_str( );
@@ -269,27 +271,27 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
                 x5 = xx.v5.c_str( );
                 m_ListFile->SetItemText(0, 1, x5);
             }
-            g_ComData.NotifyFileList.clear( );
+           g_ComData.NotifyFileList.clear( );
 
             //重置状态位
             size_t tmp = size_t(1);
             tmp = ~tmp;
-            g_ComData.m_UIChange &= tmp;
+           g_ComData.m_UIChange &= tmp;
         }
 
         //更新在线的存储端
-        if ((size_t(2)&g_ComData.m_UIChange) == size_t(2))
+        if (((size_t(2)&g_ComData.m_UIChange) == size_t(2)) && (g_ComData.m_HeartList.size( ) > 0))
         {
             //更新UI，Heart文件列表
             bool nee = false;
-            for (auto xx : g_ComData.m_HeartList)
+            for (auto xx :g_ComData.m_HeartList)
             {
-                for (int index=0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
+                for (int index=0; index <g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
                 {
                     if (g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ) == xx.ClientID)
                     {
                         nee = true;
-                        auto item = g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
+                        auto item =g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
                         item->set_online("ON");
                     }
                 }
@@ -297,25 +299,34 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
                 //动态添加列表
                 if (nee == false)
                 {
-                    PublicData.DoClientConfigFileTable(g_ComData.m_ClientConfigFile.add_clientinfo( ), xx.ClientID, "127.0.0.1", "213dfsefgser", xx.Prikeymd5, xx.Remain, xx.Total);
+                    std::string IPList[10] = {"127.0.0.1","192.4.2.9","127.0.0.1","212.4.45.9","147.0.7.1","192.34.65.9","127.53.54.1","192.4.45.9","246.23.54.23"};
+                    std::string IPs;
+                    std::srand(unsigned(time(0)));
+                    int pos = std::rand( );
+                    if (pos < 10)
+                    {
+                        IPs = IPList[pos];
+                    }
+
+                    PublicData.DoClientConfigFileTable(g_ComData.m_ClientConfigFile.add_clientinfo( ), xx.ClientID, IPs, "213dfsefgser", xx.Prikeymd5, xx.Remain, xx.Total);
                 }
             }
            
-            g_ComData.m_HeartList.clear( );
+           g_ComData.m_HeartList.clear( );
 
             //重置状态位
             size_t tmp = size_t(2);
             tmp = ~tmp;
-            g_ComData.m_UIChange &= tmp;
+           g_ComData.m_UIChange &= tmp;
 
             //更新界面
             UpDateUISaveServerList( );
         }
 
         //定时更新显示，已经接受到的数据块
-        if ((size_t(4)&g_ComData.m_UIChange) == size_t(4))
+        if (((size_t(4)&g_ComData.m_UIChange) == size_t(4)) && (g_ComData.g_AddBlockTmp.size( ) > 0))
         {
-            for (auto xxxx : g_ComData.g_AddBlockTmp)
+            for (auto xxxx :g_ComData.g_AddBlockTmp)
             {
                 if (xxxx.size( ) == 4)
                 {
@@ -341,16 +352,18 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
                     m_ListBlockInfo->SetItemText(0, 3, Data4);
                 }
             }
-            g_ComData.g_AddBlockTmp.clear( );
+           g_ComData.g_AddBlockTmp.clear( );
 
             //重置状态位
             size_t tmp = size_t(4);
             tmp = ~tmp;
-            g_ComData.m_UIChange &= tmp;
+           g_ComData.m_UIChange &= tmp;
         }
     }
+    break;
     case 2:
     {
+        std::lock_guard<std::mutex> guard(g_mutex);
         //定时数据到保存文件
         WriteBlockInfo( );
         WriteFileInfoList( );
@@ -365,6 +378,7 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
     default:
         break;
     }
+
     CDialogEx::OnTimer(nIDEvent);
 }
 
@@ -626,11 +640,11 @@ void CQFileSystemDlg::ReadBlockInfo( )
         MessageBox(_T("ServerBlockInfoFiles 文件打开失败！"));
     }
 
-    for (int index = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
+    for (int index = 0; index <g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
     {
         //_T("文件名"), _T("SHA512"), _T("文件大小"), _T("创建时间"), _T("是否分享")
         CString Data1;
-        Data1 = g_ComData.m_BlockToFileTable.blocklistfordown(index).filesha512( ).c_str( );
+        Data1 =g_ComData.m_BlockToFileTable.blocklistfordown(index).filesha512( ).c_str( );
         m_ListBlockInfo->InsertItem(0, Data1);
 
         CString Data3;
@@ -639,11 +653,11 @@ void CQFileSystemDlg::ReadBlockInfo( )
         m_ListBlockInfo->SetItemText(0, 1, Data3);
 
         CString Data2;
-        Data2 = g_ComData.m_BlockToFileTable.blocklistfordown(index).blockmd5( ).c_str( );
+        Data2 =g_ComData.m_BlockToFileTable.blocklistfordown(index).blockmd5( ).c_str( );
         m_ListBlockInfo->SetItemText(0, 2, Data2);
 
         CString Data4;
-        Data4 = g_ComData.m_BlockToFileTable.blocklistfordown(index).saveserversip( ).c_str( );
+        Data4 =g_ComData.m_BlockToFileTable.blocklistfordown(index).saveserversip( ).c_str( );
         m_ListBlockInfo->SetItemText(0, 3, Data4);
     }
 
@@ -653,10 +667,10 @@ void CQFileSystemDlg::UpdateUIBlockInfo( )
 {
     m_ListBlockInfo->DeleteAllItems( );
 
-    for (int index = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
+    for (int index = 0; index <g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
     {
         CString Data1;
-        Data1 = g_ComData.m_BlockToFileTable.blocklistfordown(index).filesha512( ).c_str( );
+        Data1 =g_ComData.m_BlockToFileTable.blocklistfordown(index).filesha512( ).c_str( );
         m_ListBlockInfo->InsertItem(0, Data1);
 
         CString Data3;
@@ -665,20 +679,20 @@ void CQFileSystemDlg::UpdateUIBlockInfo( )
         m_ListBlockInfo->SetItemText(0, 1, Data3);
 
         CString Data2;
-        Data2 = g_ComData.m_BlockToFileTable.blocklistfordown(index).blockmd5( ).c_str( );
+        Data2 =g_ComData.m_BlockToFileTable.blocklistfordown(index).blockmd5( ).c_str( );
         m_ListBlockInfo->SetItemText(0, 2, Data2);
 
         CString Data4;
-        Data4 = g_ComData.m_BlockToFileTable.blocklistfordown(index).saveserversip( ).c_str( );
+        Data4 =g_ComData.m_BlockToFileTable.blocklistfordown(index).saveserversip( ).c_str( );
         m_ListBlockInfo->SetItemText(0, 3, Data4);
     }
 }
 void  CQFileSystemDlg::WriteBlockInfo( )
 {
     boost::filesystem::fstream readBlockInfoFile("ServerBlockInfoFiles", std::ios::out | std::ios::binary);
-    if (readBlockInfoFile.is_open( ))
+    if (!readBlockInfoFile.is_open( ))
         MessageBox(_T("ServerBlockInfoFiles 文件打开失败！"));
-    if (!g_ComData.m_BlockListForDownCheckTable.ParseFromIstream(&readBlockInfoFile))
+    if (!g_ComData.m_BlockToFileTable.ParseFromIstream(&readBlockInfoFile))
         MessageBox(_T("ServerBlockInfoFiles 文件解析失败！"));
 
     readBlockInfoFile.close( );
@@ -695,15 +709,15 @@ void CQFileSystemDlg::ReadFileInfoList( )
 
     readFile.close( );
 
-    for (int index = 0; index < g_ComData.m_FileListTable.filelist_size( ); ++index)
+    for (int index = 0; index <g_ComData.m_FileListTable.filelist_size( ); ++index)
     {
         //_T("文件名"), _T("SHA512"), _T("文件大小"), _T("创建时间"), _T("是否分享")
         CString Data1;
-        Data1 = g_ComData.m_FileListTable.filelist(index).filename( ).c_str( );
+        Data1 =g_ComData.m_FileListTable.filelist(index).filename( ).c_str( );
         m_ListFile->InsertItem(0, Data1);
 
         CString Data2;
-        Data2 = g_ComData.m_FileListTable.filelist(index).filesha512( ).c_str( );
+        Data2 =g_ComData.m_FileListTable.filelist(index).filesha512( ).c_str( );
         m_ListFile->SetItemText(0, 1, Data2);
 
         CString Data3;
@@ -712,11 +726,11 @@ void CQFileSystemDlg::ReadFileInfoList( )
         m_ListFile->SetItemText(0, 2, Data3);
 
         CString Data4;
-        Data4 = g_ComData.m_FileListTable.filelist(index).filecreatedate( ).c_str( );
+        Data4 =g_ComData.m_FileListTable.filelist(index).filecreatedate( ).c_str( );
         m_ListFile->SetItemText(0, 3, Data4);
 
         CString Data5;
-        Data5 = g_ComData.m_FileListTable.filelist(index).isshared( ).c_str( );
+        Data5 =g_ComData.m_FileListTable.filelist(index).isshared( ).c_str( );
         m_ListFile->SetItemText(0, 4, Data5);
 
     }
@@ -725,15 +739,15 @@ void CQFileSystemDlg::UpdateUIFileInfoList( )
 { 
     m_ListFile->DeleteAllItems( );
 
-    for (int index = 0; index < g_ComData.m_FileListTable.filelist_size( ); ++index)
+    for (int index = 0; index <g_ComData.m_FileListTable.filelist_size( ); ++index)
     {
         //_T("文件名"), _T("SHA512"), _T("文件大小"), _T("创建时间"), _T("是否分享")
         CString Data1;
-        Data1 = g_ComData.m_FileListTable.filelist(index).filename( ).c_str( );
+        Data1 =g_ComData.m_FileListTable.filelist(index).filename( ).c_str( );
         m_ListFile->InsertItem(0, Data1);
 
         CString Data2;
-        Data2 = g_ComData.m_FileListTable.filelist(index).filesha512( ).c_str( );
+        Data2 =g_ComData.m_FileListTable.filelist(index).filesha512( ).c_str( );
         m_ListFile->SetItemText(0, 1, Data2);
 
         CString Data3;
@@ -742,11 +756,11 @@ void CQFileSystemDlg::UpdateUIFileInfoList( )
         m_ListFile->SetItemText(0, 2, Data3);
 
         CString Data4;
-        Data4 = g_ComData.m_FileListTable.filelist(index).filecreatedate( ).c_str( );
+        Data4 =g_ComData.m_FileListTable.filelist(index).filecreatedate( ).c_str( );
         m_ListFile->SetItemText(0, 3, Data4);
 
         CString Data5;
-        Data5 = g_ComData.m_FileListTable.filelist(index).isshared( ).c_str( );
+        Data5 =g_ComData.m_FileListTable.filelist(index).isshared( ).c_str( );
         m_ListFile->SetItemText(0, 4, Data5);
 
     }
@@ -771,19 +785,19 @@ void CQFileSystemDlg::ReadSharedList( )
 
     if (!g_ComData.m_SharedTable.ParsePartialFromIstream(&readFile));
 
-    for (int index = 0; index < g_ComData.m_SharedTable.sharedinfo_size( ); ++index)
+    for (int index = 0; index <g_ComData.m_SharedTable.sharedinfo_size( ); ++index)
     {
         //_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")
         CString Data1;
-        Data1 = g_ComData.m_SharedTable.sharedinfo(index).sha512( ).c_str( );
+        Data1 =g_ComData.m_SharedTable.sharedinfo(index).sha512( ).c_str( );
         m_ListShared->InsertItem(0, Data1);
 
         CString Data2;
-        Data2 = g_ComData.m_SharedTable.sharedinfo(index).verificationcode( ).c_str( );
+        Data2 =g_ComData.m_SharedTable.sharedinfo(index).verificationcode( ).c_str( );
         m_ListShared->SetItemText(0, 1, Data2);
 
         CString Data3;
-        Data3 = g_ComData.m_SharedTable.sharedinfo(index).userid( ).c_str( );
+        Data3 =g_ComData.m_SharedTable.sharedinfo(index).userid( ).c_str( );
         m_ListShared->SetItemText(0, 2, Data3);
 
         CString Data4;
@@ -798,19 +812,19 @@ void CQFileSystemDlg::UpdateUISharedList( )
 { 
     m_ListShared->DeleteAllItems( );
 
-    for (int index = 0; index < g_ComData.m_SharedTable.sharedinfo_size( ); ++index)
+    for (int index = 0; index <g_ComData.m_SharedTable.sharedinfo_size( ); ++index)
     {
         //_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")
         CString Data1;
-        Data1 = g_ComData.m_SharedTable.sharedinfo(index).sha512( ).c_str( );
+        Data1 =g_ComData.m_SharedTable.sharedinfo(index).sha512( ).c_str( );
         m_ListShared->InsertItem(0, Data1);
 
         CString Data2;
-        Data2 = g_ComData.m_SharedTable.sharedinfo(index).verificationcode( ).c_str( );
+        Data2 =g_ComData.m_SharedTable.sharedinfo(index).verificationcode( ).c_str( );
         m_ListShared->SetItemText(0, 1, Data2);
 
         CString Data3;
-        Data3 = g_ComData.m_SharedTable.sharedinfo(index).userid( ).c_str( );
+        Data3 =g_ComData.m_SharedTable.sharedinfo(index).userid( ).c_str( );
         m_ListShared->SetItemText(0, 2, Data3);
 
         CString Data4;
@@ -843,15 +857,15 @@ void CQFileSystemDlg::ReadSaveServerList( )
 
     readClientFile.close( );
 
-    for (int index = 0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
+    for (int index = 0; index <g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
     {
         //_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")
         CString Data1;
-        Data1 = g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ).c_str( );
+        Data1 =g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ).c_str( );
         m_ListSaveServer->InsertItem(0, Data1);
 
         CString Data2;
-        Data2 = g_ComData.m_ClientConfigFile.clientinfo(index).saveip( ).c_str( );
+        Data2 =g_ComData.m_ClientConfigFile.clientinfo(index).saveip( ).c_str( );
         m_ListSaveServer->SetItemText(0, 1, Data2);
 
         CString Data3;
@@ -866,7 +880,7 @@ void CQFileSystemDlg::ReadSaveServerList( )
 
         //默认设置为离线，客户端发送Heart是进行变动
         const std::string fff = "OFF";
-        auto tt = g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
+        auto tt =g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
         tt->set_online("OFF");          //更改Protoc数据
         m_ListSaveServer->SetItemText(0, 4, _T("OFF"));
     }
@@ -875,15 +889,15 @@ void CQFileSystemDlg::UpDateUISaveServerList( )
 {
     m_ListSaveServer->DeleteAllItems( );
 
-    for (int index = 0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
+    for (int index = 0; index <g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
     {
         //_T("存储端编号"),_T("IP"),_T("剩余空间"),_T("总空间")
         CString Data1;
-        Data1 = g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ).c_str( );
+        Data1 =g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ).c_str( );
         m_ListSaveServer->InsertItem(0, Data1);
 
         CString Data2;
-        Data2 = g_ComData.m_ClientConfigFile.clientinfo(index).saveip( ).c_str( );
+        Data2 =g_ComData.m_ClientConfigFile.clientinfo(index).saveip( ).c_str( );
         m_ListSaveServer->SetItemText(0, 1, Data2);
 
         CString Data3;
@@ -897,7 +911,7 @@ void CQFileSystemDlg::UpDateUISaveServerList( )
         m_ListSaveServer->SetItemText(0, 3, Data4);
 
         CString Data5;
-        Data5 = g_ComData.m_ClientConfigFile.clientinfo(index).online( ).c_str( );
+        Data5 =g_ComData.m_ClientConfigFile.clientinfo(index).online( ).c_str( );
         m_ListSaveServer->SetItemText(0, 4, Data5);
     }
 }

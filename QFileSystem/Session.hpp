@@ -23,7 +23,7 @@
 #include "public.h"
 
 //ComData g_ComData;
-
+std::mutex g_mutex;
 class Session : public boost::enable_shared_from_this<Session>
 {
 public:
@@ -101,6 +101,31 @@ private:
                                 , boost::asio::placeholders::error));
     }
 
+    void dof( )
+    {
+        //更行数据块界面         
+        std::mutex some_mutex;
+        std::vector<std::string> vtmp;
+        vtmp.push_back(vstr[0]);
+        vtmp.push_back(vstr[2]);
+        vtmp.push_back(vstr[1]);
+        vtmp.push_back(vstr[3]);
+        std::lock_guard<std::mutex> guard(g_mutex);
+
+       g_ComData.g_AddBlockTmp.push_back(vtmp);
+
+        //Sleep(10);
+        PublicData.DoBlockList4DownTable(g_ComData.m_BlockToFileTableTmp.add_blocklistfordown( )
+                                         , vstr[0]
+                                         , std::stoll(vstr[2])
+                                         , vstr[1]
+                                         , vstr[3]);
+
+        //设置状态位
+        //std::lock_guard<std::mutex> guard3(some_mutex);
+       g_ComData.m_UIChange |= size_t(4);
+    }
+
     //根据请求不同，调用不同的处理函数
     void CallBackDiffType(const boost::system::error_code &error)
     {
@@ -131,10 +156,10 @@ private:
         {
             //查找用户和密码，验证
             bool isok = false;
-            for (int index = 0; index < g_ComData.m_UserhasFile.user_size( ); ++index)
+            for (int index = 0; index <g_ComData.m_UserhasFile.user_size( ); ++index)
             {
                 if (g_ComData.m_UserhasFile.user(index).userid( ).c_str( ) == vstr[2] &&
-                    g_ComData.m_UserhasFile.user(index).userps( ).c_str( ) == vstr[3])
+                   g_ComData.m_UserhasFile.user(index).userps( ).c_str( ) == vstr[3])
                 {
                         isok = true;
                 }
@@ -147,7 +172,7 @@ private:
             }
 
             //查找文件SHA512
-            for (int i = 0; i < g_ComData.m_FileListTable.filelist_size( ); ++i)
+            for (int i = 0; i <g_ComData.m_FileListTable.filelist_size( ); ++i)
             {
                 if (g_ComData.m_FileListTable.filelist(i).filesha512( ).compare(vstr[1]) == 0)
                 {
@@ -169,9 +194,9 @@ private:
 
             //文件不存在，查找当前可存储的服务端，并发送
             qiuwanli::ClientConfigFileTable ClientInfo;
-            for (int i = 0; i < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++i)
+            for (int i = 0; i <g_ComData.m_ClientConfigFile.clientinfo_size( ); ++i)
             {
-                const qiuwanli::ClientConfigFile& conf = g_ComData.m_ClientConfigFile.clientinfo(i);
+                const qiuwanli::ClientConfigFile& conf =g_ComData.m_ClientConfigFile.clientinfo(i);
 
                 PublicData.DoClientConfigFileTable(ClientInfo.add_clientinfo( )
                                                    , conf.cilentid( )
@@ -230,22 +255,7 @@ private:
         //接收已经上传到存储服务端的文件块对应的信息
         if (file_info_.m_ReqiureType == 'f')
         {
-            //更行数据块界面
-            std::vector<std::string> vtmp;
-            vtmp.push_back(vstr[0]);
-            vtmp.push_back(vstr[2]);
-            vtmp.push_back(vstr[1]);
-            vtmp.push_back(vstr[3]);
-            g_ComData.g_AddBlockTmp.push_back(vtmp);
-
-            PublicData.DoBlockList4DownTable(g_ComData.m_BlockToFileTableTmp.add_blocklistfordown( )
-                                             , vstr[0]
-                                             , std::stol(vstr[2])
-                                             , vstr[1]
-                                             , vstr[3]);
-
-            //设置状态位
-            g_ComData.m_UIChange |= size_t(4);
+            dof( );
         }
 
         //文件传输完成，进行块统计
@@ -254,18 +264,19 @@ private:
             Sleep(3000);
             //从中删选数据
             std::vector<ComData::Vec4> CheckBlockList;
-            for (auto iter = g_ComData.BlockUploadList.begin( ); iter != g_ComData.BlockUploadList.end( ); ++iter)
+            for (auto iter =g_ComData.BlockUploadList.begin( ); iter !=g_ComData.BlockUploadList.end( ); ++iter)
             {
                 if (iter->m_Sha512.compare( vstr[1]))
                 {
                     CheckBlockList.push_back(ComData::Vec4(iter->m_Sha512, iter->m_md5, iter->m_BlockNumer, iter->m_IP));
-                    iter = g_ComData.BlockUploadList.erase(iter);
+                    iter =g_ComData.BlockUploadList.erase(iter);
                 }
             }
 
-            for (int index = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
+            for (int index = 0; index <g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index)
             {
-                auto item = g_ComData.m_BlockToFileTable.mutable_blocklistfordown(index);
+                std::lock_guard<std::mutex> guard(g_mutex);
+                auto item =g_ComData.m_BlockToFileTable.mutable_blocklistfordown(index);
                 PublicData.DoBlockList4DownTable(g_ComData.m_BlockToFileTableTmp.add_blocklistfordown( )
                                                  , item->filesha512( )
                                                  , item->blocknumer( )
@@ -307,22 +318,23 @@ private:
                                                , atoll(vstr[4].c_str( ))
                                                , atoll(vstr[5].c_str( ))
                                                , "");
-                
+                std::lock_guard<std::mutex> guard(g_mutex);
                 //将块信息临时存放表写入到块信息列表
-                g_ComData.m_BlockToFileTable.MergeFrom(g_ComData.m_BlockToFileTableTmp);
+               g_ComData.m_BlockToFileTable.MergeFrom(g_ComData.m_BlockToFileTableTmp);
 
                 //设置响应条件，更新UI
-                g_ComData.m_UIChange |= (size_t)1;
-                g_ComData.NotifyFileList.push_back(ComData::VecStr5(vstr[0], vstr[1], vstr[5], vstr[3], "否"));
+               g_ComData.m_UIChange |= (size_t)1;
+               g_ComData.NotifyFileList.push_back(ComData::VecStr5(vstr[0], vstr[1], vstr[5], vstr[3], "否"));
             }
             else
             {   //若数据不完整则将，愿数据块信息插入到块信息临时存放表
                 filenamed += "false";
                 //for (auto x : CheckBlockList)
                 //{
-                //    g_ComData.BlockUploadList.push_back(x);
+                //   g_ComData.BlockUploadList.push_back(x);
                 //}
-                g_ComData.BlockUploadList.insert(g_ComData.BlockUploadList.end( ), CheckBlockList.begin( ), CheckBlockList.end( ));
+                std::lock_guard<std::mutex> guard(g_mutex);
+               g_ComData.BlockUploadList.insert(g_ComData.BlockUploadList.end( ), CheckBlockList.begin( ), CheckBlockList.end( ));
             }
 
             try
@@ -340,8 +352,9 @@ private:
         //存储端发来的心跳连接
         if (file_info_.m_ReqiureType=='i')
         {
-            g_ComData.m_UIChange |= size_t(2);
-            g_ComData.m_HeartList.push_back(ComData::HeartLink(vstr[0], atol(vstr[1].c_str( )), atol(vstr[2].c_str( )), vstr[3]));
+            std::lock_guard<std::mutex> guard(g_mutex);
+           g_ComData.m_UIChange |= size_t(2);
+           g_ComData.m_HeartList.push_back(ComData::HeartLink(vstr[0], atol(vstr[1].c_str( )), atol(vstr[2].c_str( )), vstr[3]));
         }
 
     }
@@ -357,7 +370,7 @@ private:
         }
         else
         {	//解析配置文件
-            //std::string md5 = g_ComData.Conf.prikeymd5( );
+            //std::string md5 =g_ComData.Conf.prikeymd5( );
             //if (DownListTable.prikeymd5( ).compare(md5) == 0)
             //{
             //    PairVec ListForUp;
@@ -402,10 +415,8 @@ private:
     //        for (auto Block : FileBlocks.second)
     //        {
     //            //查找文件块，若存在则读取文件块和对应块的MD5，并发送给客户端
-
     //        }
     //    }
-
     //    return DownList;
     //}
 
