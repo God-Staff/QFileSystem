@@ -284,18 +284,20 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
         {
             //更新UI，Heart文件列表
             bool nee = false;
-            for (auto xx :g_ComData.m_HeartList)
+
+            for (auto xx : g_ComData.m_HeartList)
             {
-                for (int index=0; index <g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
+                //std::lock_guard<std::mutex> guard(g_mutex);
+                for (int index = 0; index < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index)
                 {
                     if (g_ComData.m_ClientConfigFile.clientinfo(index).cilentid( ) == xx.ClientID)
                     {
                         nee = true;
-                        auto item =g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
+                        auto item = g_ComData.m_ClientConfigFile.mutable_clientinfo(index);
                         item->set_online("ON");
                     }
                 }
-               
+
                 //动态添加列表
                 if (nee == false)
                 {
@@ -311,6 +313,7 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
                     PublicData.DoClientConfigFileTable(g_ComData.m_ClientConfigFile.add_clientinfo( ), xx.ClientID, IPs, "213dfsefgser", xx.Prikeymd5, xx.Remain, xx.Total);
                 }
             }
+
            
            g_ComData.m_HeartList.clear( );
 
@@ -321,12 +324,14 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
 
             //更新界面
             UpDateUISaveServerList( );
+            UpdateUIFileInfoList( );
         }
 
         //定时更新显示，已经接受到的数据块
         if (((size_t(4)&g_ComData.m_UIChange) == size_t(4)) && (g_ComData.g_AddBlockTmp.size( ) > 0))
         {
-            for (auto xxxx :g_ComData.g_AddBlockTmp)
+            //std::lock_guard<std::mutex> guard(g_mutex);
+            for (auto xxxx : g_ComData.g_AddBlockTmp)
             {
                 if (xxxx.size( ) == 4)
                 {
@@ -359,6 +364,23 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
             tmp = ~tmp;
            g_ComData.m_UIChange &= tmp;
         }
+
+        //定时更新显示，文件传输完成时进行界面更新
+        if (((size_t(8)&g_ComData.m_UIChange) == size_t(8)) && (g_ComData.g_AddBlockTmp.size( ) > 0))
+        {
+            
+            for (auto xxxx : g_ComData.g_AddBlockTmp)
+            {
+             
+            }
+            g_ComData.g_AddBlockTmp.clear( );
+
+            //重置状态位
+            size_t tmp = size_t(8);
+            tmp = ~tmp;
+            g_ComData.m_UIChange &= tmp;
+        }
+
     }
     break;
     case 2:
@@ -616,14 +638,85 @@ void CQFileSystemDlg::OnNMRClickSharedList(NMHDR *pNMHDR, LRESULT *pResult)
     *pResult = 0;
 }
 
+
+//数据的初始化
 void CQFileSystemDlg::InitData( )
 {
     //初始化列表
     ReadBlockInfo( );
-    ReadFileInfoList( );
+    //ReadFileInfoList( );
     ReadSaveServerList( );
     ReadSharedList( );
     readUserInfo( );
+
+    m_ListFile->InsertItem(0, _T("VC++标准库.pdf"));
+    m_ListFile->SetItemText(0, 1, _T("5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE"));
+    m_ListFile->SetItemText(0, 2, _T("3265235"));
+    m_ListFile->SetItemText(0, 3, _T("2017-1-3 8:34:44"));
+    m_ListFile->SetItemText(0, 4, _T("已分享"));
+
+    m_ListFile->InsertItem(0, _T("BOOST标准库.pdf"));
+    m_ListFile->SetItemText(0, 1, _T("4ABD812CF05FE5D4925D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE"));
+    m_ListFile->SetItemText(0, 2, _T("6874654"));
+    m_ListFile->SetItemText(0, 3, _T("2017-5-3 8:34:44"));
+    m_ListFile->SetItemText(0, 4, _T(""));
+
+    m_ListFile->InsertItem(0, _T("轮回不止.pdf"));
+    m_ListFile->SetItemText(0, 1, _T("543DD5DCA59C9E4ABD815D492643DD5DCA59C9E4ABD812CF05FE5D4922CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE"));
+    m_ListFile->SetItemText(0, 2, _T("68765456"));
+    m_ListFile->SetItemText(0, 3, _T("2017-3-3 18:35:44"));
+    m_ListFile->SetItemText(0, 4, _T("已分享"));
+
+    m_ListFile->InsertItem(0, _T("爱的方式.pdf"));
+    m_ListFile->SetItemText(0, 1, _T("HD492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE"));
+    m_ListFile->SetItemText(0, 2, _T("796785543"));
+    m_ListFile->SetItemText(0, 3, _T("2017-1-3 8:34:44"));
+    m_ListFile->SetItemText(0, 4, _T(""));
+
+    //qiuwanli::FileInfoListTable ssss;
+    g_ComData.m_FileListTable.Clear( );
+    PublicData.DoFileInfoListTable(g_ComData.m_FileListTable.add_filelist( )
+                                   , "5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE"
+                                   , "D492643DD5DCA59C9E4ABD812CF05FE"
+                                   , "爱的方式.pdf"
+                                   , "2017-1-3 8:34:44"
+                                   , ""
+                                   , 5345
+                                   , 4546464
+                                   , "");
+
+    PublicData.DoFileInfoListTable(g_ComData.m_FileListTable.add_filelist( )
+                                   , "HD492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE"
+                                   , "D492643DD5DCA59C9E4ABD812CF05FE"
+                                   , "VC++标准库.pdf"
+                                   , "2017-1-3 8:34:44"
+                                   , "已分享"
+                                   , 345
+                                   , 4564645
+                                   , "");
+
+    PublicData.DoFileInfoListTable(g_ComData.m_FileListTable.add_filelist( )
+                                   , "4ABD812CF05FE5D4925D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE"
+                                   , "92643DD5DCA59C9E4ABD812C43DD5DC"
+                                   , "BOOST标准库.pdf"
+                                   , "2017-11-3 8:34:44"
+                                   , ""
+                                   , 355
+                                   , 47464
+                                   , "");
+
+    PublicData.DoFileInfoListTable(g_ComData.m_FileListTable.add_filelist( )
+                                   , "543DD5DCA59C9E4ABD815D492643DD5DCA59C9E4ABD812CF05FE5D4922CF05FE5D492643DD5DCA59C9E4ABD812CF05FE5D492643DD5DCA59C9E4ABD812CF05FE"
+                                   , "D492643DD5DCA59C9E4ABD812CF05FE"
+                                   , "爱的方式.pdf"
+                                   , "2017-3-3 18:35:44"
+                                   , ""
+                                   , 345
+                                   , 4456464
+                                   , "");
+
+    WriteFileInfoList( );
+
 }
 
 //载入文件存储块对应的文件列表

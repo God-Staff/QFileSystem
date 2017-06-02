@@ -227,3 +227,18 @@ message LogsTable
 	string logdate=1;
 	repeated Logs log=2;
 }
+0x74C6A832 处(位于 ThridDownClient.exe 中)引发的异常: 
+Microsoft C++ 异常: 
+boost::exception_detail::clone_impl<boost::exception_detail::error_info_injector
+<boost::system::system_error> >，位于内存位置 0x04477658 处。
+
+
+543DD5DCA59C9E4A
+BD815D492643DD5D
+CA59C9E4ABD812CF
+05FE5D4922CF05FE
+
+5D492643DD5DCA59
+C9E4ABD812CF05FE
+5D492643DD5DCA59
+C9E4ABD812CF05FE

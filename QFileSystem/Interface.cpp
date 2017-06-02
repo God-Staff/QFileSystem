@@ -191,7 +191,7 @@ bool CInterface::DoBlockList4DownTable(qiuwanli::BlockList4Down* BlockList
                                        , const std::string& SaveServersIP)
 {
     BlockList->set_filesha512(FileSHA512);
-    //BlockList->set_blocknumer(BlockNumer);
+    BlockList->set_blocknumer(BlockNumer);
     BlockList->set_blockmd5(BlockMD5);
     BlockList->set_saveserversip(SaveServersIP);
 

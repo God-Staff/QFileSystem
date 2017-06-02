@@ -11,10 +11,10 @@
 #include "Interface.h"
 
 //文件块大小//
-const unsigned int BLOCK_SIZE = 1024 * 32;
+const unsigned int BLOCK_SIZE = 1024 * 64;
 const unsigned int FILE_MAX = ~0;
 //k*1024
-const unsigned int k_times = 32;
+const unsigned int k_times = 64;
 
 const size_t k_buffer_size = 1024 * k_times;
 //常量数据
@@ -63,7 +63,7 @@ struct ComData
         {}
     };
     std::vector<Vec4> BlockUploadList;  //块信息临时存放表
-    size_t m_UIChange = (size_t)0;
+    size_t m_UIChange = (size_t)0;      //信号量，用于通知界面更新
     struct VecStr5
     {
         VecStr5(std::string vv1, std::string vv2, std::string vv3, std::string vv4, std::string vv5) :
@@ -93,5 +93,6 @@ extern ComData g_ComData;
 extern CInterface PublicData;
 
 extern std::mutex g_mutex;
+extern std::mutex g_mutex2;
 
 #endif // !PUBLIC_H__
