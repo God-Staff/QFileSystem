@@ -111,7 +111,7 @@ private:
         vtmp.push_back(vstr[2]);
         vtmp.push_back(vstr[1]);
         vtmp.push_back(vstr[3]);
-       
+
         {
             std::lock_guard<std::mutex> guard(g_mutex);
             g_ComData.g_AddBlockTmp.push_back(vtmp);
@@ -173,6 +173,7 @@ private:
         //请求目录服务端验证文件是否已存正在
         if (file_info_.m_ReqiureType == 'a')
         {
+            std::cout << "请求目录服务端验证文件是否已存正在" << std::endl;
             //查找用户和密码，验证
             bool isok = false;
             {
@@ -225,7 +226,7 @@ private:
                 std::lock_guard<std::mutex> guard(g_mutex);
                 for (int i = 0; i < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++i)
                 {
-                    
+
                     const qiuwanli::ClientConfigFile& conf = g_ComData.m_ClientConfigFile.clientinfo(i);
                     PublicData.DoClientConfigFileTable(ClientInfo.add_clientinfo( )
                                                        , conf.cilentid( )
@@ -259,7 +260,7 @@ private:
             {
                 std::cout << e.what( ) << std::endl;
             }
-            
+
             ////解析请求类型，调用不同的处理函数
             //switch (file_info_.m_ReqiureType)
             //{
@@ -285,6 +286,7 @@ private:
         //接收已经上传到存储服务端的文件块对应的信息
         if (file_info_.m_ReqiureType == 'f')
         {
+            std::cout << "接收已经上传到存储服务端的文件块对应的信息" << std::endl;
             dof( );
         }
 
@@ -293,19 +295,19 @@ private:
         {
             Sleep(30);
             //从中删选数据
-            
+            std::cout << "文件传输完成，进行块统计" << std::endl;
             int countBlock = 0;
             {
                 std::lock_guard<std::mutex> guard(g_mutex);
                 for (int index = 0; index < g_ComData.m_BlockToFileTableTmp.blocklistfordown_size( ); ++index)
                 {
                     auto item = g_ComData.m_BlockToFileTableTmp.mutable_blocklistfordown(index);
-                    std::string itemT=item->filesha512( );
+                    std::string itemT = item->filesha512( );
 
                     std::vector<std::string> strss;
                     boost::split(strss, itemT, boost::is_any_of("-"), boost::token_compress_on);
 
-                    if (strss[0].compare(vstr[1])==0)
+                    if (strss[0].compare(vstr[1]) == 0)
                     {
                         ++countBlock;
                     }
@@ -316,11 +318,11 @@ private:
             size_t count = std::stoi(vstr[4]);
             if (countBlock == count)
             {
-                for (int index = g_ComData.m_BlockToFileTableTmp.blocklistfordown_size( ); index>=0 ; --index)
+                for (int index = g_ComData.m_BlockToFileTableTmp.blocklistfordown_size( ); index >= 0; --index)
                 {
                     //std::lock_guard<std::mutex> guard(g_mutex);
                     auto item = g_ComData.m_BlockToFileTable.mutable_blocklistfordown(index);
-                    if (item->filesha512( ).compare(vstr[1])==0)
+                    if (item->filesha512( ).compare(vstr[1]) == 0)
                     {
                         PublicData.DoBlockList4DownTable(TmpList.add_blocklistfordown( )
                                                          , item->filesha512( )
@@ -371,22 +373,24 @@ private:
                 SendFile send;
                 send.senderLitter(io_ser, "127.0.0.1", 8089, filenamed.c_str( ), 'h');
             } catch (std::exception& e)
-            { 
+            {
                 std::cout << e.what( ) << std::endl;
             }
-            
+
         }
 
         //存储端发来的心跳连接
-        if (file_info_.m_ReqiureType=='i')
+        if (file_info_.m_ReqiureType == 'i')
         {
             std::lock_guard<std::mutex> guard(g_mutex);
             g_ComData.m_UIChange |= size_t(2);
             g_ComData.m_HeartList.push_back(ComData::HeartLink(vstr[0], atol(vstr[1].c_str( )), atol(vstr[2].c_str( )), vstr[3]));
         }
 
-        if (file_info_.m_ReqiureType=='A')
+        //文件下载请求
+        if (file_info_.m_ReqiureType == 'A')
         {
+            std::cout << "文件下载请求" << std::endl;
             //用户和密码，验证
             bool isok = false;
             {
@@ -410,26 +414,26 @@ private:
             qiuwanli::BlockList4DownTable BlocksList;
             unsigned long long CountBlock;
             qiuwanli::FileInfoList FileInfo;
-            if (g_ComData.m_FileListTable.filelist_size( ) > 0 && 
+            if (g_ComData.m_FileListTable.filelist_size( ) > 0 &&
                 g_ComData.m_UserhasFile.user_size( ) > 0)
             {
                 for (int index = 0; index < g_ComData.m_FileListTable.filelist_size( ); ++index)
                 {
-                    if (g_ComData.m_FileListTable.filelist(index).filesha512().compare(vstr[1]))
+                    if (g_ComData.m_FileListTable.filelist(index).filesha512( ).compare(vstr[1]))
                     {
-                        FileInfo.set_filesha512(g_ComData.m_FileListTable.filelist(index).filesha512());
-                        FileInfo.set_filemd5(g_ComData.m_FileListTable.filelist(index).filemd5());
-                        FileInfo.set_filename(g_ComData.m_FileListTable.filelist(index).filename());
-                        FileInfo.set_filecreatedate(g_ComData.m_FileListTable.filelist(index).filecreatedate());
-                        FileInfo.set_isshared(g_ComData.m_FileListTable.filelist(index).isshared());
-                        FileInfo.set_fileallblock(g_ComData.m_FileListTable.filelist(index).fileallblock());
-                        FileInfo.set_filetotalsize(g_ComData.m_FileListTable.filelist(index).filetotalsize());
+                        FileInfo.set_filesha512(g_ComData.m_FileListTable.filelist(index).filesha512( ));
+                        FileInfo.set_filemd5(g_ComData.m_FileListTable.filelist(index).filemd5( ));
+                        FileInfo.set_filename(g_ComData.m_FileListTable.filelist(index).filename( ));
+                        FileInfo.set_filecreatedate(g_ComData.m_FileListTable.filelist(index).filecreatedate( ));
+                        FileInfo.set_isshared(g_ComData.m_FileListTable.filelist(index).isshared( ));
+                        FileInfo.set_fileallblock(g_ComData.m_FileListTable.filelist(index).fileallblock( ));
+                        FileInfo.set_filetotalsize(g_ComData.m_FileListTable.filelist(index).filetotalsize( ));
                         FileInfo.set_tag(g_ComData.m_FileListTable.filelist(index).tag( ));
 
                         CountBlock = g_ComData.m_FileListTable.filelist(index).fileallblock( );
                         for (int index2 = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index2)
                         {
-                            if (g_ComData.m_BlockToFileTable.blocklistfordown(index2).filesha512().compare(vstr[1]))
+                            if (g_ComData.m_BlockToFileTable.blocklistfordown(index2).filesha512( ).compare(vstr[1]))
                             {
                                 DoBlockList4DownTable(BlocksList.add_blocklistfordown( )
                                                       , g_ComData.m_BlockToFileTable.blocklistfordown(index2).filesha512( )
@@ -445,7 +449,7 @@ private:
             }
 
             //文件是否存在//文件是否完整
-            if ((BlocksList.blocklistfordown_size( )<=0)&& (BlocksList.blocklistfordown_size()!=CountBlock))
+            if ((BlocksList.blocklistfordown_size( ) <= 0) && (BlocksList.blocklistfordown_size( ) != CountBlock))
             {
                 //不存在，则返回错误消息
                 try
@@ -470,16 +474,16 @@ private:
                 //若存在，则将文件存储表发送给客户端
                 try
                 {
-                //文件SHA512+文件MD5+文件名+文件块数+文件大小
+                    //文件SHA512+文件MD5+文件名+文件块数+文件大小
                     std::string filename12 = FileInfo.filesha512( );
                     filename12 += "+";
-                    filename12 += FileInfo.filemd5();
+                    filename12 += FileInfo.filemd5( );
                     filename12 += "+";
                     filename12 += FileInfo.filename( );
                     filename12 += "+";
                     filename12 += std::to_string(FileInfo.fileallblock( ));
                     filename12 += "+";
-                    filename12 +=std::to_string(FileInfo.filetotalsize( ));
+                    filename12 += std::to_string(FileInfo.filetotalsize( ));
 
                     boost::asio::io_service io_ser;
                     SendFile send;
@@ -492,52 +496,250 @@ private:
                 BlocksList.Clear( );
             }
         }
+
+        //创建文件分享请求
+        if (file_info_.m_ReqiureType == 'G')
+        {
+            std::cout << "创建文件分享请求" << std::endl;
+            //如果用户存在，遍历文件表，检查文件是否存在
+            //若存在，则生成一个8位的随机数，并和文件SHA512、
+            //文件大小、用户ID组成一个分享标识，发送给客户端
+            boost::asio::io_service io_ser;
+            SendFile send;
+
+            if (CheckKey(vstr[3], vstr[4]))
+            {
+                for (int index = 0; index < g_ComData.m_SharedTable.sharedinfo_size( ); ++index)
+                {
+                    if (g_ComData.m_SharedTable.sharedinfo(index).sha512( ).compare(vstr[1]) == 0)
+                    {
+                        char randStr[9];
+                        rand_str(randStr, 8);
+                        std::string msg = vstr[0];
+                        msg += "+";
+                        msg += vstr[1];
+                        msg += "+";
+                        msg += vstr[2];
+                        msg += "+";
+                        msg += vstr[3];
+                        msg += "+";
+                        msg += randStr;
+
+                        try
+                        {
+                            send.senderLitter(io_ser, "127.0.0.1", 8089, msg.c_str( ), 'I');
+                        } catch (std::exception& e)
+                        {
+                            std::cout << e.what( ) << std::endl;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    send.senderLitter(io_ser, "127.0.0.1", 8089, "文件分享失败", 'H');
+                } catch (std::exception& e)
+                {
+                    std::cout << e.what( ) << std::endl;
+                }
+            }
+        }
+
+        //分享删除请求
+        if (file_info_.m_ReqiureType == 'J')
+        {
+            std::cout << "分享删除请求" << std::endl;
+            //如果用户存在，遍历分享文件表，检查分享链接是否存在
+            //若存在，则将其删除，若不存在，则返回错误信息
+            std::string done = "删除失败";
+            if (CheckKey(vstr[2],vstr[3]))
+            {
+                for (int index = g_ComData.m_SharedTable.sharedinfo_size( ); index >= 0; --index)
+                {
+                    auto xx = g_ComData.m_SharedTable.sharedinfo(index);
+                    if (xx.sha512().compare(vstr[0])&& 
+                        xx.verificationcode().compare(vstr[1]) )
+                    {
+                        xx.Clear( );
+                        done.clear( );
+                        done = "删除成功";
+                    }
+                }
+            }
+
+            std::string name = vstr[0];
+            name += "+";
+            name += done;
+
+            boost::asio::io_service io_ser;
+            SendFile send;
+            try
+            {
+                send.senderLitter(io_ser, "127.0.0.1", 8089, name.c_str(), 'H');
+            } catch (std::exception& e)
+            {
+                std::cout << e.what( ) << std::endl;
+            }
+        }
+
+        //删除文件关联请求
+        if (file_info_.m_ReqiureType == 'N')
+        {
+            std::cout << "删除文件关联请求" << std::endl;
+            if (CheckKey( "","" ))
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+
+        //分享链接下载请求
+        if (file_info_.m_ReqiureType == 'X')
+        {
+            std::cout << "分享链接下载请求" << std::endl;
+            if (CheckKey(vstr[4],vstr[5]))
+            {
+                for (int index = 0; index < g_ComData.m_SharedTable.sharedinfo_size( ); ++index)
+                {
+                    if (g_ComData.m_SharedTable.sharedinfo(index).sha512( ).compare(vstr[0]) &&
+                        std::to_string(g_ComData.m_SharedTable.sharedinfo(index).filesize( )).compare(vstr[1]) &&
+                        g_ComData.m_SharedTable.sharedinfo(index).verificationcode( ).compare(vstr[2]) &&
+                        g_ComData.m_SharedTable.sharedinfo(index).userid( ).compare(vstr[3]))
+                    {
+                     //查找文件块列表，将块存储列表，发送给客户端
+                     //检查文件是否存在和完整
+                        qiuwanli::BlockList4DownTable BlocksList;
+                        unsigned long long CountBlock;
+                        qiuwanli::FileInfoList FileInfo;
+                        if (g_ComData.m_FileListTable.filelist_size( ) > 0 &&
+                            g_ComData.m_UserhasFile.user_size( ) > 0)
+                        {
+                            for (int index = 0; index < g_ComData.m_FileListTable.filelist_size( ); ++index)
+                            {
+                                if (g_ComData.m_FileListTable.filelist(index).filesha512( ).compare(vstr[1]))
+                                {
+                                    FileInfo.set_filesha512(g_ComData.m_FileListTable.filelist(index).filesha512( ));
+                                    FileInfo.set_filemd5(g_ComData.m_FileListTable.filelist(index).filemd5( ));
+                                    FileInfo.set_filename(g_ComData.m_FileListTable.filelist(index).filename( ));
+                                    FileInfo.set_filecreatedate(g_ComData.m_FileListTable.filelist(index).filecreatedate( ));
+                                    FileInfo.set_isshared(g_ComData.m_FileListTable.filelist(index).isshared( ));
+                                    FileInfo.set_fileallblock(g_ComData.m_FileListTable.filelist(index).fileallblock( ));
+                                    FileInfo.set_filetotalsize(g_ComData.m_FileListTable.filelist(index).filetotalsize( ));
+                                    FileInfo.set_tag(g_ComData.m_FileListTable.filelist(index).tag( ));
+
+                                    CountBlock = g_ComData.m_FileListTable.filelist(index).fileallblock( );
+                                    for (int index2 = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index2)
+                                    {
+                                        if (g_ComData.m_BlockToFileTable.blocklistfordown(index2).filesha512( ).compare(vstr[1]))
+                                        {
+                                            DoBlockList4DownTable(BlocksList.add_blocklistfordown( )
+                                                                  , g_ComData.m_BlockToFileTable.blocklistfordown(index2).filesha512( )
+                                                                  , g_ComData.m_BlockToFileTable.blocklistfordown(index2).blocknumer( )
+                                                                  , g_ComData.m_BlockToFileTable.blocklistfordown(index2).blockmd5( )
+                                                                  , g_ComData.m_BlockToFileTable.blocklistfordown(index2).saveserversip( )
+                                            );
+                                        }
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        //文件是否存在//文件是否完整
+                        if ((BlocksList.blocklistfordown_size( ) <= 0) && (BlocksList.blocklistfordown_size( ) != CountBlock))
+                        {
+                            //不存在，则返回错误消息
+                            try
+                            {
+                                std::string filename12 = vstr[0];
+                                filename12 += "+";
+                                filename12 += vstr[1];
+
+                                boost::asio::io_service io_ser;
+                                SendFile send;
+                                send.senderLitter(io_ser, "127.0.0.1", 8089, filename12.c_str( ), 'B');
+                            } catch (std::exception& e)
+                            {
+                                std::cout << e.what( ) << std::endl;
+                            }
+                        }
+                        else
+                        {
+                            //序列化数据到文件
+                            boost::filesystem::ofstream outfile(BlocksList.blocklistfordown(0).filesha512( )
+                                                                , std::ios::out | std::ios::trunc | std::ios::binary);
+                            //若存在，则将文件存储表发送给客户端
+                            try
+                            {
+                                //文件SHA512+文件MD5+文件名+文件块数+文件大小
+                                std::string filename12 = FileInfo.filesha512( );
+                                filename12 += "+";
+                                filename12 += FileInfo.filemd5( );
+                                filename12 += "+";
+                                filename12 += FileInfo.filename( );
+                                filename12 += "+";
+                                filename12 += std::to_string(FileInfo.fileallblock( ));
+                                filename12 += "+";
+                                filename12 += std::to_string(FileInfo.filetotalsize( ));
+
+                                boost::asio::io_service io_ser;
+                                SendFile send;
+                                send.senderLitter(io_ser, "127.0.0.1", 8089, filename12.c_str( ), 'C');
+                            } catch (std::exception& e)
+                            {
+                                std::cout << e.what( ) << std::endl;
+                            }
+
+                            BlocksList.Clear( );
+                        }
+                    }
+                }
+            }
+            else
+            {
+                try
+                {
+                    std::string name="文件不存在或分享链接失效\r\n请尝试其他分享链接！";
+                    boost::asio::io_service io_ser;
+                    SendFile send;
+                    send.senderLitter(io_ser, "127.0.0.1", 8089, name.c_str( ), 'C');
+                } catch (std::exception& e)
+                {
+
+                }
+            }
+        }
+
     }
     
-    //检查客户端携带的PirateKey的MD5是否正确，失败则关闭链接
-    void CheckKey(const boost::system::error_code& error)
+    //随机生成字符串
+    char *rand_str(char *str, const int len)
     {
-        //获取本机Prikey的md5与此比较;
-        qiuwanli::BlockListForDownCheckTable DownListTable;
+        int i;
+        for (i = 0; i < len; ++i)
+            str[i] = 'A' + rand( ) % 26;
+        str[++i] = '\0';
+        return str;
+    }
 
-        if (!DownListTable.ParseFromString(buffer_))
-        {	//打开失败
+    //检查客户端携带的PirateKey的MD5是否正确，失败则关闭链接
+    bool CheckKey(std::string id,std::string ps)
+    {
+        //用户和密码，验证
+        std::lock_guard<std::mutex> guard(g_mutex);
+        for (int index = 0; index < g_ComData.m_UserhasFile.user_size( ); ++index)
+        {
+            if (g_ComData.m_UserhasFile.user(index).userid( ) == id &&
+                g_ComData.m_UserhasFile.user(index).userps( ) == ps)
+            {
+                return true;
+            }
         }
-        else
-        {	//解析配置文件
-            //std::string md5 =g_ComData.Conf.prikeymd5( );
-            //if (DownListTable.prikeymd5( ).compare(md5) == 0)
-            //{
-            //    PairVec ListForUp;
-            //    for (size_t index = 0; index < DownListTable.blocklistfordown_size( ); ++index)
-            //    {
-            //        const qiuwanli::BlockListForDown& DownList = DownListTable.blocklistfordown(index);
-            //        std::pair<std::string, std::vector<unsigned long>> pairs;
-            //        pairs.first = DownList.filesha512( );
-            //        std::vector<unsigned long> vec;
-            //        for (size_t index = 0; index < DownList.blocks_size( ); ++index)
-            //        {
-            //            const qiuwanli::Block& Block = DownList.blocks(index);
-            //            //vec.emplace_back(Block.blockitem( ));
-            //        }
-
-            //        ListForUp.emplace_back(pairs);
-            //    }
-
-            //    //启用线程进行文件传输
-            //    auto FailList = SendFileToClient(ListForUp);
-            //    if (FailList.size( ) == 0)
-            //    {
-            //        optlog.log("Sent File Success!");
-            //    }
-            //    else
-            //    {
-            //        //尝试重传
-            //        SendFileToClient(ListForUp);
-            //    }
-
-            //}
-        }
+        return false;
     }
 
     ////发送文件块，并将发送失败的列表，返回
