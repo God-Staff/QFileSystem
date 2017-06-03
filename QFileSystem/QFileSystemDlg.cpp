@@ -19,7 +19,7 @@
 //std::mutex g_mutex;
 ComData g_ComData;
 CInterface PublicData;
-
+qiuwanli::BlockList4DownTable m_BlockToFileTableTmp;
 // 用于应用程序“关于”菜单项的 CAboutDlg 对话框
 
 class CAboutDlg : public CDialogEx
@@ -273,10 +273,13 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
             }
            g_ComData.NotifyFileList.clear( );
 
-            //重置状态位
-            size_t tmp = size_t(1);
-            tmp = ~tmp;
+           //重置状态位
+           size_t tmp = size_t(1);
+           tmp = ~tmp;
            g_ComData.m_UIChange &= tmp;
+           
+           //写入文件
+           WriteFileInfoList( );
         }
 
         //更新在线的存储端
@@ -363,6 +366,11 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
             size_t tmp = size_t(4);
             tmp = ~tmp;
            g_ComData.m_UIChange &= tmp;
+
+           //将数据块写入到文件
+           //合并数据写入文件
+           g_ComData.m_BlockToFileTable.MergeFrom(g_ComData.m_BlockToFileTableTmp);
+           WriteBlockInfo( );
         }
 
         //定时更新显示，文件传输完成时进行界面更新
@@ -782,7 +790,7 @@ void CQFileSystemDlg::UpdateUIBlockInfo( )
 }
 void  CQFileSystemDlg::WriteBlockInfo( )
 {
-    boost::filesystem::fstream readBlockInfoFile("ServerBlockInfoFiles", std::ios::out | std::ios::binary);
+    boost::filesystem::fstream readBlockInfoFile("ServerBlockInfoFiles", std::ios::trunc | std::ios::out | std::ios::binary);
     if (!readBlockInfoFile.is_open( ))
         MessageBox(_T("ServerBlockInfoFiles 文件打开失败！"));
     if (!g_ComData.m_BlockToFileTable.ParseFromIstream(&readBlockInfoFile))
@@ -860,7 +868,7 @@ void CQFileSystemDlg::UpdateUIFileInfoList( )
 }
 void CQFileSystemDlg::WriteFileInfoList( )
 { 
-    boost::filesystem::fstream readFile("FileInfoList", std::ios::out | std::ios::binary);
+    boost::filesystem::fstream readFile("FileInfoList", std::ios::trunc | std::ios::out | std::ios::binary);
     if (!readFile.is_open( ))
         return;
 
@@ -928,7 +936,7 @@ void CQFileSystemDlg::UpdateUISharedList( )
 }
 void CQFileSystemDlg::WriteSharedList( )
 {
-    boost::filesystem::fstream readFile("SharedInfoList", std::ios::out | std::ios::binary);
+    boost::filesystem::fstream readFile("SharedInfoList", std::ios::trunc | std::ios::out | std::ios::binary);
     if (!readFile.is_open( ))
         return;
 
@@ -1010,7 +1018,7 @@ void CQFileSystemDlg::UpDateUISaveServerList( )
 }
 void CQFileSystemDlg::WriteSaveServerList( )
 { 
-    boost::filesystem::fstream readClientFile("ClientTable", std::ios::out | std::ios::binary);
+    boost::filesystem::fstream readClientFile("ClientTable", std::ios::trunc | std::ios::out | std::ios::binary);
     if (!readClientFile.is_open( ))
         return;
 
@@ -1034,7 +1042,7 @@ void CQFileSystemDlg::readUserInfo( )
 }
 void CQFileSystemDlg::WriteUserInfo( )
 {
-    boost::filesystem::fstream readUserInfoFile("UserTable", std::ios::out | std::ios::binary);
+    boost::filesystem::fstream readUserInfoFile("UserTable", std::ios::trunc | std::ios::out | std::ios::binary);
     if (!readUserInfoFile.is_open( ))//return;
         MessageBox(_T("UserTable 文件打开失败！"));
 

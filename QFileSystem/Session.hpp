@@ -115,11 +115,7 @@ private:
         {
             std::lock_guard<std::mutex> guard(g_mutex);
             g_ComData.g_AddBlockTmp.push_back(vtmp);
-            //设置状态位
-            g_ComData.m_UIChange |= size_t(4);
         }
-
-        //Sleep(10);
         {
             std::lock_guard<std::mutex> guard(g_mutex1);
             PublicData.DoBlockList4DownTable(g_ComData.m_BlockToFileTableTmp.add_blocklistfordown( )
@@ -129,6 +125,8 @@ private:
                                              , vstr[3]);
         }
 
+        //设置状态位
+        g_ComData.m_UIChange |= size_t(4);
     }
 
     bool DoBlockList4DownTable(qiuwanli::BlockList4Down* BlockList
@@ -293,9 +291,11 @@ private:
         //文件传输完成，进行块统计
         if (file_info_.m_ReqiureType == 'g')
         {
-            Sleep(30);
+            size_t countTimes = std::stoi(vstr[4]);
+            Sleep(10 * countTimes);
             //从中删选数据
             std::cout << "文件传输完成，进行块统计" << std::endl;
+            qiuwanli::BlockList4DownTable TmpList;
             int countBlock = 0;
             {
                 std::lock_guard<std::mutex> guard(g_mutex);
@@ -311,17 +311,7 @@ private:
                     {
                         ++countBlock;
                     }
-                }
-            }
 
-            qiuwanli::BlockList4DownTable TmpList;
-            size_t count = std::stoi(vstr[4]);
-            if (countBlock == count)
-            {
-                for (int index = g_ComData.m_BlockToFileTableTmp.blocklistfordown_size( ); index >= 0; --index)
-                {
-                    //std::lock_guard<std::mutex> guard(g_mutex);
-                    auto item = g_ComData.m_BlockToFileTable.mutable_blocklistfordown(index);
                     if (item->filesha512( ).compare(vstr[1]) == 0)
                     {
                         PublicData.DoBlockList4DownTable(TmpList.add_blocklistfordown( )
@@ -331,13 +321,15 @@ private:
                                                          , item->saveserversip( ));
                         item->Clear( );
                     }
+
                 }
             }
 
+            size_t count = std::stoi(vstr[4]);
             std::string  filenamed = vstr[0];
             filenamed += "+";
             //将完整部分进行合并，并序列化到文件
-            if (countBlock != count)
+            if (countBlock == count)
             {
                 std::lock_guard<std::mutex> guard(g_mutex1);
                 g_ComData.m_BlockToFileTable.MergeFrom(TmpList);
