@@ -487,13 +487,13 @@ private:
             if ((BlocksList.blocklistfordown_size( ) > 0) && (BlocksList.blocklistfordown_size( ) == CountBlock))
             {
                 ////将在线的存储服务器列表写入到文件
-                //std::string ClientListKeepFile = "OnLineStorageServiceIPList";
-                //boost::filesystem::ofstream ClientOutFile(ClientListKeepFile, std::ios::trunc | std::ios::out | std::ios::binary);
-                //if (!ClientOutFile.is_open( ))
-                //    return;
-                //if (!StorageServiceIPList.SerializePartialToOstream(&ClientOutFile))
-                //    return;
-                //ClientOutFile.close( );
+                std::string ClientListKeepFile = "OnLineStorageServiceIPList";
+                boost::filesystem::ofstream ClientOutFile(ClientListKeepFile, std::ios::trunc | std::ios::out | std::ios::binary);
+                if (!ClientOutFile.is_open( ))
+                    return;
+                if (!StorageServiceIPList.SerializePartialToOstream(&ClientOutFile))
+                    return;
+                ClientOutFile.close( );
 
 
                 //将文件块存储列表序列化数据到文件
@@ -516,6 +516,15 @@ private:
                 //    std::cout << e.what( ) << std::endl;
                 //    return;
                 //}
+                try
+                {
+                    //用于查找对应IP对应的私钥的MD5，进行下载请求时验证
+                    send.sender(io_ser, "127.0.0.1", 8089, ClientListKeepFile.c_str( ), 'Z');
+                } catch (const std::exception& e)
+                {
+                    std::cout << e.what( ) << std::endl;
+                    return;
+                }
 
                 //再发送文件解析请求
                 try

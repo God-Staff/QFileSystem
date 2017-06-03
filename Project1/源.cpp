@@ -1,45 +1,55 @@
-//#include <string>
-//#include <iostream>
-//#include <boost/filesystem.hpp>
-//#include <windows.h>
-//#include <thread>
-//
-////char* ReadFileBlock(char* fileBlock, const size_t OffSet, const size_t CurSize)
-////{
-////    //超出文件区域
-////    if (OffSet > (m_FileBlockConut - 1))
-////    {
-////        return nullptr;
-////    }
-////
-////    //申请内存，存储文件
-////    fileBlock = new char[BLOCK_SIZE];
-////
-////    //将文件指针移动到指定位置
-////    m_FileInOut->seekg(OffSet*BLOCK_SIZE);
-////    m_FileInOut->read(fileBlock, CurSize);
-////
-////    return fileBlock;
-////}
-////
-//////写入数据
-////bool WriteFileBlock(char* WriteBlock, const size_t CurSize, const size_t OffSet)
-////{
-////    if (OffSet == FILE_MAX)
-////    {
-////        // return false;
-////    }
-////
-////    m_FileInOut->seekp(0);
-////    m_FileInOut->write(WriteBlock, CurSize);
-////
-////    return false;
-////}
-////
-////size_t Getfilesize(const boost::filesystem::path& FileName)
-////{
-////    return FileName.size( );
-////}
+#include <string>
+#include <iostream>
+#include <boost/filesystem.hpp>
+#include <windows.h>
+#include <thread>
+#include <boost/filesystem.hpp>
+
+const unsigned int BLOCK_SIZE = 1024 * 64;
+
+char* ReadFileBlock(char* fileBlock, const size_t OffSet, const size_t CurSize)
+{
+    //超出文件区域
+    if (OffSet > (m_FileBlockConut - 1))
+    {
+        return nullptr;
+    }
+
+    //申请内存，存储文件
+    fileBlock = new char[BLOCK_SIZE];
+
+    //将文件指针移动到指定位置
+    m_FileInOut->seekg(OffSet*BLOCK_SIZE);
+    m_FileInOut->read(fileBlock, CurSize);
+
+    return fileBlock;
+}
+
+//写入数据
+bool WriteFileBlock(char* WriteBlock, const size_t CurSize, const size_t OffSet)
+{
+    if (OffSet == FILE_MAX)
+    {
+        // return false;
+    }
+
+    m_FileInOut->seekp(0);
+    m_FileInOut->write(WriteBlock, CurSize);
+
+    return false;
+}
+
+size_t Getfilesize(const boost::filesystem::path& FileName)
+{
+    return FileName.size( );
+}
+
+int main( )
+{
+
+
+    return 0;
+}
 //
 //
 //void doItNextTime( )
@@ -116,12 +126,12 @@
 //    return 0;
 //}
 
-#include <boost/filesystem.hpp> 
-#include <iostream> 
-
-int main( )
-{
-    boost::filesystem::path p("photo.jpg");
-    std::cout << p.stem( ) << std::endl;
-    std::cout << p.extension( ) << std::endl;
-}
+//#include <boost/filesystem.hpp> 
+//#include <iostream> 
+//
+//int main( )
+//{
+//    boost::filesystem::path p("photo.jpg");
+//    std::cout << p.stem( ) << std::endl;
+//    std::cout << p.extension( ) << std::endl;
+//}
