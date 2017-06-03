@@ -376,7 +376,10 @@ private:
         {
             std::lock_guard<std::mutex> guard(g_mutex);
             g_ComData.m_UIChange |= size_t(2);
-            g_ComData.m_HeartList.push_back(ComData::HeartLink(vstr[0], atol(vstr[1].c_str( )), atol(vstr[2].c_str( )), vstr[3]));
+            g_ComData.m_HeartList.push_back(ComData::HeartLink(vstr[0]
+                                            , atol(vstr[1].c_str( ))
+                                            , atol(vstr[2].c_str( ))
+                                            , vstr[3]));
         }
 
         //文件下载请求
@@ -403,16 +406,23 @@ private:
             }
 
             //检查文件是否存在和完整
-            qiuwanli::BlockList4DownTable BlocksList;
             unsigned long long CountBlock;
+
+            //当前在线的存储服务器列表
             qiuwanli::FileInfoList FileInfo;
+            qiuwanli::ClientConfigFileTable StorageServiceIPList;
+            //qiuwanli::BlockList4Down WaitingForDownloadedFileBlockList;
+            qiuwanli::BlockList4DownTable BlocksList;
+
             if (g_ComData.m_FileListTable.filelist_size( ) > 0 &&
                 g_ComData.m_UserhasFile.user_size( ) > 0)
             {
+                //检查文件列表中是否存在
                 for (int index = 0; index < g_ComData.m_FileListTable.filelist_size( ); ++index)
                 {
                     if (g_ComData.m_FileListTable.filelist(index).filesha512( ).compare(vstr[1]))
                     {
+                        //保存文件待下载的信息，用于文件还原的验证
                         FileInfo.set_filesha512(g_ComData.m_FileListTable.filelist(index).filesha512( ));
                         FileInfo.set_filemd5(g_ComData.m_FileListTable.filelist(index).filemd5( ));
                         FileInfo.set_filename(g_ComData.m_FileListTable.filelist(index).filename( ));
@@ -422,52 +432,98 @@ private:
                         FileInfo.set_filetotalsize(g_ComData.m_FileListTable.filelist(index).filetotalsize( ));
                         FileInfo.set_tag(g_ComData.m_FileListTable.filelist(index).tag( ));
 
-                        CountBlock = g_ComData.m_FileListTable.filelist(index).fileallblock( );
-                        for (int index2 = 0; index < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index2)
+                        //遍历当前在线的存储服务器，将存在的IP地址保存到待发送列表中
+                        for (int index3 = 0; index3 < g_ComData.m_ClientConfigFile.clientinfo_size( ); ++index3)
                         {
-                            if (g_ComData.m_BlockToFileTable.blocklistfordown(index2).filesha512( ).compare(vstr[1]))
+                            const qiuwanli::ClientConfigFile item = g_ComData.m_ClientConfigFile.clientinfo(index3);
+                            
+                            //过滤掉不在线存储端            
+                            if (item.online( ).compare("ON") )
+                                //和剩余空间大小不足1GB的Server
+                                //&& ( item.remainsize()>(unsigned long long)(1024 * 1024)))
                             {
-                                DoBlockList4DownTable(BlocksList.add_blocklistfordown( )
-                                                      , g_ComData.m_BlockToFileTable.blocklistfordown(index2).filesha512( )
-                                                      , g_ComData.m_BlockToFileTable.blocklistfordown(index2).blocknumer( )
-                                                      , g_ComData.m_BlockToFileTable.blocklistfordown(index2).blockmd5( )
-                                                      , g_ComData.m_BlockToFileTable.blocklistfordown(index2).saveserversip( )
-                                );
+                                PublicData.DoClientConfigFileTable(StorageServiceIPList.add_clientinfo( )
+                                                                   , item.cilentid()
+                                                                   , item.saveip()
+                                                                   , ""             //不传递私钥
+                                                                   ,item.keymd5()
+                                                                   ,item.totalsize()
+                                                                   ,item.remainsize() );
                             }
                         }
+
+                        //将文件对应的存储位置信息过滤出来
+                        CountBlock = g_ComData.m_FileListTable.filelist(index).fileallblock( );
+                        for (int index2 = 0; index2 < g_ComData.m_BlockToFileTable.blocklistfordown_size( ); ++index2)
+                        {
+                            const qiuwanli::BlockList4Down blockItem = g_ComData.m_BlockToFileTable.blocklistfordown(index2);
+                            if (blockItem.filesha512( ).compare(vstr[1]))
+                            {
+                                //剔除不在线的存储服务器所存储的文件块信息
+                                for (int index4 = 0; index < StorageServiceIPList.clientinfo_size( ); ++index4)
+                                {
+                                    if (StorageServiceIPList.clientinfo(index4).saveip( ).compare(blockItem.saveserversip()))
+                                    {
+                                        DoBlockList4DownTable(BlocksList.add_blocklistfordown( )
+                                                              , blockItem.filesha512( )
+                                                              , blockItem.blocknumer( )
+                                                              , blockItem.blockmd5( )
+                                                              , blockItem.saveserversip( ));
+                                    }
+                                }
+                            }
+                        }
+
                         break;
                     }
                 }
             }
 
-            //文件是否存在//文件是否完整
-            if ((BlocksList.blocklistfordown_size( ) <= 0) && (BlocksList.blocklistfordown_size( ) != CountBlock))
-            {
-                //不存在，则返回错误消息
-                try
-                {
-                    std::string filename12 = vstr[0];
-                    filename12 += "+";
-                    filename12 += vstr[1];
+            //网络连接对象
+            boost::asio::io_service io_ser;
+            SendFile send;
 
-                    boost::asio::io_service io_ser;
-                    SendFile send;
-                    send.senderLitter(io_ser, "127.0.0.1", 8089, filename12.c_str( ), 'B');
-                } catch (std::exception& e)
-                {
-                    std::cout << e.what( ) << std::endl;
-                }
-            }
-            else
+            //文件是否存在//文件是否完整
+            if ((BlocksList.blocklistfordown_size( ) > 0) && (BlocksList.blocklistfordown_size( ) == CountBlock))
             {
-                //序列化数据到文件
-                boost::filesystem::ofstream outfile(BlocksList.blocklistfordown(0).filesha512( )
-                                                    , std::ios::out | std::ios::trunc | std::ios::binary);
-                //若存在，则将文件存储表发送给客户端
+                ////将在线的存储服务器列表写入到文件
+                //std::string ClientListKeepFile = "OnLineStorageServiceIPList";
+                //boost::filesystem::ofstream ClientOutFile(ClientListKeepFile, std::ios::trunc | std::ios::out | std::ios::binary);
+                //if (!ClientOutFile.is_open( ))
+                //    return;
+                //if (!StorageServiceIPList.SerializePartialToOstream(&ClientOutFile))
+                //    return;
+                //ClientOutFile.close( );
+
+
+                //将文件块存储列表序列化数据到文件
+                std::string BlocksListKepFile = BlocksList.blocklistfordown(0).filesha512( ) + "-BlockInfoList";
+                boost::filesystem::ofstream BlockOutFile(BlocksListKepFile, std::ios::out | std::ios::trunc | std::ios::binary);
+                if (!BlockOutFile.is_open( ))
+                    return;
+                if (!BlocksList.SerializePartialToOstream(&BlockOutFile))
+                    return;
+                BlockOutFile.close( );
+                BlocksList.Clear( );
+
+                //try
+                //{
+                //    //则将文件存储表以及在线的存储端列表先将文件发送给客户端
+                //    send.sender(io_ser, "127.0.0.1", 8089, ClientListKeepFile.c_str( ), 'Z');
+                //    send.sender(io_ser, "127.0.0.1", 8089, BlocksListKepFile.c_str( ), 'Z');
+                //} catch (const std::exception& e)
+                //{
+                //    std::cout << e.what( ) << std::endl;
+                //    return;
+                //}
+
+                //再发送文件解析请求
                 try
                 {
-                    //文件SHA512+文件MD5+文件名+文件块数+文件大小
-                    std::string filename12 = FileInfo.filesha512( );
+                    //块信息所存储的文件名+文件SHA512+文件MD5+文件名+文件块数+文件大小
+                    std::string filename12 = BlocksListKepFile;
+                    filename12 += "+";
+                    filename12 += FileInfo.filesha512( );
                     filename12 += "+";
                     filename12 += FileInfo.filemd5( );
                     filename12 += "+";
@@ -477,15 +533,27 @@ private:
                     filename12 += "+";
                     filename12 += std::to_string(FileInfo.filetotalsize( ));
 
-                    boost::asio::io_service io_ser;
-                    SendFile send;
-                    send.senderLitter(io_ser, "127.0.0.1", 8089, filename12.c_str( ), 'C');
+                    send.sender(io_ser, "127.0.0.1", 8089, filename12.c_str( ), 'C');
+                } 
+                catch (std::exception& e)
+                {
+                    std::cout << e.what( ) << std::endl;
+                }
+            }
+            else
+            {
+                //不存在，则返回错误消息
+                try
+                {
+                    std::string filename12 = vstr[0];
+                    filename12 += "+";
+                    filename12 += vstr[1];
+
+                    send.senderLitter(io_ser, "127.0.0.1", 8089, filename12.c_str( ), 'B');
                 } catch (std::exception& e)
                 {
                     std::cout << e.what( ) << std::endl;
                 }
-
-                BlocksList.Clear( );
             }
         }
 

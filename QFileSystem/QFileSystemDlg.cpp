@@ -313,7 +313,13 @@ void CQFileSystemDlg::OnTimer(UINT_PTR nIDEvent)
                         IPs = IPList[pos];
                     }
 
-                    PublicData.DoClientConfigFileTable(g_ComData.m_ClientConfigFile.add_clientinfo( ), xx.ClientID, IPs, "213dfsefgser", xx.Prikeymd5, xx.Remain, xx.Total);
+                    PublicData.DoClientConfigFileTable(g_ComData.m_ClientConfigFile.add_clientinfo( )
+                                                       , xx.ClientID
+                                                       , IPs
+                                                       , "213dfsefgser"
+                                                       , xx.Prikeymd5
+                                                       , xx.Remain
+                                                       , xx.Total);
                 }
             }
 
@@ -793,7 +799,7 @@ void  CQFileSystemDlg::WriteBlockInfo( )
     boost::filesystem::fstream readBlockInfoFile("ServerBlockInfoFiles", std::ios::trunc | std::ios::out | std::ios::binary);
     if (!readBlockInfoFile.is_open( ))
         MessageBox(_T("ServerBlockInfoFiles 文件打开失败！"));
-    if (!g_ComData.m_BlockToFileTable.ParseFromIstream(&readBlockInfoFile))
+    if (!g_ComData.m_BlockToFileTable.SerializePartialToOstream(&readBlockInfoFile))
         MessageBox(_T("ServerBlockInfoFiles 文件解析失败！"));
 
     readBlockInfoFile.close( );
